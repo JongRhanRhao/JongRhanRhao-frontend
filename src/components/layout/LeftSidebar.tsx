@@ -4,8 +4,8 @@ import {
   faStar,
   faEnvelope,
   faFileInvoiceDollar,
-  faHistory,
   faCog,
+  faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
 
@@ -23,7 +23,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
     { name: "Favorite", key: "Item 2", icon: faStar },
     { name: "Message", key: "Item 3", icon: faEnvelope },
     { name: "Status", key: "Item 4", icon: faFileInvoiceDollar },
-    { name: "Order History", key: "Item 5", icon: faHistory },
+    { name: "My Store", key: "Item 5", icon: faStore },
     { name: "Setting", key: "Item 6", icon: faCog },
   ];
 
