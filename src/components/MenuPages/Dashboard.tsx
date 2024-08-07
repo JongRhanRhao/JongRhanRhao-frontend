@@ -1,14 +1,17 @@
-import Card from "@/components/Card";
-import { useEffect, useState } from "react";
+import Card from "@/components/shared/HeaderCard";
+import SearchBar from "@/components/shared/SearchBar";
+import PopularStoreList from "@/components/shared/PopularStoreList";
 
 const DashboardContent = () => {
   return (
-    <div>
+    <div className="space-y-2 mt-5">
+      <SearchBar />
       <Card
         title="Dashboard"
         description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam eligendi enim, quos soluta eveniet obcaecati? Ex iste aliquid in eveniet?"
-        imageSrc="https://images.unsplash.com/photo-1688045303217-f44fec8d3fe1?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        imageSrc="https://www.freeiconspng.com/thumbs/minions-png/evil-minions-png-24.png"
       />
+      <PopularStoreList />
     </div>
   );
 };
