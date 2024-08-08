@@ -26,7 +26,7 @@ const StoreCard = ({
 
   return (
     <div
-      className="bg-gray-900 rounded-xl overflow-hidden shadow-lg w-64 m-1 flex-shrink-0 relative" // You can adjust m-1 to reduce margin further
+      className="bg-gray-900 rounded-xl overflow-hidden shadow-lg w-80 m-1 flex-shrink-0 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
