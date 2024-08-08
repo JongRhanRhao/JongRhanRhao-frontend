@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
 
+import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
+
 interface LeftSidebarProps {
   selectedItem: string;
   onItemClick: (item: string) => void;
@@ -49,6 +51,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
           </li>
         ))}
       </ul>
+      <UpgradeToVIPCard />
     </div>
   );
 };
