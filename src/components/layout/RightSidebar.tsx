@@ -7,11 +7,16 @@ const RightSidebar = () => {
     },
   ];
   return (
-    <div className="w-64 bg-accent text-white p-4">
+    <div className="w-64 bg-accent text-white p-4 space-y-10 h-screen">
       <div className="flex justify-between">
         <h2 className="text-xl">{users[0].username}</h2>
-        <img src={users[0].userImage} className="w-10 h-10" alt="profile" />
+        <img
+          src={users[0].userImage}
+          className="w-10 h-10 rounded-full"
+          alt="profile"
+        />
       </div>
+      <p>Reservation Status</p>
     </div>
   );
 };
