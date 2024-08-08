@@ -29,7 +29,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
 
   return (
     <div className="w-64 bg-accent text-white p-4 text-center flex flex-col">
-      <h2 className="text-3xl text-primary font-bold font-sans mt-5">
+      <h2 className="text-3xl text-primary font-bold font-sans mt-5 text-left">
         ChongRanNai
       </h2>
       <ul className="mt-4 text-md font-sans text-left space-y-4">
