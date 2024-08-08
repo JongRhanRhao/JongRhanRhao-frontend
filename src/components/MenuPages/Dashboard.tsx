@@ -1,6 +1,7 @@
 import Card from "@/components/shared/HeaderCard";
 import SearchBar from "@/components/shared/SearchBar";
 import PopularStoreList from "@/components/shared/PopularStoreList";
+import SeatAvailableStoreList from "@/components/shared/SeatAvailableStoreList";
 
 const DashboardContent = () => {
   return (
@@ -12,6 +13,7 @@ const DashboardContent = () => {
         imageSrc="https://www.freeiconspng.com/thumbs/minions-png/evil-minions-png-24.png"
       />
       <PopularStoreList />
+      <SeatAvailableStoreList />
     </div>
   );
 };
