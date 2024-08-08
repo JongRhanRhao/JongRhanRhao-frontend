@@ -1,4 +1,4 @@
-const Card = ({
+const HeaderCard = ({
   title,
   description,
   imageSrc,
@@ -28,4 +28,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default HeaderCard;
