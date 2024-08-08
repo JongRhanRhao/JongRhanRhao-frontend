@@ -26,14 +26,14 @@ const StoreCard = ({
 
   return (
     <div
-      className="bg-gray-900 rounded-xl overflow-hidden shadow-lg w-64 m-1 flex-shrink-0 relative"
+      className="bg-gray-900 rounded-xl overflow-hidden shadow-lg w-64 m-1 flex-shrink-0 relative" // You can adjust m-1 to reduce margin further
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative">
         <img src={image} alt={title} className="w-full h-52 object-cover" />
         <div
-          className={`absolute top-2 left-2 text-white text-xs font-bold px-2 py-1 rounded ${reservationClass}`}
+          className={`absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${reservationClass}`}
         >
           {reservationStatus}
         </div>

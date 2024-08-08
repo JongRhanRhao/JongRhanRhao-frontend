@@ -11,14 +11,19 @@ const RootLayout = () => {
   };
 
   return (
-    <div className="flex h-screen">
-      <LeftSidebar selectedItem={selectedItem} onItemClick={handleItemClick} />
-      <div className="flex-1 flex flex-col">
-        <main className="flex-1 p-4 bg-accent2">
-          <Content selectedItem={selectedItem} />
-        </main>
+    <div className="flex justify-center h-screen overflow-hidden">
+      <div className="flex w-full h-full">
+        <LeftSidebar
+          selectedItem={selectedItem}
+          onItemClick={handleItemClick}
+        />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <main className="flex-1 p-4 bg-accent2 overflow-y-auto">
+            <Content selectedItem={selectedItem} />
+          </main>
+        </div>
+        <RightSidebar />
       </div>
-      <RightSidebar />
     </div>
   );
 };
