@@ -26,7 +26,7 @@ const StoreCard = ({
 
   return (
     <div
-      className="bg-gray-900 rounded-xl overflow-hidden shadow-lg w-80 m-1 flex-shrink-0 relative"
+      className="bg-gray-900 rounded-xl overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
