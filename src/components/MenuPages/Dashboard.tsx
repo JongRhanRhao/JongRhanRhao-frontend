@@ -4,7 +4,7 @@ import PopularStoreList from "@/components/shared/PopularStoreList";
 
 const DashboardContent = () => {
   return (
-    <div className="space-y-2 mt-5">
+    <div className="space-y-4 mt-5 p-4">
       <SearchBar />
       <Card
         title="Dashboard"
