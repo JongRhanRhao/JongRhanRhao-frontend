@@ -1,16 +1,37 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import RootLayout from "./pages/RootLayout";
-// import Home from "./pages/Home";
-// import About from "./pages/About";
+import { useState } from "react";
+
+import RootLayout from "@/pages/RootLayout";
+import ShopDescription from "@/components/ShopDescription";
 
 function App() {
+  const [selectedItem, setSelectedItem] = useState("Item 1");
+
+  const handleItemClick = (item: string) => {
+    setSelectedItem(item);
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<RootLayout />}>
-          {/* <Route index element={<Home />} /> */}
-          {/* <Route path="about" element={<About />} /> */}
-        </Route>
+        <Route
+          path="/"
+          element={
+            <RootLayout
+              selectedItem={selectedItem}
+              onItemClick={handleItemClick}
+            />
+          }
+        />
+        <Route
+          path="/shop/:id"
+          element={
+            <ShopDescription
+              selectedItem={selectedItem}
+              onItemClick={handleItemClick}
+            />
+          }
+        />
       </Routes>
     </Router>
   );
