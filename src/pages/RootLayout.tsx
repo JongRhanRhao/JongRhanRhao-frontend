@@ -1,22 +1,18 @@
-import { useState } from "react";
+import { FC } from "react";
 import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
 import Content from "@/components/layout/Content";
 
-const RootLayout = () => {
-  const [selectedItem, setSelectedItem] = useState("Item 1");
+interface RootLayoutProps {
+  selectedItem: string;
+  onItemClick: (item: string) => void;
+}
 
-  const handleItemClick = (item: string) => {
-    setSelectedItem(item);
-  };
-
+const RootLayout: FC<RootLayoutProps> = ({ selectedItem, onItemClick }) => {
   return (
     <div className="flex justify-center h-screen overflow-hidden">
       <div className="flex w-full h-full">
-        <LeftSidebar
-          selectedItem={selectedItem}
-          onItemClick={handleItemClick}
-        />
+        <LeftSidebar selectedItem={selectedItem} onItemClick={onItemClick} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <main className="flex-1 p-4 bg-accent2 overflow-y-auto">
             <Content selectedItem={selectedItem} />
