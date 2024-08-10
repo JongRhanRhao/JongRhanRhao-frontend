@@ -1,52 +1,11 @@
-import StoreCard from "@/components/shared/StoreCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const PopularStoreList = () => {
-  const cards = [
-    {
-      image:
-        "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-03-1024x1024.jpg",
-      title: "Warmup",
-      reservationStatus: "can reserve",
-      rating: 5,
-      currSeats: 25,
-      maxSeats: 30,
-      description: "This is a popular club where you can have fun.",
-    },
-    {
-      image:
-        "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-02-1024x1024.jpg",
-      title: "Thachang",
-      reservationStatus: "can reserve",
-      rating: 4,
-      currSeats: 15,
-      maxSeats: 30,
-      description: "This is a popular club where you can have fun.",
-    },
-    {
-      image:
-        "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-05-1024x1024.jpg",
-      title: "Too Nice Nimman",
-      reservationStatus: "can't reserve",
-      rating: 3,
-      currSeats: 30,
-      maxSeats: 30,
-      description: "This is a popular club where you can have fun.",
-    },
-    {
-      image:
-        "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-16-1024x1024.jpg",
-      title: "Lonely Heart Cafe",
-      reservationStatus: "can't reserve",
-      rating: 5,
-      currSeats: 30,
-      maxSeats: 30,
-      description: "This is a popular club where you can have fun.",
-    },
-  ];
+import StoreCard from "@/components/shared/StoreCard";
+import { ShopCards } from "@/SampleData/data";
 
+const PopularStoreList = () => {
   const settings = {
     dots: true,
     infinite: true,
@@ -84,9 +43,10 @@ const PopularStoreList = () => {
         </div>
       </div>
       <Slider {...settings}>
-        {cards.map((card, index) => (
-          <div key={index} className="px-1">
+        {ShopCards.map((card) => (
+          <div key={card.id} className="px-1">
             <StoreCard
+              id={card.id}
               image={card.image}
               title={card.title}
               reservationStatus={card.reservationStatus}
