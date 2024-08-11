@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 import RootLayout from "@/pages/RootLayout";
-import ShopDescription from "@/components/ShopDescription";
+import ShopDescription from "@/components/shared/ShopDescription";
 
 function App() {
   const [selectedItem, setSelectedItem] = useState("Item 1");
