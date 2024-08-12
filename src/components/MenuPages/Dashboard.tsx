@@ -5,7 +5,7 @@ import SeatAvailableStoreList from "@/components/shared/SeatAvailableStoreList";
 
 const DashboardContent = () => {
   return (
-    <div className="space-y-4 mt-5 p-4">
+    <div className="space-y-4">
       <SearchBar />
       <Card
         title="Dashboard"
