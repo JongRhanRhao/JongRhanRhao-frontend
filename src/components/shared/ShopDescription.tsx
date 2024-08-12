@@ -29,13 +29,9 @@ const ShopDescription: FC<ShopDescriptionProps> = ({
         <LeftSidebar selectedItem={selectedItem} onItemClick={onItemClick} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <main className="flex-1 p-4 bg-accent2 overflow-y-auto space-y-10">
-            <div className="grid grid-cols-2">
-              {/* Left content */}
-              <div>
-                <img src={shop.image} className="rounded-xl w-1/2"></img>
-              </div>
-              {/* Right content */}
-              <div className="bg-secondary rounded-xl p-3 max-h-36">
+            <div className="flex justify-center">
+              <img src={shop.image} className="rounded-xl h-96"></img>
+              <div className="bg-secondary rounded-xl p-3 max-h-32 w-full ml-5">
                 <div className="font-bold text-accent uppercase text-lg">
                   {shop.name}
                 </div>
