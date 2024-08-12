@@ -9,7 +9,7 @@ const DashboardContent = () => {
       <SearchBar />
       <Card
         title="Dashboard"
-        description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam eligendi enim, quos soluta eveniet obcaecati? Ex iste aliquid in eveniet?"
+        description="Welcome to dashboard. Here you can see available store and seat status."
         imageSrc="https://www.freeiconspng.com/thumbs/minions-png/evil-minions-png-24.png"
       />
       <PopularStoreList />
