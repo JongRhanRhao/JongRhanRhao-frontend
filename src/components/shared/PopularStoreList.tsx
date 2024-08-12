@@ -12,7 +12,7 @@ const PopularStoreList = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 2000,
+    speed: 500,
     cssEase: "linear",
     responsive: [
       {
