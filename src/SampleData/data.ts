@@ -6,6 +6,9 @@ export const shopData: {
     day: string;
     openTime: string;
     reserveExpired: string;
+    maxSeats: number;
+    currSeats: number;
+    rating: number;
   };
 } = {
   1: {
@@ -16,6 +19,9 @@ export const shopData: {
     day: "EVERYDAY",
     openTime: "19:00 - 02:00",
     reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 25,
+    rating: 5,
   },
   2: {
     name: "Thachang",
@@ -25,6 +31,9 @@ export const shopData: {
     day: "EVERYDAY",
     openTime: "19:00 - 03:00",
     reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 15,
+    rating: 4,
   },
   3: {
     name: "Too Nice Nimman",
@@ -34,6 +43,9 @@ export const shopData: {
     day: "EVERYDAY",
     openTime: "19:00 - 02:00",
     reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 3,
   },
   4: {
     name: "Lonely Heart Cafe",
@@ -43,52 +55,25 @@ export const shopData: {
     day: "EVERYDAY",
     openTime: "19:00 - 02:00",
     reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 5,
   },
 };
 
-export const ShopCards = [
-  {
-    id: 1,
-    image:
-      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-03-1024x1024.jpg",
-    title: "Warmup",
-    reservationStatus: "can reserve",
-    rating: 5,
-    currSeats: 25,
-    maxSeats: 30,
-    description: "This is a popular club where you can have fun.",
-  },
-  {
-    id: 2,
-    image:
-      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-02-1024x1024.jpg",
-    title: "Thachang",
-    reservationStatus: "can reserve",
-    rating: 4,
-    currSeats: 15,
-    maxSeats: 30,
-    description: "This is another popular club where you can have fun.",
-  },
-  {
-    id: 3,
-    image:
-      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-05-1024x1024.jpg",
-    title: "Too Nice Nimman",
-    reservationStatus: "can't reserve",
-    rating: 3,
-    currSeats: 30,
-    maxSeats: 30,
-    description: "This is a trendy club with a great atmosphere.",
-  },
-  {
-    id: 4,
-    image:
-      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-16-1024x1024.jpg",
-    title: "Lonely Heart Cafe",
-    reservationStatus: "can't reserve",
-    rating: 5,
-    currSeats: 30,
-    maxSeats: 30,
-    description: "This is a cozy cafe with a romantic ambiance.",
-  },
-];
+export const ShopCards = Object.keys(shopData).map((key) => {
+  const shop = shopData[parseInt(key)];
+  const reservationStatus =
+    shop.currSeats < shop.maxSeats ? "can reserve" : "can't reserve";
+
+  return {
+    id: parseInt(key),
+    image: shop.image,
+    title: shop.name,
+    reservationStatus,
+    rating: shop.rating,
+    currSeats: shop.currSeats,
+    maxSeats: shop.maxSeats,
+    description: shop.description,
+  };
+});
