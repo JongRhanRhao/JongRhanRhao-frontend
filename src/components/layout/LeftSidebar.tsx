@@ -54,8 +54,8 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
             <span>{item.name}</span>
           </li>
         ))}
+        <UpgradeToVIPCard />
       </ul>
-      <UpgradeToVIPCard />
     </div>
   );
 };
