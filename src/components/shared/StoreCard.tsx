@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
-// import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface StoreCardProps {
@@ -22,20 +21,14 @@ const StoreCard: React.FC<StoreCardProps> = ({
   rating,
   maxSeats,
   currSeats,
-  // description,
 }) => {
   const isAvailable = reservationStatus === "can reserve";
   const reservationClass = isAvailable ? "bg-green-500" : "bg-red-500";
   const isFullseats = isAvailable ? "text-white" : "text-red-500";
-  // const [isHovered, setIsHovered] = useState(false);
 
   return (
     <Link to={`/shop/${id}`} className="no-underline">
-      <div
-        className="bg-gray-900 rounded-xl overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative"
-        // onMouseEnter={() => setIsHovered(true)}
-        // onMouseLeave={() => setIsHovered(false)}
-      >
+      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative">
         <div className="relative">
           <img
             src={image}
@@ -67,14 +60,6 @@ const StoreCard: React.FC<StoreCardProps> = ({
             </p>
           </div>
         </div>
-        {/* {isHovered && (
-          <div className="absolute inset-0 bg-black bg-opacity-75 flex-col flex items-center justify-center p-4 text-center text-white">
-            <div className="p-4">
-              <h2 className="text-lg font-bold text-white">{title}</h2>
-            </div>
-            <p>{description}</p>
-          </div>
-        )} */}
       </div>
     </Link>
   );
