@@ -17,7 +17,6 @@ const ShopDescription: FC<ShopDescriptionProps> = ({
 }) => {
   const { id } = useParams<{ id: string }>();
 
-  // Filter only id
   const shop = shopData[parseInt(id!)] || {
     name: "Not Found",
     description: "Shop not found",
