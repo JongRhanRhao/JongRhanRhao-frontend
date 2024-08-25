@@ -1,3 +1,12 @@
+interface Comment {
+  name: string;
+  avatar: string;
+  comment: string;
+  date: string;
+  likes: number;
+  replies: number;
+}
+
 export const shopData: {
   [key: number]: {
     name: string;
@@ -9,6 +18,7 @@ export const shopData: {
     maxSeats: number;
     currSeats: number;
     rating: number;
+    comment: Comment[];
   };
 } = {
   1: {
@@ -22,6 +32,24 @@ export const shopData: {
     maxSeats: 30,
     currSeats: 25,
     rating: 5,
+    comment: [
+      {
+        name: "สมชาย ใจดี",
+        avatar: "https://randomuser.me/api/portraits",
+        comment: "อาหารอร่อย พนักงานน่ารัก",
+        date: "2 hours ago",
+        likes: 5,
+        replies: 2,
+      },
+      {
+        name: "สมหญิง ใจเย็น",
+        avatar: "https://randomuser.me/api/portraits",
+        comment: "ที่จอดรถเยอะ ไปสะดวก",
+        date: "2 hours ago",
+        likes: 5,
+        replies: 2,
+      },
+    ],
   },
   2: {
     name: "Thachang",
@@ -34,6 +62,24 @@ export const shopData: {
     maxSeats: 30,
     currSeats: 15,
     rating: 4,
+    comment: [
+      {
+        name: "น้องโบนัส",
+        avatar: "https://randomuser.me/api/portraits",
+        comment: "ลูกค้าน่ารัก พนักงานยิ้มหวานมาก",
+        date: "2 hours ago",
+        likes: 5,
+        replies: 2,
+      },
+      {
+        name: "น้องแองเจิ้ล",
+        avatar: "https://randomuser.me/api/portraits",
+        comment: "ที่จอดรถเยอะ ไปสะดวก",
+        date: "5 hours ago",
+        likes: 5,
+        replies: 2,
+      },
+    ],
   },
   3: {
     name: "Too Nice Nimman",
@@ -46,6 +92,7 @@ export const shopData: {
     maxSeats: 30,
     currSeats: 30,
     rating: 3,
+    comment: [],
   },
   4: {
     name: "Lonely Heart Cafe",
@@ -58,6 +105,7 @@ export const shopData: {
     maxSeats: 30,
     currSeats: 30,
     rating: 5,
+    comment: [],
   },
 };
 
