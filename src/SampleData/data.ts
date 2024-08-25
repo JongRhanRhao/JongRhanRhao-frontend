@@ -35,7 +35,7 @@ export const shopData: {
     comment: [
       {
         name: "สมชาย ใจดี",
-        avatar: "https://randomuser.me/api/portraits",
+        avatar: "https://randomuser.me/api/portraits/thumb/men/76.jpg",
         comment: "อาหารอร่อย พนักงานน่ารัก",
         date: "2 hours ago",
         likes: 5,
@@ -43,7 +43,7 @@ export const shopData: {
       },
       {
         name: "สมหญิง ใจเย็น",
-        avatar: "https://randomuser.me/api/portraits",
+        avatar: "https://randomuser.me/api/portraits/thumb/men/75.jpg",
         comment: "ที่จอดรถเยอะ ไปสะดวก",
         date: "2 hours ago",
         likes: 5,
@@ -65,7 +65,7 @@ export const shopData: {
     comment: [
       {
         name: "น้องโบนัส",
-        avatar: "https://randomuser.me/api/portraits",
+        avatar: "https://randomuser.me/api/portraits/thumb/women/75.jpg",
         comment: "ลูกค้าน่ารัก พนักงานยิ้มหวานมาก",
         date: "2 hours ago",
         likes: 5,
@@ -73,7 +73,7 @@ export const shopData: {
       },
       {
         name: "น้องแองเจิ้ล",
-        avatar: "https://randomuser.me/api/portraits",
+        avatar: "https://randomuser.me/api/portraits/thumb/women/76.jpg",
         comment: "ที่จอดรถเยอะ ไปสะดวก",
         date: "5 hours ago",
         likes: 5,
