@@ -11,10 +11,7 @@ interface ShopDescriptionProps {
   onItemClick: (item: string) => void;
 }
 
-const ShopDescription: FC<ShopDescriptionProps> = ({
-  selectedItem,
-  onItemClick,
-}) => {
+const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   const { id } = useParams<{ id: string }>();
 
   const shop = shopData[parseInt(id!)] || {
@@ -25,7 +22,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({
   return (
     <div className="flex justify-center h-screen overflow-hidden">
       <div className="flex w-full h-full">
-        <LeftSidebar selectedItem={selectedItem} onItemClick={onItemClick} />
+        <LeftSidebar onItemClick={onItemClick} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <main className="flex-1 p-4 bg-accent2 overflow-y-auto space-y-10">
             <div className="flex justify-center">
