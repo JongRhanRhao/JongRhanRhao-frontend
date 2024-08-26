@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import classNames from "classnames";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTachometerAlt,
@@ -13,14 +12,12 @@ import {
 import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
 
 interface LeftSidebarProps {
-  selectedItem: string;
   onItemClick: (item: string) => void;
 }
 
-const LeftSidebar: React.FC<LeftSidebarProps> = ({
-  selectedItem,
-  onItemClick,
-}) => {
+const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
+  const location = useLocation();
+
   const items = [
     {
       name: "Dashboard",
@@ -36,27 +33,29 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
       icon: faFileInvoiceDollar,
       path: "/status",
     },
-    { name: "My Store", key: "Item 5", icon: faStore, path: "store" },
-    { name: "Setting", key: "Item 6", icon: faCog, path: "setting" },
+    { name: "My Store", key: "Item 5", icon: faStore, path: "/store" },
+    { name: "Setting", key: "Item 6", icon: faCog, path: "/setting" },
   ];
 
   return (
-    <>
-      <div className="w-64 bg-accent text-white p-4 text-center flex flex-col">
-        <Link
-          to="/dashboard"
-          className="text-3xl text-primary font-bold font-sans mt-5 text-left"
-        >
-          JongRhanRhao
-        </Link>
-        <ul className="mt-4 text-md font-sans text-left space-y-4">
-          {items.map((item) => (
+    <div className="w-64 bg-accent text-white p-4 text-center flex flex-col">
+      <Link
+        to="/dashboard"
+        className="text-3xl text-primary font-bold font-sans mt-5 text-left"
+      >
+        JongRhanRhao
+      </Link>
+      <ul className="mt-4 text-md font-sans text-left space-y-4">
+        {items.map((item) => {
+          const isActive = location.pathname === item.path;
+
+          return (
             <li
               key={item.key}
               className={classNames(
                 "cursor-pointer p-4 rounded-xl flex items-center space-x-2",
                 {
-                  "bg-primary": selectedItem === item.key,
+                  "bg-primary": isActive,
                 }
               )}
               onClick={() => onItemClick(item.key)}
@@ -69,11 +68,11 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
                 <span>{item.name}</span>
               </Link>
             </li>
-          ))}
-          <UpgradeToVIPCard />
-        </ul>
-      </div>
-    </>
+          );
+        })}
+        <UpgradeToVIPCard />
+      </ul>
+    </div>
   );
 };
 
