@@ -47,7 +47,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
       </Link>
       <ul className="mt-4 text-md font-sans text-left space-y-4">
         {items.map((item) => {
-          const isActive = location.pathname === item.path;
+          const isSelectedMenuAndPathMatch = location.pathname === item.path;
 
           return (
             <li
@@ -55,7 +55,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
               className={classNames(
                 "cursor-pointer p-4 rounded-xl flex items-center space-x-2",
                 {
-                  "bg-primary": isActive,
+                  "bg-primary": isSelectedMenuAndPathMatch,
                 }
               )}
               onClick={() => onItemClick(item.key)}
