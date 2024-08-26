@@ -15,7 +15,7 @@ const RootLayout: FC<RootLayoutProps> = ({ selectedItem, onItemClick }) => {
         <LeftSidebar selectedItem={selectedItem} onItemClick={onItemClick} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <main className="flex-1 p-4 bg-accent2 overflow-y-auto">
-            <Content selectedItem={selectedItem} />
+            <Content />
           </main>
         </div>
         <RightSidebar />

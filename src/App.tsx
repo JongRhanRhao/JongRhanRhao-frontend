@@ -15,7 +15,7 @@ function App() {
     <Router>
       <Routes>
         <Route
-          path="/"
+          path="/*"
           element={
             <RootLayout
               selectedItem={selectedItem}
@@ -23,15 +23,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/shop/:id"
-          element={
-            <ShopDescription
-              selectedItem={selectedItem}
-              onItemClick={handleItemClick}
-            />
-          }
-        />
+        <Route path="/shop/:id" element={<ShopDescription />} />
       </Routes>
     </Router>
   );

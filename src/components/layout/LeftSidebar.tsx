@@ -22,41 +22,58 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
   onItemClick,
 }) => {
   const items = [
-    { name: "Dashboard", key: "Item 1", icon: faTachometerAlt },
-    { name: "Favorite", key: "Item 2", icon: faStar },
-    { name: "Message", key: "Item 3", icon: faEnvelope },
-    { name: "Status", key: "Item 4", icon: faFileInvoiceDollar },
-    { name: "My Store", key: "Item 5", icon: faStore },
-    { name: "Setting", key: "Item 6", icon: faCog },
+    {
+      name: "Dashboard",
+      key: "Item 1",
+      icon: faTachometerAlt,
+      path: "/dashboard",
+    },
+    { name: "Favorite", key: "Item 2", icon: faStar, path: "/favorite" },
+    { name: "Message", key: "Item 3", icon: faEnvelope, path: "/message" },
+    {
+      name: "Status",
+      key: "Item 4",
+      icon: faFileInvoiceDollar,
+      path: "/status",
+    },
+    { name: "My Store", key: "Item 5", icon: faStore, path: "store" },
+    { name: "Setting", key: "Item 6", icon: faCog, path: "setting" },
   ];
 
   return (
-    <div className="w-64 bg-accent text-white p-4 text-center flex flex-col">
-      <Link
-        to="/"
-        className="text-3xl text-primary font-bold font-sans mt-5 text-left"
-      >
-        JongRhanRhao
-      </Link>
-      <ul className="mt-4 text-md font-sans text-left space-y-4">
-        {items.map((item) => (
-          <li
-            key={item.key}
-            className={classNames(
-              "cursor-pointer p-4 rounded-xl flex items-center space-x-2",
-              {
-                "bg-primary": selectedItem === item.key,
-              }
-            )}
-            onClick={() => onItemClick(item.key)}
-          >
-            <FontAwesomeIcon icon={item.icon} />
-            <span>{item.name}</span>
-          </li>
-        ))}
-        <UpgradeToVIPCard />
-      </ul>
-    </div>
+    <>
+      <div className="w-64 bg-accent text-white p-4 text-center flex flex-col">
+        <Link
+          to="/dashboard"
+          className="text-3xl text-primary font-bold font-sans mt-5 text-left"
+        >
+          JongRhanRhao
+        </Link>
+        <ul className="mt-4 text-md font-sans text-left space-y-4">
+          {items.map((item) => (
+            <li
+              key={item.key}
+              className={classNames(
+                "cursor-pointer p-4 rounded-xl flex items-center space-x-2",
+                {
+                  "bg-primary": selectedItem === item.key,
+                }
+              )}
+              onClick={() => onItemClick(item.key)}
+            >
+              <Link
+                to={item.path}
+                className="flex items-center space-x-2 w-full"
+              >
+                <FontAwesomeIcon icon={item.icon} />
+                <span>{item.name}</span>
+              </Link>
+            </li>
+          ))}
+          <UpgradeToVIPCard />
+        </ul>
+      </div>
+    </>
   );
 };
 
