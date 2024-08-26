@@ -79,6 +79,22 @@ export const shopData: {
         likes: 5,
         replies: 2,
       },
+      {
+        name: "น้องแองเจิ้ล",
+        avatar: "https://randomuser.me/api/portraits/thumb/women/76.jpg",
+        comment: "ที่จอดรถเยอะ ไปสะดวก",
+        date: "5 hours ago",
+        likes: 5,
+        replies: 2,
+      },
+      {
+        name: "น้องแองเจิ้ล",
+        avatar: "https://randomuser.me/api/portraits/thumb/women/76.jpg",
+        comment: "ที่จอดรถเยอะ ไปสะดวก",
+        date: "5 hours ago",
+        likes: 5,
+        replies: 2,
+      },
     ],
   },
   3: {
