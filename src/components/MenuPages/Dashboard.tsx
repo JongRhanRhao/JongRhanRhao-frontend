@@ -10,7 +10,7 @@ const DashboardContent = () => {
       <Card
         title="Dashboard"
         description="Welcome to dashboard. Here you can see available store and seat status."
-        imageSrc="https://www.freeiconspng.com/thumbs/minions-png/evil-minions-png-24.png"
+        imageSrc="https://png.pngtree.com/png-vector/20220616/ourmid/pngtree-drunk-santa-claus-cartoon-character-with-two-mugs-of-beer-png-image_5090275.png"
       />
       <PopularStoreList />
       <SeatAvailableStoreList />
