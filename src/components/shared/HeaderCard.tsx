@@ -16,13 +16,7 @@ const HeaderCard = ({
         <p className="p-4 text-secondary font-sans text-sm">{description}</p>
       </div>
       <div>
-        <img
-          className="rounded-xl"
-          src={imageSrc}
-          alt="logo"
-          width={150}
-          height={150}
-        />
+        <img className="rounded-xl h-44" src={imageSrc} alt="logo" />
       </div>
     </div>
   );
