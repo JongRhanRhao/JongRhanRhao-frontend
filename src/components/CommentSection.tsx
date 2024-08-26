@@ -14,24 +14,22 @@ const CommentSection = () => {
 
   return (
     <div className="space-y-3">
-      <h2 className="text-secondary font-bold">Comments</h2>
-      <div className="flex gap-2 overflow-scroll">
-        {shop.comment && shop.comment.length > 0 ? (
-          shop.comment.map((comment, index) => (
-            <CommentCard
-              key={index}
-              name={comment.name}
-              avatar={comment.avatar}
-              date={comment.date}
-              likes={comment.likes}
-              comment={comment.comment}
-              replies={comment.replies}
-            />
-          ))
-        ) : (
-          <p className="text-white">ยังไม่มีความคิดเห็นสำหรับร้านนี้</p>
-        )}
-      </div>
+      <h2 className="text-secondary text-xl font-medium">Comments</h2>
+      {shop.comment && shop.comment.length > 0 ? (
+        shop.comment.map((comment, index) => (
+          <CommentCard
+            key={index}
+            name={comment.name}
+            avatar={comment.avatar}
+            date={comment.date}
+            likes={comment.likes}
+            comment={comment.comment}
+            replies={comment.replies}
+          />
+        ))
+      ) : (
+        <p className="text-white">ยังไม่มีความคิดเห็นสำหรับร้านนี้</p>
+      )}
     </div>
   );
 };

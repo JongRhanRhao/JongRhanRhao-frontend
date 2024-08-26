@@ -14,7 +14,7 @@ const CommentCard = ({
   replies: number;
 }) => {
   return (
-    <div className="max-w-xl px-6 py-4 rounded-lg bg-accent h-auto">
+    <div className="max-w-lg px-6 py-4 rounded-lg bg-accent">
       <div className="flex items-center mb-6">
         <img
           src={avatar}
