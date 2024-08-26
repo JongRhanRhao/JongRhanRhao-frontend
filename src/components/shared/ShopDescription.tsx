@@ -34,15 +34,21 @@ const ShopDescription: FC<ShopDescriptionProps> = ({
                 <div className="font-bold text-accent uppercase text-lg">
                   {shop.name}
                 </div>
-                <div className="font-bold text-accent2 uppercase">
-                  OPEN: <span className="text-primary">{shop.openTime}</span>
+                <div className="font-semibold text-accent2 uppercase">
+                  OPEN:{" "}
+                  <span className="text-primary font-medium">
+                    {shop.openTime}
+                  </span>
                 </div>
-                <div className="font-bold text-accent2">
-                  DAY: <span className="text-primary">{shop.day}</span>
+                <div className="font-semibold text-accent2">
+                  DAY:{" "}
+                  <span className="text-primary font-medium">{shop.day}</span>
                 </div>
-                <div className="font-bold text-accent2">
+                <div className="font-semibold text-accent2">
                   Reservation Expired time:{" "}
-                  <span className="text-primary">{shop.reserveExpired}</span>
+                  <span className="text-primary font-medium">
+                    {shop.reserveExpired}
+                  </span>
                 </div>
               </div>
             </div>
