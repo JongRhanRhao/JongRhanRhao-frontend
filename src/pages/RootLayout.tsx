@@ -8,11 +8,11 @@ interface RootLayoutProps {
   onItemClick: (item: string) => void;
 }
 
-const RootLayout: FC<RootLayoutProps> = ({ selectedItem, onItemClick }) => {
+const RootLayout: FC<RootLayoutProps> = ({ onItemClick }) => {
   return (
     <div className="flex justify-center h-screen overflow-hidden">
       <div className="flex w-full h-full">
-        <LeftSidebar selectedItem={selectedItem} onItemClick={onItemClick} />
+        <LeftSidebar onItemClick={onItemClick} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <main className="flex-1 p-4 bg-accent2 overflow-y-auto">
             <Content />
