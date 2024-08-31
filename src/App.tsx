@@ -23,7 +23,15 @@ function App() {
             />
           }
         />
-        <Route path="/shop/:id" element={<ShopDescription />} />
+        <Route
+          path="/shop/:id"
+          element={
+            <ShopDescription
+              selectedItem={selectedItem}
+              onItemClick={handleItemClick}
+            />
+          }
+        />
       </Routes>
     </Router>
   );
