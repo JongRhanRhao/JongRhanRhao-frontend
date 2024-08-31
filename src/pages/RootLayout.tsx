@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
 import Content from "@/components/layout/Content";
