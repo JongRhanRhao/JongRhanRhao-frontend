@@ -3,6 +3,7 @@ import { z } from "zod";
 export type FormData = {
   email: string;
   password: string;
+  phone_number: string;
 };
 
 export const UserSchema = z.object({
@@ -11,4 +12,5 @@ export const UserSchema = z.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters long" })
     .max(50, { message: "Password must not exceed 50 characters" }),
+  phone_number: z.string().min(10, { message: "Invalid phone number" }),
 });
