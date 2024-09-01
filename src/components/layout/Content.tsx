@@ -1,10 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 
-import Dashboard from "@/components/MenuPages/Dashboard";
-import Favorite from "@/components/MenuPages/Favorite";
-import Message from "@/components/MenuPages/Message";
-import ReserveStatus from "@/components/MenuPages/ReserveStatus";
-import StoreManagement from "@/components/MenuPages/StoreManagement";
+import Dashboard from "@/pages/MenuPages/Dashboard";
+import Favorite from "@/pages/MenuPages/Favorite";
+import Message from "@/pages/MenuPages/Message";
+import ReserveStatus from "@/pages/MenuPages/ReserveStatus";
+import StoreManagement from "@/pages/MenuPages/StoreManagement";
+import NotFoundPage from "@/pages/NotFoundPage";
 
 const Content: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const Content: React.FC = () => {
         <Route path="/status" element={<ReserveStatus />} />
         <Route path="/store" element={<StoreManagement />} />
         <Route path="/setting" element={<div>Setting Content</div>} />
-        <Route path="*" element={<div>Default Content</div>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
