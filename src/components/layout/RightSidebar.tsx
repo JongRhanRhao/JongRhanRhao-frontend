@@ -1,17 +1,17 @@
 import LoginButton from "@/components/LoginButton";
 
 const RightSidebar = () => {
-  const users = [
-    {
-      username: "Ton",
-      userImage:
-        "https://images.unsplash.com/photo-1688045303217-f44fec8d3fe1?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+  // const users = [
+  //   {
+  //     username: "Ton",
+  //     userImage:
+  //       "https://images.unsplash.com/photo-1688045303217-f44fec8d3fe1?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   },
+  // ];
   return (
-    <div className="w-64 bg-accent text-white p-4 space-y-10 h-screen">
+    <div className="w-64 bg-accent text-white p-4 space-y-4 h-screen">
       <LoginButton />
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <h2 className="text-xl">{users[0].username}</h2>
         <img
           src={users[0].userImage}
@@ -19,7 +19,7 @@ const RightSidebar = () => {
           alt="profile"
         />
       </div>
-      <p>Reservation Status</p>
+      <p>Reservation Status</p> */}
     </div>
   );
 };
