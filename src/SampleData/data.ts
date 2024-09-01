@@ -12,7 +12,7 @@ export const shopData: {
     name: string;
     description: string;
     image: string;
-    day: string;
+    status: string;
     openTime: string;
     reserveExpired: string;
     maxSeats: number;
@@ -22,11 +22,11 @@ export const shopData: {
   };
 } = {
   1: {
-    name: "Warmup",
+    name: "Warm up Cafe",
     description: "This is a popular club where you can have fun.",
     image:
       "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-03-1024x1024.jpg",
-    day: "EVERYDAY",
+    status: "Available",
     openTime: "19:00 - 02:00",
     reserveExpired: "20:00",
     maxSeats: 30,
@@ -56,7 +56,7 @@ export const shopData: {
     description: "This is another popular club where you can have fun.",
     image:
       "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-02-1024x1024.jpg",
-    day: "EVERYDAY",
+    status: "EVERYDAY",
     openTime: "19:00 - 03:00",
     reserveExpired: "20:00",
     maxSeats: 30,
@@ -102,7 +102,7 @@ export const shopData: {
     description: "This is a trendy club with a great atmosphere.",
     image:
       "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-05-1024x1024.jpg",
-    day: "EVERYDAY",
+    status: "EVERYDAY",
     openTime: "19:00 - 02:00",
     reserveExpired: "20:00",
     maxSeats: 30,
@@ -115,7 +115,7 @@ export const shopData: {
     description: "This is a cozy cafe with a romantic ambiance.",
     image:
       "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-16-1024x1024.jpg",
-    day: "EVERYDAY",
+    status: "EVERYDAY",
     openTime: "19:00 - 02:00",
     reserveExpired: "20:00",
     maxSeats: 30,
