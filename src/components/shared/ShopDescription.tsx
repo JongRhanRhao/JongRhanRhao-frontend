@@ -13,12 +13,13 @@ interface ShopDescriptionProps {
 
 const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   const { id } = useParams<{ id: string }>();
-
   const shop = shopData[parseInt(id!)] || {
     name: "Not Found",
     description: "Shop not found",
   };
-
+  const isAvailable = shop.status === "Busy";
+  const isBusy = isAvailable ? "text-red-500" : "text-green-500";
+  
   return (
     <div className="flex justify-center h-screen overflow-hidden">
       <div className="flex w-full h-full">
@@ -31,21 +32,21 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 <div className="font-bold text-accent uppercase text-lg">
                   {shop.name}
                 </div>
-                <div className="font-semibold text-accent2 uppercase">
-                  OPEN:{" "}
-                  <span className="text-primary font-medium">
+                <div className="font-bold text-gray-500">
+                  Opening Hours :{" "}
+                  <span className="text-primary font-bold">
                     {shop.openTime}
                   </span>
                 </div>
-                <div className="font-semibold text-accent2">
-                  DAY:{" "}
-                  <span className="text-primary font-medium">{shop.day}</span>
-                </div>
-                <div className="font-semibold text-accent2">
+                <div className="font-bold text-gray-500">
                   Reservation Expired time:{" "}
-                  <span className="text-primary font-medium">
+                  <span className="text-primary font-bold">
                     {shop.reserveExpired}
                   </span>
+                </div>
+                <div className="font-bold text-gray-500">
+                  Status:{" "}
+                  <span className={`${isBusy} font-bold`}>{shop.status}</span>
                 </div>
               </div>
             </div>
