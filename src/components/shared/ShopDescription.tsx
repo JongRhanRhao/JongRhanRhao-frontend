@@ -19,7 +19,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   };
   const isAvailable = shop.status === "Busy";
   const isBusy = isAvailable ? "text-red-500" : "text-green-500";
-  
+
   return (
     <div className="flex justify-center h-screen overflow-hidden">
       <div className="flex w-full h-full">
@@ -28,7 +28,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
           <main className="flex-1 p-4 bg-accent2 overflow-y-auto space-y-10">
             <div className="flex justify-center">
               <img src={shop.image} className="rounded-xl h-96"></img>
-              <div className="bg-secondary rounded-xl p-3 max-h-32 w-full ml-5">
+              <div className="bg-secondary rounded-xl p-3 h-36 w-full ml-5">
                 <div className="font-bold text-accent uppercase text-lg">
                   {shop.name}
                 </div>
