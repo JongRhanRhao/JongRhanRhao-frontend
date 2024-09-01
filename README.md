@@ -83,6 +83,25 @@ yarn build
 
 The production-ready files will be generated in the `dist` folder.
 
+## Project Structure
+
+A brief overview of the project's structure.
+
+```
+├── public              # Static assets
+├── src
+│   ├── assets          # Assets like images, fonts, etc.
+│   ├── components      # Reusable components
+│   ├── pages           # Pages
+│   ├── App.tsx         # Main app component
+│   ├── main.tsx        # Entry point
+│   └── index.css       # Global styles
+├── index.html          # Main HTML template
+├── package.json        # Project metadata and scripts
+├── tsconfig.json       # TypeScript configuration
+└── vite.config.ts      # Vite configuration
+```
+
 ## Available Scripts
 
 - `npm run dev` / `yarn dev`: Start the development server.
