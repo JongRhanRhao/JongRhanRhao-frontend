@@ -1,11 +1,16 @@
-import { useForm } from "react-hook-form";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormData, UserSchema } from "@/lib/types";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { FormData, UserSchema } from "@/lib/types";
 import { SERVER_URL } from "@/lib/helpers/environment";
 
+// TODO: implement oauth login with google and facebook
 const LoginButton = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const endpoint = isLogin ? "login" : "signup";
+
   const {
     register,
     handleSubmit,
@@ -16,7 +21,10 @@ const LoginButton = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const response = await axios.post(`${SERVER_URL}/api/auth/login`, data);
+      const response = await axios.post(
+        `${SERVER_URL}/api/auth/${endpoint}`,
+        data
+      );
       console.log(response);
       if (response.status === 200) {
         (document.getElementById("login") as HTMLDialogElement).close();
@@ -30,15 +38,20 @@ const LoginButton = () => {
     e.preventDefault();
     (document.getElementById("login") as HTMLDialogElement).close();
   };
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+  };
+
   return (
     <>
       <button
-        className="btn"
+        className="btn bg-primary text-secondary w-full"
         onClick={() =>
           (document.getElementById("login") as HTMLDialogElement).showModal()
         }
       >
-        Login
+        Log In / Sign Up
       </button>
       <dialog id="login" className="modal">
         <div className="modal-box bg-secondary">
@@ -55,13 +68,15 @@ const LoginButton = () => {
             </button>
             <div className="text-center">
               <p className="text-2xl font-semibold leading-5 text-primary">
-                Login to your account
+                {isLogin ? "Login to your account" : "Create an account"}
               </p>
-              <p className="text-sm text-secondary leading-4 text-slate-600 mt-2 mb-5">
-                You must be logged in to perform this action.
+              <p className="text-sm leading-4 text-slate-600 mt-2 mb-5">
+                {isLogin
+                  ? "You must be logged in to perform this action."
+                  : "Sign up to get started."}
               </p>
             </div>
-            <button className="flex items-center justify-center bg-secondary border border-gray-300 rounded-lg shadow-md max-w-lg w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            <button className="btn flex items-center justify-center bg-secondary border border-gray-300 rounded-lg shadow-md max-w-lg w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
               <svg
                 className="h-6 w-6 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +126,7 @@ const LoginButton = () => {
               </svg>
               <span>Continue with Google</span>
             </button>
-            <button className="flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md w-full max-w-lg px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            <button className="btn flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md w-full max-w-lg px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
               <svg
                 className="h-6 w-6 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -163,26 +178,25 @@ const LoginButton = () => {
                 </p>
               )}
               <p className="mb-3 mt-2 text-sm text-gray-500">
-                <a
-                  href="/forgot-password"
-                  className="text-slate-600 hover:text-accent"
-                >
+                <a href="/forgot-password" className="text-primary">
                   Reset your password?
                 </a>
               </p>
               <button
                 type="submit"
-                className="inline-flex w-full items-center justify-center rounded-lg bg-primary p-2 py-3 text-sm font-medium text-white outline-none focus:ring-2"
+                className="btn border-none w-full bg-primary text-secondary"
               >
-                Continue
+                {isLogin ? "Log In" : "Sign Up"}{" "}
               </button>
             </div>
             <div className="mt-6 text-center text-sm text-slate-600">
-              Don't have an account?{" "}
-              <a href="/signup" className="font-medium text-primary">
-                {" "}
-                Sign up
-              </a>{" "}
+              {isLogin ? "Don't have an account?" : "Already have an account?"}
+              <button
+                onClick={toggleForm}
+                className="font-medium text-primary ml-1"
+              >
+                {isLogin ? "Sign Up" : "Log In"}
+              </button>
             </div>
           </form>
         </div>
