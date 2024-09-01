@@ -13,19 +13,22 @@ const CommentSection = () => {
   };
 
   return (
+    // TODO: fix comment card style
     <div className="space-y-3">
       <form className="max-w-2xl rounded-lg">
         <textarea
           placeholder="Comment..."
-          className="w-full rounded-lg leading-normal resize-none h-20 py-2 px-3 font-medium placeholder-gray-600 focus:outline-none focus:bg-white bg-accent"
+          className="w-full text-black rounded-lg leading-normal resize-none h-20 py-2 px-3 font-medium placeholder-gray-600 focus:outline-none focus:bg-white bg-accent"
           defaultValue={""}
         />
-        <div className="flex justify-end px-4">
-          <input
+        <div className="flex justify-end">
+          <button
             type="submit"
-            className="px-2.5 py-1.5 rounded-md text-white text-sm bg-primary cursor-pointer mt-1"
+            className="btn rounded-md text-white bg-primary mt-1"
             defaultValue="Comment"
-          />
+          >
+            Comment
+          </button>
         </div>
       </form>
 
