@@ -1,3 +1,5 @@
+import LoginButton from "@/components/LoginButton";
+
 const RightSidebar = () => {
   const users = [
     {
@@ -8,6 +10,7 @@ const RightSidebar = () => {
   ];
   return (
     <div className="w-64 bg-accent text-white p-4 space-y-10 h-screen">
+      <LoginButton />
       <div className="flex justify-between">
         <h2 className="text-xl">{users[0].username}</h2>
         <img
