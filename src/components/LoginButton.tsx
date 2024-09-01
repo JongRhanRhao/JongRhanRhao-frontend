@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormData, UserSchema } from "@/lib/types";
 import axios from "axios";
-import { SERVER_URL } from "@/lib/helpers/constants";
+import { SERVER_URL } from "@/lib/helpers/environment";
 
 const LoginButton = () => {
   const {
