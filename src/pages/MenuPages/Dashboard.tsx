@@ -5,7 +5,7 @@ import ShopImageSlider from "@/components/shared/ShopImageSlider";
 const DashboardContent = () => {
   return (
     <>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <ShopImageSlider />
       <PopularStoreList />
     </>
