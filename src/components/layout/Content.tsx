@@ -11,7 +11,6 @@ const Content: React.FC = () => {
   return (
     <div>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/" element={<Dashboard />} />
         <Route path="/favorite" element={<Favorite />} />
         <Route path="/message" element={<Message />} />

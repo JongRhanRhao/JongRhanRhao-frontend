@@ -28,7 +28,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
       name: "Dashboard",
       key: "Item 1",
       icon: faHome,
-      path: "/dashboard",
+      path: "/",
     },
     { name: "Favorite", key: "Item 2", icon: faStar, path: "/favorite" },
     { name: "Message", key: "Item 3", icon: faEnvelope, path: "/message" },
