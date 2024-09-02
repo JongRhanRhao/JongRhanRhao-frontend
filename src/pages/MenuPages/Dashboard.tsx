@@ -1,19 +1,13 @@
-import HeaderCard from "@/components/shared/HeaderCard";
 import SearchBar from "@/components/shared/SearchBar";
 import PopularStoreList from "@/components/shared/PopularStoreList";
-import SeatAvailableStoreList from "@/components/shared/SeatAvailableStoreList";
+import ShopImageSlider from "@/components/shared/ShopImageSlider";
 
 const DashboardContent = () => {
   return (
     <div className="space-y-4">
       <SearchBar />
-      <HeaderCard
-        title="Dashboard"
-        description="Welcome to dashboard. Here you can see available store and seat status."
-        imageSrc="https://png.pngtree.com/png-vector/20220616/ourmid/pngtree-drunk-santa-claus-cartoon-character-with-two-mugs-of-beer-png-image_5090275.png"
-      />
+      <ShopImageSlider />
       <PopularStoreList />
-      <SeatAvailableStoreList />
     </div>
   );
 };
