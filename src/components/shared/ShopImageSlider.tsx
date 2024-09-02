@@ -7,12 +7,11 @@ import { ShopCards } from "@/SampleData/data";
 
 const ShopImageSlider = () => {
   const settings = {
-    dots: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 500,
+    speed: 750,
     cssEase: "linear",
   };
 
@@ -21,7 +20,7 @@ const ShopImageSlider = () => {
       <div className="flex justify-between"></div>
       <Slider {...settings}>
         {ShopCards.map((card) => (
-          <div key={card.id} className="px-1">
+          <div key={card.id}>
             <ShopCard
               id={card.id}
               image={card.image}
