@@ -1,6 +1,7 @@
+import { useParams } from "react-router-dom";
+
 import CommentCard from "@/components/shared/CommentCard";
 import { shopData } from "@/SampleData/data";
-import { useParams } from "react-router-dom";
 
 const CommentSection = () => {
   const { id } = useParams<{ id: string }>();
