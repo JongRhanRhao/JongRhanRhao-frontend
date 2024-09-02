@@ -181,7 +181,8 @@ const LoginButton = () => {
                 <input
                   {...register("phone_number")}
                   name="phone_number"
-                  type="string"
+                  type="tel"
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                   autoComplete="current-password"
                   className="mt-2 block w-full text-black bg-secondary rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 "
                   placeholder="081 234 5678"
