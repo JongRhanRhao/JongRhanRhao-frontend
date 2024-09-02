@@ -5,10 +5,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#f8b602",
+        primary: "#3a86ff",
         secondary: "#ffffff",
-        accent: "#2e2e2e",
-        accent2: "#363636",
+        accent: "#161a1d",
+        accent2: "#15191c",
       },
     },
     fontFamily: {
