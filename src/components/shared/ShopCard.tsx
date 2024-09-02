@@ -34,7 +34,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
             src={image}
             alt={title}
             className={
-              "w-full h-52 object-cover hover:scale-105 duration-500 ease-out"
+              "w-full max-h-96 object-cover hover:scale-105 duration-500 ease-out"
             }
           />
           <div
