@@ -4,11 +4,11 @@ import ShopImageSlider from "@/components/shared/ShopImageSlider";
 
 const DashboardContent = () => {
   return (
-    <div className="space-y-4">
+    <>
       <SearchBar />
       <ShopImageSlider />
       <PopularStoreList />
-    </div>
+    </>
   );
 };
 
