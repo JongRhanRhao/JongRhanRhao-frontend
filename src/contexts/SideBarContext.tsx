@@ -23,7 +23,7 @@ export const SidebarProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [leftSidebarExpanded, setLeftSidebarExpanded] = useState(false);
-  const [rightSidebarExpanded, setRightSidebarExpanded] = useState(true);
+  const [rightSidebarExpanded, setRightSidebarExpanded] = useState(false);
 
   const toggleLeftSidebar = () => setLeftSidebarExpanded((prev) => !prev);
   const toggleRightSidebar = () => setRightSidebarExpanded((prev) => !prev);
