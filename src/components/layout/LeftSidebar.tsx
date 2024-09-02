@@ -50,8 +50,10 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
     >
       <button
         onClick={toggleLeftSidebar}
-        className={`text-xl text-secondary flex ${
-          leftSidebarExpanded ? "justify-end" : "justify-center"
+        className={`text-xl flex hover:text-primary duration-300 ${
+          leftSidebarExpanded
+            ? "justify-end text-primary"
+            : "justify-center text-secondary"
         }`}
       >
         <FontAwesomeIcon icon={leftSidebarExpanded ? faX : faBars} />
@@ -59,7 +61,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
       <div className="flex justify-between items-baseline">
         <Link
           to="/dashboard"
-          className={`text-2xl font-bold font-sans mt-5 text-left ${
+          className={`text-2xl font-bold font-sans text-left ${
             leftSidebarExpanded ? "text-primary" : "hidden"
           }`}
         >
@@ -77,9 +79,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
             return (
               <li
                 key={item.key}
-                className={`cursor-pointer p-4 rounded-xl flex items-center space-x-2 ${
+                className={`cursor-pointer p-4 rounded-xl flex items-center space-x-2 duration-150 ${
                   isSelectedMenuAndPathMatch ? "bg-primary" : ""
-                }`}
+                } ${!isSelectedMenuAndPathMatch ? "hover:text-primary" : ""}`}
                 onClick={() => onItemClick(item.key)}
               >
                 <Link
@@ -102,9 +104,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
             return (
               <li
                 key={item.key}
-                className={`cursor-pointer p-4 rounded-xl flex items-center space-x-2 ${
+                className={`cursor-pointer p-4 rounded-xl flex items-center space-x-2 duration-150 ${
                   isSelectedMenuAndPathMatch ? "bg-primary" : ""
-                }`}
+                }${!isSelectedMenuAndPathMatch ? "hover:text-primary" : ""}`}
                 onClick={() => onItemClick(item.key)}
               >
                 <Link
