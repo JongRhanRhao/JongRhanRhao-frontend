@@ -2,7 +2,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import StoreCard from "@/components/shared/StoreCard";
+import StoreCard from "@/components/shared/ShopCard";
 import { ShopCards } from "@/SampleData/data";
 
 const PopularStoreList = () => {

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-interface StoreCardProps {
+interface ShopCardProps {
   id: number;
   image: string;
   title: string;
@@ -13,7 +13,7 @@ interface StoreCardProps {
   description: string;
 }
 
-const StoreCard: React.FC<StoreCardProps> = ({
+const ShopCard: React.FC<ShopCardProps> = ({
   id,
   image,
   title,
@@ -65,4 +65,4 @@ const StoreCard: React.FC<StoreCardProps> = ({
   );
 };
 
-export default StoreCard;
+export default ShopCard;

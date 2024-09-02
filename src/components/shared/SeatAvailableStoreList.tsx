@@ -1,7 +1,8 @@
-import StoreCard from "@/components/shared/StoreCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import StoreCard from "@/components/shared/ShopCard";
 import { ShopCards } from "@/SampleData/data";
 
 const PopularStoreList = () => {
@@ -41,7 +42,7 @@ const PopularStoreList = () => {
       </div>
       <Slider {...settings}>
         {ShopCards.map((card) => (
-          <div key={card.id} className="px-1">
+          <div key={card.id} className="px-1 flex">
             <StoreCard
               id={card.id}
               image={card.image}
