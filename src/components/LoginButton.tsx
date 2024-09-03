@@ -145,7 +145,7 @@ const LoginButton = () => {
               <div className="h-px w-full bg-slate-200"></div>
             </div>
             <div className="w-full">
-              <div className=" text-accent">Email</div>
+              <div className=" text-accent">E-mail</div>
               <div className="mb-3">
                 <input
                   {...register("email")}
@@ -160,8 +160,24 @@ const LoginButton = () => {
                   </p>
                 )}
               </div>
-              <div className="mb-3">
-                <div className="text-accent">Password</div>
+              <div className="text-accent mt-3">Password</div>
+              <input
+                {...register("password")}
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                className="mt-2 block w-full text-black bg-secondary rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 "
+                placeholder="Enter password"
+              />
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.password.message}
+                </p>
+              )}
+              {!isLogin && (
+                <div className="text-accent mt-3">Confirm Password</div>
+              )}
+              {!isLogin && (
                 <input
                   {...register("password")}
                   name="password"
@@ -170,13 +186,8 @@ const LoginButton = () => {
                   className="mt-2 block w-full text-black bg-secondary rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 "
                   placeholder="Enter password"
                 />
-                {errors.password && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
-              {!isLogin && <div className="text-accent">Phone Number</div>}
+              )}
+              {!isLogin && <div className="text-accent mt-3">Phone</div>}
               {!isLogin && (
                 <input
                   {...register("phone_number")}
@@ -193,7 +204,7 @@ const LoginButton = () => {
                   {errors.phone_number.message}
                 </p>
               )}
-              <p className="mb-3 mt-2 text-sm text-gray-500">
+              <p className="mb-3 mt-2 text-sm text-gray-500 mt-3">
                 <a href="/forgot-password" className="text-primary">
                   Reset your password?
                 </a>
