@@ -33,7 +33,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
     <div className="flex justify-center h-screen">
       <div className="flex w-full h-full">
         <LeftSidebar onItemClick={onItemClick} />
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-y-auto">
           <main className="flex-1 p-4 bg-accent2">
             <Link to="/">
               <div className="py-2 text-xl text-primary mb-2">
