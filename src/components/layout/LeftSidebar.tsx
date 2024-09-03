@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,7 +12,7 @@ import {
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useSidebarContext } from "@/contexts/SideBarContext";
+// import { useSidebarContext } from "@/contexts/SideBarContext";
 import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
 
 interface LeftSidebarProps {
@@ -22,10 +22,11 @@ interface LeftSidebarProps {
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
+  // const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const items = [
-    { name: "Dashboard", key: "Item 1", icon: faHome, path: "/" },
+    { name: "Discovery", key: "Item 1", icon: faHome, path: "/" },
     { name: "Favorite", key: "Item 2", icon: faStar, path: "/favorite" },
     { name: "Message", key: "Item 3", icon: faEnvelope, path: "/message" },
     {
@@ -66,25 +67,27 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   return (
     <div
       className={`flex flex-col transition-all duration-300 ${
-        leftSidebarExpanded ? "w-64" : "w-20"
+        isExpanded ? "w-64" : "w-20"
       } bg-accent text-white p-4`}
+      onMouseEnter={() => setIsExpanded(true)}
+      onMouseLeave={() => setIsExpanded(false)}
     >
       <button
-        onClick={toggleLeftSidebar}
+        // onClick={toggleLeftSidebar}
         className={`text-xl flex hover:text-primary duration-300 ${
-          leftSidebarExpanded
+          isExpanded
             ? "justify-end text-primary"
             : "justify-center text-secondary"
         }`}
       >
-        <FontAwesomeIcon icon={leftSidebarExpanded ? faX : faBars} />
+        <FontAwesomeIcon icon={isExpanded ? faX : faBars} />
       </button>
-      {leftSidebarExpanded && (
+      {isExpanded && (
         <div className="text-2xl font-bold font-sans text-left text-primary mt-4">
           JongRhanRhao
         </div>
       )}
-      {renderItems(leftSidebarExpanded)}
+      {renderItems(isExpanded)}
     </div>
   );
 };
