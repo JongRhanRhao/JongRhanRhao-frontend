@@ -16,8 +16,7 @@ const ShopImageSlider = () => {
   };
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between"></div>
+    <div className="p-2">
       <Slider {...settings}>
         {ShopCards.map((card) => (
           <div key={card.id}>
