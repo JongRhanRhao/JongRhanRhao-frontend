@@ -19,7 +19,7 @@ const CommentSection = () => {
       <form className="max-w-2xl rounded-lg">
         <textarea
           placeholder="Comment..."
-          className="w-full text-black rounded-lg leading-normal resize-none h-20 py-2 px-3 font-medium placeholder-gray-600 focus:outline-none focus:bg-white bg-accent"
+          className="w-full text-black rounded-lg leading-normal resize-none py-2 px-3 font-medium placeholder-gray-600 focus:outline-none focus:bg-white bg-accent"
           defaultValue={""}
         />
         <div className="flex justify-end">
@@ -32,8 +32,7 @@ const CommentSection = () => {
           </button>
         </div>
       </form>
-
-      <h2 className="text-secondary text-xl font-medium">Comments</h2>
+      <div className="text-secondary text-xl font-medium">Comments</div>
       {shop.comment && shop.comment.length > 0 ? (
         shop.comment.map((comment, index) => (
           <CommentCard
