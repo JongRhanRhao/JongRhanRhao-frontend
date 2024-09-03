@@ -82,11 +82,11 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
     <div
       className={`flex flex-col transition-all duration-300 ${
         isExpanded ? "w-64" : "w-20"
-      } bg-accent text-white p-4`}
+      } bg-accent text-white p-4 hidden md:block lg:block`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button
+      {/* <button
         // onClick={toggleLeftSidebar}
         className={`text-xl flex hover:text-primary duration-300 ${
           isExpanded
@@ -95,9 +95,14 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
         }`}
       >
         <FontAwesomeIcon icon={isExpanded ? faX : faBars} />
-      </button>
+      </button> */}
+      {!isExpanded && (
+        <div className="text-secondary text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl font-bold mt-2">
+          J
+        </div>
+      )}
       {isExpanded && (
-        <div className="text-2xl font-bold font-sans text-left text-primary mt-4">
+        <div className="text-3xl font-bold font-sans text-left text-white underline underline-offset-4 rounded-xl p-4 mt-2 decoration-primary">
           JongRhanRhao
         </div>
       )}
