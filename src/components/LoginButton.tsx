@@ -54,7 +54,7 @@ const LoginButton = () => {
         Log In / Sign Up
       </button>
       <dialog id="login" className="modal">
-        <div className="modal-box bg-secondary">
+        <div className="modal-box bg-white">
           <form
             method="dialog"
             className="space-y-2"
@@ -76,7 +76,7 @@ const LoginButton = () => {
                   : "Sign up to get started."}
               </p>
             </div>
-            <button className="btn flex items-center justify-center bg-secondary border border-gray-300 rounded-lg shadow-md max-w-lg w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            <button className="btn flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md max-w-lg w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
               <svg
                 className="h-6 w-6 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +151,7 @@ const LoginButton = () => {
                   {...register("email")}
                   name="email"
                   type="email"
-                  className="block w-full text-black bg-secondary rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
+                  className="block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
                   placeholder="Enter email"
                 />
                 {errors.email && (
@@ -166,7 +166,7 @@ const LoginButton = () => {
                 name="password"
                 type="password"
                 autoComplete="current-password"
-                className="mt-2 block w-full text-black bg-secondary rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 "
+                className="mt-2 block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 "
                 placeholder="Enter password"
               />
               {errors.password && (
