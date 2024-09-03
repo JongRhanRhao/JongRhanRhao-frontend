@@ -43,9 +43,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           <img
             src={image}
             alt={title}
-            className={
-              "w-full max-h-96 object-cover hover:scale-105 duration-500 ease-out"
-            }
+            className={"w-full max-h-96 object-cover duration-500 ease-out"}
           />
           <div
             className={`absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${reservationClass}`}
