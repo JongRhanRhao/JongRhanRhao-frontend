@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -21,15 +21,11 @@ interface LeftSidebarProps {
 
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
 
   const items = [
-    {
-      name: "Dashboard",
-      key: "Item 1",
-      icon: faHome,
-      path: "/",
-    },
+    { name: "Dashboard", key: "Item 1", icon: faHome, path: "/" },
     { name: "Favorite", key: "Item 2", icon: faStar, path: "/favorite" },
     { name: "Message", key: "Item 3", icon: faEnvelope, path: "/message" },
     {
@@ -41,6 +37,31 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
     { name: "My Store", key: "Item 5", icon: faStore, path: "/store" },
     { name: "Setting", key: "Item 6", icon: faCog, path: "/setting" },
   ];
+
+  const handleItemClick = (item: { key: string; path: string }) => {
+    onItemClick(item.key);
+    navigate(item.path);
+  };
+
+  const renderItems = (expanded: boolean) => (
+    <ul className={`space-y-4 ${expanded ? "mt-4" : "mt-8"}`}>
+      {items.map((item) => {
+        const isActive = location.pathname === item.path;
+        return (
+          <li
+            key={item.key}
+            className={`cursor-pointer p-4 rounded-xl flex items-center space-x-2 duration-150 
+              ${isActive ? "bg-primary" : "hover:text-primary"}`}
+            onClick={() => handleItemClick(item)}
+          >
+            <FontAwesomeIcon icon={item.icon} />
+            {expanded && <span>{item.name}</span>}
+          </li>
+        );
+      })}
+      {expanded && <UpgradeToVIPCard />}
+    </ul>
+  );
 
   return (
     <div
@@ -58,68 +79,12 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
       >
         <FontAwesomeIcon icon={leftSidebarExpanded ? faX : faBars} />
       </button>
-      <div className="flex justify-between items-baseline">
-        <Link
-          to="/dashboard"
-          className={`text-2xl font-bold font-sans text-left ${
-            leftSidebarExpanded ? "text-primary" : "hidden"
-          }`}
-        >
+      {leftSidebarExpanded && (
+        <div className="text-2xl font-bold font-sans text-left text-primary mt-4">
           JongRhanRhao
-        </Link>
-      </div>
-      <div
-        className={`mt-4  ${
-          leftSidebarExpanded ? "" : "hidden"
-        } text-md font-sans text-left space-y-4`}
-      >
-        <ul className="space-y-3">
-          {items.map((item) => {
-            const isSelectedMenuAndPathMatch = location.pathname === item.path;
-            return (
-              <li
-                key={item.key}
-                className={`cursor-pointer p-4 rounded-xl flex items-center space-x-2 duration-150 ${
-                  isSelectedMenuAndPathMatch ? "bg-primary" : ""
-                } ${!isSelectedMenuAndPathMatch ? "hover:text-primary" : ""}`}
-                onClick={() => onItemClick(item.key)}
-              >
-                <Link
-                  to={item.path}
-                  className="flex items-center space-x-2 w-full"
-                >
-                  <FontAwesomeIcon icon={item.icon} />
-                  {leftSidebarExpanded && <span>{item.name}</span>}
-                </Link>
-              </li>
-            );
-          })}
-          <UpgradeToVIPCard />
-        </ul>
-      </div>
-      {!leftSidebarExpanded && (
-        <ul className="space-y-4 mt-8">
-          {items.map((item) => {
-            const isSelectedMenuAndPathMatch = location.pathname === item.path;
-            return (
-              <li
-                key={item.key}
-                className={`cursor-pointer p-4 rounded-xl flex items-center space-x-2 duration-150 ${
-                  isSelectedMenuAndPathMatch ? "bg-primary" : ""
-                }${!isSelectedMenuAndPathMatch ? "hover:text-primary" : ""}`}
-                onClick={() => onItemClick(item.key)}
-              >
-                <Link
-                  to={item.path}
-                  className="flex items-center space-x-2 w-full"
-                >
-                  <FontAwesomeIcon icon={item.icon} />
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        </div>
       )}
+      {renderItems(leftSidebarExpanded)}
     </div>
   );
 };
