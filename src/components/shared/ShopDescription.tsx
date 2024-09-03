@@ -74,7 +74,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 <div className="font-bold text-gray-300">
                   <FontAwesomeIcon icon={faLocationDot} />
                   &nbsp; Address:{" "}
-                  <span className={`${isBusy} font-bold`}>{shop.status}</span>
+                  <span className="text-gray-400">{shop.address}</span>
                 </div>
                 <div className="mt-7">
                   <BookingButton />
