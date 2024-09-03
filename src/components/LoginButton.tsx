@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-import { FormData, UserSchema } from "@/lib/types";
+import { FormData } from "@/lib/types";
 import { SERVER_URL } from "@/lib/helpers/environment";
 
 // TODO: implement oauth login with google and facebook
@@ -15,8 +14,9 @@ const LoginButton = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>({
-    resolver: zodResolver(UserSchema),
+    mode: "onSubmit",
   });
 
   const onSubmit = async (data: FormData) => {
@@ -41,6 +41,7 @@ const LoginButton = () => {
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
+    reset();
   };
 
   return (
