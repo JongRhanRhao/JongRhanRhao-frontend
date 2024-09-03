@@ -16,7 +16,7 @@ const PopularStoreList = () => {
 
   return (
     <div className="p-4">
-      w<h2 className="text-4xl font-bold text-primary mb-5">Popular</h2>
+      <h2 className="text-4xl font-bold text-primary mb-5">Popular</h2>
       {isLoading ? (
         <div className="flex justify-center items-center">
           <span className="loading loading-ring loading-lg text-secondary"></span>
