@@ -18,6 +18,7 @@ export const shopData: {
     maxSeats: number;
     currSeats: number;
     rating: number;
+    address?: string;
     comment: Comment[];
   };
 } = {
@@ -32,6 +33,8 @@ export const shopData: {
     maxSeats: 30,
     currSeats: 25,
     rating: 5,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [
       {
         name: "สมชาย ใจดี",
@@ -62,6 +65,8 @@ export const shopData: {
     maxSeats: 30,
     currSeats: 15,
     rating: 4,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [
       {
         name: "น้องโบนัส",
@@ -108,6 +113,8 @@ export const shopData: {
     maxSeats: 30,
     currSeats: 30,
     rating: 3,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
   },
   4: {
@@ -121,6 +128,36 @@ export const shopData: {
     maxSeats: 30,
     currSeats: 30,
     rating: 5,
+    comment: [],
+  },
+  5: {
+    name: "Lonely Heart Cafe",
+    description: "This is a cozy cafe with a romantic ambiance.",
+    image:
+      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-16-1024x1024.jpg",
+    status: "EVERYDAY",
+    openTime: "19:00 - 02:00",
+    reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 5,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
+    comment: [],
+  },
+  6: {
+    name: "Lonely Heart Cafe",
+    description: "This is a cozy cafe with a romantic ambiance.",
+    image:
+      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-16-1024x1024.jpg",
+    status: "EVERYDAY",
+    openTime: "19:00 - 02:00",
+    reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 5,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
   },
 };
