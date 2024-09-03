@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -25,10 +26,19 @@ const ShopCard: React.FC<ShopCardProps> = ({
   const isAvailable = reservationStatus === "can reserve";
   const reservationClass = isAvailable ? "bg-green-500" : "bg-red-500";
   const isFullseats = isAvailable ? "text-white" : "text-red-500";
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  //TODO: Change function to POST to /api/favorite
+  const handleFavoriteClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    setIsFavorite((prev) => !prev);
+  };
 
   return (
     <Link to={`/shop/${id}`} className="no-underline">
-      <div className="bg-gray-900 rounded-xl overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative">
+      <div className="bg-gray-900 rounded overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative">
         <div className="relative">
           <img
             src={image}
@@ -42,8 +52,17 @@ const ShopCard: React.FC<ShopCardProps> = ({
           >
             {reservationStatus}
           </div>
-          <div className="absolute top-2 right-2 bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded">
-            <FontAwesomeIcon icon={faHeart} />
+          <div
+            className={`absolute top-2 right-2 text-white text-2xl hover:text-red-600 font-bold px-2 py-1 rounded ${
+              isFavorite ? "text-red-500" : "text-white"
+            }`}
+          >
+            <button onClick={handleFavoriteClick}>
+              <FontAwesomeIcon
+                className={`${isFavorite ? "text-red-600" : "text-white"}`}
+                icon={faHeart}
+              />
+            </button>
           </div>
           <div className="absolute bottom-2 left-2 text-white text-xs font-bold px-2 py-1 rounded">
             <div className="flex items-center">
