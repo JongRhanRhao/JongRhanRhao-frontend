@@ -9,17 +9,15 @@ import NotFoundPage from "@/pages/NotFoundPage";
 
 const Content: React.FC = () => {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/favorite" element={<Favorite />} />
-        <Route path="/message" element={<Message />} />
-        <Route path="/status" element={<ReserveStatus />} />
-        <Route path="/store" element={<StoreManagement />} />
-        <Route path="/setting" element={<div>Setting Content</div>} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/favorite" element={<Favorite />} />
+      <Route path="/message" element={<Message />} />
+      <Route path="/status" element={<ReserveStatus />} />
+      <Route path="/store" element={<StoreManagement />} />
+      <Route path="/setting" element={<div>Setting Content</div>} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 };
 
