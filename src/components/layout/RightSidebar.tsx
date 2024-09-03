@@ -1,6 +1,6 @@
 import LoginButton from "@/components/LoginButton";
 import { useSidebarContext } from "@/contexts/SideBarContext";
-import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // TODO: Implement RightSidebar component ( use user profile icon to be displayed on the right sidebar )
 const RightSidebar = () => {
@@ -15,7 +15,7 @@ const RightSidebar = () => {
   return (
     <div
       className={`flex flex-col transition-all duration-300 ${
-        rightSidebarExpanded ? "w-64" : "w-20"
+        rightSidebarExpanded ? "w-64" : "w-12"
       } bg-accent text-white p-4 space-y-4`}
     >
       <button
@@ -24,9 +24,14 @@ const RightSidebar = () => {
           rightSidebarExpanded ? "justify-end" : "justify-center"
         }`}
       >
-        <FontAwesomeIcon icon={rightSidebarExpanded ? faX : faBars} />
+        <FontAwesomeIcon
+          className={`hover:text-primary duration-150 ${
+            rightSidebarExpanded && "text-primary"
+          }`}
+          icon={rightSidebarExpanded ? faX : faUser}
+        />
       </button>
-      {/* <LoginButton /> */}
+      {rightSidebarExpanded && <LoginButton />}
       {/* <div className="flex justify-between">
         <h2 className="text-xl">{users[0].username}</h2>
         <img
