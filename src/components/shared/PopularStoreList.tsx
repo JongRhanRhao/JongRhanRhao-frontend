@@ -5,7 +5,7 @@ const PopularStoreList = () => {
   return (
     <div className="p-4">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-bold text-primary">Popular</h2>
+        <h2 className="text-4xl font-bold text-primary mb-2">Popular</h2>
         <div className="flex justify-between items-center mb-4">
           <span className="text-primary hover:underline cursor-pointer">
             View all
