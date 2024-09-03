@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -24,6 +24,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const navigate = useNavigate();
   // const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
   const [isExpanded, setIsExpanded] = useState(false);
+  const expandTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const items = [
     { name: "Discovery", key: "Item 1", icon: faHome, path: "/" },
@@ -64,13 +65,26 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
     </ul>
   );
 
+  const handleMouseEnter = () => {
+    expandTimeout.current = setTimeout(() => {
+      setIsExpanded(true);
+    }, 200);
+  };
+
+  const handleMouseLeave = () => {
+    if (expandTimeout.current) {
+      clearTimeout(expandTimeout.current);
+    }
+    setIsExpanded(false);
+  };
+
   return (
     <div
       className={`flex flex-col transition-all duration-300 ${
         isExpanded ? "w-64" : "w-20"
       } bg-accent text-white p-4`}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <button
         // onClick={toggleLeftSidebar}
