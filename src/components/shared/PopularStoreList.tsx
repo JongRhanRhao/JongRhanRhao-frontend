@@ -9,14 +9,14 @@ const PopularStoreList = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="p-4">
-      <h2 className="text-4xl font-bold text-primary mb-5">Popular</h2>
+      w<h2 className="text-4xl font-bold text-primary mb-5">Popular</h2>
       {isLoading ? (
         <div className="flex justify-center items-center">
           <span className="loading loading-ring loading-lg text-secondary"></span>
