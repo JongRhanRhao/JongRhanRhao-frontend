@@ -49,7 +49,7 @@ const PopularStoreList = () => {
   if (isLoading) {
     return (
       <div className="p-4">
-        <h2 className="text-4xl font-bold text-primary mb-5">Popular</h2>
+        <h2 className="text-4xl font-bold text-secondary mb-5">Popular</h2>
         <div className="flex justify-center items-center">
           <span className="loading loading-ring loading-lg text-secondary"></span>
         </div>
@@ -59,8 +59,8 @@ const PopularStoreList = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-4xl font-bold text-primary mb-5">Popular</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+      <h2 className="text-4xl font-bold text-secondary mb-5">Popular</h2>
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {shopCardsList}
       </div>
     </div>
