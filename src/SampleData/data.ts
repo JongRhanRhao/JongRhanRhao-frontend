@@ -19,20 +19,23 @@ export const shopData: {
     currSeats: number;
     rating: number;
     address?: string;
+    type: string;
     comment: Comment[];
   };
 } = {
   1: {
     name: "Warm up Cafe",
-    description: "This is a popular club where you can have fun.",
+    description:
+      "ร้านท่ามใจกลางเมืองนิมมาน ใครไม่รู้จักร้านนี้คงพลาด มีแต่คนเข้าร้าน เหมาะกับวัยรุ่นยุค 90s ที่ชอบฟังเพลงเก่าๆ และเพลงลูกทุ่ง ",
     image:
       "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-03-1024x1024.jpg",
-    status: "Available",
+    status: "Busy",
     openTime: "19:00 - 02:00",
     reserveExpired: "20:00",
     maxSeats: 30,
     currSeats: 25,
     rating: 5,
+    type: "Cafe",
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [
@@ -65,6 +68,7 @@ export const shopData: {
     maxSeats: 30,
     currSeats: 15,
     rating: 4,
+    type: "club",
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [
@@ -131,10 +135,10 @@ export const shopData: {
     comment: [],
   },
   5: {
-    name: "Lonely Heart Cafe",
+    name: "TAWANDANG",
     description: "This is a cozy cafe with a romantic ambiance.",
     image:
-      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-16-1024x1024.jpg",
+      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-19-1024x1024.jpg",
     status: "EVERYDAY",
     openTime: "19:00 - 02:00",
     reserveExpired: "20:00",
@@ -146,10 +150,100 @@ export const shopData: {
     comment: [],
   },
   6: {
-    name: "Lonely Heart Cafe",
+    name: "Zoe In Yellow",
     description: "This is a cozy cafe with a romantic ambiance.",
     image:
-      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-16-1024x1024.jpg",
+      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-12-1024x1024.jpg",
+    status: "EVERYDAY",
+    openTime: "19:00 - 02:00",
+    reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 5,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
+    comment: [],
+  },
+  7: {
+    name: "LVMC",
+    description: "This is a cozy cafe with a romantic ambiance.",
+    image:
+      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-06-1024x1024.jpg",
+    status: "EVERYDAY",
+    openTime: "19:00 - 02:00",
+    reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 5,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
+    comment: [],
+  },
+  8: {
+    name: "Space Time",
+    description: "This is a cozy cafe with a romantic ambiance.",
+    image:
+      "https://northspace.life/wp-content/uploads/2024/06/hangout-spacetime-1024x1024.jpg",
+    status: "EVERYDAY",
+    openTime: "19:00 - 02:00",
+    reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 5,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
+    comment: [],
+  },
+  9: {
+    name: "Botan Bar",
+    description: "This is a cozy cafe with a romantic ambiance.",
+    image:
+      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-24new-1024x1024.png",
+    status: "EVERYDAY",
+    openTime: "19:00 - 02:00",
+    reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 5,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
+    comment: [],
+  },
+  10: {
+    name: "Tora",
+    description: "This is a cozy cafe with a romantic ambiance.",
+    image:
+      "https://northspace.life/wp-content/uploads/2024/08/hangout-tora-1024x1024.png",
+    status: "EVERYDAY",
+    openTime: "19:00 - 02:00",
+    reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 5,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
+    comment: [],
+  },
+  11: {
+    name: "Shellby Bar",
+    description: "This is a cozy cafe with a romantic ambiance.",
+    image:
+      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-15-1024x1024.jpg",
+    status: "EVERYDAY",
+    openTime: "19:00 - 02:00",
+    reserveExpired: "20:00",
+    maxSeats: 30,
+    currSeats: 30,
+    rating: 5,
+    address:
+      "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
+    comment: [],
+  },
+  12: {
+    name: "What a small CNX",
+    description: "This is a cozy cafe with a romantic ambiance.",
+    image:
+      "https://northspace.life/wp-content/uploads/2024/01/hanguotcnx2024-09-1024x1024.jpg",
     status: "EVERYDAY",
     openTime: "19:00 - 02:00",
     reserveExpired: "20:00",
@@ -176,5 +270,6 @@ export const ShopCards = Object.keys(shopData).map((key) => {
     currSeats: shop.currSeats,
     maxSeats: shop.maxSeats,
     description: shop.description,
+    type: shop.type,
   };
 });
