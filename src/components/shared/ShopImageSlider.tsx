@@ -9,6 +9,7 @@ const ShopImageSlider = () => {
   const settings = {
     infinite: true,
     slidesToShow: 1,
+    dots: true,
     slidesToScroll: 1,
     autoplay: true,
     speed: 750,
