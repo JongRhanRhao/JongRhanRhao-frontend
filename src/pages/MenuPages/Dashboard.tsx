@@ -1,5 +1,5 @@
 import SearchBar from "@/components/shared/SearchBar";
-import PopularStoreList from "@/components/shared/PopularStoreList";
+import StoreListWithFilterFeature from "@/components/shared/StoreListWithFilterFeature";
 import ShopImageSlider from "@/components/shared/ShopImageSlider";
 
 const DashboardContent = () => {
@@ -7,7 +7,7 @@ const DashboardContent = () => {
     <>
       {/* <SearchBar /> */}
       <ShopImageSlider />
-      <PopularStoreList />
+      <StoreListWithFilterFeature />
     </>
   );
 };
