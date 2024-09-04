@@ -27,7 +27,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
     description: "Shop not found",
   };
   const isAvailable = shop.status === "Busy";
-  const isBusy = isAvailable ? "text-red-500" : "text-green-500";
+  const isBusy = isAvailable ? "text-error" : "text-success";
 
   return (
     <div className="flex justify-center h-screen">
@@ -51,7 +51,9 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 <div className="font-bold text-gray-300 uppercase text-4xl">
                   {shop.name}
                 </div>
-                <div className="mb-4 mt-2">{shop.description}</div>
+                <div className="mb-4 mt-2 font-thai text-lg">
+                  {shop.description}
+                </div>
                 <div className="font-bold text-gray-300">
                   <FontAwesomeIcon icon={faClock} />
                   &nbsp; Opening Hours :{" "}
@@ -82,7 +84,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
               </div>
               {/* Comment Section */}
             </div>
-            {/* <CommentSection /> */}
+            <CommentSection />
           </main>
         </div>
         <RightSidebar />
