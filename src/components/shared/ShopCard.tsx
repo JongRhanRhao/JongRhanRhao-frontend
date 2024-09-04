@@ -24,7 +24,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   currSeats,
 }) => {
   const isAvailable = reservationStatus === "can reserve";
-  const reservationClass = isAvailable ? "bg-green-500" : "bg-red-500";
+  const reservationClass = isAvailable ? "bg-success" : "bg-error";
   const isFullseats = isAvailable ? "text-white" : "text-red-500";
   const [isFavorite, setIsFavorite] = useState(false);
 
