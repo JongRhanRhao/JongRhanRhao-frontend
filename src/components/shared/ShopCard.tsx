@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 interface ShopCardProps {
@@ -43,7 +43,9 @@ const ShopCard: React.FC<ShopCardProps> = ({
           <img
             src={image}
             alt={title}
-            className={"w-full max-h-96 object-cover duration-500 ease-out"}
+            className={
+              "w-full lg:h-96 md:h-96 sm:h-32  object-cover duration-500 ease-out"
+            }
           />
           <div
             className={`absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${reservationClass}`}
@@ -57,8 +59,8 @@ const ShopCard: React.FC<ShopCardProps> = ({
           >
             <button onClick={handleFavoriteClick}>
               <FontAwesomeIcon
-                className={`${isFavorite ? "text-red-600" : "text-white"}`}
-                icon={faHeart}
+                className={`${isFavorite ? "text-yellow-400" : "text-white"}`}
+                icon={faStar}
               />
             </button>
           </div>
