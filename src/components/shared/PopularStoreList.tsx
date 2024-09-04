@@ -51,7 +51,7 @@ const PopularStoreList = () => {
       <div className="p-4">
         <h2 className="text-4xl font-bold text-secondary mb-5">Popular</h2>
         <div className="flex justify-center items-center">
-          <span className="loading loading-ring loading-lg text-secondary"></span>
+          <span className="loading loading-ring loading-lg text-primary"></span>
         </div>
       </div>
     );
