@@ -7,9 +7,8 @@ import {
   faFileInvoiceDollar,
   faCog,
   faStore,
-  faBars,
-  faX,
   faHome,
+  faWineGlassEmpty,
 } from "@fortawesome/free-solid-svg-icons";
 
 // import { useSidebarContext } from "@/contexts/SideBarContext";
@@ -27,7 +26,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const expandTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const items = [
-    { name: "Discovery", key: "Item 1", icon: faHome, path: "/" },
+    { name: "Discover", key: "Item 1", icon: faHome, path: "/" },
     { name: "Favorite", key: "Item 2", icon: faStar, path: "/favorite" },
     { name: "Message", key: "Item 3", icon: faEnvelope, path: "/message" },
     {
@@ -98,7 +97,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
       </button> */}
       {!isExpanded && (
         <div className="text-secondary text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl font-bold mt-2">
-          J
+          <FontAwesomeIcon icon={faWineGlassEmpty} />
         </div>
       )}
       {isExpanded && (
