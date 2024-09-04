@@ -84,7 +84,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
               </div>
               {/* Comment Section */}
             </div>
-            <CommentSection />
+            {/* <CommentSection /> */}
           </main>
         </div>
         <RightSidebar />
