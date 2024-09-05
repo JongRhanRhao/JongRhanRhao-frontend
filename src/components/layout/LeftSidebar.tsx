@@ -51,7 +51,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
         return (
           <li
             key={item.key}
-            className={`btn bg-accent border-none cursor-pointer font-bold p-4 rounded-xl flex items-center space-x-2 duration-150 
+            className={`btn bg-accent text-secondary border-none cursor-pointer font-bold p-4 rounded-xl flex items-center space-x-2 duration-150 
               ${isActive ? "bg-primary" : "hover:text-primary"}`}
             onClick={() => handleItemClick(item)}
           >
