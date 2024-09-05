@@ -48,7 +48,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
             src={image}
             alt={title}
             className={
-              "w-full lg:h-56 md:h-80 sm:h-32  object-cover duration-500 ease-out"
+              "w-full lg:h-60 md:h-80 sm:h-32 object-cover duration-500 ease-out"
             }
           />
           <div
