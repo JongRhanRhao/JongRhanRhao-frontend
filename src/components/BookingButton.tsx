@@ -1,38 +1,21 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 
 const BookingButton = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [numberOfPeople, setNumberOfPeople] = useState<{
     value: number;
-    label: string;
   } | null>(null);
-  const [timeRange, setTimeRange] = useState<{
-    value: string;
-    label: string;
+  const [phoneNumber, setPhoneNumber] = useState<{
+    value: number;
   } | null>(null);
-
-  const peopleOptions = [
-    { value: 1, label: "1 Person" },
-    { value: 2, label: "2 People" },
-    { value: 3, label: "3 People" },
-    { value: 4, label: "4 People" },
-  ];
-
-  const timeOptions = [
-    { value: "morning", label: "Morning (8 AM - 12 PM)" },
-    { value: "afternoon", label: "Afternoon (12 PM - 4 PM)" },
-    { value: "evening", label: "Evening (4 PM - 8 PM)" },
-    { value: "night", label: "Night (8 PM - 12 AM)" },
-  ];
 
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
     console.log("Date:", selectedDate);
     console.log("Number of People:", numberOfPeople);
-    console.log("Time Range:", timeRange);
+    console.log("Phone Number:", phoneNumber);
   };
 
   return (
@@ -47,12 +30,14 @@ const BookingButton = () => {
       >
         BOOK NOW
       </button>
-      <dialog id="BookingButton" className="modal modal-bottom sm:modal-middle">
+      <dialog
+        id="BookingButton"
+        className="modal modal-bottom sm:modal-middle md:modal-middle lg:modal-middle xl:modal-middle"
+      >
         <div className="modal-box">
           <h2 className="font-bold text-xl mb-4">Book Your Reservation</h2>
-
           <div className="mb-4">
-            <label className="font-bold text-gray-500">Select Date:</label>
+            <label className="font-bold mr-2">Select Date:</label>
             <DatePicker
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
@@ -61,24 +46,29 @@ const BookingButton = () => {
               minDate={new Date()}
             />
           </div>
-
           <div className="mb-4">
-            <label className="font-bold text-gray-500">Number of People:</label>
-            <Select
-              options={peopleOptions}
-              value={numberOfPeople}
-              onChange={(option) => setNumberOfPeople(option)}
-              className="mt-1"
+            <label className="font-bold">Number of People:</label>
+            <input
+              type="number"
+              value={numberOfPeople ? numberOfPeople.value.toString() : ""}
+              min={1}
+              onChange={(e) =>
+                setNumberOfPeople({ value: parseInt(e.target.value) })
+              }
+              className="rounded p-2 w-full mt-1"
             />
           </div>
-
           <div className="mb-4">
-            <label className="font-bold text-gray-500">Time Range:</label>
-            <Select
-              options={timeOptions}
-              value={timeRange}
-              onChange={(option) => setTimeRange(option)}
-              className="mt-1"
+            <label className="font-bold">Phone:</label>
+            <input
+              type="tel"
+              value={phoneNumber ? phoneNumber.value.toString() : ""}
+              maxLength={10}
+              placeholder="081 234 5678"
+              onChange={(e) =>
+                setPhoneNumber({ value: e.target.value as unknown as number })
+              }
+              className="rounded p-2 w-full mt-1"
             />
           </div>
           <div className="modal-action">
