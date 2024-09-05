@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-interface ShopCardProps {
+export interface ShopCardProps {
   id: number;
   image: string;
   title: string;
@@ -22,16 +22,14 @@ const ShopCard: React.FC<ShopCardProps> = ({
   rating,
   maxSeats,
   currSeats,
-  // description,
 }) => {
   const isAvailable = reservationStatus === "can reserve";
   const reservationClass = `absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${
-    isAvailable ? "bg-success" : "bg-error"
+    isAvailable ? "bg-green-500" : "bg-red-500"
   }`;
   const seatCountClass = `mt-2 ${isAvailable ? "text-white" : "text-red-500"}`;
   const [isFavorite, setIsFavorite] = useState(false);
 
-  //TODO: Change function to POST to /api/favorite
   const handleFavoriteClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.preventDefault();
@@ -47,9 +45,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           <img
             src={image}
             alt={title}
-            className={
-              "w-full lg:h-60 md:h-80 sm:h-32 object-cover duration-500 ease-out"
-            }
+            className={`w-full object-cover duration-500 ease-out lg:h-60 md:h-80 sm:h-32`}
           />
           <div
             className={`absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${reservationClass}`}
