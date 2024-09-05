@@ -72,6 +72,48 @@ const StoreListWithFilterFeature = () => {
         <h2 className="text-3xl font-bold text-secondary mb-5">
           Discover & Booking
         </h2>
+        <div className="mb-4 space-x-2">
+          <button
+            className={`btn btn-sm ${
+              selectedType === "Hot" ? "btn-primary" : "btn-outline"
+            }`}
+            onClick={() => handleTypeClick("Hot")}
+          >
+            <FontAwesomeIcon icon={faFire} className="text-error" />
+          </button>
+          <button
+            className={`btn btn-sm ${
+              selectedType === "Favorite" ? "btn-primary" : "btn-outline"
+            }`}
+            onClick={() => handleTypeClick("Favorite")}
+          >
+            <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
+          </button>
+          <button
+            className={`btn btn-sm ${
+              selectedType === "All" ? "btn-primary" : "btn-outline"
+            }`}
+            onClick={() => handleTypeClick("All")}
+          >
+            All
+          </button>
+          <button
+            className={`btn btn-sm ${
+              selectedType === "Cafe" ? "btn-primary" : "btn-outline"
+            }`}
+            onClick={() => handleTypeClick("Cafe")}
+          >
+            Cafe
+          </button>
+          <button
+            className={`btn btn-sm ${
+              selectedType === "90s" ? "btn-primary" : "btn-outline"
+            }`}
+            onClick={() => handleTypeClick("90s")}
+          >
+            90s
+          </button>
+        </div>
         <div className="flex justify-center items-center">
           <span className="loading loading-ring loading-lg text-primary"></span>
         </div>
@@ -88,19 +130,19 @@ const StoreListWithFilterFeature = () => {
       <div className="mb-4 space-x-2">
         <button
           className={`btn btn-sm ${
-            selectedType === "Favorite" ? "btn-primary" : "btn-outline"
-          }`}
-          onClick={() => handleTypeClick("Favorite")}
-        >
-          <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-        </button>
-        <button
-          className={`btn btn-sm ${
             selectedType === "Hot" ? "btn-primary" : "btn-outline"
           }`}
           onClick={() => handleTypeClick("Hot")}
         >
           <FontAwesomeIcon icon={faFire} className="text-error" />
+        </button>
+        <button
+          className={`btn btn-sm ${
+            selectedType === "Favorite" ? "btn-primary" : "btn-outline"
+          }`}
+          onClick={() => handleTypeClick("Favorite")}
+        >
+          <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
         </button>
         <button
           className={`btn btn-sm ${
