@@ -2,16 +2,16 @@ import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faStar,
   faEnvelope,
   faFileInvoiceDollar,
   faCog,
   faStore,
   faHome,
-  faSplotch,
+  faAngleRight,
+  faAngleLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
-// import { useSidebarContext } from "@/contexts/SideBarContext";
+import { useSidebarContext } from "@/contexts/SideBarContext";
 import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
 
 interface LeftSidebarProps {
@@ -21,13 +21,13 @@ interface LeftSidebarProps {
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  // const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
+  const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
   const [isExpanded, setIsExpanded] = useState(false);
   const expandTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const items = [
     { name: "Discover", key: "Item 1", icon: faHome, path: "/" },
-    { name: "Favorite", key: "Item 2", icon: faStar, path: "/favorite" },
+    // { name: "Favorite", key: "Item 2", icon: faStar, path: "/favorite" },
     { name: "Message", key: "Item 3", icon: faEnvelope, path: "/message" },
     {
       name: "Status",
@@ -77,35 +77,39 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
     setIsExpanded(false);
   };
 
+  // if you want to change the sidebar to expand on hover instead of click event change leftSidebarExpanded to isExpanded
   return (
     <div
       className={`flex flex-col transition-all duration-300 ${
-        isExpanded ? "w-64" : "w-20"
+        leftSidebarExpanded ? "w-64" : "w-20"
       } bg-accent text-white p-4 hidden md:block lg:block`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* <button
-        // onClick={toggleLeftSidebar}
-        className={`text-xl flex hover:text-primary duration-300 ${
-          isExpanded
-            ? "justify-end text-primary"
-            : "justify-center text-secondary"
-        }`}
-      >
-        <FontAwesomeIcon icon={isExpanded ? faX : faBars} />
-      </button> */}
-      {!isExpanded && (
-        <div className="text-secondary text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl font-bold mt-2">
-          <FontAwesomeIcon icon={faSplotch} />
+      {leftSidebarExpanded && (
+        <div className="flex justify-end">
+          <button
+            onClick={toggleLeftSidebar}
+            className={`text-xl duration-300 shadow-lg text-secondary bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl w-12 mt-2`}
+          >
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </button>
         </div>
       )}
-      {isExpanded && (
-        <div className="text-3xl font-bold font-sans text-left text-white underline underline-offset-4 rounded-xl p-4 mt-2 decoration-primary">
+      {!leftSidebarExpanded && (
+        <div
+          onClick={toggleLeftSidebar}
+          className="text-secondary text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl mt-2"
+        >
+          <FontAwesomeIcon icon={faAngleRight} />
+        </div>
+      )}
+      {leftSidebarExpanded && (
+        <div className="text-3xl font-bold font-sans text-left text-white underline underline-offset-4 rounded-xl p-4 decoration-primary">
           JongRhanRhao
         </div>
       )}
-      {renderItems(isExpanded)}
+      {renderItems(leftSidebarExpanded)}
     </div>
   );
 };
