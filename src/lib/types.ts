@@ -1,9 +1,11 @@
 import { z } from "zod";
 
 export type FormData = {
+  user_name: string;
   email: string;
   password: string;
   phone_number: string;
+  role: string;
 };
 
 export const UserSchema = z.object({
