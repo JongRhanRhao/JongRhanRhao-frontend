@@ -3,9 +3,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import ShopCard from "@/components/shared/ShopCard";
-import { ShopCards } from "@/SampleData/data";
+import { ShopSamepleData } from "@/SampleData/data";
 
-const ShopImageSlider = () => {
+const ImageSlider: React.FC = () => {
   const settings = {
     infinite: true,
     slidesToShow: 1,
@@ -17,20 +17,11 @@ const ShopImageSlider = () => {
   };
 
   return (
-    <div className="p-2">
+    <div className={`p-2`}>
       <Slider {...settings}>
-        {ShopCards.map((card) => (
+        {ShopSamepleData.map((card) => (
           <div key={card.id}>
-            <ShopCard
-              id={card.id}
-              image={card.image}
-              title={card.title}
-              reservationStatus={card.reservationStatus}
-              rating={card.rating}
-              currSeats={card.currSeats}
-              maxSeats={card.maxSeats}
-              description={card.description}
-            />
+            <ShopCard {...card} />
           </div>
         ))}
       </Slider>
@@ -38,4 +29,4 @@ const ShopImageSlider = () => {
   );
 };
 
-export default ShopImageSlider;
+export default ImageSlider;
