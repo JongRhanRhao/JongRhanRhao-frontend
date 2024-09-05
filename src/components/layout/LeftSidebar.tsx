@@ -3,12 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
-  faFileInvoiceDollar,
   faCog,
   faStore,
   faHome,
   faAngleRight,
   faAngleLeft,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useSidebarContext } from "@/contexts/SideBarContext";
@@ -32,7 +32,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
     {
       name: "Status",
       key: "Item 4",
-      icon: faFileInvoiceDollar,
+      icon: faClock,
       path: "/status",
     },
     { name: "My Store", key: "Item 5", icon: faStore, path: "/store" },
