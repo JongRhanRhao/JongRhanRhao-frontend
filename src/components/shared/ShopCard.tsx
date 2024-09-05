@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -22,19 +22,23 @@ const ShopCard: React.FC<ShopCardProps> = ({
   rating,
   maxSeats,
   currSeats,
+  // description,
 }) => {
   const isAvailable = reservationStatus === "can reserve";
-  const reservationClass = isAvailable ? "bg-success" : "bg-error";
-  const isFullseats = isAvailable ? "text-white" : "text-red-500";
+  const reservationClass = `absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${
+    isAvailable ? "bg-success" : "bg-error"
+  }`;
+  const seatCountClass = `mt-2 ${isAvailable ? "text-white" : "text-red-500"}`;
   const [isFavorite, setIsFavorite] = useState(false);
 
   //TODO: Change function to POST to /api/favorite
-  const handleFavoriteClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    setIsFavorite((prev) => !prev);
-  };
+  const handleFavoriteClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault();
+      setIsFavorite((prev) => !prev);
+    },
+    []
+  );
 
   return (
     <Link to={`/shop/${id}`} className="no-underline">
@@ -44,7 +48,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
             src={image}
             alt={title}
             className={
-              "w-full lg:h-96 md:h-96 sm:h-32  object-cover duration-500 ease-out"
+              "w-full lg:h-56 md:h-80 sm:h-32  object-cover duration-500 ease-out"
             }
           />
           <div
@@ -74,7 +78,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
                 />
               ))}
             </div>
-            <p className={`mt-2 ${isFullseats}`}>
+            <p className={`mt-2 ${seatCountClass}`}>
               {currSeats} / {maxSeats}
             </p>
           </div>
