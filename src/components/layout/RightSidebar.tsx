@@ -33,7 +33,7 @@ const RightSidebar = () => {
         }`}
       >
         <FontAwesomeIcon
-          className={`hover:text-primary duration-150 ${
+          className={`hover:text-primary duration-150 btn btn-xs bg-accent border-none text-secondary ${
             rightSidebarExpanded && "text-primary"
           }`}
           icon={rightSidebarExpanded ? faX : faUser}
