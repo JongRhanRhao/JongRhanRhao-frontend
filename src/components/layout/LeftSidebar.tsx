@@ -51,7 +51,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
         return (
           <li
             key={item.key}
-            className={`cursor-pointer font-bold p-4 rounded-xl flex items-center space-x-2 duration-150 
+            className={`btn bg-accent border-none cursor-pointer font-bold p-4 rounded-xl flex items-center space-x-2 duration-150 
               ${isActive ? "bg-primary" : "hover:text-primary"}`}
             onClick={() => handleItemClick(item)}
           >
@@ -90,7 +90,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
         <div className="flex justify-end">
           <button
             onClick={toggleLeftSidebar}
-            className={`text-xl duration-300 shadow-lg text-secondary bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl w-12 mt-2`}
+            className={`btn text-xl duration-300 shadow-lg text-secondary bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl w-12 mt-2`}
           >
             <FontAwesomeIcon icon={faAngleLeft} />
           </button>
@@ -99,7 +99,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
       {!leftSidebarExpanded && (
         <div
           onClick={toggleLeftSidebar}
-          className="text-secondary text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl mt-2"
+          className="btn w-12 text-secondary text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl mt-2"
         >
           <FontAwesomeIcon icon={faAngleRight} />
         </div>
