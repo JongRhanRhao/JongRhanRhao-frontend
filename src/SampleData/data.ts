@@ -120,6 +120,7 @@ export const shopData: {
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
+    type: "90s",
   },
   4: {
     name: "Lonely Heart Cafe",
@@ -133,6 +134,7 @@ export const shopData: {
     currSeats: 30,
     rating: 5,
     comment: [],
+    type: "Cafe",
   },
   5: {
     name: "TAWANDANG",
@@ -148,6 +150,7 @@ export const shopData: {
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
+    type: "90s",
   },
   6: {
     name: "Zoe In Yellow",
@@ -163,6 +166,7 @@ export const shopData: {
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
+    type: "90s",
   },
   7: {
     name: "LVMC",
@@ -178,6 +182,7 @@ export const shopData: {
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
+    type: "90s",
   },
   8: {
     name: "Space Time",
@@ -193,6 +198,7 @@ export const shopData: {
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
+    type: "90s",
   },
   9: {
     name: "Botan Bar",
@@ -208,6 +214,7 @@ export const shopData: {
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
+    type: "Cafe",
   },
   10: {
     name: "Tora",
@@ -223,6 +230,7 @@ export const shopData: {
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
+    type: "90s",
   },
   11: {
     name: "Shellby Bar",
@@ -238,6 +246,7 @@ export const shopData: {
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
+    type: "Cafe",
   },
   12: {
     name: "What a small CNX",
@@ -253,10 +262,11 @@ export const shopData: {
     address:
       "Nimmanhaemin Rd, Tambon Su Thep, Amphoe Mueang Chiang Mai, Chang Wat Chiang Mai 50200",
     comment: [],
+    type: "90s",
   },
 };
 
-export const ShopCards = Object.keys(shopData).map((key) => {
+export const ShopSamepleData = Object.keys(shopData).map((key) => {
   const shop = shopData[parseInt(key)];
   const reservationStatus =
     shop.currSeats < shop.maxSeats ? "can reserve" : "can't reserve";
