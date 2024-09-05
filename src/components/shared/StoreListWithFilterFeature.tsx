@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
 
 import ShopCard from "@/components/shared/ShopCard";
-import { ShopCards } from "@/SampleData/data";
+import { ShopSamepleData } from "@/SampleData/data";
 
 const LOADING_TIMEOUT = 500;
 
@@ -24,9 +24,9 @@ const StoreListWithFilterFeature = () => {
 
   const filteredShopCards = useMemo(() => {
     if (selectedType === "All") {
-      return ShopCards;
+      return ShopSamepleData;
     }
-    return ShopCards.filter((card) => card.type === selectedType);
+    return ShopSamepleData.filter((card) => card.type === selectedType);
   }, [selectedType]);
 
   const handleTypeClick = (type: string) => {
