@@ -5,15 +5,28 @@ import Message from "@/pages/MenuPages/Message";
 import ReserveStatus from "@/pages/MenuPages/ReserveStatus";
 import StoreManagement from "@/pages/MenuPages/StoreManagement";
 import NotFoundPage from "@/pages/NotFoundPage";
+import { GLOBAL_URL_ROUTES } from "@/lib/helpers/environment";
 
 const Content: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
-      <Route path="/message" element={<Message />} />
-      <Route path="/status" element={<ReserveStatus />} />
-      <Route path="/store" element={<StoreManagement />} />
-      <Route path="/setting" element={<div>Setting Content</div>} />
+      <Route
+        path={`${GLOBAL_URL_ROUTES.landingPage}`}
+        element={<Dashboard />}
+      />
+      <Route path={`${GLOBAL_URL_ROUTES.message}`} element={<Message />} />
+      <Route
+        path={`${GLOBAL_URL_ROUTES.reserveStatus}`}
+        element={<ReserveStatus />}
+      />
+      <Route
+        path={`${GLOBAL_URL_ROUTES.storeManagement}`}
+        element={<StoreManagement />}
+      />
+      <Route
+        path={`${GLOBAL_URL_ROUTES.setting}`}
+        element={<div>Setting Content</div>}
+      />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
