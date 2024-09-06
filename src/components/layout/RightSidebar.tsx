@@ -6,7 +6,7 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 
-import LoginButton from "@/components/LoginButton";
+import LoginButton from "@/components/shared/LoginButton";
 import { useSidebarContext } from "@/contexts/SideBarContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // TODO: Implement RightSidebar component ( use user profile icon to be displayed on the right sidebar )
