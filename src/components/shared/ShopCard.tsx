@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
+import { toast } from "react-hot-toast";
 export interface ShopCardProps {
   id: number;
   image: string;
@@ -29,11 +29,13 @@ const ShopCard: React.FC<ShopCardProps> = ({
   }`;
   const seatCountClass = `mt-2 ${isAvailable ? "text-white" : "text-red-500"}`;
   const [isFavorite, setIsFavorite] = useState(false);
+  const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
 
   const handleFavoriteClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.preventDefault();
       setIsFavorite((prev) => !prev);
+      toast.success("Look at my styles.");
     },
     []
   );
@@ -53,7 +55,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
             {reservationStatus}
           </div>
           <div
-            className={`absolute top-2 right-2 text-white text-2xl hover:text-red-600 font-bold px-2 py-1 rounded ${
+            className={`absolute top-2 right-2 text-white text-xl hover:text-red-600 font-bold px-2 py-1 rounded ${
               isFavorite ? "text-red-500" : "text-white"
             }`}
           >
@@ -66,7 +68,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           </div>
           <div className="absolute bottom-2 left-2 text-white text-xs font-bold px-2 py-1 rounded">
             <div className="flex items-center">
-              {[...Array(rating)].map((_, i) => (
+              {[...Array(safeRating)].map((_, i) => (
                 <FontAwesomeIcon
                   key={i}
                   icon={faStar}
