@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faEnvelope,
+  // faEnvelope,
   faCog,
   faStore,
   faHome,
@@ -13,6 +13,7 @@ import {
 
 import { useSidebarContext } from "@/contexts/SideBarContext";
 import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
+import { GLOBAL_URL_ROUTES } from "@/lib/helpers/environment";
 
 interface LeftSidebarProps {
   onItemClick: (item: string) => void;
@@ -26,17 +27,30 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const expandTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const items = [
-    { name: "Discover", key: "Item 1", icon: faHome, path: "/" },
-    // { name: "Favorite", key: "Item 2", icon: faStar, path: "/favorite" },
-    { name: "Message", key: "Item 3", icon: faEnvelope, path: "/message" },
+    {
+      name: "Discover",
+      key: "Item 1",
+      icon: faHome,
+      path: `${GLOBAL_URL_ROUTES.landingPage}`,
+    },
     {
       name: "Status",
       key: "Item 4",
       icon: faClock,
-      path: "/status",
+      path: `${GLOBAL_URL_ROUTES.reserveStatus}`,
     },
-    { name: "My Store", key: "Item 5", icon: faStore, path: "/store" },
-    { name: "Setting", key: "Item 6", icon: faCog, path: "/setting" },
+    {
+      name: "My Store",
+      key: "Item 5",
+      icon: faStore,
+      path: `${GLOBAL_URL_ROUTES.storeManagement}`,
+    },
+    {
+      name: "Setting",
+      key: "Item 6",
+      icon: faCog,
+      path: `${GLOBAL_URL_ROUTES.setting}`,
+    },
   ];
 
   const handleItemClick = (item: { key: string; path: string }) => {
@@ -99,7 +113,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
       {!leftSidebarExpanded && (
         <div
           onClick={toggleLeftSidebar}
-          className="btn w-12 text-secondary text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl mt-2"
+          className={`btn w-12 text-secondary text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl mt-2`}
         >
           <FontAwesomeIcon icon={faAngleRight} />
         </div>
