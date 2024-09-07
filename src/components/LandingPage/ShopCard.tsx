@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { toast } from "react-hot-toast";
 
 export interface ShopCardProps {
   id: string;
@@ -36,7 +35,6 @@ const ShopCard: React.FC<ShopCardProps> = ({
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.preventDefault();
       setIsFavoriteState((prev) => !prev);
-      toast.success("Favorite status toggled!");
     },
     []
   );
