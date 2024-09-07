@@ -1,65 +1,88 @@
-import { useState, useMemo, memo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 import ShopCard from "@/components/shared/ShopCard";
 import BackHomeButton from "@/components/shared/BackHomeButton";
-import { useFetchStores } from "@/hooks/useFetchStores";
-import { Link } from "react-router-dom";
+import { Store, useFetchStores } from "@/hooks/useFetchStores";
 
-const MemoizedShopCard = memo(ShopCard);
+const FILTER_TYPES = {
+  ALL: "All",
+  HOT: "Hot",
+  FAVORITE: "Favorite",
+  CAFE: "Cafe",
+  NINETIES: "90s",
+};
+
+type FilterButtonProps = {
+  type: string;
+  selectedType: string;
+  onClick: (type: string) => void;
+  icon?: IconDefinition;
+};
+
+const FilterButton = React.memo(
+  ({ type, selectedType, onClick, icon }: FilterButtonProps) => (
+    <button
+      className={`btn btn-sm ${
+        selectedType === type ? "btn-primary" : "btn-outline"
+      }`}
+      onClick={() => onClick(type)}
+    >
+      {icon ? (
+        <FontAwesomeIcon
+          icon={icon}
+          className={icon === faFire ? "text-error" : "text-yellow-400"}
+        />
+      ) : (
+        type
+      )}
+    </button>
+  )
+);
+
+const ShopCardLink = React.memo(({ store }: { store: Store }) => (
+  <Link to={`/shop/${store.store_id}`} className="no-underline">
+    <ShopCard
+      id={store.store_id}
+      image={store.image_url || ""}
+      title={store.shop_name}
+      reservationStatus={
+        store.curr_seats < store.max_seats ? "can reserve" : "cannot reserve"
+      }
+      rating={store.rating}
+      maxSeats={store.max_seats}
+      currSeats={store.curr_seats}
+      isFavorite={store.is_favorite}
+      description={store.description || ""}
+      onClick={() => {}}
+    />
+  </Link>
+));
 
 const StoreListWithFilterFeature = () => {
-  const [selectedType, setSelectedType] = useState("All");
-
+  const [selectedType, setSelectedType] = useState(FILTER_TYPES.ALL);
   const { data: stores, isLoading, error } = useFetchStores();
+
+  const handleTypeClick = useCallback((type: React.SetStateAction<string>) => {
+    setSelectedType(type);
+  }, []);
 
   const filteredShopCards = useMemo(() => {
     if (!stores) return [];
-
-    if (selectedType === "All") {
-      return stores;
+    switch (selectedType) {
+      case FILTER_TYPES.ALL:
+        return stores;
+      case FILTER_TYPES.HOT:
+        return stores.filter((store) => store.is_popular);
+      case FILTER_TYPES.FAVORITE:
+        return stores.filter((store) => store.is_favorite);
+      default:
+        return stores.filter((store) => store.type === selectedType);
     }
-    if (selectedType === "Hot") {
-      return stores.filter((store) => store.is_popular);
-    }
-    if (selectedType === "Favorite") {
-      return stores.filter((store) => store.is_favorite);
-    }
-    return stores.filter((store) => store.type === selectedType);
   }, [selectedType, stores]);
-
-  const handleTypeClick = (type: string) => {
-    setSelectedType(type);
-  };
-
-  const shopCardsList = useMemo(
-    () =>
-      filteredShopCards.map((store) => {
-        const storeId = store.store_id;
-        return (
-          <Link key={storeId} to={`/shop/${storeId}`} className="no-underline">
-            <MemoizedShopCard
-              id={storeId}
-              image={store.image_url || ""}
-              title={store.shop_name}
-              reservationStatus={
-                store.curr_seats < store.max_seats
-                  ? "can reserve"
-                  : "cannot reserve"
-              }
-              rating={store.rating}
-              maxSeats={store.max_seats}
-              currSeats={store.curr_seats}
-              isFavorite={store.is_favorite}
-              description={store.description || ""}
-              onClick={() => {}}
-            />
-          </Link>
-        );
-      }),
-    [filteredShopCards]
-  );
 
   if (isLoading) {
     return (
@@ -84,52 +107,36 @@ const StoreListWithFilterFeature = () => {
         Discover & Booking
       </h2>
       <div className="mb-4 space-x-2">
-        <button
-          className={`btn btn-sm ${
-            selectedType === "Hot" ? "btn-primary" : "btn-outline"
-          }`}
-          onClick={() => handleTypeClick("Hot")}
-        >
-          <FontAwesomeIcon icon={faFire} className="text-error" />
-        </button>
-        <button
-          className={`btn btn-sm ${
-            selectedType === "Favorite" ? "btn-primary" : "btn-outline"
-          }`}
-          onClick={() => handleTypeClick("Favorite")}
-        >
-          <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-        </button>
-        <button
-          className={`btn btn-sm ${
-            selectedType === "All" ? "btn-primary" : "btn-outline"
-          }`}
-          onClick={() => handleTypeClick("All")}
-        >
-          All
-        </button>
-        <button
-          className={`btn btn-sm ${
-            selectedType === "Cafe" ? "btn-primary" : "btn-outline"
-          }`}
-          onClick={() => handleTypeClick("Cafe")}
-        >
-          Cafe
-        </button>
-        <button
-          className={`btn btn-sm ${
-            selectedType === "90s" ? "btn-primary" : "btn-outline"
-          }`}
-          onClick={() => handleTypeClick("90s")}
-        >
-          90s
-        </button>
+        <FilterButton
+          type={FILTER_TYPES.HOT}
+          selectedType={selectedType}
+          onClick={handleTypeClick}
+          icon={faFire}
+        />
+        <FilterButton
+          type={FILTER_TYPES.FAVORITE}
+          selectedType={selectedType}
+          onClick={handleTypeClick}
+          icon={faStar}
+        />
+        {Object.values(FILTER_TYPES)
+          .slice(2)
+          .map((type) => (
+            <FilterButton
+              key={type}
+              type={type}
+              selectedType={selectedType}
+              onClick={handleTypeClick}
+            />
+          ))}
       </div>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {shopCardsList}
+        {filteredShopCards.map((store) => (
+          <ShopCardLink key={store.store_id} store={store} />
+        ))}
       </div>
     </div>
   );
 };
 
-export default memo(StoreListWithFilterFeature);
+export default React.memo(StoreListWithFilterFeature);
