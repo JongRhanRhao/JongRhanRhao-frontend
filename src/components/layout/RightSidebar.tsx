@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   faAngleRight,
   faTicket,
@@ -9,17 +8,20 @@ import {
 import LoginButton from "@/components/shared/LoginButton";
 import { useSidebarContext } from "@/contexts/SideBarContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// TODO: Implement RightSidebar component ( use user profile icon to be displayed on the right sidebar )
+import { useUser } from "@/contexts/UserContext";
+import { clearUserData } from "@/utils/userUtils";
+
 const RightSidebar = () => {
   const { rightSidebarExpanded, toggleRightSidebar } = useSidebarContext();
-  const [isLogin, setIsLogin] = useState(false);
-  const users = [
-    {
-      username: "Ton",
-      userImage:
-        "https://images.unsplash.com/photo-1688045303217-f44fec8d3fe1?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+
+  const { setUser, user, isAuthenticated, setIsAuthenticated } = useUser();
+
+  const handleLogout = () => {
+    clearUserData();
+    setUser(null);
+    setIsAuthenticated(false);
+  };
+
   return (
     <div
       className={`flex flex-col transition-all duration-300 ${
@@ -39,13 +41,13 @@ const RightSidebar = () => {
           icon={rightSidebarExpanded ? faX : faUser}
         />
       </button>
-      {!isLogin && rightSidebarExpanded && <LoginButton />}
-      {!isLogin && rightSidebarExpanded && (
+      {!isAuthenticated && rightSidebarExpanded && <LoginButton />}
+      {user && rightSidebarExpanded && (
         <>
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl">{users[0].username}</h2>
+            <h2 className="text-2xl">{user.userName}</h2>
             <img
-              src={users[0].userImage}
+              src={user.userImage || "default-image-url"}
               className="w-10 h-10 rounded-full"
               alt="profile"
             />
@@ -54,6 +56,16 @@ const RightSidebar = () => {
           <div className="font-semibold text-lg">
             Status: <span className="text-success">Successfully reserved</span>{" "}
           </div>
+          {isAuthenticated && (
+            <div className="justify-end flex">
+              <button
+                onClick={handleLogout}
+                className="w-full btn btn-outline btn-error text-secondary"
+              >
+                Logout
+              </button>
+            </div>
+          )}
           <div className="h-px w-full bg-slate-200"></div>
           <button className="btn bg-primary text-secondary h-14">
             Check reservation
