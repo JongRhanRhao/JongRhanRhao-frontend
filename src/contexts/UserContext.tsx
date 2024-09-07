@@ -46,7 +46,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const logout = async () => {
-    await axios.get(`${SERVER_URL}/users/auth/logout`, {
+    axios.get(`${SERVER_URL}/users/auth/logout`, {
       withCredentials: true,
     });
     setUser(null);
