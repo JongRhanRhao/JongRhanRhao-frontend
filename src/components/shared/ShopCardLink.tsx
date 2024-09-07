@@ -17,7 +17,6 @@ export const ShopCardLink = React.memo(({ store }: { store: Store }) => (
       currSeats={store.curr_seats}
       isFavorite={store.is_favorite}
       description={store.description || ""}
-      onClick={() => {}}
     />
   </Link>
 ));
