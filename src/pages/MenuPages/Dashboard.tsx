@@ -1,6 +1,6 @@
 import SearchBar from "@/components/shared/SearchBar";
-import StoreListWithFilterFeature from "@/components/shared/StoreListWithFilterFeature";
-import ShopImageSlider from "@/components/shared/ShopImageSlider";
+import StoreListWithFilterFeature from "@/components/LandingPage/StoreListWithFilterFeature";
+import ShopImageSlider from "@/components/LandingPage/ShopImageSlider";
 
 const DashboardContent = () => {
   return (
