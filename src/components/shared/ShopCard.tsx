@@ -13,7 +13,6 @@ export interface ShopCardProps {
   currSeats: number;
   description: string | null;
   isFavorite: boolean;
-  onClick: () => void; // Add this prop for navigation
 }
 
 const ShopCard: React.FC<ShopCardProps> = ({
@@ -24,7 +23,6 @@ const ShopCard: React.FC<ShopCardProps> = ({
   maxSeats,
   currSeats,
   isFavorite,
-  onClick,
 }) => {
   const isAvailable = reservationStatus === "can reserve";
   const reservationClass = `absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${
@@ -44,10 +42,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   );
 
   return (
-    <div
-      className="bg-gray-900 rounded overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative cursor-pointer"
-      onClick={onClick} // Handle navigation here
-    >
+    <div className="bg-gray-900 rounded overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative cursor-pointer">
       <div className="relative">
         <img
           src={image || "/default-image.jpg"}
