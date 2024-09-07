@@ -16,3 +16,11 @@ export const UserSchema = z.object({
     .max(50, { message: "Password must not exceed 50 characters" }),
   phone_number: z.string().min(10, { message: "Invalid phone number" }),
 });
+
+export const FILTER_TYPES = {
+  HOT: "Hot",
+  FAVORITE: "Favorite",
+  ALL: "All",
+  NINETIES: "90s",
+  CAFE: "Cafe",
+};
