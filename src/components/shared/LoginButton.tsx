@@ -5,11 +5,13 @@ import { useState } from "react";
 import { FormData } from "@/lib/types";
 import { SERVER_URL } from "@/lib/helpers/environment";
 import { useUser } from "@/contexts/UserContext";
+import { storeUserData } from "@/utils/userUtils";
 
 const LoginButton = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
   const endpoint = isLogin ? "login" : "register";
-  const { setUser } = useUser();
+  const { setUser, setIsAuthenticated} = useUser();
 
   const {
     register,
@@ -21,6 +23,7 @@ const LoginButton = () => {
   });
 
   const handleEmailLogin = async (data: FormData) => {
+    setErrorMessage("");
     try {
       const response = await axios.post(
         `${SERVER_URL}/users/auth/${endpoint}`,
@@ -31,18 +34,26 @@ const LoginButton = () => {
       );
       if (response.data.message === "Login successful") {
         setUser(response.data.user);
-        window.location.href = "/";
-      }
-      if (response.status === 200) {
+        storeUserData(response.data.user);
+        (document.getElementById("login") as HTMLDialogElement).close();
+        setIsAuthenticated(true);
+      } else if (response.status === 200) {
         (document.getElementById("login") as HTMLDialogElement).close();
       }
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        setErrorMessage("Axios error: " + error.response?.data);
+      } else if (error instanceof Error) {
+        setErrorMessage(`Error: ${error.message}`);
+      } else {
+        setErrorMessage("Unknown error: " + error);
+      }
     }
   };
 
   const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setErrorMessage("");
     (document.getElementById("login") as HTMLDialogElement).close();
   };
 
@@ -52,6 +63,7 @@ const LoginButton = () => {
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
+    setErrorMessage("");
     reset();
   };
 
@@ -88,6 +100,9 @@ const LoginButton = () => {
                   : "Sign up to get started."}
               </p>
             </div>
+            {errorMessage && (
+              <p className="text-red-600 text-center">{errorMessage}</p>
+            )}
             <button
               onClick={() => handleOAuthLogin("google")}
               className="btn flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md max-w-lg w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
