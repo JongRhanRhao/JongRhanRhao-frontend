@@ -4,14 +4,12 @@ import { useState } from "react";
 
 import { FormData } from "@/lib/types";
 import { SERVER_URL } from "@/lib/helpers/environment";
-import { useUser } from "@/contexts/UserContext";
-import { storeUserData } from "@/utils/userUtils";
+import { User, useUser } from "@/contexts/UserContext";
 
 const LoginButton = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const endpoint = isLogin ? "login" : "register";
-  const { setUser, setIsAuthenticated} = useUser();
+  const { setUser, setIsAuthenticated } = useUser();
 
   const {
     register,
@@ -22,8 +20,9 @@ const LoginButton = () => {
     mode: "onSubmit",
   });
 
-  const handleEmailLogin = async (data: FormData) => {
+  const handleAuth = async (data: FormData) => {
     setErrorMessage("");
+    const endpoint = isLogin ? "login" : "register";
     try {
       const response = await axios.post(
         `${SERVER_URL}/users/auth/${endpoint}`,
@@ -32,27 +31,26 @@ const LoginButton = () => {
           role: "user",
         }
       );
-      if (response.data.message === "Login successful") {
-        setUser(response.data.user);
+      if (response.data.user) {
         storeUserData(response.data.user);
-        (document.getElementById("login") as HTMLDialogElement).close();
+        setUser(response.data.user);
         setIsAuthenticated(true);
-      } else if (response.status === 200) {
-        (document.getElementById("login") as HTMLDialogElement).close();
+        closeModal();
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setErrorMessage("Axios error: " + error.response?.data);
-      } else if (error instanceof Error) {
-        setErrorMessage(`Error: ${error.message}`);
-      } else {
-        setErrorMessage("Unknown error: " + error);
-      }
+      setErrorMessage(
+        axios.isAxiosError(error)
+          ? `Error: ${error.response?.data}`
+          : `Unknown error: ${error}`
+      );
     }
   };
 
-  const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const storeUserData = (userData: User) => {
+    localStorage.setItem("userData", JSON.stringify(userData));
+  };
+
+  const closeModal = () => {
     setErrorMessage("");
     (document.getElementById("login") as HTMLDialogElement).close();
   };
@@ -60,6 +58,8 @@ const LoginButton = () => {
   const handleOAuthLogin = (provider: "google" | "facebook") => {
     window.location.href = `${SERVER_URL}/users/auth/${provider}`;
   };
+
+  closed;
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
@@ -82,11 +82,11 @@ const LoginButton = () => {
           <form
             method="dialog"
             className="space-y-2"
-            onSubmit={handleSubmit(handleEmailLogin)}
+            onSubmit={handleSubmit(handleAuth)}
           >
             <button
               className="btn btn-sm btn-circle btn-ghost absolute text-primary right-2 top-2"
-              onClick={handleClose}
+              onClick={closeModal}
             >
               ✕
             </button>
