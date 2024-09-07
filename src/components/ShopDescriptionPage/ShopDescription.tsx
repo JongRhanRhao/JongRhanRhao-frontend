@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
-import { shopData } from "@/SampleData/data";
 import CommentSection from "@/components/ShopDescriptionPage/CommentSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,6 +14,8 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import BookingButton from "./BookingButton";
+import { SERVER_URL } from "@/lib/helpers/environment";
+import { Store } from "@/hooks/useFetchStores";
 
 interface ShopDescriptionProps {
   selectedItem: string;
@@ -22,12 +24,37 @@ interface ShopDescriptionProps {
 
 const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   const { id } = useParams<{ id: string }>();
-  const shop = shopData[parseInt(id!)] || {
-    name: "Not Found",
-    description: "Shop not found",
-  };
-  const isAvailable = shop.status === "Busy";
-  const isBusy = isAvailable ? "text-error" : "text-success";
+
+  const {
+    data: stores,
+    isLoading,
+    error,
+  } = useQuery<Store>({
+    queryKey: ["stores", id],
+    queryFn: () =>
+      fetch(`${SERVER_URL}/stores/api/stores/${id}`).then((res) => res.json()),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-ring loading-lg text-primary"></span>
+      </div>
+    );
+  }
+
+  if (error || !stores) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-2xl text-error">
+          Error loading shop data. Please try again later.
+        </div>
+      </div>
+    );
+  }
+
+  const isAvailable = stores.status === "EVERYDAY";
+  const statusClass = isAvailable ? "text-success" : "text-error";
 
   return (
     <div className="flex justify-center h-screen">
@@ -43,46 +70,47 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
             </Link>
             <div className="flex justify-center">
               <img
-                src={shop.image}
+                src={stores.image_url as string}
                 className="rounded-xl h-96"
                 alt="shopImage"
-              ></img>
+              />
               <div className="rounded-xl p-3 h-36 w-full ml-5">
                 <div className="font-bold text-gray-300 uppercase text-4xl">
-                  {shop.name}
+                  {stores.shop_name}
                 </div>
                 <div className="mb-4 mt-2 font-thai text-lg">
-                  {shop.description}
+                  {stores.description}
                 </div>
                 <div className="font-bold text-gray-300">
                   <FontAwesomeIcon icon={faClock} />
-                  &nbsp; Opening Hours :{" "}
+                  &nbsp; Opening Hours:{" "}
                   <span className="text-gray-400 font-bold">
-                    {shop.openTime}
+                    {stores.open_timebooking}
                   </span>
                 </div>
                 <div className="font-bold text-gray-300">
                   <FontAwesomeIcon icon={faCalendarTimes} />
                   &nbsp; Reservation Expired time:{" "}
                   <span className="text-gray-400 font-bold">
-                    {shop.reserveExpired}
+                    {stores.cancel_reserve}
                   </span>
                 </div>
                 <div className="font-bold text-gray-300">
                   <FontAwesomeIcon icon={faInfoCircle} />
                   &nbsp; Status:{" "}
-                  <span className={`${isBusy} font-bold`}>{shop.status}</span>
+                  <span className={`${statusClass} font-bold`}>
+                    {isAvailable ? "Available" : "Unavailable"}
+                  </span>
                 </div>
                 <div className="font-bold text-gray-300">
                   <FontAwesomeIcon icon={faLocationDot} />
                   &nbsp; Address:{" "}
-                  <span className="text-gray-400">{shop.address}</span>
+                  <span className="text-gray-400">{stores.address}</span>
                 </div>
                 <div className="mt-7">
                   <BookingButton />
                 </div>
               </div>
-              {/* Comment Section */}
             </div>
             <div className="mt-8">
               <CommentSection />
