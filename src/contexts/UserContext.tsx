@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
+
 import { getCurrentUser } from "../utils/userAPI";
+import { SERVER_URL } from "@/lib/helpers/environment";
 
 export interface User {
   userId: number;
@@ -13,6 +16,7 @@ interface UserContextType {
   isAuthenticated: boolean;
   setIsAuthenticated: (status: boolean) => void;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  logout: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -26,18 +30,33 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const fetchUser = async () => {
       const userData = await getCurrentUser();
-      setUser(userData);
+      if (userData) {
+        setUser(userData);
+        setIsAuthenticated(true);
+      }
     };
-    const storedUser = localStorage.getItem("user");
+
+    const storedUser = localStorage.getItem("userData");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+      setIsAuthenticated(true);
     }
+
     fetchUser();
   }, []);
 
+  const logout = async () => {
+    await axios.get(`${SERVER_URL}/users/auth/logout`, {
+      withCredentials: true,
+    });
+    setUser(null);
+    setIsAuthenticated(false);
+    localStorage.removeItem("userData");
+  };
+
   return (
     <UserContext.Provider
-      value={{ user, setUser, isAuthenticated, setIsAuthenticated }}
+      value={{ user, setUser, isAuthenticated, setIsAuthenticated, logout }}
     >
       {children}
     </UserContext.Provider>
