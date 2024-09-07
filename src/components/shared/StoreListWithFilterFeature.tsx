@@ -44,7 +44,9 @@ const StoreListWithFilterFeature = () => {
               image={store.image_url || ""}
               title={store.shop_name}
               reservationStatus={
-                store.status === "EVERYDAY" ? "can reserve" : "cannot reserve"
+                store.curr_seats < store.max_seats
+                  ? "can reserve"
+                  : "cannot reserve"
               }
               rating={store.rating}
               maxSeats={store.max_seats}
