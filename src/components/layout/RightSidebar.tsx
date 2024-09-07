@@ -9,18 +9,11 @@ import LoginButton from "@/components/shared/LoginButton";
 import { useSidebarContext } from "@/contexts/SideBarContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "@/contexts/UserContext";
-import { clearUserData } from "@/utils/userUtils";
 
 const RightSidebar = () => {
   const { rightSidebarExpanded, toggleRightSidebar } = useSidebarContext();
 
-  const { setUser, user, isAuthenticated, setIsAuthenticated } = useUser();
-
-  const handleLogout = () => {
-    clearUserData();
-    setUser(null);
-    setIsAuthenticated(false);
-  };
+  const { user, isAuthenticated, logout } = useUser();
 
   return (
     <div
@@ -46,11 +39,6 @@ const RightSidebar = () => {
         <>
           <div className="flex justify-between items-center">
             <h2 className="text-2xl">{user.userName}</h2>
-            <img
-              src={user.userImage || "default-image-url"}
-              className="w-10 h-10 rounded-full"
-              alt="profile"
-            />
           </div>
           <div className="font-semibold text-lg">Reservation Status</div>
           <div className="font-semibold text-lg">
@@ -59,7 +47,7 @@ const RightSidebar = () => {
           {isAuthenticated && (
             <div className="justify-end flex">
               <button
-                onClick={handleLogout}
+                onClick={logout}
                 className="w-full btn btn-outline btn-error text-secondary"
               >
                 Logout
