@@ -41,7 +41,7 @@ const Footer = () => {
         </a>
       </div>
       <p className="text-center text-gray-700 font-medium">
-        © 2024 JongRhaoRhao Ltd. All rights reservered.
+        © 2024 Jongrhanrhao Ltd. All rights reservered.
       </p>
     </footer>
   );
