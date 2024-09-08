@@ -61,9 +61,9 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
       <div className="flex w-full h-full">
         <LeftSidebar onItemClick={onItemClick} />
         <div className="flex-1 flex flex-col overflow-y-auto">
-          <main className="flex-1 p-4 bg-accent2">
+          <main className="flex-1 p-4 bg-bg">
             <Link to="/">
-              <div className="py-2 text-xl text-primary mb-2">
+              <div className="py-2 text-xl text-primary mb-2 font-bold">
                 <FontAwesomeIcon icon={faAngleLeft} />
                 &nbsp; Back
               </div>
@@ -75,37 +75,33 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 alt="shopImage"
               />
               <div className="rounded-xl p-3 h-36 w-full ml-5">
-                <div className="font-bold text-gray-300 uppercase text-4xl">
+                <div className="font-bold text-text uppercase text-4xl">
                   {stores.shop_name}
                 </div>
-                <div className="mb-4 mt-2 font-thai text-lg">
+                <div className="mb-4 mt-2 font-thai text-lg text-text">
                   {stores.description}
                 </div>
-                <div className="font-bold text-gray-300">
+                <div className="font-bold text-gray-400">
                   <FontAwesomeIcon icon={faClock} />
                   &nbsp; Opening Hours:{" "}
-                  <span className="text-gray-400 font-bold">
-                    {stores.open_timebooking}
-                  </span>
+                  <span className="text-text">{stores.open_timebooking}</span>
                 </div>
-                <div className="font-bold text-gray-300">
+                <div className="font-bold text-gray-400">
                   <FontAwesomeIcon icon={faCalendarTimes} />
                   &nbsp; Reservation Expired time:{" "}
-                  <span className="text-gray-400 font-bold">
-                    {stores.cancel_reserve}
-                  </span>
+                  <span className="text-text">{stores.cancel_reserve}</span>
                 </div>
-                <div className="font-bold text-gray-300">
+                <div className="font-bold text-gray-400">
                   <FontAwesomeIcon icon={faInfoCircle} />
                   &nbsp; Status:{" "}
-                  <span className={`${statusClass} font-bold`}>
+                  <span className={`${statusClass} font-semibold`}>
                     {isAvailable ? "Available" : "Unavailable"}
                   </span>
                 </div>
-                <div className="font-bold text-gray-300">
+                <div className="font-bold text-gray-400">
                   <FontAwesomeIcon icon={faLocationDot} />
                   &nbsp; Address:{" "}
-                  <span className="text-gray-400">{stores.address}</span>
+                  <span className="text-text">{stores.address}</span>
                 </div>
                 <div className="mt-7">
                   <BookingButton />
