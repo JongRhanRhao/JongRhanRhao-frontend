@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { GLOBAL_URL_ROUTES } from "@/lib/helpers/environment";
+import { useUser } from "@/contexts/UserContext";
 
 interface BottomMenuProps {
   onItemClick: (item: string) => void;
@@ -17,6 +18,9 @@ interface BottomMenuProps {
 const BottomMenu: React.FC<BottomMenuProps> = ({ onItemClick }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useUser();
+  const userRole = user?.role;
+  const isOwnerOrStaff = userRole === "owner" || userRole === "staff";
 
   const items = [
     {
@@ -32,18 +36,21 @@ const BottomMenu: React.FC<BottomMenuProps> = ({ onItemClick }) => {
       path: `${GLOBAL_URL_ROUTES.reserveStatus}`,
     },
     {
-      name: "My Store",
-      key: "Item 5",
-      icon: faStore,
-      path: `${GLOBAL_URL_ROUTES.storeManagement}`,
-    },
-    {
       name: "Setting",
       key: "Item 6",
       icon: faCog,
       path: `${GLOBAL_URL_ROUTES.setting}`,
     },
   ];
+
+  if (isOwnerOrStaff) {
+    items.splice(2, 0, {
+      name: "My Store",
+      key: "Item 5",
+      icon: faStore,
+      path: `${GLOBAL_URL_ROUTES.storeManagement}`,
+    });
+  }
 
   const handleItemClick = (item: { key: string; path: string }) => {
     onItemClick(item.key);
