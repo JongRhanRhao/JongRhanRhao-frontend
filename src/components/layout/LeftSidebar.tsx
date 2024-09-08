@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -23,7 +23,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
-  const [isExpanded, setIsExpanded] = useState(false);
+  // const [isExpanded, setIsExpanded] = useState(false);
   const expandTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const items = [
@@ -65,7 +65,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
         return (
           <li
             key={item.key}
-            className={`btn bg-accent text-secondary border-none cursor-pointer font-bold p-4 rounded-xl flex items-center space-x-2 duration-150 
+            className={`btn bg-bg2 text-text border-none cursor-pointer font-bold p-4 rounded-xl flex items-center space-x-2 duration-150 justify-start 
               ${isActive ? "bg-primary" : "hover:text-primary"}`}
             onClick={() => handleItemClick(item)}
           >
@@ -80,7 +80,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
 
   const handleMouseEnter = () => {
     expandTimeout.current = setTimeout(() => {
-      setIsExpanded(true);
+      // setIsExpanded(true);
     }, 200);
   };
 
@@ -88,7 +88,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
     if (expandTimeout.current) {
       clearTimeout(expandTimeout.current);
     }
-    setIsExpanded(false);
+    // setIsExpanded(false);
   };
 
   // if you want to change the sidebar to expand on hover instead of click event change leftSidebarExpanded to isExpanded
@@ -96,7 +96,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
     <div
       className={`flex flex-col transition-all duration-300 ${
         leftSidebarExpanded ? "w-64" : "w-20"
-      } bg-accent text-white p-4 hidden md:block lg:block`}
+      } bg-bg2 text-white p-4 hidden md:block lg:block`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -104,7 +104,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
         <div className="flex justify-end">
           <button
             onClick={toggleLeftSidebar}
-            className={`btn text-xl duration-300 shadow-lg text-secondary bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl w-12 mt-2`}
+            className={`btn text-xl duration-300 shadow-lg text-text bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl w-12 mt-2`}
           >
             <FontAwesomeIcon icon={faAngleLeft} />
           </button>
@@ -113,13 +113,13 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
       {!leftSidebarExpanded && (
         <div
           onClick={toggleLeftSidebar}
-          className={`btn w-12 text-secondary text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl mt-2`}
+          className={`btn w-12 text-text text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl mt-2`}
         >
           <FontAwesomeIcon icon={faAngleRight} />
         </div>
       )}
       {leftSidebarExpanded && (
-        <div className="text-3xl font-bold font-sans text-left text-white underline underline-offset-4 rounded-xl p-4 decoration-primary">
+        <div className=" font-bold font-sans text-center text-2xl text-text rounded-xl py-4">
           JongRhanRhao
         </div>
       )}
