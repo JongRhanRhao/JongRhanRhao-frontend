@@ -28,7 +28,7 @@ const RightSidebar = () => {
         }`}
       >
         <FontAwesomeIcon
-          className={`hover:text-primary duration-150 btn btn-xs bg-bg2 border-none text-text ${
+          className={`hover:text-primary duration-150 btn btn-xs bg-bg2 hover:bg-bg2 border-none text-text ${
             rightSidebarExpanded && "text-primary"
           }`}
           icon={rightSidebarExpanded ? faX : faUser}
@@ -54,7 +54,7 @@ const RightSidebar = () => {
               </button>
             </div>
           )}
-          <div className="h-px w-full bg-slate-200"></div>
+          <div className="h-px w-full bg-text"></div>
           <button className="btn bg-primary text-text h-14">
             Check reservation
           </button>
