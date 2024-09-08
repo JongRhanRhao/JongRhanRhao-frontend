@@ -5,17 +5,18 @@ import React from "react";
 
 type FilterButtonProps = {
   type: string;
-  selectedType: string;
+  selectedType?: string;
   onClick: (type: string) => void;
   icon?: IconDefinition;
+  className?: string;
 };
 
 export const FilterButton = React.memo(
-  ({ type, selectedType, onClick, icon }: FilterButtonProps) => (
+  ({ type, selectedType, onClick, icon, className }: FilterButtonProps) => (
     <button
-      className={`btn btn-sm ${
-        selectedType === type ? "btn-primary" : "btn-outline"
-      }`}
+      className={`btn text-text btn-sm ${
+        selectedType === type ? "btn bg-primary text-text" : "btn-outline"
+      } ${className}`}
       onClick={() => onClick(type)}
     >
       {icon ? (
