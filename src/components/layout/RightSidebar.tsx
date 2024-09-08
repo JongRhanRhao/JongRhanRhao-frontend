@@ -19,16 +19,16 @@ const RightSidebar = () => {
     <div
       className={`flex flex-col transition-all duration-300 ${
         rightSidebarExpanded ? "w-64" : "w-12"
-      } bg-accent text-white p-4 space-y-5`}
+      } bg-bg2 text-white p-4 space-y-5`}
     >
       <button
         onClick={toggleRightSidebar}
-        className={`text-xl text-secondary flex ${
+        className={`text-xl text-text flex ${
           rightSidebarExpanded ? "justify-end" : "justify-center"
         }`}
       >
         <FontAwesomeIcon
-          className={`hover:text-primary duration-150 btn btn-xs bg-accent border-none text-secondary ${
+          className={`hover:text-primary duration-150 btn btn-xs bg-bg2 border-none text-text ${
             rightSidebarExpanded && "text-primary"
           }`}
           icon={rightSidebarExpanded ? faX : faUser}
@@ -48,17 +48,17 @@ const RightSidebar = () => {
             <div className="justify-end flex">
               <button
                 onClick={logout}
-                className="w-full btn btn-outline btn-error text-secondary"
+                className="w-full btn btn-outline btn-error text-text"
               >
                 Logout
               </button>
             </div>
           )}
           <div className="h-px w-full bg-slate-200"></div>
-          <button className="btn bg-primary text-secondary h-14">
+          <button className="btn bg-primary text-text h-14">
             Check reservation
           </button>
-          <button className="btn bg-secondary text-primary h-14 border-2 border-primary">
+          <button className="btn bg-text text-primary h-14 border-2 border-primary">
             <FontAwesomeIcon icon={faTicket} /> Have a coupon code?{" "}
             <FontAwesomeIcon icon={faAngleRight} />
           </button>
