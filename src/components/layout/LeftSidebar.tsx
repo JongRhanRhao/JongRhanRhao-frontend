@@ -14,6 +14,7 @@ import {
 import { useSidebarContext } from "@/contexts/SideBarContext";
 import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
 import { GLOBAL_URL_ROUTES } from "@/lib/helpers/environment";
+import { useUser } from "@/contexts/UserContext";
 
 interface LeftSidebarProps {
   onItemClick: (item: string) => void;
@@ -25,6 +26,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
   // const [isExpanded, setIsExpanded] = useState(false);
   const expandTimeout = useRef<NodeJS.Timeout | null>(null);
+  const { user } = useUser();
+  const userRole = user?.role;
+  const isOwnerOrStaff = userRole === "owner" || userRole === "staff";
 
   const items = [
     {
@@ -40,18 +44,21 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
       path: `${GLOBAL_URL_ROUTES.reserveStatus}`,
     },
     {
-      name: "My Store",
-      key: "Item 5",
-      icon: faStore,
-      path: `${GLOBAL_URL_ROUTES.storeManagement}`,
-    },
-    {
       name: "Setting",
       key: "Item 6",
       icon: faCog,
       path: `${GLOBAL_URL_ROUTES.setting}`,
     },
   ];
+
+  if (isOwnerOrStaff) {
+    items.splice(2, 0, {
+      name: "My Store",
+      key: "Item 5",
+      icon: faStore,
+      path: `${GLOBAL_URL_ROUTES.storeManagement}`,
+    });
+  }
 
   const handleItemClick = (item: { key: string; path: string }) => {
     onItemClick(item.key);
