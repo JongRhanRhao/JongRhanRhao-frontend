@@ -48,9 +48,7 @@ const StoreListWithFilterFeature = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-3xl font-bold text-secondary mb-5">
-        Discover & Booking
-      </h2>
+      <h2 className="text-3xl font-bold text-text mb-5">Discover & Booking</h2>
       <div className="mb-4 space-x-2">
         <FilterButton
           type={FILTER_TYPES.HOT}
