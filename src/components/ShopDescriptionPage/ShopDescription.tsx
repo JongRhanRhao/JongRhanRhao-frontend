@@ -1,10 +1,6 @@
 import { FC } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-
-import LeftSidebar from "@/components/layout/LeftSidebar";
-import RightSidebar from "@/components/layout/RightSidebar";
-import CommentSection from "@/components/ShopDescriptionPage/CommentSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -12,8 +8,13 @@ import {
   faClock,
   faInfoCircle,
   faLocationDot,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
-import BookingButton from "./BookingButton";
+
+import LeftSidebar from "@/components/layout/LeftSidebar";
+import RightSidebar from "@/components/layout/RightSidebar";
+import CommentSection from "@/components/ShopDescriptionPage/CommentSection";
+import BookingButton from "@/components/ShopDescriptionPage/BookingButton";
 import { SERVER_URL } from "@/lib/helpers/environment";
 import { Store } from "@/hooks/useFetchStores";
 
@@ -55,6 +56,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
 
   const isAvailable = stores.status === "EVERYDAY";
   const statusClass = isAvailable ? "text-success" : "text-error";
+  const safeRating = Math.max(0, Math.min(5, Math.floor(stores.rating)));
 
   return (
     <div className="flex justify-center h-screen">
@@ -76,29 +78,39 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
               />
               <div className="rounded-xl p-3 h-36 w-full ml-5">
                 <div className="font-bold text-text uppercase text-4xl">
-                  {stores.shop_name}
+                  {stores.shop_name}{" "}
                 </div>
-                <div className="mb-4 mt-2 font-thai text-lg text-text">
+                <div className="mt-1">
+                  {[...Array(safeRating)].map((_, i) => (
+                    <FontAwesomeIcon
+                      key={i}
+                      icon={faStar}
+                      className="text-yellow-400"
+                    />
+                  ))}
+                  <span className="ml-1">({stores.rating})</span>
+                </div>
+                <div className="mb-4 mt-2 text-lg text-text font-thai">
                   {stores.description}
                 </div>
-                <div className="font-bold text-gray-400">
+                <div className="font-bold">
                   <FontAwesomeIcon icon={faClock} />
                   &nbsp; Opening Hours:{" "}
                   <span className="text-text">{stores.open_timebooking}</span>
                 </div>
-                <div className="font-bold text-gray-400">
+                <div className="font-bold">
                   <FontAwesomeIcon icon={faCalendarTimes} />
                   &nbsp; Reservation Expired time:{" "}
                   <span className="text-text">{stores.cancel_reserve}</span>
                 </div>
-                <div className="font-bold text-gray-400">
+                <div className="font-bold">
                   <FontAwesomeIcon icon={faInfoCircle} />
                   &nbsp; Status:{" "}
                   <span className={`${statusClass} font-semibold`}>
                     {isAvailable ? "Available" : "Unavailable"}
                   </span>
                 </div>
-                <div className="font-bold text-gray-400">
+                <div className="font-bold">
                   <FontAwesomeIcon icon={faLocationDot} />
                   &nbsp; Address:{" "}
                   <span className="text-text">{stores.address}</span>
