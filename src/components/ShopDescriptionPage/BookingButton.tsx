@@ -64,16 +64,15 @@ const BookingButton = () => {
         id="BookingButton"
         className="modal modal-bottom sm:modal-middle md:modal-middle lg:modal-middle xl:modal-middle"
       >
-        <div className="modal-box">
+        <div className="modal-box bg-secondary">
           <h2 className="font-bold text-xl mb-4">Book Your Reservation</h2>
           <div className="mb-4">
             <label className="font-bold mr-2">Select Date and Time:</label>
             <DatePicker
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
-              showTimeSelect
-              dateFormat="MMMM d, yyyy h:mm aa"
-              className="rounded p-2 mt-1 w-full"
+              dateFormat="d MMMM yyyy"
+              className="rounded p-2 mt-1 w-full bg-bg"
               minDate={new Date()}
             />
           </div>
@@ -84,7 +83,7 @@ const BookingButton = () => {
               value={numberOfPeople}
               min={1}
               onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-              className="rounded p-2 w-full mt-1"
+              className="rounded p-2 w-full mt-1 bg-bg"
             />
           </div>
           <div className="mb-4">
@@ -94,7 +93,7 @@ const BookingButton = () => {
               value={phoneNumber}
               placeholder="081 234 5678"
               onChange={(e) => setPhoneNumber(e.target.value)}
-              className="rounded p-2 w-full mt-1"
+              className="rounded p-2 w-full mt-1 bg-bg"
             />
           </div>
           <div className="modal-action">
