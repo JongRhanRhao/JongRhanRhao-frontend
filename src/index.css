@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 @layer utilities {
-  .font-inter {
-    @apply font-sans;
-  }
   .font-pridi {
     @apply font-thai;
   }
@@ -13,3 +10,6 @@
   }
 }
 
+* {
+  font-family: Lexend Deca, sans-serif;
+}
