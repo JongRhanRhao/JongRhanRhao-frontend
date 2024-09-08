@@ -8,19 +8,35 @@ export type FormData = {
   role: string;
 };
 
+export type Reservations = {
+  shop_name: string;
+  reservation_id: string;
+  shop_id: string;
+  customerId: string;
+  reservation_date: string;
+  reservation_time: string;
+  reservationStatus: string;
+  reservation_status: string;
+};
+
 export const UserSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
+  email: z.string().email({ message: "* Invalid email address" }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters long" })
-    .max(50, { message: "Password must not exceed 50 characters" }),
-  phone_number: z.string().min(10, { message: "Invalid phone number" }),
+    .min(8, { message: "* Password must be at least 8 characters long" })
+    .max(50, { message: "* Password must not exceed 50 characters" }),
+  phone_number: z.string().min(10, { message: "* Invalid phone number" }),
 });
 
 export const FILTER_TYPES = {
   HOT: "Hot",
   FAVORITE: "Favorite",
   ALL: "All",
+  BAR: "Bar",
+  JAZZ: "Jazz",
+  COCKTAIL: "Cocktail",
+  PUB: "Pub",
+  CHILL: "Chill",
   NINETIES: "90s",
-  CAFE: "Cafe",
+  DANCE: "Dance",
 };
