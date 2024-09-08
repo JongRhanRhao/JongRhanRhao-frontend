@@ -51,13 +51,13 @@ const BottomMenu: React.FC<BottomMenuProps> = ({ onItemClick }) => {
   };
 
   return (
-    <div className="fixed bottom-7 left-1/2 transform -translate-x-1/2 space-x-5 p-3 gap-1 bg-accent shadow-lg flex text-white justify-around rounded-full">
+    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 space-x-5 p-1 gap-1 bg-bg shadow-lg flex text-white justify-around rounded-t-3xl">
       {items.map((item) => {
         const isActive = location.pathname === item.path;
         return (
           <button
             key={item.key}
-            className={`flex flex-col items-center btn bg-accent hover:bg-accent border-none ${
+            className={`flex flex-col items-center btn bg-bg hover:bg-bg border-none ${
               isActive ? "text-primary" : "text-white"
             }`}
             onClick={() => handleItemClick(item)}
