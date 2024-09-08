@@ -25,7 +25,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
 }) => {
   const isAvailable = reservationStatus === "can reserve";
   const reservationClass = `absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${
-    isAvailable ? "bg-green-500" : "bg-red-500"
+    isAvailable ? "bg-green-500" : "bg-rose-500"
   }`;
   const seatCountClass = `mt-2 ${isAvailable ? "text-white" : "text-red-500"}`;
   const [isFavoriteState, setIsFavoriteState] = useState(isFavorite);
@@ -40,12 +40,12 @@ const ShopCard: React.FC<ShopCardProps> = ({
   );
 
   return (
-    <div className="bg-gray-900 rounded overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative cursor-pointer">
+    <div className="card bg-gray-900 rounded overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative cursor-pointer">
       <div className="relative">
         <img
           src={image || "/default-image.jpg"}
           alt={title}
-          className={`w-full object-cover duration-500 ease-out lg:h-60 md:h-80 sm:h-32`}
+          className={`w-full object-cover duration-500 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32`}
         />
         <div
           className={`absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${reservationClass}`}
