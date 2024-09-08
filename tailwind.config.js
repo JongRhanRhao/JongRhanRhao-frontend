@@ -6,13 +6,15 @@ export default {
     extend: {
       colors: {
         primary: "#3f37c9",
-        secondary: "#ececec",
-        accent: "#161a1d",
-        accent2: "#15191c",
+        secondary: "#121212",
+        text: "#e5e5f5",
+        bg: "#000005",
+        bg2: "#000005",
+        accent: "#b40892",
       },
     },
     fontFamily: {
-      sans: ["Inter", "sans-serif"],
+      sans: ["Lexend Deca", "sans-serif"],
       thai: ["Pridi", "sans-serif"],
     },
   },
