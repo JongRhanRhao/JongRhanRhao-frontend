@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
 
 import BackHomeButton from "@/components/shared/BackHomeButton";
@@ -6,13 +6,22 @@ import { useFetchStores } from "@/hooks/useFetchStores";
 import { FilterButton } from "./FilterButton";
 import { FILTER_TYPES } from "@/lib/types";
 import { ShopCardLink } from "./ShopCardLink";
+// TODO: Assign store type in DB
 
 const StoreListWithFilterFeature = () => {
+  const LOADING_DELAY = 1000;
   const [selectedType, setSelectedType] = useState(FILTER_TYPES.ALL);
-  const { data: stores, isLoading, error } = useFetchStores();
+  const { data: stores, isLoading: isFetchingStores, error } = useFetchStores();
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleTypeClick = useCallback((type: React.SetStateAction<string>) => {
+    setIsLoading(true);
     setSelectedType(type);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, LOADING_DELAY);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const filteredShopCards = useMemo(() => {
@@ -29,11 +38,52 @@ const StoreListWithFilterFeature = () => {
     }
   }, [selectedType, stores]);
 
+  useEffect(() => {
+    if (!isFetchingStores) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, LOADING_DELAY);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isFetchingStores]);
+
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-full">
-        <span className="loading loading-ring loading-lg text-primary"></span>
-      </div>
+      <>
+        <div className="p-4">
+          <h2 className="text-3xl font-bold text-text mb-5">
+            Discover & Booking
+          </h2>
+          <div className="mb-4 space-x-2">
+            <FilterButton
+              type={FILTER_TYPES.HOT}
+              selectedType={selectedType}
+              onClick={handleTypeClick}
+              icon={faFire}
+            />
+            <FilterButton
+              type={FILTER_TYPES.FAVORITE}
+              selectedType={selectedType}
+              onClick={handleTypeClick}
+              icon={faStar}
+            />
+            {Object.values(FILTER_TYPES)
+              .slice(2)
+              .map((type) => (
+                <FilterButton
+                  key={type}
+                  type={type}
+                  selectedType={selectedType}
+                  onClick={handleTypeClick}
+                />
+              ))}
+          </div>
+          <div className="flex justify-center mt-8">
+            <span className="loading loading-ring loading-lg text-primary"></span>
+          </div>
+        </div>
+      </>
     );
   }
 
