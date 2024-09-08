@@ -70,7 +70,7 @@ const LoginButton = () => {
   return (
     <>
       <button
-        className="btn bg-primary text-secondary w-full"
+        className="btn bg-primary text-text w-full"
         onClick={() =>
           (document.getElementById("login") as HTMLDialogElement).showModal()
         }
@@ -180,10 +180,10 @@ const LoginButton = () => {
             <div className="w-full">
               {!isLogin && (
                 <>
-                  <div className="text-accent">Username</div>
+                  <div className="text-gray-800">Username</div>
                   <input
                     {...register("user_name", {
-                      required: "Username is required",
+                      required: "* Username is required",
                     })}
                     type="text"
                     className="mt-2 block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
@@ -196,9 +196,9 @@ const LoginButton = () => {
                   )}
                 </>
               )}
-              <div className="text-accent mt-3">E-mail</div>
+              <div className="text-gray-800 mt-3">E-mail</div>
               <input
-                {...register("email", { required: "Email is required" })}
+                {...register("email", { required: "* Email is required" })}
                 type="email"
                 className="mt-2 block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
                 placeholder="Enter email"
@@ -208,9 +208,11 @@ const LoginButton = () => {
                   {errors.email.message}
                 </p>
               )}
-              <div className="text-accent mt-3">Password</div>
+              <div className="text-gray-800 mt-3">Password</div>
               <input
-                {...register("password", { required: "Password is required" })}
+                {...register("password", {
+                  required: "* Password is required",
+                })}
                 type="password"
                 className="mt-2 block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
                 placeholder="Enter password"
@@ -222,10 +224,10 @@ const LoginButton = () => {
               )}
               {!isLogin && (
                 <>
-                  <div className="text-accent mt-3">Phone</div>
+                  <div className="text-gray-800 mt-3">Phone</div>
                   <input
                     {...register("phone_number", {
-                      required: "Phone number is required",
+                      required: "* Phone number is required",
                     })}
                     type="tel"
                     className="mt-2 block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
@@ -247,7 +249,7 @@ const LoginButton = () => {
               )}
               <button
                 type="submit"
-                className="btn border-none w-full bg-primary text-secondary mt-3"
+                className="btn border-none w-full bg-primary text-text mt-3"
               >
                 {isLogin ? "Log In" : "Sign Up"}
               </button>
