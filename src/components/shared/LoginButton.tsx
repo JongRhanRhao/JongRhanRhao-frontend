@@ -78,7 +78,7 @@ const LoginButton = () => {
         Log In / Sign Up
       </button>
       <dialog id="login" className="modal">
-        <div className="modal-box bg-white">
+        <div className="modal-box bg-white overflow-hidden">
           <form
             method="dialog"
             className="space-y-2"
@@ -173,7 +173,7 @@ const LoginButton = () => {
               </svg>
               <span>Continue with Facebook</span>
             </button>
-            <div className="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
+            <div className="flex w-full items-center gap-2 text-sm text-slate-600">
               <div className="h-px w-full bg-slate-200"></div>OR
               <div className="h-px w-full bg-slate-200"></div>
             </div>
