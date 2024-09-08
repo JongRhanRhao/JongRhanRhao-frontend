@@ -15,7 +15,7 @@ export default {
     },
     fontFamily: {
       sans: ["Lexend Deca", "sans-serif"],
-      thai: ["Pridi", "sans-serif"],
+      thai: ["Kanit", "sans-serif"],
     },
   },
   plugins: [daisyui],
