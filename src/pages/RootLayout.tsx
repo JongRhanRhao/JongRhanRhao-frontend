@@ -19,7 +19,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ onItemClick }) => {
             <LeftSidebar onItemClick={onItemClick} />
           </div>
           <div className="flex-1 flex flex-col overflow-hidden">
-            <main className="flex-1 flex flex-col p-4 bg-accent2 overflow-y-auto">
+            <main className="flex-1 flex flex-col p-4 bg-bg overflow-y-auto">
               <div className="flex-grow">
                 <Content />
               </div>
