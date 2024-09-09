@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SERVER_URL } from "@/lib/helpers/environment";
+import { SERVER_URL } from "@/lib/variables";
 
 export const getCurrentUser = async () => {
   try {
