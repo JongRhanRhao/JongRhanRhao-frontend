@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 
-import { SERVER_URL } from "@/lib/helpers/environment";
+import { SERVER_URL } from "@/lib/variables";
 
 const BookingButton = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
