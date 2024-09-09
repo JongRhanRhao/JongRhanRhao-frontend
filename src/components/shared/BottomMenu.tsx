@@ -8,14 +8,15 @@ import {
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { GLOBAL_URL_ROUTES } from "@/lib/helpers/environment";
+import { GLOBAL_URL_ROUTES } from "@/lib/variables";
 import { useUser } from "@/contexts/UserContext";
 
 interface BottomMenuProps {
   onItemClick: (item: string) => void;
+  className?: string;
 }
 
-const BottomMenu: React.FC<BottomMenuProps> = ({ onItemClick }) => {
+const BottomMenu: React.FC<BottomMenuProps> = ({ onItemClick, className }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useUser();
@@ -58,7 +59,9 @@ const BottomMenu: React.FC<BottomMenuProps> = ({ onItemClick }) => {
   };
 
   return (
-    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 space-x-5 p-1 gap-1 bg-bg shadow-lg flex text-white justify-around rounded-t-3xl">
+    <div
+      className={`fixed bottom-0 left-1/2 transform -translate-x-1/2 space-x-5 p-1 gap-1 bg-bg shadow-lg flex text-white justify-around rounded-t-3xl ${className}`}
+    >
       {items.map((item) => {
         const isActive = location.pathname === item.path;
         return (
