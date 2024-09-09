@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
 import Dashboard from "@/pages/MenuPages/Dashboard";
-import Message from "@/pages/MenuPages/Message";
 import ReserveStatus from "@/pages/MenuPages/ReserveStatus";
 import StoreManagement from "@/pages/MenuPages/StoreManagement";
 import NotFoundPage from "@/pages/NotFoundPage";
@@ -14,7 +13,6 @@ const Content: React.FC = () => {
         path={`${GLOBAL_URL_ROUTES.landingPage}`}
         element={<Dashboard />}
       />
-      <Route path={`${GLOBAL_URL_ROUTES.message}`} element={<Message />} />
       <Route
         path={`${GLOBAL_URL_ROUTES.reserveStatus}`}
         element={<ReserveStatus />}
