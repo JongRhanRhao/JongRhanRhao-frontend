@@ -11,12 +11,15 @@ import {
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
 import { useUser } from "@/contexts/UserContext";
 
-interface BottomMenuProps {
+interface SmallScreenMenuProps {
   onItemClick: (item: string) => void;
   className?: string;
 }
 
-const BottomMenu: React.FC<BottomMenuProps> = ({ onItemClick, className }) => {
+const SmallScreenMenu: React.FC<SmallScreenMenuProps> = ({
+  onItemClick,
+  className,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useUser();
@@ -80,4 +83,4 @@ const BottomMenu: React.FC<BottomMenuProps> = ({ onItemClick, className }) => {
   );
 };
 
-export default BottomMenu;
+export default SmallScreenMenu;

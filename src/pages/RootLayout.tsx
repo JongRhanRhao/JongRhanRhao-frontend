@@ -5,13 +5,13 @@ import RightSidebar from "@/components/layout/RightSidebar";
 import Content from "@/components/layout/Content";
 import Footer from "@/components/shared/Footer";
 import { SidebarProvider } from "@/contexts/SideBarContext";
-import BottomMenu from "@/components/shared/BottomMenu";
+import SmallScreenMenu from "@/components/shared/SmallScreenMenu";
 
 interface RootLayoutProps {
   selectedItem: string;
   onItemClick: (item: string) => void;
 }
-
+// TODO: add chat with admin feature
 const RootLayout: React.FC<RootLayoutProps> = ({ onItemClick }) => {
   return (
     <SidebarProvider>
@@ -29,7 +29,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ onItemClick }) => {
 
         <RightSidebar className="hidden lg:block md:block" />
 
-        <BottomMenu
+        <SmallScreenMenu
           onItemClick={onItemClick}
           className="block md:hidden lg:hidden"
         />

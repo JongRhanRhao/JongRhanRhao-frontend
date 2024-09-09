@@ -17,7 +17,7 @@ import CommentSection from "@/components/ShopDescriptionPage/CommentSection";
 import BookingButton from "@/components/ShopDescriptionPage/BookingButton";
 import { SERVER_URL } from "@/lib/variables";
 import { Store } from "@/hooks/useFetchStores";
-import BottomMenu from "../shared/BottomMenu";
+import SmallScreenMenu from "../shared/SmallScreenMenu";
 
 interface ShopDescriptionProps {
   selectedItem: string;
@@ -133,7 +133,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
             </div>
           </main>
         </div>
-        <BottomMenu
+        <SmallScreenMenu
           onItemClick={onItemClick}
           className="block md:hidden lg:hidden"
         />
