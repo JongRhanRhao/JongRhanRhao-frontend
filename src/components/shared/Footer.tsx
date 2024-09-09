@@ -1,7 +1,15 @@
 // TODO: add social media links
-const Footer = () => {
+import React from "react";
+
+interface FooterProps {
+  className?: string;
+}
+
+const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
-    <footer className="flex flex-col space-y-10 justify-center m-10">
+    <footer
+      className={`flex flex-col space-y-10 justify-center m-10 ${className}`}
+    >
       <nav className="flex justify-center flex-wrap gap-6 text-gray-500 font-medium"></nav>
       <div className="flex justify-center space-x-5">
         <a
