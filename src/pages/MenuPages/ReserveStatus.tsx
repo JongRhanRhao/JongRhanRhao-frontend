@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useUser } from "@/contexts/UserContext";
-import { SERVER_URL } from "@/lib/helpers/environment";
-import { Reservations } from "@/lib/types";
+import { SERVER_URL } from "@/lib/variables";
+import { Reservations } from "@/lib/variables";
 
 const ReservationStatus = () => {
   const user = useUser();
