@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { SERVER_URL } from "@/lib/helpers/environment";
+
+import { SERVER_URL } from "@/lib/variables";
 
 export interface Store {
   store_id: string;
