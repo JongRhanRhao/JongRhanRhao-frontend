@@ -20,7 +20,7 @@ const ReservationStatus = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="text-2xl text-text flex justify-center items-center h-full flex-col">
+      <div className="text-2xl text-text flex justify-center items-center mt-20 flex-col">
         You need to log in to view this page.
         <BackHomeButton className="mt-5 text-primary" />
       </div>
