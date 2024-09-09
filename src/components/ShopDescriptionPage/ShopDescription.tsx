@@ -15,8 +15,9 @@ import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
 import CommentSection from "@/components/ShopDescriptionPage/CommentSection";
 import BookingButton from "@/components/ShopDescriptionPage/BookingButton";
-import { SERVER_URL } from "@/lib/helpers/environment";
+import { SERVER_URL } from "@/lib/variables";
 import { Store } from "@/hooks/useFetchStores";
+import BottomMenu from "../shared/BottomMenu";
 
 interface ShopDescriptionProps {
   selectedItem: string;
@@ -63,22 +64,22 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
       <div className="flex w-full h-full">
         <LeftSidebar onItemClick={onItemClick} />
         <div className="flex-1 flex flex-col overflow-y-auto">
-          <main className="flex-1 p-4 bg-bg">
+          <main className="flex-1 p-6 bg-bg">
             <Link to="/">
-              <div className="py-2 text-xl text-primary mb-2 font-bold">
+              <div className="py-2 text-xl text-primary mb-4 font-bold flex items-center">
                 <FontAwesomeIcon icon={faAngleLeft} />
-                &nbsp; Back
+                <span className="ml-2">Back</span>
               </div>
             </Link>
-            <div className="flex justify-center">
+            <div className="flex flex-col md:flex-row justify-center">
               <img
                 src={stores.image_url as string}
-                className="rounded-xl h-96"
+                className="rounded-xl h-80 w-full md:w-1/2 object-cover"
                 alt="shopImage"
               />
-              <div className="rounded-xl p-3 h-36 w-full ml-5">
-                <div className="font-bold text-text uppercase text-4xl">
-                  {stores.shop_name}{" "}
+              <div className="rounded-xl p-5 h-auto w-full md:ml-8 mt-5 md:mt-0 shadow-md">
+                <div className="font-bold text-text uppercase text-4xl mb-2">
+                  {stores.shop_name}
                 </div>
                 <div className="mt-1">
                   {[...Array(safeRating)].map((_, i) => (
@@ -88,44 +89,55 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                       className="text-yellow-400"
                     />
                   ))}
-                  <span className="ml-1">({stores.rating})</span>
-                </div>
-                <div className="mb-4 mt-2 text-lg text-text font-thai">
-                  {stores.description}
-                </div>
-                <div className="font-bold">
-                  <FontAwesomeIcon icon={faClock} />
-                  &nbsp; Opening Hours:{" "}
-                  <span className="text-text">{stores.open_timebooking}</span>
-                </div>
-                <div className="font-bold">
-                  <FontAwesomeIcon icon={faCalendarTimes} />
-                  &nbsp; Reservation Expired time:{" "}
-                  <span className="text-text">{stores.cancel_reserve}</span>
-                </div>
-                <div className="font-bold">
-                  <FontAwesomeIcon icon={faInfoCircle} />
-                  &nbsp; Status:{" "}
-                  <span className={`${statusClass} font-semibold`}>
-                    {isAvailable ? "Available" : "Unavailable"}
+                  <span className="ml-2 text-lg font-medium">
+                    ({stores.rating})
                   </span>
                 </div>
-                <div className="font-bold">
-                  <FontAwesomeIcon icon={faLocationDot} />
-                  &nbsp; Address:{" "}
-                  <span className="text-text">{stores.address}</span>
+                <p className="text-lg text-text font-light my-4">
+                  {stores.description}
+                </p>
+                <div className="font-medium text-lg">
+                  <div className="mb-3">
+                    <FontAwesomeIcon icon={faClock} />
+                    <span className="ml-2">
+                      Opening Hours: {stores.open_timebooking}
+                    </span>
+                  </div>
+                  <div className="mb-3">
+                    <FontAwesomeIcon icon={faCalendarTimes} />
+                    <span className="ml-2">
+                      Reservation Expiry: {stores.cancel_reserve}
+                    </span>
+                  </div>
+                  <div className="mb-3">
+                    <FontAwesomeIcon icon={faInfoCircle} />
+                    <span className="ml-2">
+                      Status:{" "}
+                      <span className={`${statusClass} font-semibold`}>
+                        {isAvailable ? "Available" : "Unavailable"}
+                      </span>
+                    </span>
+                  </div>
+                  <div className="mb-3">
+                    <FontAwesomeIcon icon={faLocationDot} />
+                    <span className="ml-2">Address: {stores.address}</span>
+                  </div>
                 </div>
-                <div className="mt-7">
+                <div className="mt-6">
                   <BookingButton />
                 </div>
               </div>
             </div>
-            <div className="mt-8">
+            <div className="mt-10">
               <CommentSection />
             </div>
           </main>
         </div>
-        <RightSidebar />
+        <BottomMenu
+          onItemClick={onItemClick}
+          className="block md:hidden lg:hidden"
+        />
+        <RightSidebar className="hidden md:block lg:block" />
       </div>
     </div>
   );
