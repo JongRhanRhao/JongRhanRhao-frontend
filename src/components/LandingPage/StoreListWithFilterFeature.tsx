@@ -3,8 +3,8 @@ import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
 
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useFetchStores } from "@/hooks/useFetchStores";
-import { FilterButton } from "./FilterButton";
-import { FILTER_TYPES } from "@/lib/types";
+import { FilterButton } from "@/components/shared/FilterButton";
+import { FILTER_TYPES } from "@/lib/variables";
 import { ShopCardLink } from "./ShopCardLink";
 // TODO: Assign store type in DB
 
@@ -57,14 +57,14 @@ const StoreListWithFilterFeature = () => {
           </h2>
           <div className="mb-4 space-x-2">
             <FilterButton
-              type={FILTER_TYPES.HOT}
-              selectedType={selectedType}
+              title={FILTER_TYPES.HOT}
+              selectedTitle={selectedType}
               onClick={handleTypeClick}
               icon={faFire}
             />
             <FilterButton
-              type={FILTER_TYPES.FAVORITE}
-              selectedType={selectedType}
+              title={FILTER_TYPES.FAVORITE}
+              selectedTitle={selectedType}
               onClick={handleTypeClick}
               icon={faStar}
             />
@@ -73,8 +73,8 @@ const StoreListWithFilterFeature = () => {
               .map((type) => (
                 <FilterButton
                   key={type}
-                  type={type}
-                  selectedType={selectedType}
+                  title={type}
+                  selectedTitle={selectedType}
                   onClick={handleTypeClick}
                 />
               ))}
@@ -101,14 +101,14 @@ const StoreListWithFilterFeature = () => {
       <h2 className="text-3xl font-bold text-text mb-5">Discover & Booking</h2>
       <div className="mb-4 space-x-2">
         <FilterButton
-          type={FILTER_TYPES.HOT}
-          selectedType={selectedType}
+          title={FILTER_TYPES.HOT}
+          selectedTitle={selectedType}
           onClick={handleTypeClick}
           icon={faFire}
         />
         <FilterButton
-          type={FILTER_TYPES.FAVORITE}
-          selectedType={selectedType}
+          title={FILTER_TYPES.FAVORITE}
+          selectedTitle={selectedType}
           onClick={handleTypeClick}
           icon={faStar}
         />
@@ -117,8 +117,8 @@ const StoreListWithFilterFeature = () => {
           .map((type) => (
             <FilterButton
               key={type}
-              type={type}
-              selectedType={selectedType}
+              title={type}
+              selectedTitle={selectedType}
               onClick={handleTypeClick}
             />
           ))}
