@@ -16,9 +16,13 @@ import { useUser } from "@/contexts/UserContext";
 
 interface LeftSidebarProps {
   onItemClick: (item: string) => void;
+  className?: string;
 }
 
-const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
+const LeftSidebar: React.FC<LeftSidebarProps> = ({
+  onItemClick,
+  className,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
@@ -63,9 +67,11 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
 
   return (
     <div
-      className={`flex flex-col transition-all duration-300 ${
-        leftSidebarExpanded ? "w-64" : "w-20"
-      } bg-bg text-white p-4 hidden md:flex shadow-lg`}
+      className={
+        `flex flex-col transition-all duration-300 ${
+          leftSidebarExpanded ? "w-64" : "w-20"
+        } bg-bg text-white p-4 hidden md:flex shadow-lg` + className
+      }
     >
       <div className="flex justify-between items-center mb-8">
         {leftSidebarExpanded && (
