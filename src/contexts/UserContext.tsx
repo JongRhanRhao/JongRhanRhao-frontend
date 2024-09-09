@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
 import { getCurrentUser } from "../utils/userAPI";
-import { SERVER_URL } from "@/lib/helpers/environment";
+import { SERVER_URL } from "@/lib/variables";
 
 export interface User {
   userId: number;
