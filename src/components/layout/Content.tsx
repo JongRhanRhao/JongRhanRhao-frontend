@@ -5,7 +5,7 @@ import Message from "@/pages/MenuPages/Message";
 import ReserveStatus from "@/pages/MenuPages/ReserveStatus";
 import StoreManagement from "@/pages/MenuPages/StoreManagement";
 import NotFoundPage from "@/pages/NotFoundPage";
-import { GLOBAL_URL_ROUTES } from "@/lib/helpers/environment";
+import { GLOBAL_URL_ROUTES } from "@/lib/variables";
 
 const Content: React.FC = () => {
   return (
