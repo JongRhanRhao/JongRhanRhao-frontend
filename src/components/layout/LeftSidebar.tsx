@@ -1,8 +1,7 @@
-import { useRef } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  // faEnvelope,
   faCog,
   faStore,
   faHome,
@@ -10,10 +9,9 @@ import {
   faAngleLeft,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { useSidebarContext } from "@/contexts/SideBarContext";
 import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
-import { GLOBAL_URL_ROUTES } from "@/lib/helpers/environment";
+import { GLOBAL_URL_ROUTES } from "@/lib/variables";
 import { useUser } from "@/contexts/UserContext";
 
 interface LeftSidebarProps {
@@ -24,8 +22,6 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
-  // const [isExpanded, setIsExpanded] = useState(false);
-  const expandTimeout = useRef<NodeJS.Timeout | null>(null);
   const { user } = useUser();
   const userRole = user?.role;
   const isOwnerOrStaff = userRole === "owner" || userRole === "staff";
@@ -33,30 +29,30 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
   const items = [
     {
       name: "Discover",
-      key: "Item 1",
+      key: "Item1",
       icon: faHome,
-      path: `${GLOBAL_URL_ROUTES.landingPage}`,
+      path: GLOBAL_URL_ROUTES.landingPage,
     },
     {
       name: "Status",
-      key: "Item 4",
+      key: "Item4",
       icon: faClock,
-      path: `${GLOBAL_URL_ROUTES.reserveStatus}`,
+      path: GLOBAL_URL_ROUTES.reserveStatus,
     },
     {
       name: "Setting",
-      key: "Item 6",
+      key: "Item6",
       icon: faCog,
-      path: `${GLOBAL_URL_ROUTES.setting}`,
+      path: GLOBAL_URL_ROUTES.setting,
     },
   ];
 
   if (isOwnerOrStaff) {
     items.splice(2, 0, {
       name: "My Store",
-      key: "Item 5",
+      key: "Item5",
       icon: faStore,
-      path: `${GLOBAL_URL_ROUTES.storeManagement}`,
+      path: GLOBAL_URL_ROUTES.storeManagement,
     });
   }
 
@@ -65,72 +61,57 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ onItemClick }) => {
     navigate(item.path);
   };
 
-  const renderItems = (expanded: boolean) => (
-    <ul className={`space-y-4 ${expanded ? "mt-4" : "mt-8"}`}>
-      {items.map((item) => {
-        const isActive = location.pathname === item.path;
-        return (
-          <li
-            key={item.key}
-            className={`btn bg-bg2 text-text border-none cursor-pointer font-bold p-4 rounded-xl flex items-center space-x-2 duration-150 justify-start 
-              ${isActive ? "bg-primary" : "hover:text-primary"}`}
-            onClick={() => handleItemClick(item)}
-          >
-            <FontAwesomeIcon icon={item.icon} />
-            {expanded && <span>{item.name}</span>}
-          </li>
-        );
-      })}
-      {expanded && <UpgradeToVIPCard />}
-    </ul>
-  );
-
-  const handleMouseEnter = () => {
-    expandTimeout.current = setTimeout(() => {
-      // setIsExpanded(true);
-    }, 200);
-  };
-
-  const handleMouseLeave = () => {
-    if (expandTimeout.current) {
-      clearTimeout(expandTimeout.current);
-    }
-    // setIsExpanded(false);
-  };
-
-  // if you want to change the sidebar to expand on hover instead of click event change leftSidebarExpanded to isExpanded
   return (
     <div
       className={`flex flex-col transition-all duration-300 ${
         leftSidebarExpanded ? "w-64" : "w-20"
-      } bg-bg2 text-white p-4 hidden md:block lg:block`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      } bg-bg text-white p-4 hidden md:flex shadow-lg`}
     >
-      {leftSidebarExpanded && (
-        <div className="flex justify-end">
-          <button
-            onClick={toggleLeftSidebar}
-            className={`btn text-xl duration-300 shadow-lg text-text bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl w-12 mt-2`}
-          >
-            <FontAwesomeIcon icon={faAngleLeft} />
-          </button>
-        </div>
-      )}
-      {!leftSidebarExpanded && (
-        <div
+      <div className="flex justify-between items-center mb-8">
+        {leftSidebarExpanded && (
+          <h1 className="font-bold text-2xl text-primary">JongRhanRhao</h1>
+        )}
+        <button
           onClick={toggleLeftSidebar}
-          className={`btn w-12 text-text text-center text-2xl shadow-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl mt-2`}
+          className="btn btn-circle btn-sm bg-primary text-white hover:bg-primary-focus"
         >
-          <FontAwesomeIcon icon={faAngleRight} />
-        </div>
-      )}
+          <FontAwesomeIcon
+            icon={leftSidebarExpanded ? faAngleLeft : faAngleRight}
+          />
+        </button>
+      </div>
+
+      <nav className="flex-grow">
+        <ul className="space-y-2">
+          {items.map((item) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <li key={item.key}>
+                <button
+                  className={`w-full btn btn-ghost justify-start ${
+                    isActive ? "bg-primary text-white" : "hover:bg-primary/20"
+                  } ${
+                    leftSidebarExpanded ? "px-4" : "px-0"
+                  } py-3 rounded-lg transition-colors duration-200`}
+                  onClick={() => handleItemClick(item)}
+                >
+                  <FontAwesomeIcon
+                    icon={item.icon}
+                    className={`${leftSidebarExpanded ? "mr-3" : "mx-auto"}`}
+                  />
+                  {leftSidebarExpanded && <span>{item.name}</span>}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
       {leftSidebarExpanded && (
-        <div className=" font-bold font-sans text-center text-2xl text-text rounded-xl py-4">
-          JongRhanRhao
+        <div className="mt-auto">
+          <UpgradeToVIPCard />
         </div>
       )}
-      {renderItems(leftSidebarExpanded)}
     </div>
   );
 };
