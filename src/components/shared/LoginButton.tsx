@@ -2,8 +2,8 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-import { FormData } from "@/lib/types";
-import { SERVER_URL } from "@/lib/helpers/environment";
+import { FormData } from "@/lib/variables";
+import { SERVER_URL } from "@/lib/variables";
 import { User, useUser } from "@/contexts/UserContext";
 
 const LoginButton = () => {
