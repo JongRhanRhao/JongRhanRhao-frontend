@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
-import { useUser } from "@/contexts/useUserStore";
+import { useUser } from "@/hooks/useUserStore";
 
 interface SmallScreenMenuProps {
   onItemClick: (item: string) => void;
