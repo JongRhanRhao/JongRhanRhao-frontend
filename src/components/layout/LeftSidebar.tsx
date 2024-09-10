@@ -9,10 +9,10 @@ import {
   faAngleLeft,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
-import { useSidebarContext } from "@/contexts/SideBarContext";
 import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
-import { useUser } from "@/contexts/UserContext";
+import { useUser } from "@/contexts/useUserStore";
+import { useSidebarStore } from "@/contexts/useSidebarStore";
 
 interface LeftSidebarProps {
   onItemClick: (item: string) => void;
@@ -25,7 +25,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarContext();
+  const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarStore();
   const { user } = useUser();
   const userRole = user?.role;
   const isOwnerOrStaff = userRole === "owner" || userRole === "staff";
