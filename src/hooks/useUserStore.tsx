@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import axios from "axios";
-import { getCurrentUser } from "../utils/userAPI";
+
+import { getCurrentUser } from "@/utils/userAPI";
 import { SERVER_URL } from "@/lib/variables";
 
 export interface User {
