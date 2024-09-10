@@ -1,8 +1,7 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import axios from "axios";
-
-import { getCurrentUser } from "@/utils/userAPI";
+import { getCurrentUser } from "../utils/userAPI";
 import { SERVER_URL } from "@/lib/variables";
 
 export interface User {
@@ -29,10 +28,19 @@ export const useUserStore = create<UserState>()(
       setUser: (user) => set({ user }),
       setIsAuthenticated: (status) => set({ isAuthenticated: status }),
       logout: async () => {
-        await axios.get(`${SERVER_URL}/users/auth/logout`, {
-          withCredentials: true,
-        });
-        set({ user: null, isAuthenticated: false });
+        try {
+          const response = await axios.get(`${SERVER_URL}/users/auth/logout`, {
+            withCredentials: true,
+          });
+
+          if (response.status === 200) {
+            set({ user: null, isAuthenticated: false });
+          } else {
+            throw new Error(response.data.message || "Logout failed");
+          }
+        } catch (error) {
+          console.error("Logout failed", error);
+        }
       },
       initializeUser: async () => {
         const userData = await getCurrentUser();
@@ -43,37 +51,16 @@ export const useUserStore = create<UserState>()(
     }),
     {
       name: "user-storage",
-      storage: {
-        getItem: (name) => {
-          const item = localStorage.getItem(name);
-          return item ? JSON.parse(item) : null;
-        },
-        setItem: (name, value) => {
-          localStorage.setItem(name, JSON.stringify(value));
-        },
-        removeItem: (name) => {
-          localStorage.removeItem(name);
-        },
-      },
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+      }),
     }
   )
 );
 
 export const useUser = () => {
-  const {
-    user,
-    isAuthenticated,
-    setUser,
-    setIsAuthenticated,
-    logout,
-    initializeUser,
-  } = useUserStore();
-  return {
-    user,
-    isAuthenticated,
-    setUser,
-    setIsAuthenticated,
-    logout,
-    initializeUser,
-  };
+  const store = useUserStore();
+  return store;
 };
