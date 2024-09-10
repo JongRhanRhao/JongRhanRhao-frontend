@@ -8,8 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import LoginButton from "@/components/shared/LoginButton";
-import { useSidebarStore } from "@/contexts/useSidebarStore";
-import { useUser } from "@/contexts/useUserStore";
+import { useSidebarStore } from "@/hooks/useSidebarStore";
+import { useUser } from "@/hooks/useUserStore";
 
 interface RightSidebarProps {
   className?: string;
