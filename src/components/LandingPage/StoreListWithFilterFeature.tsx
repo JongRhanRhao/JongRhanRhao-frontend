@@ -4,7 +4,7 @@ import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useFetchStores } from "@/hooks/useFetchStores";
 import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
-import { useUser } from "@/contexts/UserContext";
+import { useUser } from "@/contexts/useUserStore";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { FILTER_TYPES } from "@/lib/variables";
 import { ShopCardLink } from "./ShopCardLink";
