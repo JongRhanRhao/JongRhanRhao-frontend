@@ -11,8 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
-import { useUser } from "@/contexts/useUserStore";
-import { useSidebarStore } from "@/contexts/useSidebarStore";
+import { useUser } from "@/hooks/useUserStore";
+import { useSidebarStore } from "@/hooks/useSidebarStore";
 
 interface LeftSidebarProps {
   onItemClick: (item: string) => void;
