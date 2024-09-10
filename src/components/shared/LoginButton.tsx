@@ -2,9 +2,17 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-import { FormData } from "@/lib/variables";
 import { SERVER_URL } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
+
+type FormData = {
+  user_name: string;
+  email: string;
+  password: string;
+  phone_number: string;
+  role: string;
+  confirm_password: string;
+};
 
 const LoginButton = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -54,8 +62,6 @@ const LoginButton = () => {
     window.location.href = `${SERVER_URL}/users/auth/${provider}`;
   };
 
-  closed;
-
   const toggleForm = () => {
     setIsLogin(!isLogin);
     setErrorMessage("");
@@ -65,42 +71,46 @@ const LoginButton = () => {
   return (
     <>
       <button
-        className="btn bg-primary text-text w-full"
+        className="btn bg-primary text-white w-full py-3 rounded-md"
         onClick={() =>
           (document.getElementById("login") as HTMLDialogElement).showModal()
         }
       >
         Log In / Sign Up
       </button>
+
       <dialog id="login" className="modal">
-        <div className="modal-box bg-white overflow-hidden">
+        <div className="modal-box bg-bg rounded-lg shadow-lg p-8 border-primary/30 border-2">
           <form
             method="dialog"
-            className="space-y-2"
+            className="space-y-4"
             onSubmit={handleSubmit(handleAuth)}
           >
             <button
-              className="btn btn-sm btn-circle btn-ghost absolute text-primary right-2 top-2"
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
               onClick={closeModal}
             >
               ✕
             </button>
+
             <div className="text-center">
-              <p className="text-2xl font-semibold leading-5 text-primary">
+              <h2 className="text-2xl font-bold text-primary mb-2">
                 {isLogin ? "Login to your account" : "Create an account"}
-              </p>
-              <p className="text-sm leading-4 text-slate-600 mt-2 mb-5">
+              </h2>
+              <p className="text-sm text-text">
                 {isLogin
-                  ? "You must be logged in to perform this action."
+                  ? "You must be logged in to continue."
                   : "Sign up to get started."}
               </p>
             </div>
+
             {errorMessage && (
               <p className="text-red-600 text-center">{errorMessage}</p>
             )}
+
             <button
               onClick={() => handleOAuthLogin("google")}
-              className="btn flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md max-w-lg w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="btn bg-secondary flex items-center justify-center rounded-md w-full py-3 hover:bg-opacity-50 text-text shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
             >
               <svg
                 className="h-6 w-6 mr-2"
@@ -141,11 +151,12 @@ const LoginButton = () => {
                   </g>
                 </g>
               </svg>
-              <span>Continue with Google</span>
+              Continue with Google
             </button>
+
             <button
               onClick={() => handleOAuthLogin("facebook")}
-              className="btn flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md w-full max-w-lg px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="btn bg-secondary flex items-center justify-center border rounded-md w-full py-3 text-text shadow-sm hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
             >
               <svg
                 className="h-6 w-6 mr-2"
@@ -166,98 +177,98 @@ const LoginButton = () => {
                   </g>
                 </g>
               </svg>
-              <span>Continue with Facebook</span>
+              Continue with Facebook
             </button>
-            <div className="flex w-full items-center gap-2 text-sm text-slate-600">
-              <div className="h-px w-full bg-slate-200"></div>OR
-              <div className="h-px w-full bg-slate-200"></div>
+
+            <div className="flex items-center gap-2 text-sm my-4">
+              <div className="h-px w-full bg-text"></div>OR
+              <div className="h-px w-full bg-text"></div>
             </div>
-            <div className="w-full">
+
+            {/* email & pass login */}
+            <div className="w-full space-y-3 flex flex-col">
               {!isLogin && (
                 <>
-                  <div className="text-gray-800">Username</div>
+                  <label className="text-text">Username</label>
                   <input
                     {...register("user_name", {
                       required: "* Username is required",
                     })}
                     type="text"
-                    className="mt-2 block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
+                    className="input bg-secondary"
                     placeholder="Enter username"
                   />
                   {errors.user_name && (
-                    <p className="mt-1 text-sm text-red-600">
+                    <p className="text-sm text-red-600">
                       {errors.user_name.message}
                     </p>
                   )}
                 </>
               )}
-              <div className="text-gray-800 mt-3">E-mail</div>
+
+              <label className="text-text">E-mail</label>
               <input
                 {...register("email", { required: "* Email is required" })}
                 type="email"
-                className="mt-2 block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
+                className="input bg-secondary"
                 placeholder="Enter email"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">
-                  {errors.email.message}
-                </p>
+                <p className="text-sm text-red-600">{errors.email.message}</p>
               )}
-              <div className="text-gray-800 mt-3">Password</div>
+
+              <label className="text-text">Password</label>
               <input
                 {...register("password", {
                   required: "* Password is required",
                 })}
                 type="password"
-                className="mt-2 block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
+                className="input bg-secondary"
                 placeholder="Enter password"
               />
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="text-sm text-red-600">
                   {errors.password.message}
                 </p>
               )}
+
               {!isLogin && (
                 <>
-                  <div className="text-gray-800 mt-3">Phone</div>
+                  <label className="text-text">Confirm Password</label>
                   <input
-                    {...register("phone_number", {
-                      required: "* Phone number is required",
+                    {...register("confirm_password", {
+                      required: "* Please confirm your password",
                     })}
-                    type="tel"
-                    className="mt-2 block w-full text-black bg-white rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400"
-                    placeholder="081 234 5678"
+                    type="password"
+                    className="input bg-secondary"
+                    placeholder="Confirm password"
                   />
-                  {errors.phone_number && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.phone_number.message}
+                  {errors.confirm_password && (
+                    <p className="text-sm text-red-600">
+                      {errors.confirm_password.message}
                     </p>
                   )}
                 </>
               )}
-              {isLogin && (
-                <p className="mb-3 mt-2 text-sm text-gray-500">
-                  <a href="/forgot-password" className="text-primary">
-                    Reset your password?
-                  </a>
-                </p>
-              )}
-              <button
-                type="submit"
-                className="btn border-none w-full bg-primary text-text mt-3"
-              >
-                {isLogin ? "Log In" : "Sign Up"}
-              </button>
             </div>
-            <div className="mt-6 text-center text-sm text-slate-600">
-              {isLogin ? "Don't have an account?" : "Already have an account?"}
+
+            <button
+              type="submit"
+              className="btn w-full bg-primary text-white py-3 rounded-lg"
+            >
+              {isLogin ? "Login" : "Sign Up"}
+            </button>
+
+            <p className="text-center text-sm text-text">
+              {isLogin ? "New here? " : "Already have an account? "}
               <button
+                type="button"
+                className="text-primary hover:underline"
                 onClick={toggleForm}
-                className="font-medium text-primary ml-1"
               >
-                {isLogin ? "Sign Up" : "Log In"}
+                {isLogin ? "Create an account" : "Login"}
               </button>
-            </div>
+            </p>
           </form>
         </div>
       </dialog>
