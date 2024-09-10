@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { FormData } from "@/lib/variables";
 import { SERVER_URL } from "@/lib/variables";
-import { User, useUser } from "@/contexts/UserContext";
+import { User, useUser } from "@/contexts/useUserStore";
 
 const LoginButton = () => {
   const [isLogin, setIsLogin] = useState(true);
