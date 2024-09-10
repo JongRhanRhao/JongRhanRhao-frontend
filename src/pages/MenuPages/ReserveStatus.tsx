@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 import BackHomeButton from "@/components/shared/BackHomeButton";
-import { useUser } from "@/contexts/UserContext";
+import { useUser } from "@/hooks/useUserStore";
 import { SERVER_URL } from "@/lib/variables";
 import { Reservations } from "@/lib/variables";
 
