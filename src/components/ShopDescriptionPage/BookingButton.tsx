@@ -64,10 +64,10 @@ const BookingButton = () => {
         id="BookingButton"
         className="modal modal-bottom sm:modal-middle md:modal-middle lg:modal-middle xl:modal-middle"
       >
-        <div className="modal-box bg-secondary">
+        <div className="modal-box bg-secondary text-text">
           <h2 className="font-bold text-xl mb-4">Book Your Reservation</h2>
           <div className="mb-4">
-            <label className="font-bold mr-2">Select Date and Time:</label>
+            <label className="font-bold mr-2">Select Date:</label>
             <DatePicker
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
@@ -96,6 +96,7 @@ const BookingButton = () => {
               className="rounded p-2 w-full mt-1 bg-bg"
             />
           </div>
+          <p className="text-sm">Store will call you to confirm the booking.</p>
           <div className="modal-action">
             <form method="dialog" className="flex justify-end w-full space-x-2">
               <button className="btn">Close</button>
