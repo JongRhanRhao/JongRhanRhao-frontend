@@ -4,7 +4,7 @@ import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
 import Content from "@/components/layout/Content";
 import Footer from "@/components/shared/Footer";
-import SmallScreenMenu from "@/components/shared/SmallScreenMenu";
+import SmallScreenNavMenu from "@/components/shared/SmallScreenNavMenu";
 
 interface RootLayoutProps {
   selectedItem: string;
@@ -27,7 +27,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ onItemClick }) => {
 
       <RightSidebar className="hidden lg:block md:block" />
 
-      <SmallScreenMenu
+      <SmallScreenNavMenu
         onItemClick={onItemClick}
         className="block md:hidden lg:hidden"
       />
