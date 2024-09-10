@@ -6,12 +6,11 @@ import { useFetchStores } from "@/hooks/useFetchStores";
 import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
 import { useUser } from "@/hooks/useUserStore";
 import { FilterButton } from "@/components/shared/FilterButton";
-import { FILTER_TYPES } from "@/lib/variables";
-import { ShopCardLink } from "./ShopCardLink";
+import { DATA_FETCHING_TIME_DELAY, FILTER_TYPES } from "@/lib/variables";
+import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
 // TODO: Assign store type in DB
 
 const StoreListWithFilterFeature = () => {
-  const LOADING_DELAY = 1000;
   const [selectedType, setSelectedType] = useState(FILTER_TYPES.ALL);
   const { data: stores, isLoading: isFetchingStores, error } = useFetchStores();
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +23,7 @@ const StoreListWithFilterFeature = () => {
     setSelectedType(type);
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, LOADING_DELAY);
+    }, DATA_FETCHING_TIME_DELAY);
 
     return () => clearTimeout(timer);
   }, []);
@@ -53,7 +52,7 @@ const StoreListWithFilterFeature = () => {
     if (!isFetchingStores && !isFetchingFavorites) {
       const timer = setTimeout(() => {
         setIsLoading(false);
-      }, LOADING_DELAY);
+      }, DATA_FETCHING_TIME_DELAY);
 
       return () => clearTimeout(timer);
     }
@@ -108,7 +107,7 @@ const StoreListWithFilterFeature = () => {
   }
 
   return (
-    <div className="p-4">
+    <div className="container">
       <h2 className="text-3xl font-bold text-text mb-5">Discover & Booking</h2>
       <div className="mb-4 space-x-2">
         <FilterButton
