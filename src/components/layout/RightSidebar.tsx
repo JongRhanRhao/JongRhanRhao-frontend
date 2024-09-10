@@ -8,15 +8,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import LoginButton from "@/components/shared/LoginButton";
-import { useSidebarContext } from "@/contexts/SideBarContext";
-import { useUser } from "@/contexts/UserContext";
+import { useSidebarStore } from "@/contexts/useSidebarStore";
+import { useUser } from "@/contexts/useUserStore";
 
 interface RightSidebarProps {
   className?: string;
 }
 
 const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
-  const { rightSidebarExpanded, toggleRightSidebar } = useSidebarContext();
+  const { rightSidebarExpanded, toggleRightSidebar } = useSidebarStore();
   const { user, isAuthenticated, logout } = useUser();
 
   return (
