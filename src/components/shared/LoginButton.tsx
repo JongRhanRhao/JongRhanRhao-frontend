@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { FormData } from "@/lib/variables";
 import { SERVER_URL } from "@/lib/variables";
-import { User, useUser } from "@/hooks/useUserStore";
+import { useUser } from "@/hooks/useUserStore";
 
 const LoginButton = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -32,7 +32,6 @@ const LoginButton = () => {
         }
       );
       if (response.data.user) {
-        storeUserData(response.data.user);
         setUser(response.data.user);
         setIsAuthenticated(true);
         closeModal();
@@ -44,10 +43,6 @@ const LoginButton = () => {
           : `Unknown error: ${error}`
       );
     }
-  };
-
-  const storeUserData = (userData: User) => {
-    localStorage.setItem("userData", JSON.stringify(userData));
   };
 
   const closeModal = () => {
