@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useUser } from "@/contexts/UserContext";
+import { useUser } from "@/hooks/useUserStore";
 import { STORE_MANAGEMENT_MENU } from "@/lib/variables";
 import ReservationsList from "@/components/StoreManagementPage/ReservationsList";
 import StaffManagement from "@/components/StoreManagementPage/StaffManagement";
