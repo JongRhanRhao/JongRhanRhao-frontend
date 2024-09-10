@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { SERVER_URL } from "@/lib/variables";
 
 interface FavoriteStore {
