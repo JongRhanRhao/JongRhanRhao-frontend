@@ -3,6 +3,8 @@ import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
 
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useFetchStores } from "@/hooks/useFetchStores";
+import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
+import { useUser } from "@/contexts/UserContext";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { FILTER_TYPES } from "@/lib/variables";
 import { ShopCardLink } from "./ShopCardLink";
@@ -13,6 +15,9 @@ const StoreListWithFilterFeature = () => {
   const [selectedType, setSelectedType] = useState(FILTER_TYPES.ALL);
   const { data: stores, isLoading: isFetchingStores, error } = useFetchStores();
   const [isLoading, setIsLoading] = useState(true);
+  const { user } = useUser();
+  const { data: favoriteStores, isLoading: isFetchingFavorites } =
+    useFetchFavoriteStore(user?.userId?.toString() || "");
 
   const handleTypeClick = useCallback((type: React.SetStateAction<string>) => {
     setIsLoading(true);
@@ -32,21 +37,27 @@ const StoreListWithFilterFeature = () => {
       case FILTER_TYPES.HOT:
         return stores.filter((store) => store.is_popular);
       case FILTER_TYPES.FAVORITE:
-        return stores.filter((store) => store.is_favorite);
+        if (favoriteStores && Array.isArray(favoriteStores)) {
+          const favoriteStoreIds = favoriteStores.map((fav) => fav.store_id);
+          return stores.filter((store) =>
+            favoriteStoreIds.includes(store.store_id)
+          );
+        }
+        return [];
       default:
         return stores.filter((store) => store.type === selectedType);
     }
-  }, [selectedType, stores]);
+  }, [selectedType, stores, favoriteStores]);
 
   useEffect(() => {
-    if (!isFetchingStores) {
+    if (!isFetchingStores && !isFetchingFavorites) {
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, LOADING_DELAY);
 
       return () => clearTimeout(timer);
     }
-  }, [isFetchingStores]);
+  }, [isFetchingStores, isFetchingFavorites]);
 
   if (isLoading) {
     return (
