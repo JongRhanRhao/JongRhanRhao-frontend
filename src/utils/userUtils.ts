@@ -1,4 +1,4 @@
-import { User } from "@/contexts/UserContext";
+import { User } from "@/hooks/useUserStore";
 
 export const storeUserData = (user: User) => {
   localStorage.setItem("user", JSON.stringify(user));
