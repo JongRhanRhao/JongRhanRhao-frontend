@@ -6,12 +6,12 @@ import { useFetchStores } from "@/hooks/useFetchStores";
 import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
 import { useUser } from "@/hooks/useUserStore";
 import { FilterButton } from "@/components/shared/FilterButton";
-import { DATA_FETCHING_TIME_DELAY, FILTER_TYPES } from "@/lib/variables";
+import { DATA_FETCHING_TIME_DELAY, STORE_TYPES } from "@/lib/variables";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
 // TODO: Assign store type in DB
 
 const StoreListWithFilterFeature = () => {
-  const [selectedType, setSelectedType] = useState(FILTER_TYPES.ALL);
+  const [selectedType, setSelectedType] = useState(STORE_TYPES.ALL);
   const { data: stores, isLoading: isFetchingStores, error } = useFetchStores();
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useUser();
@@ -31,11 +31,11 @@ const StoreListWithFilterFeature = () => {
   const filteredShopCards = useMemo(() => {
     if (!stores) return [];
     switch (selectedType) {
-      case FILTER_TYPES.ALL:
+      case STORE_TYPES.ALL:
         return stores;
-      case FILTER_TYPES.HOT:
+      case STORE_TYPES.HOT:
         return stores.filter((store) => store.is_popular);
-      case FILTER_TYPES.FAVORITE:
+      case STORE_TYPES.FAVORITE:
         if (favoriteStores && Array.isArray(favoriteStores)) {
           const favoriteStoreIds = favoriteStores.map((fav) => fav.store_id);
           return stores.filter((store) =>
@@ -67,18 +67,18 @@ const StoreListWithFilterFeature = () => {
           </h2>
           <div className="mb-4 space-x-2">
             <FilterButton
-              title={FILTER_TYPES.HOT}
+              title={STORE_TYPES.HOT}
               selectedTitle={selectedType}
               onClick={handleTypeClick}
               icon={faFire}
             />
             <FilterButton
-              title={FILTER_TYPES.FAVORITE}
+              title={STORE_TYPES.FAVORITE}
               selectedTitle={selectedType}
               onClick={handleTypeClick}
               icon={faStar}
             />
-            {Object.values(FILTER_TYPES)
+            {Object.values(STORE_TYPES)
               .slice(2)
               .map((type) => (
                 <FilterButton
@@ -99,7 +99,7 @@ const StoreListWithFilterFeature = () => {
 
   if (error) {
     return (
-      <div className="text-2xl flex justify-center items-center h-full flex-col">
+      <div className="text-2xl flex justify-center items-center h-full flex-col mt-14">
         Something went wrong, please try again later.
         <BackHomeButton className="mt-5 text-primary" />
       </div>
@@ -111,18 +111,18 @@ const StoreListWithFilterFeature = () => {
       <h2 className="text-3xl font-bold text-text mb-5">Discover & Booking</h2>
       <div className="mb-4 space-x-2">
         <FilterButton
-          title={FILTER_TYPES.HOT}
+          title={STORE_TYPES.HOT}
           selectedTitle={selectedType}
           onClick={handleTypeClick}
           icon={faFire}
         />
         <FilterButton
-          title={FILTER_TYPES.FAVORITE}
+          title={STORE_TYPES.FAVORITE}
           selectedTitle={selectedType}
           onClick={handleTypeClick}
           icon={faStar}
         />
-        {Object.values(FILTER_TYPES)
+        {Object.values(STORE_TYPES)
           .slice(2)
           .map((type) => (
             <FilterButton
