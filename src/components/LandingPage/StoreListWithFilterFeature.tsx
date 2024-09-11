@@ -54,7 +54,7 @@ const StoreListWithFilterFeature = () => {
 
   if (isFetchingStores || isFetchingFavorites || isFakeLoading) {
     return (
-      <div className="p-4">
+      <div>
         <h2 className="text-3xl font-bold text-text mb-5">
           Discover & Booking
         </h2>
