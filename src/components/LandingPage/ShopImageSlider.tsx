@@ -39,7 +39,6 @@ const ImageSlider: React.FC = () => {
             maxSeats={store.max_seats}
             currSeats={store.curr_seats}
             description={store.description || ""}
-            isFavorite={store.is_favorite}
           />
         </Link>
       ))}
