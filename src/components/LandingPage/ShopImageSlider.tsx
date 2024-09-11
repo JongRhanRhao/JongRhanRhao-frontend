@@ -6,7 +6,7 @@ import ShopCard from "@/components/LandingPage/ShopCard";
 import { useFetchStores } from "@/hooks/useFetchStores";
 
 const ImageSlider: React.FC = () => {
-  const { data: stores, isLoading, error } = useFetchStores();
+  const { data: stores } = useFetchStores();
   const settings = {
     infinite: true,
     slidesToShow: 1,
@@ -17,21 +17,13 @@ const ImageSlider: React.FC = () => {
     cssEase: "linear",
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-full">
-        <span className="loading loading-ring loading-lg text-primary"></span>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-2xl flex justify-center items-center h-full flex-col">
-        Something went wrong, please try again later.
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-full">
+  //       <span className="loading loading-ring loading-lg text-primary"></span>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="p-2">
