@@ -101,7 +101,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   );
 
   return (
-    <div className="card bg-gray-900 rounded overflow-hidden shadow-lg w-auto m-1 flex-shrink-0 relative cursor-pointer">
+    <div className="relative flex-shrink-0 w-auto m-1 overflow-hidden bg-gray-900 rounded shadow-lg cursor-pointer card">
       <div className="relative">
         <img
           src={
@@ -116,7 +116,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
         >
           {reservationStatus}
         </div>
-        <div className="absolute top-2 right-2 text-white text-xl">
+        <div className="absolute text-xl text-white top-2 right-2">
           <button onClick={handleFavoriteClick}>
             <FontAwesomeIcon
               className={`${isFavorite ? "text-yellow-400" : "text-white"}`}
@@ -124,7 +124,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
             />
           </button>
         </div>
-        <div className="absolute bottom-2 left-2 text-white text-xs font-bold px-2 py-1 rounded">
+        <div className="absolute px-2 py-1 text-xs font-bold text-white rounded bottom-2 left-2">
           <div className="flex items-center">
             {[...Array(safeRating)].map((_, i) => (
               <FontAwesomeIcon
