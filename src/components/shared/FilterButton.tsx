@@ -16,7 +16,7 @@ export const FilterButton = React.memo(
     <button
       className={`btn btn-sm ${
         selectedTitle === title
-          ? "bg-primary text-text"
+          ? "bg-primary text-secondary"
           : "bg-transparent text-text hover:bg-primary/10"
       } ${className}`}
       onClick={() => onClick(title)}
@@ -24,9 +24,7 @@ export const FilterButton = React.memo(
       {icon && (
         <FontAwesomeIcon
           icon={icon}
-          className={`${
-            icon === faFire ? "text-error" : "text-yellow-400"
-          } mr-2`}
+          className={`${icon === faFire ? "text-error" : "text-yellow-400"}`}
         />
       )}
       {title}
