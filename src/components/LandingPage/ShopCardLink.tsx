@@ -15,7 +15,6 @@ export const ShopCardLink = React.memo(({ store }: { store: Store }) => (
       rating={store.rating}
       maxSeats={store.max_seats}
       currSeats={store.curr_seats}
-      isFavorite={store.is_favorite}
       description={store.description || ""}
     />
   </Link>
