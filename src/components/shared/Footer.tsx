@@ -10,7 +10,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
     <footer
       className={`flex flex-col space-y-10 justify-center m-10 ${className}`}
     >
-      <nav className="flex justify-center flex-wrap gap-6 text-gray-500 font-medium"></nav>
+      <nav className="flex flex-wrap justify-center gap-6 font-medium text-gray-500"></nav>
       <div className="flex justify-center space-x-5">
         <a
           href="https://facebook.com"
@@ -37,7 +37,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           <img src="https://img.icons8.com/fluent/30/000000/twitter.png" />
         </a>
       </div>
-      <div className="justify-center flex space-x-5">
+      <div className="flex justify-center space-x-5">
         <a className="hover:text-gray-900" href="#">
           Privacy Policy
         </a>
@@ -48,7 +48,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           Contact Us
         </a>
       </div>
-      <p className="text-center text-gray-700 font-medium">
+      <p className="font-medium text-center text-gray-700">
         © 2024 Jongrhanrhao Ltd. All rights reservered.
       </p>
     </footer>

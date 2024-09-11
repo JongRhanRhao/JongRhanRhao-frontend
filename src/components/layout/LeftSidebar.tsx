@@ -73,9 +73,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
         } bg-bg text-white p-4 hidden md:flex shadow-lg` + className
       }
     >
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex items-center justify-between mb-8">
         {leftSidebarExpanded && (
-          <h1 className="font-bold text-2xl text-primary">JongRhanRhao</h1>
+          <h1 className="text-2xl font-bold text-primary">JongRhanRhao</h1>
         )}
         <button
           onClick={toggleLeftSidebar}
@@ -98,7 +98,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
                   className={`w-full btn btn-ghost justify-start ${
                     isActive
                       ? "bg-primary text-secondary"
-                      : "hover:bg-primary/20"
+                      : "hover:bg-secondary"
                   } ${
                     leftSidebarExpanded ? "px-4" : "px-0"
                   } py-3 rounded-lg transition-colors duration-200`}

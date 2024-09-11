@@ -19,20 +19,20 @@ const CommentSection = () => {
       <form className="max-w-2xl rounded-lg">
         <textarea
           placeholder="Comment..."
-          className="w-full text-black rounded-lg leading-normal resize-none py-2 px-3 font-medium placeholder-gray-600 focus:outline-none focus:bg-white bg-accent"
+          className="w-full px-3 py-2 font-medium leading-normal text-black placeholder-gray-600 rounded-lg resize-none focus:outline-none focus:bg-white"
           defaultValue={""}
         />
         <div className="flex justify-end">
           <button
             type="submit"
-            className="btn rounded-md text-white bg-primary mt-1"
+            className="mt-1 btn rounded-xl text-secondary bg-primary hover:bg-secondary hover:text-primary"
             defaultValue="Comment"
           >
             Comment
           </button>
         </div>
       </form>
-      <div className="text-secondary text-xl font-medium">Comments</div>
+      <div className="text-xl font-medium text-text">Comments</div>
       {shop.comment && shop.comment.length > 0 ? (
         shop.comment.map((comment, index) => (
           <CommentCard

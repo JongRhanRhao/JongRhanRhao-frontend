@@ -1,12 +1,12 @@
 const UpgradeToVIPCard = () => {
   return (
     <div className="flex">
-      <div className="p-4 bg-primary shadow-lg rounded-xl w-10/12 h-32 overflow-hidden max-w-8xl bg-pattern">
-        <header className="text-secondary font-bold text-md text-left font-sans">
+      <div className="w-10/12 h-32 p-4 overflow-hidden shadow-lg bg-primary rounded-xl max-w-8xl bg-pattern">
+        <header className="font-sans font-bold text-left text-secondary text-md">
           Upgrade your account to VIP
         </header>
         <div className="flex justify-end mt-4">
-          <button className="bg-text text-bg text-sm font-bold px-2 py-1 rounded-md font-sans hover:text-slate-800">
+          <button className="px-2 py-1 font-sans text-sm font-bold rounded-md bg-text text-bg hover:text-slate-800">
             Upgrade
           </button>
         </div>

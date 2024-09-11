@@ -39,7 +39,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-bg">
+      <div className="flex items-center justify-center h-screen bg-bg">
         <span className="loading loading-ring loading-lg text-primary"></span>
       </div>
     );
@@ -47,7 +47,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
 
   if (error || !stores) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex items-center justify-center h-screen">
         <div className="text-2xl text-error">
           Error loading shop data. Please try again later.
         </div>
@@ -63,17 +63,17 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
     <div className="flex justify-center h-screen">
       <div className="flex w-full h-full">
         <LeftSidebar onItemClick={onItemClick} />
-        <div className="flex-1 flex flex-col overflow-y-auto">
+        <div className="flex flex-col flex-1 overflow-y-auto">
           <main className="flex-1 p-6 bg-bg">
             <LinkBack />
-            <div className="flex flex-col md:flex-row justify-center">
+            <div className="flex flex-col justify-center md:flex-row">
               <img
                 src={stores.image_url as string}
-                className="rounded-xl h-80 w-full md:w-1/2 object-cover"
+                className="object-cover w-full rounded-xl h-80 md:w-1/2"
                 alt="shopImage"
               />
-              <div className="rounded-xl p-5 h-auto w-full md:ml-8 mt-5 md:mt-0 shadow-md">
-                <div className="font-bold text-text uppercase text-4xl mb-2">
+              <div className="w-full h-auto p-5 mt-5 shadow-md rounded-xl md:ml-8 md:mt-0">
+                <div className="mb-2 text-4xl font-bold uppercase text-text">
                   {stores.shop_name}
                 </div>
                 <div className="badge badge-outline text-primary">
@@ -92,23 +92,23 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                     ({stores.rating})
                   </span>
                 </div>
-                <p className="text-lg text-text font-thai my-4">
+                <p className="my-4 text-lg text-text font-thai">
                   {stores.description}
                 </p>
-                <div className="font-medium text-lg">
-                  <div className="mb-3">
+                <div className="text-lg font-medium">
+                  <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faClock} />
                     <span className="ml-2">
                       Opening Hours: {stores.open_timebooking}
                     </span>
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faCalendarTimes} />
                     <span className="ml-2">
                       Reservation Expiry: {stores.cancel_reserve}
                     </span>
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faInfoCircle} />
                     <span className="ml-2">
                       Status:{" "}
@@ -117,7 +117,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                       </span>
                     </span>
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faLocationDot} />
                     <span className="ml-2">Address: {stores.address}</span>
                   </div>

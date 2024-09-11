@@ -18,7 +18,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
 
   if (!store) {
     return (
-      <p className="text-text text-lg">
+      <p className="text-lg text-text">
         Please select a store to view reservations.
       </p>
     );
@@ -27,22 +27,22 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   if (isLoading) {
     return (
       <div className="container mx-auto space-x-2 space-y-4">
-        <table className="w-full table-fixed table">
+        <table className="table w-full table-fixed">
           <thead>
             <tr className="bg-secondary">
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 id reservation
               </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 customer id
               </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 date & time
               </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 Phone
               </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 Status
               </th>
             </tr>
@@ -58,8 +58,8 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   if (error) {
     return (
       <div className="container mx-auto space-x-2 space-y-4">
-        <div className="text-text text-xl font-bold">Reservations</div>
-        <div className="text-text text-lg">
+        <div className="text-xl font-bold text-text">Reservations</div>
+        <div className="text-lg text-text">
           There was an error fetching the data. Please try again later.
         </div>
       </div>
@@ -68,44 +68,44 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
 
   return (
     <div className="container mx-auto">
-      <h2 className="text-text text-xl font-bold mb-4">
+      <h2 className="mb-4 text-xl font-bold text-text">
         Reservations for {store.shop_name}
       </h2>
-      <table className="w-full table-fixed table">
+      <table className="table w-full table-fixed">
         <thead>
           <tr className="bg-secondary">
-            <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               id reservation
             </th>
-            <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               customer name
             </th>
-            <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               date & time
             </th>
-            <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               Phone
             </th>
-            <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               Status
             </th>
-            <th className="w-1/4 text-left text-text font-bold uppercase"></th>
+            <th className="w-1/4 font-bold text-left uppercase text-text"></th>
           </tr>
         </thead>
         <tbody className="bg-secondary text-text">
           {Array.isArray(data) && data.length > 0 ? (
             data.map((data) => (
               <tr key={data.reservation_id}>
-                <td className="py-4 px-6 border-b border-neutral-500">
+                <td className="px-6 py-4 border-b border-neutral-500">
                   {data.reservation_id}
                 </td>
-                <td className="py-4 px-6 truncate border-b border-neutral-500">
+                <td className="px-6 py-4 truncate border-b border-neutral-500">
                   {data.user_name}
                 </td>
-                <td className="py-4 px-6 border-b border-neutral-500">
+                <td className="px-6 py-4 border-b border-neutral-500">
                   {data.reservation_date}, {data.reservation_time}
                 </td>
-                <td className="py-4 px-6 border-b border-neutral-500">
+                <td className="px-6 py-4 border-b border-neutral-500">
                   <a className="link" href={`tel:${data.phone_number}`}>
                     {data.phone_number}
                     <FontAwesomeIcon
@@ -114,15 +114,15 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                     />
                   </a>
                 </td>
-                <td className="py-4 px-6 border-b border-neutral-500">
-                  <span className="bg-green-500 text-white py-1 px-2 rounded-full text-sm">
+                <td className="px-6 py-4 border-b border-neutral-500">
+                  <span className="px-2 py-1 text-sm text-white bg-green-500 rounded-full">
                     {data.reservation_status}
                   </span>
                 </td>
                 <td className="border-b border-neutral-500">
                   <a
                     href={`/shop/${data.store_id}`}
-                    className="text-primary underline"
+                    className="underline text-primary"
                   >
                     View Shop
                   </a>
@@ -131,7 +131,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
             ))
           ) : (
             <tr>
-              <td colSpan={6} className="py-4 px-6 text-center">
+              <td colSpan={6} className="px-6 py-4 text-center">
                 No reservations found for this store.
               </td>
             </tr>

@@ -12,7 +12,7 @@ const Reservations = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="text-xl text-text flex justify-center items-center mt-20 flex-col">
+      <div className="flex flex-col items-center justify-center mt-20 text-xl text-text">
         You need to log in to view this page.
         <BackHomeButton className="mt-5 text-primary" />
       </div>
@@ -22,36 +22,36 @@ const Reservations = () => {
   if (isLoading) {
     return (
       <div className="container mx-auto space-x-2 space-y-4">
-        <div className="text-text text-xl font-bold">Reservations</div>
+        <div className="text-xl font-bold text-text">Reservations</div>
         <table className="w-full table-fixed">
           <thead>
             <tr className="bg-secondary">
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 id reservation
               </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 shop name
               </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 date & time
               </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 Status
               </th>
             </tr>
           </thead>
           <tbody className="bg-bg">
             <tr>
-              <td className="py-4 px-6 ">
+              <td className="px-6 py-4 ">
                 <span className="loading loading-ring loading-lg text-primary"></span>
               </td>
-              <td className="py-4 px-6 ">
+              <td className="px-6 py-4 ">
                 <span className="loading loading-ring loading-lg text-primary"></span>
               </td>
-              <td className="py-4 px-6 ">
+              <td className="px-6 py-4 ">
                 <span className="loading loading-ring loading-lg text-primary"></span>
               </td>
-              <td className="py-4 px-6 ">
+              <td className="px-6 py-4 ">
                 <span className="loading loading-ring loading-lg text-primary"></span>
               </td>
             </tr>
@@ -63,7 +63,7 @@ const Reservations = () => {
 
   if (error) {
     return (
-      <div className="text-2xl text-text flex justify-center items-center h-full flex-col mt-14">
+      <div className="flex flex-col items-center justify-center h-full text-2xl text-text mt-14">
         Something went wrong, please try again later.
         <BackHomeButton className="mt-5 text-primary" />
       </div>
@@ -72,47 +72,47 @@ const Reservations = () => {
   // TODO: Add refresh button, control button
   return (
     <div className="container mx-auto">
-      <div className="text-text text-xl font-bold mb-4">Reservations</div>
-      <table className="w-full table-fixed table">
+      <div className="mb-4 text-xl font-bold text-text">Reservations</div>
+      <table className="table w-full table-fixed">
         <thead>
           <tr className="bg-secondary">
-            <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               id reservation
             </th>
-            <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               shop name
             </th>
-            <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               date & time
             </th>
-            <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               Status
             </th>
-            <th className="w-1/4 text-left text-text font-bold uppercase"></th>
+            <th className="w-1/4 font-bold text-left uppercase text-text"></th>
           </tr>
         </thead>
         <tbody className="bg-secondary text-text">
           {Array.isArray(data) &&
             data.map((data) => (
               <tr key={data.reservation_id}>
-                <td className="py-4 px-6 border-b border-neutral-500">
+                <td className="px-6 py-4 border-b border-neutral-500">
                   {data.reservation_id}
                 </td>
-                <td className="py-4 px-6 truncate border-b border-neutral-500">
+                <td className="px-6 py-4 truncate border-b border-neutral-500">
                   {data.shop_name}
                 </td>
-                <td className="py-4 px-6 border-b border-neutral-500">
+                <td className="px-6 py-4 border-b border-neutral-500">
                   {data.reservation_date}, {data.reservation_time}
                 </td>
-                <td className="py-4 px-6 border-b border-neutral-500">
-                  <span className="bg-green-500 text-white py-1 px-2 rounded-full text-sm">
+                <td className="px-6 py-4 border-b border-neutral-500">
+                  <span className="px-2 py-1 text-sm text-white bg-green-500 rounded-full">
                     {data.reservation_status}
                   </span>
                 </td>
                 <td className="border-b border-neutral-500">
                   <a
                     href={`/shop/${data.shop_id}`}
-                    className="text-primary underline"
+                    className="underline text-primary"
                   >
                     View Shop
                   </a>

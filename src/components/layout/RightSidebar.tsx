@@ -36,7 +36,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
     >
       <button
         onClick={toggleRightSidebar}
-        className="btn btn-circle btn-sm bg-primary text-white hover:bg-primary-focus self-end mb-4"
+        className="self-end mb-4 text-white btn btn-circle btn-sm bg-primary hover:bg-primary-focus"
       >
         <FontAwesomeIcon
           icon={rightSidebarExpanded ? faX : faUser}
@@ -50,8 +50,8 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
             <LoginButton />
           ) : (
             <>
-              <div className="bg-bg2/50 rounded-lg p-4 shadow-inner container">
-                <h2 className="text-xl font-bold mb-2">{user?.userName}</h2>
+              <div className="container p-4 rounded-lg shadow-inner bg-bg2/50">
+                <h2 className="mb-2 text-xl font-bold">{user?.userName}</h2>
                 <div className="text-sm opacity-75">Reservation Status</div>
                 <div className="font-semibold">
                   Status:{" "}
@@ -60,7 +60,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
               </div>
 
               <button
-                className="btn btn-outline text-text w-full"
+                className="w-full btn btn-outline text-text"
                 onClick={() => {
                   /* Handle reservation check */
                 }}
@@ -68,7 +68,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                 Check Reservation
               </button>
 
-              <button className="btn btn-outline w-full text-text">
+              <button className="w-full btn btn-outline text-text">
                 <FontAwesomeIcon icon={faTicket} className="mr-2" />
                 Have a coupon code?
                 <FontAwesomeIcon icon={faAngleRight} className="ml-2" />
@@ -76,7 +76,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
 
               <button
                 onClick={handleLogout}
-                className="btn btn-outline btn-error w-full mt-auto"
+                className="w-full mt-auto btn btn-outline btn-error"
               >
                 <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
                 Logout

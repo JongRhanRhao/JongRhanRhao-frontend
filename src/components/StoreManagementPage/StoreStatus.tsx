@@ -40,8 +40,8 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         staffId: store.staff_id,
         address: store.address,
         status: status || store.status,
-        maxSeats: store.max_seats,
-        currSeats: store.curr_seats,
+        maxSeats: maxSeat || store.max_seats,
+        currSeats: currSeat || store.curr_seats,
         isPopular: store.is_popular,
         type: storeType || store.type,
         description: description || store.description,
@@ -69,7 +69,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     : store.open_timebooking;
 
   return (
-    <div className="text-text flex flex-col container">
+    <div className="container flex flex-col text-text">
       <div className="space-y-3">
         <div className="text-base">Store Status:</div>
         {/* <Select
@@ -86,15 +86,15 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             title={option.label}
             selectedTitle={status}
             onClick={() => setStatus(option.value)}
-            className="flex-grow sm:flex-grow-0 border border-primary ml-1"
+            className="flex-grow ml-1 border sm:flex-grow-0 border-primary"
           />
         ))}
-        <div className="collapse collapse-arrow bg-secondary w-full">
+        <div className="w-full collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
           <div className="collapse-title">Description:</div>
           <div className="collapse-content">
             <textarea
-              className="input bg-secondary textarea textarea-bordered h-auto w-full"
+              className="w-full h-auto input bg-secondary textarea textarea-bordered"
               value={description || ""}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -112,7 +112,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               onChange={(e) => setCurrSeat(parseInt(e.target.value))}
               max={maxSeat}
             />
-            <span className="text-center m-2">/</span>
+            <span className="m-2 text-center">/</span>
             <input
               type="number"
               value={maxSeat}
@@ -135,7 +135,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               className="p-1 input bg-secondary"
               required
             />
-            <span className="text-center m-2">to</span>
+            <span className="m-2 text-center">to</span>
             <input
               type="time"
               id="appt"
@@ -149,19 +149,19 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
           </div>
         </div>
       </div>
-      <div className="text-base mt-1">Store Type:</div>
+      <div className="mt-1 text-base">Store Type:</div>
       <Select
         options={STORE_TYPE_FOR_SELECTOR}
-        className="text-secondary w-fit mt-1"
+        className="mt-1 text-secondary w-fit"
         value={STORE_TYPE_FOR_SELECTOR.find(
-          (option) => option.value === store.type
+          (option) => option.value === storeType
         )}
         onChange={(selectedOption) =>
           setStoreType(selectedOption?.value?.toString() || "")
         }
       />
       <button
-        className="btn btn-sm bg-primary text-secondary uppercase sm:w-fit mt-4"
+        className="mt-4 uppercase btn btn-sm bg-primary text-secondary sm:w-fit"
         onClick={updateStoreStatus}
       >
         Update

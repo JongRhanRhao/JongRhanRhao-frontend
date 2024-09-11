@@ -56,7 +56,7 @@ const StoreListWithFilterFeature = () => {
   if (isFetchingStores || isFetchingFavorites || isFakeLoading) {
     return (
       <div>
-        <h2 className="text-3xl font-bold text-text mb-5">
+        <h2 className="mb-5 text-3xl font-bold text-text">
           Discover & Booking
         </h2>
         <div className="mb-4 space-x-2">
@@ -92,7 +92,7 @@ const StoreListWithFilterFeature = () => {
 
   if (error) {
     return (
-      <div className="text-2xl flex justify-center items-center h-full flex-col mt-14">
+      <div className="flex flex-col items-center justify-center h-full text-2xl mt-14">
         Something went wrong, please try again later.
         <BackHomeButton className="mt-5 text-primary" />
       </div>
@@ -101,7 +101,7 @@ const StoreListWithFilterFeature = () => {
 
   return (
     <div className="container">
-      <h2 className="text-3xl font-bold text-text mb-5">Discover & Booking</h2>
+      <h2 className="mb-5 text-3xl font-bold text-text">Discover & Booking</h2>
       <div className="mb-4 space-x-2">
         <FilterButton
           title={STORE_TYPES.HOT}
@@ -126,7 +126,7 @@ const StoreListWithFilterFeature = () => {
             />
           ))}
       </div>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {filteredShopCards.map((store) => (
           <ShopCardLink key={store.store_id} store={store} />
         ))}

@@ -51,7 +51,7 @@ const BookingButton = () => {
   return (
     <>
       <button
-        className="btn w-48 bg-primary text-secondary font-bold py-2 px-4 rounded"
+        className="w-48 px-4 py-2 font-bold btn bg-primary text-secondary rounded-xl hover:bg-secondary hover:text-primary"
         onClick={() =>
           (
             document.getElementById("BookingButton") as HTMLDialogElement
@@ -65,14 +65,16 @@ const BookingButton = () => {
         className="modal modal-bottom sm:modal-middle md:modal-middle lg:modal-middle xl:modal-middle"
       >
         <div className="modal-box bg-secondary text-text">
-          <h2 className="font-bold text-xl mb-4">Book Your Reservation</h2>
+          <h2 className="mb-4 text-2xl font-bold text-primary">
+            Book Your Reservation
+          </h2>
           <div className="mb-4">
-            <label className="font-bold mr-2">Select Date:</label>
+            <label className="mr-2 font-bold">Select Date:</label>
             <DatePicker
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
               dateFormat="d MMMM yyyy"
-              className="rounded p-2 mt-1 w-full bg-bg"
+              className="w-full p-2 mt-1 rounded bg-bg"
               minDate={new Date()}
             />
           </div>
@@ -83,7 +85,7 @@ const BookingButton = () => {
               value={numberOfPeople}
               min={1}
               onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-              className="rounded p-2 w-full mt-1 bg-bg"
+              className="w-full p-2 mt-1 rounded bg-bg"
             />
           </div>
           <div className="mb-4">
@@ -93,16 +95,18 @@ const BookingButton = () => {
               value={phoneNumber}
               placeholder="081 234 5678"
               onChange={(e) => setPhoneNumber(e.target.value)}
-              className="rounded p-2 w-full mt-1 bg-bg"
+              className="w-full p-2 mt-1 rounded bg-bg"
             />
           </div>
-          <p className="text-sm">Store will call you to confirm the booking.</p>
+          <p className="text-sm">
+            Staff will call you to confirm your booking.
+          </p>
           <div className="modal-action">
             <form method="dialog" className="flex justify-end w-full space-x-2">
-              <button className="btn">Close</button>
+              <button className="btn text-text">Close</button>
               <button
                 onClick={handleSubmit}
-                className="btn bg-primary text-white font-bold py-2 px-4 rounded mr-2"
+                className="px-4 py-2 mr-2 font-bold rounded btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
               >
                 Book Now
               </button>

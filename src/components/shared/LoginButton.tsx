@@ -71,7 +71,7 @@ const LoginButton = () => {
   return (
     <>
       <button
-        className="btn bg-primary text-secondary w-full py-3 rounded-md"
+        className="w-full py-3 rounded-md btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
         onClick={() =>
           (document.getElementById("login") as HTMLDialogElement).showModal()
         }
@@ -80,21 +80,21 @@ const LoginButton = () => {
       </button>
 
       <dialog id="login" className="modal">
-        <div className="modal-box bg-bg rounded-lg shadow-lg p-8">
+        <div className="p-8 rounded-lg shadow-lg modal-box bg-bg">
           <form
             method="dialog"
             className="space-y-4"
             onSubmit={handleSubmit(handleAuth)}
           >
             <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
               onClick={closeModal}
             >
               ✕
             </button>
 
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-primary mb-2">
+              <h2 className="mb-2 text-2xl font-bold text-primary">
                 {isLogin ? "Login to your account" : "Create an account"}
               </h2>
               <p className="text-sm text-white">
@@ -105,15 +105,15 @@ const LoginButton = () => {
             </div>
 
             {errorMessage && (
-              <p className="text-red-600 text-center">{errorMessage}</p>
+              <p className="text-center text-red-600">{errorMessage}</p>
             )}
 
             <button
               onClick={() => handleOAuthLogin("google")}
-              className="btn bg-secondary flex items-center justify-center rounded-md w-full py-3 hover:bg-opacity-50 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="flex items-center justify-center w-full py-3 text-white rounded-md shadow-sm btn bg-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-gray-300"
             >
               <svg
-                className="h-6 w-6 mr-2"
+                className="w-6 h-6 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="-0.5 0 48 48"
                 version="1.1"
@@ -156,12 +156,12 @@ const LoginButton = () => {
 
             <button
               onClick={() => handleOAuthLogin("facebook")}
-              className="btn bg-secondary flex items-center justify-center border rounded-md w-full py-3 text-white shadow-sm hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="flex items-center justify-center w-full py-3 text-white border rounded-md shadow-sm btn bg-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-gray-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="-0.5 0 48 48"
-                className="h-6 w-6 mr-2"
+                className="w-6 h-6 mr-2"
               >
                 <linearGradient
                   id="Ld6sqrtcxMyckEl6xeDdMa_uLWV5A9vXIPu_gr1"
@@ -186,13 +186,13 @@ const LoginButton = () => {
               Continue with Facebook
             </button>
 
-            <div className="flex items-center gap-2 text-sm text-neutral-700 my-4">
-              <div className="h-px w-full bg-neutral-700"></div>OR
-              <div className="h-px w-full bg-neutral-700"></div>
+            <div className="flex items-center gap-2 my-4 text-sm text-neutral-700">
+              <div className="w-full h-px bg-neutral-700"></div>OR
+              <div className="w-full h-px bg-neutral-700"></div>
             </div>
 
             {/* email & pass login */}
-            <div className="w-full space-y-3 flex flex-col">
+            <div className="flex flex-col w-full space-y-3">
               {!isLogin && (
                 <>
                   <label className="text-text">Username</label>
@@ -260,12 +260,12 @@ const LoginButton = () => {
 
             <button
               type="submit"
-              className="btn w-full bg-primary text-secondary py-3 rounded-lg"
+              className="w-full py-3 rounded-lg btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
             >
               {isLogin ? "Login" : "Sign Up"}
             </button>
 
-            <p className="text-center text-sm text-text">
+            <p className="text-sm text-center text-text">
               {isLogin ? "New here? " : "Already have an account? "}
               <button
                 type="button"

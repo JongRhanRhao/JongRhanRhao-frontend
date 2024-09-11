@@ -51,20 +51,20 @@ const StoreManagement = () => {
   return (
     <div className="container mx-auto">
       <LinkBack />
-      <span className="text-2xl font-bold text-text mb-5">
+      <span className="mb-5 text-2xl font-bold text-text">
         Store Management
       </span>
-      <p className="text-text text-sm mt-2">
+      <p className="mt-2 text-sm text-text">
         You can control all store details from this panel.
       </p>
       <div className="flex items-center">
         <StoreSelector
           userId={user?.userId?.toString() || ""}
-          className="font-bold text-text select bg-secondary rounded"
+          className="font-bold rounded text-text select bg-secondary"
           onStoreSelect={handleStoreSelect}
         />
       </div>
-      <div className="flex flex-wrap gap-2 mb-4 mt-4">
+      <div className="flex flex-wrap gap-2 mt-4 mb-4">
         {Object.values(STORE_MANAGEMENT_MENU).map((title) => (
           <FilterButton
             key={title}

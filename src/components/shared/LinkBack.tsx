@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const LinkBack = () => {
   return (
     <Link to="/">
-      <div className="py-2 text-xl text-primary mb-4 font-bold flex items-center">
+      <div className="flex items-center py-2 mb-4 text-xl font-bold text-primary">
         <FontAwesomeIcon icon={faAngleLeft} />
         <span className="ml-2">Back</span>
       </div>

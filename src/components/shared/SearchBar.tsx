@@ -21,7 +21,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="justify-end flex">
+    <div className="flex justify-end">
       <form className="relative">
         <div className="flex items-center">
           <span className="absolute left-3">
@@ -29,7 +29,7 @@ const SearchBar = () => {
           </span>
           <input
             id="search-bar"
-            className="rounded-md p-1 pl-10 text-md font-sans"
+            className="p-1 pl-10 font-sans rounded-md text-md"
             type="text"
             placeholder="Search club name..."
             value={searchValue}
