@@ -1,11 +1,12 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
-import BackHomeButton from "@/components/shared/BackHomeButton";
+
 import { useFetchStores } from "@/hooks/useFetchStores";
-import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
 import { useUser } from "@/hooks/useUserStore";
-import { FilterButton } from "@/components/shared/FilterButton";
+import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
 import { DATA_FETCHING_TIME_DELAY, STORE_TYPES } from "@/lib/variables";
+import BackHomeButton from "@/components/shared/BackHomeButton";
+import { FilterButton } from "@/components/shared/FilterButton";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
 
 const StoreListWithFilterFeature = () => {
