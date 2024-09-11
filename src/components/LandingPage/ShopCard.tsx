@@ -16,7 +16,6 @@ export interface ShopCardProps {
   maxSeats: number;
   currSeats: number;
   description: string | null;
-  isFavorite: boolean;
 }
 
 const ShopCard: React.FC<ShopCardProps> = ({
