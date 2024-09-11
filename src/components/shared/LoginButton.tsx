@@ -71,7 +71,7 @@ const LoginButton = () => {
   return (
     <>
       <button
-        className="btn bg-primary text-white w-full py-3 rounded-md"
+        className="btn bg-primary text-secondary w-full py-3 rounded-md"
         onClick={() =>
           (document.getElementById("login") as HTMLDialogElement).showModal()
         }
@@ -80,7 +80,7 @@ const LoginButton = () => {
       </button>
 
       <dialog id="login" className="modal">
-        <div className="modal-box bg-bg rounded-lg shadow-lg p-8 border-primary/30 border-2">
+        <div className="modal-box bg-bg rounded-lg shadow-lg p-8">
           <form
             method="dialog"
             className="space-y-4"
@@ -97,7 +97,7 @@ const LoginButton = () => {
               <h2 className="text-2xl font-bold text-primary mb-2">
                 {isLogin ? "Login to your account" : "Create an account"}
               </h2>
-              <p className="text-sm text-text">
+              <p className="text-sm text-white">
                 {isLogin
                   ? "You must be logged in to continue."
                   : "Sign up to get started."}
@@ -110,7 +110,7 @@ const LoginButton = () => {
 
             <button
               onClick={() => handleOAuthLogin("google")}
-              className="btn bg-secondary flex items-center justify-center rounded-md w-full py-3 hover:bg-opacity-50 text-text shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="btn bg-secondary flex items-center justify-center rounded-md w-full py-3 hover:bg-opacity-50 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
             >
               <svg
                 className="h-6 w-6 mr-2"
@@ -156,7 +156,7 @@ const LoginButton = () => {
 
             <button
               onClick={() => handleOAuthLogin("facebook")}
-              className="btn bg-secondary flex items-center justify-center border rounded-md w-full py-3 text-text shadow-sm hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="btn bg-secondary flex items-center justify-center border rounded-md w-full py-3 text-white shadow-sm hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -186,9 +186,9 @@ const LoginButton = () => {
               Continue with Facebook
             </button>
 
-            <div className="flex items-center gap-2 text-sm my-4">
-              <div className="h-px w-full bg-text"></div>OR
-              <div className="h-px w-full bg-text"></div>
+            <div className="flex items-center gap-2 text-sm text-neutral-700 my-4">
+              <div className="h-px w-full bg-neutral-700"></div>OR
+              <div className="h-px w-full bg-neutral-700"></div>
             </div>
 
             {/* email & pass login */}
@@ -260,7 +260,7 @@ const LoginButton = () => {
 
             <button
               type="submit"
-              className="btn w-full bg-primary text-white py-3 rounded-lg"
+              className="btn w-full bg-primary text-secondary py-3 rounded-lg"
             >
               {isLogin ? "Login" : "Sign Up"}
             </button>
