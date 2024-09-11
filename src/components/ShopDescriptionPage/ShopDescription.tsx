@@ -1,9 +1,8 @@
 import { FC } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleLeft,
   faCalendarTimes,
   faClock,
   faInfoCircle,
@@ -17,13 +16,14 @@ import CommentSection from "@/components/ShopDescriptionPage/CommentSection";
 import BookingButton from "@/components/ShopDescriptionPage/BookingButton";
 import { SERVER_URL } from "@/lib/variables";
 import { Store } from "@/hooks/useFetchStores";
-import SmallScreenNavMenu from "../shared/SmallScreenNavMenu";
+import SmallScreenNavMenu from "@/components/shared/SmallScreenNavMenu";
+import LinkBack from "@/components/shared/LinkBack";
 
 interface ShopDescriptionProps {
   selectedItem: string;
   onItemClick: (item: string) => void;
 }
-
+// TODO: Show store image as carousel
 const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   const { id } = useParams<{ id: string }>();
 
@@ -39,7 +39,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen bg-bg">
         <span className="loading loading-ring loading-lg text-primary"></span>
       </div>
     );
@@ -55,7 +55,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
     );
   }
 
-  const isAvailable = stores.status === "EVERYDAY";
+  const isAvailable = stores.status === "Available";
   const statusClass = isAvailable ? "text-success" : "text-error";
   const safeRating = Math.max(0, Math.min(5, Math.floor(stores.rating)));
 
@@ -65,12 +65,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
         <LeftSidebar onItemClick={onItemClick} />
         <div className="flex-1 flex flex-col overflow-y-auto">
           <main className="flex-1 p-6 bg-bg">
-            <Link to="/">
-              <div className="py-2 text-xl text-primary mb-4 font-bold flex items-center">
-                <FontAwesomeIcon icon={faAngleLeft} />
-                <span className="ml-2">Back</span>
-              </div>
-            </Link>
+            <LinkBack />
             <div className="flex flex-col md:flex-row justify-center">
               <img
                 src={stores.image_url as string}
@@ -80,6 +75,10 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
               <div className="rounded-xl p-5 h-auto w-full md:ml-8 mt-5 md:mt-0 shadow-md">
                 <div className="font-bold text-text uppercase text-4xl mb-2">
                   {stores.shop_name}
+                </div>
+                <div className="badge badge-outline text-primary">
+                  {" "}
+                  {stores.type}
                 </div>
                 <div className="mt-1">
                   {[...Array(safeRating)].map((_, i) => (
@@ -93,7 +92,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                     ({stores.rating})
                   </span>
                 </div>
-                <p className="text-lg text-text font-light my-4">
+                <p className="text-lg text-text font-thai my-4">
                   {stores.description}
                 </p>
                 <div className="font-medium text-lg">
@@ -114,7 +113,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                     <span className="ml-2">
                       Status:{" "}
                       <span className={`${statusClass} font-semibold`}>
-                        {isAvailable ? "Available" : "Unavailable"}
+                        {stores.status}
                       </span>
                     </span>
                   </div>
