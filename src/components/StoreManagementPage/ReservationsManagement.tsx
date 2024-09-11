@@ -1,5 +1,7 @@
 import { useFetchReservations } from "@/hooks/useFetchReservations";
 import { Store } from "@/hooks/useFetchStores";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 
 const ReservationsManagement = ({ store }: { store: Store | null }) => {
@@ -104,7 +106,13 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                   {data.reservation_date}, {data.reservation_time}
                 </td>
                 <td className="py-4 px-6 border-b border-neutral-500">
-                  {data.phone_number}
+                  <a className="link" href={`tel:${data.phone_number}`}>
+                    {data.phone_number}
+                    <FontAwesomeIcon
+                      icon={faPhone}
+                      className="ml-2 text-primary"
+                    />
+                  </a>
                 </td>
                 <td className="py-4 px-6 border-b border-neutral-500">
                   <span className="bg-green-500 text-white py-1 px-2 rounded-full text-sm">
