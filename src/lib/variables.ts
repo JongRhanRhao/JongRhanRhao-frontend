@@ -1,13 +1,5 @@
 import { z } from "zod";
 
-export type FormData = {
-  user_name: string;
-  email: string;
-  password: string;
-  phone_number: string;
-  role: string;
-};
-
 export const UserSchema = z.object({
   email: z.string().email({ message: "* Invalid email address" }),
   password: z
@@ -18,27 +10,17 @@ export const UserSchema = z.object({
 });
 
 export const SERVER_URL: string = "http://localhost:3000";
+export const DATA_FETCHING_TIME_DELAY: number = 1000;
 
 export const GLOBAL_URL_ROUTES = {
   landingPage: "/",
   reserveStatus: "/reservations",
-  storeManagement: "/management",
+  storeManagement: "/store-management",
   setting: "/settings",
   notFound: "*",
 };
 
-export type Reservations = {
-  shop_name: string;
-  reservation_id: string;
-  shop_id: string;
-  customerId: string;
-  reservation_date: string;
-  reservation_time: string;
-  reservationStatus: string;
-  reservation_status: string;
-};
-
-export const FILTER_TYPES = {
+export const STORE_TYPES = {
   HOT: "Hot",
   FAVORITE: "Favorite",
   ALL: "All",
@@ -52,23 +34,62 @@ export const FILTER_TYPES = {
   CLUB: "Club",
 };
 
+export const STORE_TYPE_FOR_SELECTOR = [
+  {
+    value: STORE_TYPES.ALL,
+    label: "All",
+  },
+  {
+    value: STORE_TYPES.BAR,
+    label: "Bar",
+  },
+  {
+    value: STORE_TYPES.JAZZ,
+    label: "Jazz",
+  },
+  {
+    value: STORE_TYPES.COCKTAIL,
+    label: "Cocktail",
+  },
+  {
+    value: STORE_TYPES.PUB,
+    label: "Pub",
+  },
+  {
+    value: STORE_TYPES.CHILL,
+    label: "Chill",
+  },
+  {
+    value: STORE_TYPES.NINETIES,
+    label: "90s",
+  },
+  {
+    value: STORE_TYPES.DANCE,
+    label: "Dance",
+  },
+  {
+    value: STORE_TYPES.CLUB,
+    label: "Club",
+  },
+];
+
 export const STORE_STATUS = [
   {
     value: "Available",
     label: "Available",
   },
   {
-    value: "Closed",
-    label: "Closed",
-  },
-  {
     value: "Busy",
     label: "Busy",
+  },
+  {
+    value: "Closed",
+    label: "Closed",
   },
 ];
 
 export const STORE_MANAGEMENT_MENU = {
-  RESERVATIONS: "RESERVATIONS",
+  RESERVATIONS: "Reservations",
   STORE: "Store Management",
   STAFF: "Staff Management",
 };
