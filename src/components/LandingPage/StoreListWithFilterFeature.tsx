@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
-
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useFetchStores } from "@/hooks/useFetchStores";
 import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
@@ -8,28 +7,23 @@ import { useUser } from "@/hooks/useUserStore";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { DATA_FETCHING_TIME_DELAY, STORE_TYPES } from "@/lib/variables";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
-// TODO: Assign store type in DB
 
 const StoreListWithFilterFeature = () => {
   const [selectedType, setSelectedType] = useState(STORE_TYPES.ALL);
+  const [isFakeLoading, setIsFakeLoading] = useState(true);
   const { data: stores, isLoading: isFetchingStores, error } = useFetchStores();
-  const [isLoading, setIsLoading] = useState(true);
   const { user } = useUser();
   const { data: favoriteStores, isLoading: isFetchingFavorites } =
     useFetchFavoriteStore(user?.userId?.toString() || "");
 
   const handleTypeClick = useCallback((type: React.SetStateAction<string>) => {
-    setIsLoading(true);
     setSelectedType(type);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, DATA_FETCHING_TIME_DELAY);
-
-    return () => clearTimeout(timer);
+    setIsFakeLoading(true);
   }, []);
 
   const filteredShopCards = useMemo(() => {
     if (!stores) return [];
+
     switch (selectedType) {
       case STORE_TYPES.ALL:
         return stores;
@@ -51,49 +45,47 @@ const StoreListWithFilterFeature = () => {
   useEffect(() => {
     if (!isFetchingStores && !isFetchingFavorites) {
       const timer = setTimeout(() => {
-        setIsLoading(false);
+        setIsFakeLoading(false);
       }, DATA_FETCHING_TIME_DELAY);
 
       return () => clearTimeout(timer);
     }
-  }, [isFetchingStores, isFetchingFavorites]);
+  }, [isFetchingStores, isFetchingFavorites, selectedType]);
 
-  if (isLoading) {
+  if (isFetchingStores || isFetchingFavorites || isFakeLoading) {
     return (
-      <>
-        <div className="p-4">
-          <h2 className="text-3xl font-bold text-text mb-5">
-            Discover & Booking
-          </h2>
-          <div className="mb-4 space-x-2">
-            <FilterButton
-              title={STORE_TYPES.HOT}
-              selectedTitle={selectedType}
-              onClick={handleTypeClick}
-              icon={faFire}
-            />
-            <FilterButton
-              title={STORE_TYPES.FAVORITE}
-              selectedTitle={selectedType}
-              onClick={handleTypeClick}
-              icon={faStar}
-            />
-            {Object.values(STORE_TYPES)
-              .slice(2)
-              .map((type) => (
-                <FilterButton
-                  key={type}
-                  title={type}
-                  selectedTitle={selectedType}
-                  onClick={handleTypeClick}
-                />
-              ))}
-          </div>
-          <div className="flex justify-center mt-8">
-            <span className="loading loading-ring loading-lg text-primary"></span>
-          </div>
+      <div className="p-4">
+        <h2 className="text-3xl font-bold text-text mb-5">
+          Discover & Booking
+        </h2>
+        <div className="mb-4 space-x-2">
+          <FilterButton
+            title={STORE_TYPES.HOT}
+            selectedTitle={selectedType}
+            onClick={handleTypeClick}
+            icon={faFire}
+          />
+          <FilterButton
+            title={STORE_TYPES.FAVORITE}
+            selectedTitle={selectedType}
+            onClick={handleTypeClick}
+            icon={faStar}
+          />
+          {Object.values(STORE_TYPES)
+            .slice(2)
+            .map((type) => (
+              <FilterButton
+                key={type}
+                title={type}
+                selectedTitle={selectedType}
+                onClick={handleTypeClick}
+              />
+            ))}
         </div>
-      </>
+        <div className="flex justify-center mt-8">
+          <span className="loading loading-ring loading-lg text-primary"></span>
+        </div>
+      </div>
     );
   }
 
