@@ -14,5 +14,6 @@ export const useFetchFavoriteStore = (customerId: string) => {
         (res) => res.json()
       ),
     queryKey: ["favorites", customerId],
+    refetchOnWindowFocus: true,
   });
 };
