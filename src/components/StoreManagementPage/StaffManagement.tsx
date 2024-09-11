@@ -1,6 +1,6 @@
-import React from "react";
+import { Store } from "@/hooks/useFetchStores";
 
-const StaffManagement = () => {
+const StaffManagement = ({ store }: { store: Store | null }) => {
   return <div>StaffManagement</div>;
 };
 
