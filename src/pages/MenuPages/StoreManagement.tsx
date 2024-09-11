@@ -51,8 +51,10 @@ const StoreManagement = () => {
   return (
     <div className="container mx-auto">
       <LinkBack />
-      <span className="text-xl font-bold text-text mb-5">Store Management</span>
-      <p className="text-text">
+      <span className="text-2xl font-bold text-text mb-5">
+        Store Management
+      </span>
+      <p className="text-text text-sm mt-2">
         You can control all store details from this panel.
       </p>
       <div className="flex items-center">
