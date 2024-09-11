@@ -47,11 +47,11 @@ const BookingButton = () => {
       alert("There was an error making your booking. Please try again.");
     }
   };
-
+  // TODO: phone number feild validation
   return (
     <>
       <button
-        className="btn w-48 bg-primary text-white font-bold py-2 px-4 rounded"
+        className="btn w-48 bg-primary text-secondary font-bold py-2 px-4 rounded"
         onClick={() =>
           (
             document.getElementById("BookingButton") as HTMLDialogElement
