@@ -30,7 +30,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
 
   return (
     <div
-      className={`flex flex-col transition-all duration-300 ${
+      className={`flex flex-col transition-all duration-300 container ${
         rightSidebarExpanded ? "w-64" : "w-16"
       } bg-bg text-white p-4 shadow-lg ${className}`}
     >
@@ -38,7 +38,10 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
         onClick={toggleRightSidebar}
         className="btn btn-circle btn-sm bg-primary text-white hover:bg-primary-focus self-end mb-4"
       >
-        <FontAwesomeIcon icon={rightSidebarExpanded ? faX : faUser} />
+        <FontAwesomeIcon
+          icon={rightSidebarExpanded ? faX : faUser}
+          className="text-secondary"
+        />
       </button>
 
       {rightSidebarExpanded && (
@@ -47,7 +50,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
             <LoginButton />
           ) : (
             <>
-              <div className="bg-bg2/50 rounded-lg p-4 shadow-inner">
+              <div className="bg-bg2/50 rounded-lg p-4 shadow-inner container">
                 <h2 className="text-xl font-bold mb-2">{user?.userName}</h2>
                 <div className="text-sm opacity-75">Reservation Status</div>
                 <div className="font-semibold">
@@ -57,7 +60,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
               </div>
 
               <button
-                className="btn btn-primary w-full"
+                className="btn btn-outline text-text w-full"
                 onClick={() => {
                   /* Handle reservation check */
                 }}
@@ -65,7 +68,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                 Check Reservation
               </button>
 
-              <button className="btn btn-outline btn-primary w-full">
+              <button className="btn btn-outline w-full text-text">
                 <FontAwesomeIcon icon={faTicket} className="mr-2" />
                 Have a coupon code?
                 <FontAwesomeIcon icon={faAngleRight} className="ml-2" />
