@@ -79,10 +79,11 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
         )}
         <button
           onClick={toggleLeftSidebar}
-          className="btn btn-circle btn-sm bg-primary text-white hover:bg-primary-focus"
+          className="btn btn-circle btn-sm bg-primary text-secondary hover:bg-primary-focus"
         >
           <FontAwesomeIcon
             icon={leftSidebarExpanded ? faAngleLeft : faAngleRight}
+            className="text-secondary"
           />
         </button>
       </div>
@@ -95,7 +96,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
               <li key={item.key}>
                 <button
                   className={`w-full btn btn-ghost justify-start ${
-                    isActive ? "bg-primary text-white" : "hover:bg-primary/20"
+                    isActive
+                      ? "bg-primary text-secondary"
+                      : "hover:bg-primary/20"
                   } ${
                     leftSidebarExpanded ? "px-4" : "px-0"
                   } py-3 rounded-lg transition-colors duration-200`}
@@ -103,9 +106,17 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
                 >
                   <FontAwesomeIcon
                     icon={item.icon}
-                    className={`${leftSidebarExpanded ? "mr-3" : "mx-auto"}`}
+                    className={`${isActive ? "text-secondary" : "text-text"} ${
+                      leftSidebarExpanded ? "mr-3" : "mx-auto"
+                    }`}
                   />
-                  {leftSidebarExpanded && <span>{item.name}</span>}
+                  {leftSidebarExpanded && (
+                    <span
+                      className={`${isActive ? "text-secondary" : "text-text"}`}
+                    >
+                      {item.name}
+                    </span>
+                  )}
                 </button>
               </li>
             );
