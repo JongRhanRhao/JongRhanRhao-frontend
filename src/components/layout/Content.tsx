@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Dashboard from "@/pages/MenuPages/Dashboard";
-import ReserveStatus from "@/pages/MenuPages/ReserveStatus";
+import ReserveStatus from "@/pages/MenuPages/Reservations";
 import StoreManagement from "@/pages/MenuPages/StoreManagement";
 import NotFoundPage from "@/pages/NotFoundPage";
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
