@@ -16,7 +16,6 @@ export interface Store {
   status: string;
   max_seats: number;
   curr_seats: number;
-  is_favorite: boolean;
   is_popular: boolean;
   type: string | null;
 }
