@@ -1,6 +1,7 @@
-import { Store } from "@/hooks/useFetchStores";
 import React from "react";
-import ShopCard from "../LandingPage/ShopCard";
+
+import { Store } from "@/hooks/useFetchStores";
+import ShopCard from "@/components/LandingPage/ShopCard";
 import { Link } from "react-router-dom";
 
 export const ShopCardLink = React.memo(({ store }: { store: Store }) => (
