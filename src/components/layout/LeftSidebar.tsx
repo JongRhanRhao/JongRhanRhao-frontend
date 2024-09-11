@@ -68,7 +68,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
   return (
     <div
       className={
-        `flex flex-col transition-all duration-300 ${
+        `flex flex-col transition-all duration-300 space-y-2 ${
           leftSidebarExpanded ? "w-64" : "w-20"
         } bg-bg text-white p-4 hidden md:flex shadow-lg` + className
       }
@@ -125,7 +125,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
       </nav>
 
       {leftSidebarExpanded && (
-        <div className="mt-auto">
+        <div>
           <UpgradeToVIPCard />
         </div>
       )}
