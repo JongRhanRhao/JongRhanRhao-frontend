@@ -10,7 +10,7 @@ export const UserSchema = z.object({
 });
 
 export const SERVER_URL: string = "http://localhost:3000";
-export const DATA_FETCHING_TIME_DELAY: number = 1000;
+export const DATA_FETCHING_TIME_DELAY: number = 555;
 
 export const GLOBAL_URL_ROUTES = {
   landingPage: "/",
