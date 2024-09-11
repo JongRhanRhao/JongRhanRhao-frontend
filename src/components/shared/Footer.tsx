@@ -10,7 +10,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
     <footer
       className={`flex flex-col space-y-10 justify-center m-10 ${className}`}
     >
-      <nav className="flex flex-wrap justify-center gap-6 font-medium text-gray-500"></nav>
+      <nav className="flex flex-wrap justify-center font-medium text-gray-500 gap-6"></nav>
       <div className="flex justify-center space-x-5">
         <a
           href="https://facebook.com"

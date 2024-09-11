@@ -8,7 +8,7 @@ const HeaderCard = ({
   imageSrc: string;
 }) => {
   return (
-    <div className="flex items-center justify-between grid-cols-2 p-4 py-4 mx-auto overflow-hidden shadow-lg bg-primary rounded-xl max-w-8xl bg-pattern">
+    <div className="flex items-center justify-between p-4 py-4 mx-auto overflow-hidden shadow-lg grid-cols-2 bg-primary rounded-xl max-w-8xl bg-pattern">
       <div className="flex flex-col justify-between">
         <header className="p-4 font-sans text-3xl font-bold text-text">
           {title}
