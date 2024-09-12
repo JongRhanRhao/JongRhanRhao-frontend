@@ -10,7 +10,7 @@ import {
 } from "@/lib/variables";
 import { FilterButton } from "../shared/FilterButton";
 import toast from "react-hot-toast";
-
+// TODO: add icon for each status
 const StoreStatus = ({ store }: { store: Store | null }) => {
   const splitOldTime = store?.open_timebooking.split(" - ");
   const storeId = store?.store_id;
@@ -25,6 +25,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   const [closingTime, setClosingTime] = useState(
     splitOldTime ? splitOldTime[1] || "" : ""
   );
+  const [address, setAddress] = useState(store?.address);
   const descriptionMaxLength = 500;
 
   if (!store) {
@@ -39,7 +40,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         cancelReserve: store.cancel_reserve,
         ownerId: store.owner_id,
         staffId: store.staff_id,
-        address: store.address,
+        address: address || store.address,
         status: status || store.status,
         maxSeats: maxSeat || store.max_seats,
         currSeats: currSeat || store.curr_seats,
@@ -149,6 +150,21 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               required
               className="p-1 input bg-secondary"
             />
+          </div>
+        </div>
+        <div className="w-fit collapse collapse-arrow bg-secondary">
+          <input type="checkbox" />
+          <div className="collapse-title font-bold">Address:</div>
+          <div className="collapse-content">
+            <textarea
+              className="w-full h-auto input bg-secondary textarea textarea-bordered"
+              value={address || ""}
+              onChange={(e) => setAddress(e.target.value)}
+              maxLength={255}
+            />
+            <div className="text-sm text-right text-gray-500">
+              {address?.length}/{255}
+            </div>
           </div>
         </div>
         <div className="text-base bg-secondary w-fit p-4 rounded-xl space-y-3">
