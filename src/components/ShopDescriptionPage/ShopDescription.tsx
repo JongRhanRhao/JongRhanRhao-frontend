@@ -23,7 +23,7 @@ interface ShopDescriptionProps {
   selectedItem: string;
   onItemClick: (item: string) => void;
 }
-// TODO: Show store image as carousel
+// TODO: Show store image as carousel, add social media links
 const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   const { id } = useParams<{ id: string }>();
 
@@ -100,7 +100,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                     ({stores.rating})
                   </span>
                 </div>
-                <p className="my-4 text-lg text-text font-thai break-all">
+                <p className="my-4 text-lg break-all text-text font-thai">
                   {stores.description}
                 </p>
                 <div className="text-lg font-medium">
@@ -133,7 +133,10 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   </div>
                 </div>
                 <div className="mt-6">
-                  <BookingButton disabled={isClosed} />
+                  <BookingButton
+                    disabled={isClosed}
+                    storeId={stores.store_id}
+                  />
                 </div>
               </div>
             </div>
