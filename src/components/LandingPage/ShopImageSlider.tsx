@@ -10,12 +10,12 @@ const ImageSlider: React.FC = () => {
   const { data: stores } = useFetchStores();
   const settings = {
     infinite: true,
+    speed: 500,
     slidesToShow: 1,
-    dots: true,
     slidesToScroll: 1,
+    arrows: false,
     autoplay: true,
-    speed: 750,
-    cssEase: "linear",
+    autoplaySpeed: 5000,
   };
 
   return (
