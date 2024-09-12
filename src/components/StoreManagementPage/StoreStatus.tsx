@@ -104,6 +104,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
           <div className="collapse-content">
             <input
               type="number"
+              min={0}
               value={currSeat}
               className="w-20 input bg-secondary"
               onChange={(e) => setCurrSeat(parseInt(e.target.value))}
@@ -113,6 +114,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             <input
               type="number"
               value={maxSeat}
+              min={0}
               className="w-20 input bg-secondary"
               onChange={(e) => setMaxSeat(parseInt(e.target.value))}
             />
