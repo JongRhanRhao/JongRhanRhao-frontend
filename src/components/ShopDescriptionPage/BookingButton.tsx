@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { SERVER_URL } from "@/lib/variables";
 
-const BookingButton = () => {
+const BookingButton = ({ disabled }: { disabled: boolean }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -51,6 +51,7 @@ const BookingButton = () => {
   return (
     <>
       <button
+        disabled={disabled}
         className="w-48 px-4 py-2 font-bold btn bg-primary text-secondary rounded-xl hover:bg-secondary hover:text-primary"
         onClick={() =>
           (
