@@ -72,14 +72,6 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     <div className="container flex flex-col text-text">
       <div className="space-y-3">
         <div className="text-base">Store Status:</div>
-        {/* <Select
-          options={STORE_STATUS}
-          className="text-secondary w-fit"
-          value={STORE_STATUS.find((option) => option.value === store.status)}
-          onChange={(selectedOption) =>
-            setStatus(selectedOption?.value?.toString() || "")
-          }
-        /> */}
         {STORE_STATUS.map((option) => (
           <FilterButton
             key={option.value}
@@ -108,7 +100,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             <input
               type="number"
               value={currSeat}
-              className="input w-14 bg-secondary"
+              className="w-20 input bg-secondary"
               onChange={(e) => setCurrSeat(parseInt(e.target.value))}
               max={maxSeat}
             />
@@ -116,7 +108,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             <input
               type="number"
               value={maxSeat}
-              className="input w-14 bg-secondary"
+              className="w-20 input bg-secondary"
               onChange={(e) => setMaxSeat(parseInt(e.target.value))}
             />
           </div>
