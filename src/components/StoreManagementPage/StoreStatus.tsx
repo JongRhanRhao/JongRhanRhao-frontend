@@ -25,6 +25,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   const [closingTime, setClosingTime] = useState(
     splitOldTime ? splitOldTime[1] || "" : ""
   );
+  const descriptionMaxLength = 500;
 
   if (!store) {
     return <p>No store selected.</p>;
@@ -89,7 +90,11 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
               value={description || ""}
               onChange={(e) => setDescription(e.target.value)}
+              maxLength={descriptionMaxLength}
             />
+            <div className="text-sm text-right text-gray-500">
+              {description?.length}/{descriptionMaxLength}
+            </div>
           </div>
         </div>
 
