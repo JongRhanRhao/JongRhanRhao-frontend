@@ -28,10 +28,10 @@ const ShopCard: React.FC<ShopCardProps> = ({
   currSeats,
 }) => {
   const isAvailable = reservationStatus === "can reserve";
-  const reservationClass = `absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${
-    isAvailable ? "bg-green-500" : "bg-rose-500"
+  const reservationClass = `absolute top-3 text-[#121212] text-xs font-bold px-2 py-1 rounded-r-lg ${
+    isAvailable ? "bg-primary" : "bg-rose-500"
   }`;
-  const seatCountClass = `mt-2 ${isAvailable ? "text-white" : "text-red-500"}`;
+  const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
   const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
 
   const { user } = useUser();
@@ -112,7 +112,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           className={`w-full object-cover duration-500 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32`}
         />
         <div
-          className={`absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg shadow-lg ${reservationClass}`}
+          className={`absolute top-3 text-xs font-bold px-2 py-1 rounded-r-lg shadow-lg ${reservationClass}`}
         >
           {reservationStatus}
         </div>
