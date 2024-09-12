@@ -57,14 +57,14 @@ const StoreManagement = () => {
       <p className="mt-2 text-sm text-text">
         You can control all store details from this panel.
       </p>
-      <div className="flex items-center">
+      <div className="flex items-center mt-4 shadow-lg w-fit rounded-xl bg-secondary">
         <StoreSelector
           userId={user?.userId?.toString() || ""}
           className="font-bold rounded text-text select bg-secondary"
           onStoreSelect={handleStoreSelect}
         />
       </div>
-      <div className="flex flex-wrap gap-2 mt-4 mb-4">
+      <div className="flex flex-wrap mt-4 mb-4 gap-2">
         {Object.values(STORE_MANAGEMENT_MENU).map((title) => (
           <FilterButton
             key={title}
