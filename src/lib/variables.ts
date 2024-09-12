@@ -1,14 +1,3 @@
-import { z } from "zod";
-
-export const UserSchema = z.object({
-  email: z.string().email({ message: "* Invalid email address" }),
-  password: z
-    .string()
-    .min(8, { message: "* Password must be at least 8 characters long" })
-    .max(50, { message: "* Password must not exceed 50 characters" }),
-  phone_number: z.string().min(10, { message: "* Invalid phone number" }),
-});
-
 export const SERVER_URL: string = "http://localhost:3000";
 export const DATA_FETCHING_TIME_DELAY: number = 444;
 
@@ -35,10 +24,6 @@ export const STORE_TYPES = {
 };
 
 export const STORE_TYPE_FOR_SELECTOR = [
-  {
-    value: STORE_TYPES.ALL,
-    label: "All",
-  },
   {
     value: STORE_TYPES.BAR,
     label: "Bar",
