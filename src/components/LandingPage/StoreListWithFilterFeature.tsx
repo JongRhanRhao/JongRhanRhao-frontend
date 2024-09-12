@@ -69,7 +69,7 @@ const StoreListWithFilterFeature = () => {
   if (isFetchingStores || isFetchingFavorites || isFakeLoading) {
     return (
       <div>
-        <h2 className="mb-5 text-3xl font-bold text-text">
+        <h2 className="mt-5 mb-5 text-3xl font-bold text-text">
           Discover & Booking
         </h2>
         <div className="mb-4 space-x-2">
@@ -114,7 +114,9 @@ const StoreListWithFilterFeature = () => {
 
   return (
     <div className="container">
-      <h2 className="mb-5 text-3xl font-bold text-text">Discover & Booking</h2>
+      <h2 className="mt-5 mb-5 text-3xl font-bold text-text">
+        Discover & Booking
+      </h2>
       <div className="mb-4 space-x-2">
         <FilterButton
           title={STORE_TYPES.HOT}
