@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleRight,
@@ -18,7 +18,7 @@ interface RightSidebarProps {
 
 const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
   const { rightSidebarExpanded, toggleRightSidebar } = useSidebarStore();
-  const { user, isAuthenticated, logout } = useUser();
+  const { user, isAuthenticated, logout, initializeUser } = useUser();
 
   const handleLogout = async () => {
     try {
@@ -27,6 +27,13 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
       console.error("Error during logout:", error);
     }
   };
+
+  useEffect(() => {
+    async function initialize() {
+      await initializeUser();
+    }
+    initialize();
+  }, [initializeUser]);
 
   return (
     <div
