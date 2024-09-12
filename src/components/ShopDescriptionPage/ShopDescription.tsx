@@ -100,7 +100,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                     ({stores.rating})
                   </span>
                 </div>
-                <p className="my-4 text-lg text-text font-thai">
+                <p className="my-4 text-lg text-text font-thai break-all">
                   {stores.description}
                 </p>
                 <div className="text-lg font-medium">
