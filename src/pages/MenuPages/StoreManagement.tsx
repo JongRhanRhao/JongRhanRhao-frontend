@@ -13,7 +13,7 @@ import LinkBack from "@/components/shared/LinkBack";
 
 const StoreManagement = () => {
   const { user } = useUser();
-  const userRole = user?.role;
+  const userRole = user?.userRole;
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState(
     STORE_MANAGEMENT_MENU.RESERVATIONS
