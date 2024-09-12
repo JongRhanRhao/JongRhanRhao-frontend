@@ -1,53 +1,70 @@
+import axios from "axios";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
+import { format } from "date-fns";
 
+import "@/styles/custom-phone-input.css";
 import { SERVER_URL } from "@/lib/variables";
+import { useUser } from "@/hooks/useUserStore";
+import toast from "react-hot-toast";
 
-const BookingButton = ({ disabled }: { disabled: boolean }) => {
+const BookingButton = ({
+  disabled,
+  storeId,
+}: {
+  disabled: boolean;
+  storeId: string;
+}) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const { user, isAuthenticated } = useUser();
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
-
-    // Retrieve user data from local storage or your state management solution
-    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-
-    if (!userData.customerId || !userData.customerName) {
+    if (!isAuthenticated) {
       alert("Please log in before making a reservation.");
       return;
     }
-
     if (!selectedDate || !numberOfPeople || !phoneNumber) {
       alert("Please fill in all fields.");
       return;
     }
+    BookingStatus();
+  };
 
-    const bookingData = {
-      customerId: userData.customerId,
-      reservationTime: selectedDate.toISOString(),
-      numberOfPeople: numberOfPeople,
-      customerName: userData.customerName,
-      customerPhone: phoneNumber,
-    };
+  const formattedDate = selectedDate ? format(selectedDate, "d MMM yyyy") : "";
+  const bookingData = {
+    customerId: user?.userId,
+    shopId: storeId,
+    reservationDate: formattedDate,
+    reservationTime: new Date().toLocaleTimeString(),
+    numberOfPeople: numberOfPeople,
+    phoneNumber: phoneNumber,
+    reservationStatus: "pending",
+  };
 
+  const handleBooking = async () => {
     try {
-      const response = await axios.post(
-        `${SERVER_URL}/reservations`,
-        bookingData
-      );
-      console.log("Booking response:", response.data);
-      alert("Booking successful!");
+      await axios.post(`${SERVER_URL}/stores/api/reservations`, bookingData);
       (document.getElementById("BookingButton") as HTMLDialogElement)?.close();
     } catch (error) {
-      console.error("Booking error:", error);
-      alert("There was an error making your booking. Please try again.");
+      console.error("Error booking:", error);
     }
   };
-  // TODO: phone number feild validation
+
+  const BookingStatus = () => {
+    toast.promise(handleBooking(), {
+      loading: "Booking...",
+      success: "Booking successfully!",
+      error: "Error booking, please try again.",
+    });
+  };
+
+  // TODO: phone number field validation
   return (
     <>
       <button
@@ -91,12 +108,12 @@ const BookingButton = ({ disabled }: { disabled: boolean }) => {
           </div>
           <div className="mb-4">
             <label className="font-bold">Phone:</label>
-            <input
-              type="tel"
+            <PhoneInput
+              defaultCountry="th"
+              className="w-full mt-1"
               value={phoneNumber}
-              placeholder="081 234 5678"
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="w-full p-2 mt-1 rounded bg-bg"
+              onChange={(phone) => setPhoneNumber(phone)}
+              placeholder="+66 81 234 5678"
             />
           </div>
           <p className="text-sm">
