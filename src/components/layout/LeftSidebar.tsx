@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -26,9 +26,16 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
   const location = useLocation();
   const navigate = useNavigate();
   const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarStore();
-  const { user } = useUser();
-  const userRole = user?.role;
+  const { user, initializeUser } = useUser();
+  const userRole = user?.userRole;
   const isOwnerOrStaff = userRole === "owner" || userRole === "staff";
+
+  useEffect(() => {
+    async function initialize() {
+      await initializeUser();
+    }
+    initialize();
+  }, [initializeUser]);
 
   const items = [
     {
