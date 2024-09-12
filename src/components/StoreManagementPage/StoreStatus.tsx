@@ -72,19 +72,44 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   return (
     <div className="container flex flex-col text-text">
       <div className="space-y-3">
-        <div className="text-base">Store Status:</div>
-        {STORE_STATUS.map((option) => (
-          <FilterButton
-            key={option.value}
-            title={option.label}
-            selectedTitle={status}
-            onClick={() => setStatus(option.value)}
-            className="flex-grow ml-1 border sm:flex-grow-0 border-primary"
+        <div className="text-base bg-secondary w-fit p-4 rounded-xl space-y-3">
+          <span className="font-bold">
+            Store Status <br />
+          </span>
+          {STORE_STATUS.map((option) => (
+            <FilterButton
+              key={option.value}
+              title={option.label}
+              selectedTitle={status}
+              onClick={() => setStatus(option.value)}
+              className="flex-grow ml-1 border sm:flex-grow-0 border-primary"
+            />
+          ))}
+        </div>
+        <div className=" bg-secondary w-fit rounded-xl p-3">
+          <span className="font-bold">
+            Seat slots: <br />
+          </span>
+          <input
+            type="number"
+            min={0}
+            value={currSeat}
+            className="w-20 input bg-secondary"
+            onChange={(e) => setCurrSeat(parseInt(e.target.value))}
+            max={maxSeat}
           />
-        ))}
+          <span className="m-2 text-center">/</span>
+          <input
+            type="number"
+            value={maxSeat}
+            min={0}
+            className="w-20 input bg-secondary"
+            onChange={(e) => setMaxSeat(parseInt(e.target.value))}
+          />
+        </div>
         <div className="w-full collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
-          <div className="collapse-title">Description:</div>
+          <div className="collapse-title font-bold">Description:</div>
           <div className="collapse-content">
             <textarea
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
@@ -97,32 +122,11 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             </div>
           </div>
         </div>
-
         <div className="collapse collapse-arrow bg-secondary w-fit">
           <input type="checkbox" />
-          <div className="collapse-title">Seat slots:</div>
-          <div className="collapse-content">
-            <input
-              type="number"
-              min={0}
-              value={currSeat}
-              className="w-20 input bg-secondary"
-              onChange={(e) => setCurrSeat(parseInt(e.target.value))}
-              max={maxSeat}
-            />
-            <span className="m-2 text-center">/</span>
-            <input
-              type="number"
-              value={maxSeat}
-              min={0}
-              className="w-20 input bg-secondary"
-              onChange={(e) => setMaxSeat(parseInt(e.target.value))}
-            />
+          <div className="text-base collapse-title font-bold">
+            Opening Hours:
           </div>
-        </div>
-        <div className="collapse collapse-arrow bg-secondary w-fit">
-          <input type="checkbox" />
-          <div className="text-base collapse-title">Opening Hours:</div>
           <div className="collapse-content">
             <input
               type="time"
@@ -147,18 +151,20 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             />
           </div>
         </div>
+        <div className="text-base bg-secondary w-fit p-4 rounded-xl space-y-3">
+          <span className="font-bold">Store Type:</span>
+          <Select
+            options={STORE_TYPE_FOR_SELECTOR}
+            className="mt-1 text-secondary w-fit"
+            value={STORE_TYPE_FOR_SELECTOR.find(
+              (option) => option.value === storeType
+            )}
+            onChange={(selectedOption) =>
+              setStoreType(selectedOption?.value?.toString() || "")
+            }
+          />
+        </div>
       </div>
-      <div className="mt-1 text-base">Store Type:</div>
-      <Select
-        options={STORE_TYPE_FOR_SELECTOR}
-        className="mt-1 text-secondary w-fit"
-        value={STORE_TYPE_FOR_SELECTOR.find(
-          (option) => option.value === storeType
-        )}
-        onChange={(selectedOption) =>
-          setStoreType(selectedOption?.value?.toString() || "")
-        }
-      />
       <button
         className="mt-4 uppercase btn btn-sm bg-primary text-secondary sm:w-fit"
         onClick={updateStoreStatus}
