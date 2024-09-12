@@ -101,7 +101,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   );
 
   return (
-    <div className="relative flex-shrink-0 w-auto m-1 overflow-hidden bg-gray-900 rounded shadow-lg cursor-pointer card">
+    <div className="relative bg-gray-900 rounded shadow-lg cursor-pointer ovrflow-hidden m-a1 wh-auto sflex-shrink-0 card">
       <div className="relative">
         <img
           src={
@@ -112,14 +112,16 @@ const ShopCard: React.FC<ShopCardProps> = ({
           className={`w-full object-cover duration-500 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32`}
         />
         <div
-          className={`absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg ${reservationClass}`}
+          className={`absolute top-3 text-white text-xs font-bold px-2 py-1 rounded-r-lg shadow-lg ${reservationClass}`}
         >
           {reservationStatus}
         </div>
         <div className="absolute text-xl text-white top-2 right-2">
           <button onClick={handleFavoriteClick}>
             <FontAwesomeIcon
-              className={`${isFavorite ? "text-yellow-400" : "text-white"}`}
+              className={`${
+                isFavorite ? "text-yellow-400" : "text-white"
+              } shadow-lg`}
               icon={faStar}
             />
           </button>
@@ -130,11 +132,11 @@ const ShopCard: React.FC<ShopCardProps> = ({
               <FontAwesomeIcon
                 key={i}
                 icon={faStar}
-                className="text-yellow-400"
+                className="text-yellow-400 shadow-lg"
               />
             ))}
           </div>
-          <p className={`mt-2 ${seatCountClass}`}>
+          <p className={`mt-2 ${seatCountClass} shadow-lg`}>
             {currSeats} / {maxSeats}
           </p>
         </div>
