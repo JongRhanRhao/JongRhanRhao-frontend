@@ -6,7 +6,9 @@ export const getCurrentUser = async () => {
     const response = await axios.get(`${SERVER_URL}/users/auth/me`, {
       withCredentials: true,
     });
-    return response.data;
+    if (response.status === 200) {
+      return response.data;
+    }
   } catch (error) {
     console.error("Error fetching current user", error);
     return null;
