@@ -1,19 +1,36 @@
 import axios from "axios";
+import z from "zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { SERVER_URL } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
 
-type FormData = {
-  user_name: string;
-  email: string;
-  password: string;
-  phone_number: string;
-  role: string;
-  confirm_password: string;
-};
+export const UserSchema = z
+  .object({
+    user_name: z
+      .string()
+      .min(3, { message: "* Name must be at least 3 characters long" }),
+    email: z.string().email({ message: "* Invalid email address" }),
+    password: z
+      .string()
+      .min(8, { message: "* Password must be at least 8 characters long" })
+      .max(50, { message: "* Password must not exceed 50 characters" }),
+    confirm_password: z.string(),
+    phone_number: z.string().min(10, { message: "* Invalid phone number" }),
+  })
+  .superRefine(({ password, confirm_password }, ctx) => {
+    if (password !== confirm_password) {
+      ctx.addIssue({
+        code: "custom",
+        message: "* Passwords do not match",
+        path: ["confirm_password"],
+      });
+    }
+  });
 
+type FormData = z.infer<typeof UserSchema>;
 const LoginButton = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,6 +43,7 @@ const LoginButton = () => {
     reset,
   } = useForm<FormData>({
     mode: "onSubmit",
+    resolver: zodResolver(UserSchema),
   });
 
   const handleAuth = async (data: FormData) => {
@@ -171,8 +189,8 @@ const LoginButton = () => {
                   y2="40.615"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop offset="0" stop-color="#2aa4f4"></stop>
-                  <stop offset="1" stop-color="#007ad9"></stop>
+                  <stop offset="0" stopColor="#2aa4f4"></stop>
+                  <stop offset="1" stopColor="#007ad9"></stop>
                 </linearGradient>
                 <path
                   fill="url(#Ld6sqrtcxMyckEl6xeDdMa_uLWV5A9vXIPu_gr1)"
@@ -186,7 +204,7 @@ const LoginButton = () => {
               Continue with Facebook
             </button>
 
-            <div className="flex items-center my-4 text-sm gap-2 text-neutral-700">
+            <div className="flex items-center gap-2 my-4 text-sm text-neutral-700">
               <div className="w-full h-px bg-neutral-700"></div>OR
               <div className="w-full h-px bg-neutral-700"></div>
             </div>
@@ -215,7 +233,7 @@ const LoginButton = () => {
               <label className="text-text">E-mail</label>
               <input
                 {...register("email", { required: "* Email is required" })}
-                type="email"
+                // type="email"
                 className="input bg-secondary"
                 placeholder="Enter email"
               />
@@ -242,9 +260,7 @@ const LoginButton = () => {
                 <>
                   <label className="text-text">Confirm Password</label>
                   <input
-                    {...register("confirm_password", {
-                      required: "* Please confirm your password",
-                    })}
+                    {...register("confirm_password")}
                     type="password"
                     className="input bg-secondary"
                     placeholder="Confirm password"
@@ -260,7 +276,7 @@ const LoginButton = () => {
 
             <button
               type="submit"
-              className="w-full py-3 rounded-lg btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
+              className="w-full py-3 rounded-lg mt- btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
             >
               {isLogin ? "Login" : "Sign Up"}
             </button>
