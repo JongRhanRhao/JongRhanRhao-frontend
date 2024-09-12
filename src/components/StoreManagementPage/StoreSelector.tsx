@@ -23,6 +23,7 @@ const StoreSelector = ({
     const store = stores?.find((store) => store.store_id === selectedStoreId);
     setSelectedStore(store || null);
     onStoreSelect && onStoreSelect(store || null);
+    refetch();
   };
 
   const fetchStoresByUserId = async (userId: string): Promise<Store[]> => {
@@ -36,6 +37,7 @@ const StoreSelector = ({
     data: stores,
     error,
     isLoading,
+    refetch,
   } = useQuery({
     queryKey: ["stores", userId],
     queryFn: () => fetchStoresByUserId(userId),
