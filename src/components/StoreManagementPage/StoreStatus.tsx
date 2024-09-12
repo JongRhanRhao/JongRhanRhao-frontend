@@ -10,7 +10,7 @@ import {
 } from "@/lib/variables";
 import { FilterButton } from "../shared/FilterButton";
 import toast from "react-hot-toast";
-// TODO: Fix show store default status
+
 const StoreStatus = ({ store }: { store: Store | null }) => {
   const splitOldTime = store?.open_timebooking.split(" - ");
   const storeId = store?.store_id;
