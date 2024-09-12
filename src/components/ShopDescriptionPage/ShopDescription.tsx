@@ -56,7 +56,15 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   }
 
   const isAvailable = stores.status === "Available";
-  const statusClass = isAvailable ? "text-success" : "text-error";
+  const isBusy = stores.status === "Busy";
+  const isClosed = stores.status === "Closed";
+  const statusClass = isAvailable
+    ? "text-success"
+    : isBusy
+    ? "text-warning"
+    : isClosed
+    ? "text-error"
+    : "text-error";
   const safeRating = Math.max(0, Math.min(5, Math.floor(stores.rating)));
 
   return (
@@ -119,11 +127,13 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   </div>
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faLocationDot} />
-                    <span className="ml-2">Address: {stores.address}</span>
+                    <span className="ml-2 font-thai">
+                      Address: {stores.address}
+                    </span>
                   </div>
                 </div>
                 <div className="mt-6">
-                  <BookingButton />
+                  <BookingButton disabled={isClosed} />
                 </div>
               </div>
             </div>
