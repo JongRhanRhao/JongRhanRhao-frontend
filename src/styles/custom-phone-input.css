@@ -1,0 +1,30 @@
+.react-international-phone-input {
+  --react-international-phone-background-color: #070707;
+  --react-international-phone-border-color: #121212;
+  --react-international-phone-text-color: #e7ecef;
+  --react-international-phone-border-radius: 0.5rem;
+  --react-international-phone-color: #070707;
+  --react-international-phone-font-size: 1rem;
+}
+
+.react-international-phone-country-selector {
+  --react-international-phone-country-selector-background-color: #070707;
+  --react-international-phone-border-color: #121212;
+}
+
+.react-international-phone-country-selector:hover {
+  --react-international-phone-country-selector-background-color-hover: #070707;
+}
+
+.react-international-phone-country-selector-dropdown-item:hover {
+  --react-international-phone-country-selector-item-background-color-hover: #070707;
+}
+
+.react-international-phone-country-selector {
+  --react-international-phone-country-selector-background-color: #070707;
+  --react-international-phone-country-selector-text-color: #333333;
+}
+
+.react-international-phone-country-selector-dropdown {
+  --react-international-phone-country-selector-background-color: #070707;
+}
