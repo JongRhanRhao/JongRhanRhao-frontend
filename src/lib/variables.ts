@@ -1,5 +1,5 @@
 export const SERVER_URL: string = "http://localhost:3000";
-export const DATA_FETCHING_TIME_DELAY: number = 444;
+export const DATA_FETCHING_DELAY_TIME: number = 444;
 
 export const GLOBAL_URL_ROUTES = {
   landingPage: "/",

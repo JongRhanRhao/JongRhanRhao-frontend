@@ -4,7 +4,7 @@ import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useFetchStores } from "@/hooks/useFetchStores";
 import { useUser } from "@/hooks/useUserStore";
 import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
-import { DATA_FETCHING_TIME_DELAY, STORE_TYPES } from "@/lib/variables";
+import { DATA_FETCHING_DELAY_TIME, STORE_TYPES } from "@/lib/variables";
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
@@ -60,7 +60,7 @@ const StoreListWithFilterFeature = () => {
     if (!isFetchingStores && !isFetchingFavorites) {
       const timer = setTimeout(() => {
         setIsFakeLoading(false);
-      }, DATA_FETCHING_TIME_DELAY);
+      }, DATA_FETCHING_DELAY_TIME);
 
       return () => clearTimeout(timer);
     }
