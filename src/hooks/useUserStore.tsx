@@ -9,7 +9,7 @@ export interface User {
   userId: number;
   userName: string;
   userEmail: string;
-  role: string;
+  userRole: string;
 }
 
 interface UserState {
@@ -28,6 +28,12 @@ export const useUserStore = create<UserState>()(
       isAuthenticated: false,
       setUser: (user) => set({ user }),
       setIsAuthenticated: (status) => set({ isAuthenticated: status }),
+      initializeUser: async () => {
+        const userData = await getCurrentUser();
+        if (userData) {
+          set({ user: userData, isAuthenticated: true });
+        }
+      },
       logout: async () => {
         try {
           const response = await axios.get(`${SERVER_URL}/users/auth/logout`, {
@@ -41,12 +47,6 @@ export const useUserStore = create<UserState>()(
           }
         } catch (error) {
           console.error("Logout failed", error);
-        }
-      },
-      initializeUser: async () => {
-        const userData = await getCurrentUser();
-        if (userData) {
-          set({ user: userData, isAuthenticated: true });
         }
       },
     }),
