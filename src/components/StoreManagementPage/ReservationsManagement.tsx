@@ -115,7 +115,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                   </a>
                 </td>
                 <td className="px-6 py-4 border-b border-neutral-500">
-                  <span className="px-2 py-1 text-sm text-white bg-green-500 rounded-full">
+                  <span className="px-2 py-1 text-sm rounded-full text-secondary bg-primary">
                     {data.reservation_status}
                   </span>
                 </td>
