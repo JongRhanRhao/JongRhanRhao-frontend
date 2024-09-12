@@ -23,7 +23,7 @@ const SmallScreenNavMenu: React.FC<SmallScreenNavMenuProps> = ({
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useUser();
-  const userRole = user?.role;
+  const userRole = user?.userRole;
   const isOwnerOrStaff = userRole === "owner" || userRole === "staff";
 
   const items = [
