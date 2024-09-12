@@ -12,15 +12,28 @@ import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
 const StoreListWithFilterFeature = () => {
   const [selectedType, setSelectedType] = useState(STORE_TYPES.ALL);
   const [isFakeLoading, setIsFakeLoading] = useState(true);
-  const { data: stores, isLoading: isFetchingStores, error } = useFetchStores();
+  const {
+    data: stores,
+    isLoading: isFetchingStores,
+    error,
+    refetch: refetchStoreData,
+  } = useFetchStores();
   const { user } = useUser();
-  const { data: favoriteStores, isLoading: isFetchingFavorites } =
-    useFetchFavoriteStore(user?.userId?.toString() || "");
+  const {
+    data: favoriteStores,
+    isLoading: isFetchingFavorites,
+    refetch: refetchFavroiteStore,
+  } = useFetchFavoriteStore(user?.userId?.toString() || "");
 
-  const handleTypeClick = useCallback((type: React.SetStateAction<string>) => {
-    setSelectedType(type);
-    setIsFakeLoading(true);
-  }, []);
+  const handleTypeClick = useCallback(
+    (type: React.SetStateAction<string>) => {
+      setSelectedType(type);
+      setIsFakeLoading(true);
+      refetchFavroiteStore();
+      refetchStoreData();
+    },
+    [refetchFavroiteStore, refetchStoreData]
+  );
 
   const filteredShopCards = useMemo(() => {
     if (!stores) return [];
