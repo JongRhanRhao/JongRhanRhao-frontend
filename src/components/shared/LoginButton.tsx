@@ -1,55 +1,42 @@
 import axios from "axios";
-import z from "zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { SERVER_URL } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
+import { LoginSchema, RegisterSchema } from "@/lib/types";
 
-export const UserSchema = z
-  .object({
-    user_name: z
-      .string()
-      .min(3, { message: "* Name must be at least 3 characters long" }),
-    email: z.string().email({ message: "* Invalid email address" }),
-    password: z
-      .string()
-      .min(8, { message: "* Password must be at least 8 characters long" })
-      .max(50, { message: "* Password must not exceed 50 characters" }),
-    confirm_password: z.string(),
-    phone_number: z.string().min(10, { message: "* Invalid phone number" }),
-  })
-  .superRefine(({ password, confirm_password }, ctx) => {
-    if (password !== confirm_password) {
-      ctx.addIssue({
-        code: "custom",
-        message: "* Passwords do not match",
-        path: ["confirm_password"],
-      });
-    }
-  });
+interface FormDataProps {
+  user_name: string;
+  email: string;
+  password: string;
+  confirm_password: string;
+  phone_number: string;
+}
 
-type FormData = z.infer<typeof UserSchema>;
 const LoginButton = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const { setUser, setIsAuthenticated } = useUser();
+  const schema = isLogin ? LoginSchema : RegisterSchema;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormData>({
+  } = useForm<FormDataProps>({
+    resolver: zodResolver(schema),
     mode: "onSubmit",
-    resolver: zodResolver(UserSchema),
   });
 
-  const handleAuth = async (data: FormData) => {
+  const handleAuth = async (data: FormDataProps) => {
+    // console.log("handleAuth called with data:", data);
     setErrorMessage("");
     const endpoint = isLogin ? "login" : "register";
     try {
+      // console.log(`Sending request to ${SERVER_URL}/users/auth/${endpoint}`);
       const response = await axios.post(
         `${SERVER_URL}/users/auth/${endpoint}`,
         {
@@ -57,12 +44,14 @@ const LoginButton = () => {
           role: "user",
         }
       );
+      // console.log("Server response:", response.data);
       if (response.data.user) {
         setUser(response.data.user);
         setIsAuthenticated(true);
         closeModal();
       }
     } catch (error) {
+      // console.error("Error in handleAuth:", error);
       setErrorMessage(
         axios.isAxiosError(error)
           ? `Error: ${error.response?.data}`
@@ -90,20 +79,19 @@ const LoginButton = () => {
     <>
       <button
         className="w-full py-3 rounded-md btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
-        onClick={() =>
-          (document.getElementById("login") as HTMLDialogElement).showModal()
-        }
+        onClick={() => {
+          const dialog = document.getElementById("login") as HTMLDialogElement;
+          if (dialog) {
+            dialog.showModal();
+          }
+        }}
       >
         Log In / Sign Up
       </button>
 
       <dialog id="login" className="modal">
         <div className="p-8 rounded-lg shadow-lg modal-box bg-bg">
-          <form
-            method="dialog"
-            className="space-y-4"
-            onSubmit={handleSubmit(handleAuth)}
-          >
+          <form className="space-y-4" onSubmit={handleSubmit(handleAuth)}>
             <button
               className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
               onClick={closeModal}
@@ -233,7 +221,7 @@ const LoginButton = () => {
               <label className="text-text">E-mail</label>
               <input
                 {...register("email", { required: "* Email is required" })}
-                // type="email"
+                type="email"
                 className="input bg-secondary"
                 placeholder="Enter email"
               />
@@ -256,6 +244,7 @@ const LoginButton = () => {
                 </p>
               )}
 
+              {/* Uncomment if confirm_password is required */}
               {!isLogin && (
                 <>
                   <label className="text-text">Confirm Password</label>
@@ -280,7 +269,6 @@ const LoginButton = () => {
             >
               {isLogin ? "Login" : "Sign Up"}
             </button>
-
             <p className="text-sm text-center text-text">
               {isLogin ? "New here? " : "Already have an account? "}
               <button
