@@ -20,6 +20,8 @@ export const resources = {
       "90s": "90s",
       Dance: "Dance",
       Club: "Club",
+      Reservable: "Reservable",
+      Unavailable: "Unavailable",
     },
   },
   th: {
@@ -43,6 +45,8 @@ export const resources = {
       "90s": "90s",
       Dance: "แดนซ์",
       Club: "คลับ",
+      Reservable: "สามารถจองได้",
+      Unavailable: "ไม่สามารถจองได้",
     },
   },
 } as const;
