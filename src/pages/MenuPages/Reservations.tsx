@@ -29,21 +29,21 @@ const Reservations = () => {
   if (isLoading) {
     return (
       <div className="container mx-auto space-x-2 space-y-4">
-        <div className="text-2xl font-bold text-text">Reservations</div>
+        <div className="text-2xl font-bold text-text"> {t("reservation")}</div>
         <table className="w-full table-fixed">
           <thead>
             <tr className="bg-secondary">
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                id reservation
+                {t("id_reservation")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                shop name
+                {t("shop_name")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                date & time
+                {t("dateNtime")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                Status
+                {t("status")}
               </th>
             </tr>
           </thead>
