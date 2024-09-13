@@ -59,10 +59,7 @@ const StoreSelector = ({
 
   return (
     <div>
-      <select
-        className={`${className} mt-2 mb-2`}
-        onChange={handleStoreSelection}
-      >
+      <select className={`${className}`} onChange={handleStoreSelection}>
         <option value="">Select your store</option>
         {stores.map((store: Store) => (
           <option key={store.store_id} value={store.store_id}>
