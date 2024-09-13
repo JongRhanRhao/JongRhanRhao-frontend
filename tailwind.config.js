@@ -13,8 +13,7 @@ export default {
       },
     },
     fontFamily: {
-      sans: ["Lexend Deca", "sans-serif"],
-      thai: ["Kanit", "sans-serif"],
+      sans: ["Prompt", "sans-serif"],
     },
   },
   plugins: [daisyui],
