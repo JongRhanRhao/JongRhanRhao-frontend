@@ -47,7 +47,14 @@ const StoreSelector = ({
   if (error) return <p>Error fetching stores: {(error as Error).message}</p>;
 
   if (!Array.isArray(stores) || stores.length === 0) {
-    return <p className="mb-4">No stores available.</p>;
+    return (
+      <p className="p-2 bg-bg text-rose-500">
+        No stores available. <br />
+        <span className="text-xs text-text">
+          Staff might forgot to assign a store for you
+        </span>
+      </p>
+    );
   }
 
   return (
