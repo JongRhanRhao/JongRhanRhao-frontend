@@ -9,71 +9,100 @@ export const GLOBAL_URL_ROUTES = {
   notFound: "*",
 };
 
-export const STORE_TYPES = {
-  HOT: "Hot",
-  FAVORITE: "Favorite",
-  ALL: "All",
-  BAR: "Bar",
-  JAZZ: "Jazz",
-  COCKTAIL: "Cocktail",
-  PUB: "Pub",
-  CHILL: "Chill",
-  NINETIES: "90s",
-  DANCE: "Dance",
-  CLUB: "Club",
+export const STORE_AVAILABILITY_STATUS = {
+  AVAILABLE: "Reservable",
+  UNAVAILABLE: "Unavailable",
 };
 
-export const STORE_TYPE_FOR_SELECTOR = [
+export const RESERVATION_STATUS = {
+  PENDING: "Pending",
+  CONFIRMED: "Confirmed",
+  CANCELLED: "Cancelled",
+};
+
+export const RESERVATION_STATUS_FOR_SELECTOR = [
   {
-    value: STORE_TYPES.BAR,
-    label: "Bar",
+    value: RESERVATION_STATUS.PENDING,
+    label: RESERVATION_STATUS.PENDING,
   },
   {
-    value: STORE_TYPES.JAZZ,
-    label: "Jazz",
+    value: RESERVATION_STATUS.CONFIRMED,
+    label: RESERVATION_STATUS.CONFIRMED,
   },
   {
-    value: STORE_TYPES.COCKTAIL,
-    label: "Cocktail",
-  },
-  {
-    value: STORE_TYPES.PUB,
-    label: "Pub",
-  },
-  {
-    value: STORE_TYPES.CHILL,
-    label: "Chill",
-  },
-  {
-    value: STORE_TYPES.NINETIES,
-    label: "90s",
-  },
-  {
-    value: STORE_TYPES.DANCE,
-    label: "Dance",
-  },
-  {
-    value: STORE_TYPES.CLUB,
-    label: "Club",
+    value: RESERVATION_STATUS.CANCELLED,
+    label: RESERVATION_STATUS.CANCELLED,
   },
 ];
 
-export const STORE_STATUS = [
+export const STORE_TYPES_FOR_FILTER_BTN = {
+  HOT: "มาแรง",
+  FAVORITE: "ร้านโปรด",
+  ALL: "ทั้งหมด",
+  BAR: "บาร์",
+  JAZZ: "แจ๊ส",
+  COCKTAIL: "ค็อกเทล",
+  PUB: "ผับ",
+  CHILL: "ชิลล์",
+  NINETIES: "90s",
+  DANCE: "แดนซ์",
+  CLUB: "คลับ",
+};
+
+export const STORE_TYPES_FOR_SELECTOR = [
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.BAR,
+    label: STORE_TYPES_FOR_FILTER_BTN.BAR,
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.JAZZ,
+    label: STORE_TYPES_FOR_FILTER_BTN.JAZZ,
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.COCKTAIL,
+    label: STORE_TYPES_FOR_FILTER_BTN.COCKTAIL,
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.PUB,
+    label: STORE_TYPES_FOR_FILTER_BTN.PUB,
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.CHILL,
+    label: STORE_TYPES_FOR_FILTER_BTN.CHILL,
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.NINETIES,
+    label: STORE_TYPES_FOR_FILTER_BTN.NINETIES,
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.DANCE,
+    label: STORE_TYPES_FOR_FILTER_BTN.DANCE,
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.CLUB,
+    label: STORE_TYPES_FOR_FILTER_BTN.CLUB,
+  },
+];
+
+export const STORE_MGMT_STATUS = [
   {
     value: "Available",
     label: "Available",
+    className: "border-green-500",
   },
   {
     value: "Busy",
     label: "Busy",
+    className: "border-yellow-500",
   },
   {
     value: "Closed",
     label: "Closed",
+    className: "border-rose-500",
   },
 ];
 
-export const STORE_MANAGEMENT_MENU = {
+export const STORE_MGMT_MENU = {
   RESERVATIONS: "Reservations",
   STORE: "Store Management",
   STAFF: "Staff Management",
