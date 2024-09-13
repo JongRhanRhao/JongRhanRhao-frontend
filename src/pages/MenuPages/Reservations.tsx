@@ -5,7 +5,11 @@ import { useFetchReservations } from "@/hooks/useFetchReservations";
 const Reservations = () => {
   const user = useUser();
   const { isAuthenticated } = user;
-  const { data, isLoading, error } = useFetchReservations({
+  const {
+    data: reservation,
+    isLoading,
+    error,
+  } = useFetchReservations({
     type: "customer",
     id: user.user?.userId?.toString() || "",
   });
@@ -69,6 +73,7 @@ const Reservations = () => {
       </div>
     );
   }
+
   // TODO: Add refresh button, control button
   return (
     <div className="container mx-auto">
@@ -92,33 +97,54 @@ const Reservations = () => {
           </tr>
         </thead>
         <tbody className="bg-secondary text-text">
-          {Array.isArray(data) &&
-            data.map((data) => (
-              <tr key={data.reservation_id}>
-                <td className="px-6 py-4 border-b border-neutral-500">
-                  {data.reservation_id}
-                </td>
-                <td className="px-6 py-4 truncate border-b border-neutral-500">
-                  {data.shop_name}
-                </td>
-                <td className="px-6 py-4 border-b border-neutral-500">
-                  {data.reservation_date}, {data.reservation_time}
-                </td>
-                <td className="px-6 py-4 border-b border-neutral-500">
-                  <span className="px-2 py-1 text-sm text-white bg-green-500 rounded-full">
-                    {data.reservation_status}
-                  </span>
-                </td>
-                <td className="border-b border-neutral-500">
-                  <a
-                    href={`/shop/${data.shop_id}`}
-                    className="underline text-primary"
-                  >
-                    View Shop
-                  </a>
-                </td>
-              </tr>
-            ))}
+          {Array.isArray(reservation) &&
+            reservation.map((reservation) => {
+              let statusClass = "";
+              switch (reservation.reservation_status) {
+                case "pending":
+                  statusClass =
+                    "bg-yellow-500/30 text-yellow-500 border-yellow-500";
+                  break;
+                case "confirmed":
+                  statusClass = "bg-primary/30 text-primary border-primary";
+                  break;
+                case "cancelled":
+                  statusClass = "bg-red-500/30 text-red-500 border-red-500";
+                  break;
+                default:
+                  statusClass =
+                    "bg-yellow-500/30 text-yellow-500 border-yellow-500";
+              }
+              return (
+                <tr key={reservation.reservation_id}>
+                  <td className="px-6 py-4 border-b border-neutral-500">
+                    {reservation.reservation_id}
+                  </td>
+                  <td className="px-6 py-4 truncate border-b border-neutral-500">
+                    {reservation.shop_name}
+                  </td>
+                  <td className="px-6 py-4 border-b border-neutral-500">
+                    {reservation.reservation_date},{" "}
+                    {reservation.reservation_time}
+                  </td>
+                  <td className="px-6 py-4 border-b border-neutral-500">
+                    <span
+                      className={`px-2 py-1 text-sm rounded-full ${statusClass}`}
+                    >
+                      {reservation.reservation_status}
+                    </span>
+                  </td>
+                  <td className="border-b border-neutral-500">
+                    <a
+                      href={`/shop/${reservation.shop_id}`}
+                      className="underline text-primary"
+                    >
+                      View Shop
+                    </a>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
