@@ -4,13 +4,18 @@ import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useFetchStores } from "@/hooks/useFetchStores";
 import { useUser } from "@/hooks/useUserStore";
 import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
-import { DATA_FETCHING_DELAY_TIME, STORE_TYPES } from "@/lib/variables";
+import {
+  DATA_FETCHING_DELAY_TIME,
+  STORE_TYPES_FOR_FILTER_BTN,
+} from "@/lib/variables";
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
 
 const StoreListWithFilterFeature = () => {
-  const [selectedType, setSelectedType] = useState(STORE_TYPES.ALL);
+  const [selectedType, setSelectedType] = useState(
+    STORE_TYPES_FOR_FILTER_BTN.ALL
+  );
   const [isFakeLoading, setIsFakeLoading] = useState(true);
   const {
     data: stores,
@@ -39,11 +44,11 @@ const StoreListWithFilterFeature = () => {
     if (!stores) return [];
 
     switch (selectedType) {
-      case STORE_TYPES.ALL:
+      case STORE_TYPES_FOR_FILTER_BTN.ALL:
         return stores;
-      case STORE_TYPES.HOT:
+      case STORE_TYPES_FOR_FILTER_BTN.HOT:
         return stores.filter((store) => store.is_popular);
-      case STORE_TYPES.FAVORITE:
+      case STORE_TYPES_FOR_FILTER_BTN.FAVORITE:
         if (favoriteStores && Array.isArray(favoriteStores)) {
           const favoriteStoreIds = favoriteStores.map((fav) => fav.store_id);
           return stores.filter((store) =>
@@ -52,7 +57,7 @@ const StoreListWithFilterFeature = () => {
         }
         return [];
       default:
-        return stores.filter((store) => store.type === selectedType);
+        return stores.filter((store) => store.type.includes(selectedType));
     }
   }, [selectedType, stores, favoriteStores]);
 
@@ -69,23 +74,23 @@ const StoreListWithFilterFeature = () => {
   if (isFetchingStores || isFetchingFavorites || isFakeLoading) {
     return (
       <div>
-        <h2 className="mt-5 mb-5 text-3xl font-bold text-text">
-          Discover & Booking
+        <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
+          คันหารัานที่ใช่ & จองโต๊ะ
         </h2>
         <div className="mb-4 space-x-2">
           <FilterButton
-            title={STORE_TYPES.HOT}
+            title={STORE_TYPES_FOR_FILTER_BTN.HOT}
             selectedTitle={selectedType}
             onClick={handleTypeClick}
             icon={faFire}
           />
           <FilterButton
-            title={STORE_TYPES.FAVORITE}
+            title={STORE_TYPES_FOR_FILTER_BTN.FAVORITE}
             selectedTitle={selectedType}
             onClick={handleTypeClick}
             icon={faStar}
           />
-          {Object.values(STORE_TYPES)
+          {Object.values(STORE_TYPES_FOR_FILTER_BTN)
             .slice(2)
             .map((type) => (
               <FilterButton
@@ -114,23 +119,23 @@ const StoreListWithFilterFeature = () => {
 
   return (
     <div className="container">
-      <h2 className="mt-5 mb-5 text-3xl font-bold text-text">
-        Discover & Booking
+      <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
+        คันหารัานที่ใช่ & จองโต๊ะ
       </h2>
       <div className="mb-4 space-x-2">
         <FilterButton
-          title={STORE_TYPES.HOT}
+          title={STORE_TYPES_FOR_FILTER_BTN.HOT}
           selectedTitle={selectedType}
           onClick={handleTypeClick}
           icon={faFire}
         />
         <FilterButton
-          title={STORE_TYPES.FAVORITE}
+          title={STORE_TYPES_FOR_FILTER_BTN.FAVORITE}
           selectedTitle={selectedType}
           onClick={handleTypeClick}
           icon={faStar}
         />
-        {Object.values(STORE_TYPES)
+        {Object.values(STORE_TYPES_FOR_FILTER_BTN)
           .slice(2)
           .map((type) => (
             <FilterButton
