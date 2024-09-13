@@ -11,6 +11,7 @@ import {
 import LoginButton from "@/components/shared/LoginButton";
 import { useSidebarStore } from "@/hooks/useSidebarStore";
 import { useUser } from "@/hooks/useUserStore";
+import { useNavigate } from "react-router-dom";
 
 interface RightSidebarProps {
   className?: string;
@@ -19,6 +20,7 @@ interface RightSidebarProps {
 const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
   const { rightSidebarExpanded, toggleRightSidebar } = useSidebarStore();
   const { user, isAuthenticated, logout, initializeUser } = useUser();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -71,7 +73,8 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
               <button
                 className="w-full btn btn-outline text-text"
                 onClick={() => {
-                  /* Handle reservation check */
+                  navigate("/reservations");
+                  toggleRightSidebar();
                 }}
               >
                 Check Reservation
