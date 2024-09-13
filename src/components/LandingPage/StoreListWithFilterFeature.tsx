@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
+import { t } from "i18next";
 
 import { useFetchStores } from "@/hooks/useFetchStores";
 import { useUser } from "@/hooks/useUserStore";
@@ -11,10 +12,8 @@ import {
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
-import { useTranslation } from "react-i18next";
 
 const StoreListWithFilterFeature = () => {
-  const { t } = useTranslation();
   const [selectedType, setSelectedType] = useState(
     STORE_TYPES_FOR_FILTER_BTN.ALL
   );

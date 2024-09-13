@@ -9,6 +9,7 @@ import {
   faLocationDot,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
+import { t } from "i18next";
 
 import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
@@ -115,7 +116,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                       key={index}
                       className="badge badge-outline text-primary mr-0.5"
                     >
-                      {type}
+                      {t(type)}
                     </div>
                   ))
                 ) : (
