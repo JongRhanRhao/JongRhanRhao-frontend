@@ -1,6 +1,7 @@
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useUser } from "@/hooks/useUserStore";
 import { useFetchReservations } from "@/hooks/useFetchReservations";
+import LinkBack from "@/components/shared/LinkBack";
 
 const Reservations = () => {
   const user = useUser();
@@ -26,7 +27,7 @@ const Reservations = () => {
   if (isLoading) {
     return (
       <div className="container mx-auto space-x-2 space-y-4">
-        <div className="text-xl font-bold text-text">Reservations</div>
+        <div className="text-2xl font-bold text-text">Reservations</div>
         <table className="w-full table-fixed">
           <thead>
             <tr className="bg-secondary">
@@ -77,7 +78,8 @@ const Reservations = () => {
   // TODO: Add refresh button, control button
   return (
     <div className="container mx-auto">
-      <div className="mb-4 text-xl font-bold text-text">Reservations</div>
+      <LinkBack />
+      <div className="mb-4 text-2xl font-bold text-text">Reservations</div>
       <table className="table w-full table-fixed">
         <thead>
           <tr className="bg-secondary">
