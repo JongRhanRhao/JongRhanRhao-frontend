@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-import { STORE_AVAILABILITY_STATUS } from "@/lib/variables";
 import FavoriteButton from "@/components/shared/FavoriteButton";
 
 export interface ShopCardProps {
@@ -24,7 +23,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   maxSeats,
   currSeats,
 }) => {
-  const isAvailable = reservationStatus === STORE_AVAILABILITY_STATUS.AVAILABLE;
+  const isAvailable = currSeats < maxSeats;
   const reservationClass = `absolute top-3 text-[#121212] text-xs font-bold px-2 py-1 rounded-r-lg ${
     isAvailable ? "bg-primary" : "bg-rose-500"
   }`;
