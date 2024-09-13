@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useUser } from "@/hooks/useUserStore";
-import { STORE_MANAGEMENT_MENU } from "@/lib/variables";
+import { STORE_MGMT_MENU } from "@/lib/variables";
 import ReservationsManagement from "@/components/StoreManagementPage/ReservationsManagement";
 import StaffManagement from "@/components/StoreManagementPage/StaffManagement";
 import StoreStatus from "@/components/StoreManagementPage/StoreStatus";
@@ -16,7 +16,7 @@ const StoreManagement = () => {
   const userRole = user?.userRole;
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState(
-    STORE_MANAGEMENT_MENU.RESERVATIONS
+    STORE_MGMT_MENU.RESERVATIONS
   );
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
 
@@ -26,7 +26,7 @@ const StoreManagement = () => {
 
   const handleStoreSelect = useCallback((store: Store | null) => {
     setSelectedStore(store);
-    setSelectedType(STORE_MANAGEMENT_MENU.RESERVATIONS);
+    setSelectedType(STORE_MGMT_MENU.RESERVATIONS);
   }, []);
 
   useEffect(() => {
@@ -37,11 +37,11 @@ const StoreManagement = () => {
 
   const renderActiveSection = () => {
     switch (selectedType) {
-      case STORE_MANAGEMENT_MENU.RESERVATIONS:
+      case STORE_MGMT_MENU.RESERVATIONS:
         return <ReservationsManagement store={selectedStore} />;
-      case STORE_MANAGEMENT_MENU.STORE:
+      case STORE_MGMT_MENU.STORE:
         return <StoreStatus store={selectedStore} />;
-      case STORE_MANAGEMENT_MENU.STAFF:
+      case STORE_MGMT_MENU.STAFF:
         return <StaffManagement store={selectedStore} />;
       default:
         return null;
@@ -65,7 +65,7 @@ const StoreManagement = () => {
         />
       </div>
       <div className="flex flex-wrap mt-4 mb-4 gap-2">
-        {Object.values(STORE_MANAGEMENT_MENU).map((title) => (
+        {Object.values(STORE_MGMT_MENU).map((title) => (
           <FilterButton
             key={title}
             onClick={handleTypeClick}
