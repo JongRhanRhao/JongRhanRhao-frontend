@@ -18,6 +18,7 @@ import { SERVER_URL } from "@/lib/variables";
 import { Store } from "@/hooks/useFetchStores";
 import SmallScreenNavMenu from "@/components/shared/SmallScreenNavMenu";
 import LinkBack from "@/components/shared/LinkBack";
+import FavoriteButton from "@/components/shared/FavoriteButton";
 
 interface ShopDescriptionProps {
   selectedItem: string;
@@ -84,10 +85,19 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 <div className="mb-2 text-4xl font-bold uppercase text-text">
                   {stores.shop_name}
                 </div>
-                <div className="badge badge-outline text-primary">
-                  {" "}
-                  {stores.type}
-                </div>
+                <FavoriteButton storeId={id ? id : ""} />
+                {stores && Array.isArray(stores.type) ? (
+                  stores.type.map((type: string, index: number) => (
+                    <div
+                      key={index}
+                      className="badge badge-outline text-primary mr-0.5"
+                    >
+                      {type}
+                    </div>
+                  ))
+                ) : (
+                  <span>All</span>
+                )}
                 <div className="mt-1">
                   {[...Array(safeRating)].map((_, i) => (
                     <FontAwesomeIcon
@@ -100,26 +110,26 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                     ({stores.rating})
                   </span>
                 </div>
-                <p className="my-4 text-lg break-all text-text font-thai">
+                <p className="my-4 text-lg break-words text-text">
                   {stores.description}
                 </p>
                 <div className="text-lg font-medium">
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faClock} />
                     <span className="ml-2">
-                      Opening Hours: {stores.open_timebooking}
+                      เวลาเปิด-ปิด: {stores.open_timebooking}
                     </span>
                   </div>
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faCalendarTimes} />
                     <span className="ml-2">
-                      Reservation Expiry: {stores.cancel_reserve}
+                      เงื่อนไขการยกเลิกจอง: {stores.cancel_reserve}
                     </span>
                   </div>
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faInfoCircle} />
                     <span className="ml-2">
-                      Status:{" "}
+                      สถานะ:{" "}
                       <span className={`${statusClass} font-semibold`}>
                         {stores.status}
                       </span>
@@ -128,7 +138,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faLocationDot} />
                     <span className="ml-2 font-thai">
-                      Address: {stores.address}
+                      ตำแหน่งที่ตั้ง: {stores.address}
                     </span>
                   </div>
                 </div>
