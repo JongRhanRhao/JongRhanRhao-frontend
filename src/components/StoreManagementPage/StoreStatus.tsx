@@ -83,7 +83,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               title={option.label}
               selectedTitle={status}
               onClick={() => setStatus(option.value)}
-              className="flex-grow ml-1 border sm:flex-grow-0 border-primary"
+              className="flex-grow ml-1 border sm:flex-grow-0 border-primary hover:text-primary hover:bg-secondary"
             />
           ))}
         </div>
