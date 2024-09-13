@@ -16,7 +16,7 @@ export const FilterButton = React.memo(
     <button
       className={`btn btn-sm ${
         selectedTitle === title
-          ? "bg-primary text-secondary"
+          ? "bg-primary text-secondary border-none"
           : "bg-transparent text-text hover:bg-secondary hover:text-primary"
       } ${className}`}
       onClick={() => onClick(title)}
