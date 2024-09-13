@@ -26,11 +26,11 @@ const BookingButton = ({
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!isAuthenticated) {
-      alert("Please log in before making a reservation.");
+      toast.error("Please log in before making a reservation.");
       return;
     }
     if (!selectedDate || !numberOfPeople || !phoneNumber) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
     BookingStatus();
@@ -82,7 +82,7 @@ const BookingButton = ({
         id="BookingButton"
         className="modal modal-bottom sm:modal-middle md:modal-middle lg:modal-middle xl:modal-middle"
       >
-        <div className="modal-box bg-secondary text-text">
+        <div className="modal-box shadow-lg border-secondary/70 border-2 bg-bg text-text">
           <h2 className="mb-4 text-2xl font-bold text-primary">
             Book Your Reservation
           </h2>
@@ -92,7 +92,7 @@ const BookingButton = ({
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
               dateFormat="d MMMM yyyy"
-              className="w-full p-2 mt-1 rounded bg-bg"
+              className="w-full p-2 mt-1 rounded bg-secondary"
               minDate={new Date()}
             />
           </div>
@@ -103,7 +103,7 @@ const BookingButton = ({
               value={numberOfPeople}
               min={1}
               onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-              className="w-full p-2 mt-1 rounded bg-bg"
+              className="w-full p-2 mt-1 rounded bg-secondary"
             />
           </div>
           <div className="mb-4">
@@ -121,10 +121,10 @@ const BookingButton = ({
           </p>
           <div className="modal-action">
             <form method="dialog" className="flex justify-end w-full space-x-2">
-              <button className="btn text-text">Close</button>
+              <button className="btn text-text rounded-xl">Close</button>
               <button
                 onClick={handleSubmit}
-                className="px-4 py-2 mr-2 font-bold rounded btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
+                className="px-4 py-2 mr-2 font-bold rounded-xl btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
               >
                 Book Now
               </button>
