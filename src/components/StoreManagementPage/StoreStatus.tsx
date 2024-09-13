@@ -1,12 +1,11 @@
 import { useState } from "react";
-import Select from "react-select";
 import axios from "axios";
 
 import { Store } from "@/hooks/useFetchStores";
 import {
   SERVER_URL,
-  STORE_STATUS,
-  STORE_TYPE_FOR_SELECTOR,
+  STORE_MGMT_STATUS,
+  STORE_TYPES_FOR_SELECTOR,
 } from "@/lib/variables";
 import { FilterButton } from "../shared/FilterButton";
 import toast from "react-hot-toast";
@@ -15,7 +14,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   const splitOldTime = store?.open_timebooking.split(" - ");
   const storeId = store?.store_id;
   const [status, setStatus] = useState(store?.status);
-  const [storeType, setStoreType] = useState(store?.type);
+  const [selectedStoreTypes, setSelectedStoreTypes] = useState<string[]>(
+    store?.type || []
+  );
   const [currSeat, setCurrSeat] = useState(store?.curr_seats);
   const [maxSeat, setMaxSeat] = useState(store?.max_seats);
   const [openingTime, setOpeningTime] = useState(
@@ -45,7 +46,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         maxSeats: maxSeat || store.max_seats,
         currSeats: currSeat || store.curr_seats,
         isPopular: store.is_popular,
-        type: storeType || store.type,
+        type: selectedStoreTypes || store.type,
         description: description || store.description,
         imageUrl: store.image_url,
         rating: store.rating,
@@ -54,6 +55,14 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
       console.error("Error updating store:", error);
       throw error;
     }
+  };
+
+  const handleTypeCheckboxChange = (type: string) => {
+    setSelectedStoreTypes((prevSelected) =>
+      prevSelected.includes(type)
+        ? prevSelected.filter((selected) => selected !== type)
+        : [...prevSelected, type]
+    );
   };
 
   const updateStoreStatus = () => {
@@ -77,13 +86,13 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
           <span className="font-bold">
             Store Status <br />
           </span>
-          {STORE_STATUS.map((option) => (
+          {STORE_MGMT_STATUS.map((option) => (
             <FilterButton
               key={option.value}
               title={option.label}
               selectedTitle={status}
               onClick={() => setStatus(option.value)}
-              className="flex-grow ml-1 border sm:flex-grow-0 border-primary hover:text-primary hover:bg-secondary"
+              className={`${option.className} flex-grow ml-1 border sm:flex-grow-0 border-primary hover:text-primary hover:bg-secondary`}
             />
           ))}
         </div>
@@ -160,25 +169,31 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
               value={address || ""}
               onChange={(e) => setAddress(e.target.value)}
-              maxLength={255}
+              maxLength={50}
             />
             <div className="text-sm text-right text-gray-500">
-              {address?.length}/{255}
+              {address?.length}/{50}
             </div>
           </div>
         </div>
-        <div className="text-base bg-secondary w-fit p-4 rounded-xl space-y-3">
-          <span className="font-bold">Store Type:</span>
-          <Select
-            options={STORE_TYPE_FOR_SELECTOR}
-            className="mt-1 text-secondary w-fit"
-            value={STORE_TYPE_FOR_SELECTOR.find(
-              (option) => option.value === storeType
-            )}
-            onChange={(selectedOption) =>
-              setStoreType(selectedOption?.value?.toString() || "")
-            }
-          />
+        <div className="text-base bg-secondary w-fit rounded-xl space-y-3 collapse collapse-arrow">
+          <input type="checkbox" />
+          <span className="collapse-title font-bold">Store Categories:</span>
+          <div className="space-y-2 collapse-content">
+            {STORE_TYPES_FOR_SELECTOR.map((option) => (
+              <div key={option.value} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id={`store-type-${option.value}`}
+                  checked={selectedStoreTypes.includes(option.value)}
+                  onChange={() => handleTypeCheckboxChange(option.value)}
+                />
+                <label htmlFor={`store-type-${option.value}`}>
+                  {option.label}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <button
