@@ -19,6 +19,7 @@ import { Store } from "@/hooks/useFetchStores";
 import SmallScreenNavMenu from "@/components/shared/SmallScreenNavMenu";
 import LinkBack from "@/components/shared/LinkBack";
 import FavoriteButton from "@/components/shared/FavoriteButton";
+import { useTranslation } from "react-i18next";
 
 interface ShopDescriptionProps {
   selectedItem: string;
@@ -27,6 +28,11 @@ interface ShopDescriptionProps {
 // TODO: Show store image as carousel, add social media links
 const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   const { id } = useParams<{ id: string }>();
+  const { i18n } = useTranslation();
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+  };
+  const isThai = i18n.language === "th";
 
   const {
     data: stores,
@@ -74,7 +80,24 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
         <LeftSidebar onItemClick={onItemClick} />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <main className="flex-1 p-6 bg-bg">
-            <LinkBack />
+            <div className="flex justify-between items-baseline">
+              <LinkBack />
+              <div className=" justify-end">
+                <button
+                  className={`${isThai ? "" : "text-text"}`}
+                  onClick={() => changeLanguage("en")}
+                >
+                  English
+                </button>
+                <span className="m-2">|</span>
+                <button
+                  className={`${!isThai ? "" : "text-text"}`}
+                  onClick={() => changeLanguage("th")}
+                >
+                  ไทย
+                </button>
+              </div>
+            </div>
             <div className="flex flex-col justify-center md:flex-row">
               <img
                 src={stores.image_url as string}
