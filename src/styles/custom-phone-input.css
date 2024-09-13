@@ -1,14 +1,16 @@
 .react-international-phone-input {
-  --react-international-phone-background-color: #070707;
+  --react-international-phone-background-color: #121212;
   --react-international-phone-border-color: #121212;
   --react-international-phone-text-color: #e7ecef;
+  --react-international-phone-placeholder-color: #e7ecef;
   --react-international-phone-border-radius: 0.5rem;
-  --react-international-phone-color: #070707;
+  --react-international-phone-border-radius: 0.5rem;
+  --react-international-phone-color: #121212;
   --react-international-phone-font-size: 1rem;
 }
 
 .react-international-phone-country-selector {
-  --react-international-phone-country-selector-background-color: #070707;
+  --react-international-phone-country-selector-background-color: #121212;
   --react-international-phone-border-color: #121212;
 }
 
