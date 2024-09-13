@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleRight,
-  faTicket,
+  // faAngleRight,
+  // faTicket,
   faUser,
   faX,
   faSignOutAlt,
@@ -59,10 +59,15 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
             <>
               <div className="container p-4 rounded-lg shadow-inner bg-bg2/50">
                 <h2 className="mb-2 text-xl font-bold">{user?.userName}</h2>
-                <div className="text-sm opacity-75">Reservation Status</div>
+                <div className="text-sm uppercase opacity-50 mb-5">
+                  {user?.userRole}
+                </div>
+                <div className="text-base text-text opacity-75">
+                  Reservation Status
+                </div>
                 <div className="font-semibold">
                   Status:{" "}
-                  <span className="text-success">Successfully reserved</span>
+                  {/* <span className="text-success">Successfully reserved</span> */}
                 </div>
               </div>
 
@@ -75,11 +80,11 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                 Check Reservation
               </button>
 
-              <button className="w-full btn btn-outline text-text">
+              {/* <button className="w-full btn btn-outline text-text">
                 <FontAwesomeIcon icon={faTicket} className="mr-2" />
                 Have a coupon code?
                 <FontAwesomeIcon icon={faAngleRight} className="ml-2" />
-              </button>
+              </button> */}
 
               <button
                 onClick={handleLogout}
