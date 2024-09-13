@@ -89,16 +89,19 @@ export const STORE_MGMT_STATUS = [
     value: "Available",
     label: "Available",
     className: "border-green-500",
+    selectedClassName: "bg-green-500",
   },
   {
     value: "Busy",
     label: "Busy",
     className: "border-yellow-500",
+    selectedClassName: "bg-yellow-500",
   },
   {
     value: "Closed",
     label: "Closed",
     className: "border-rose-500",
+    selectedClassName: "bg-rose-500 text-text",
   },
 ];
 
