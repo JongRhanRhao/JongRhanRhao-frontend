@@ -7,6 +7,7 @@ interface Reservation {
   reservation_id: string;
   shop_id: string;
   customerId: string;
+  number_of_people: string;
   reservation_date: string;
   reservation_time: string;
   reservationStatus: string;
