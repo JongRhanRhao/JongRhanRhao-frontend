@@ -2,7 +2,7 @@ import React from "react";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 type FilterButtonProps = {
   title: string;
@@ -22,6 +22,8 @@ export const FilterButton = React.memo(
     className,
     selectedClassName,
   }: FilterButtonProps) => {
+    const { t } = useTranslation();
+
     return (
       <button
         className={`btn btn-sm ${
