@@ -17,7 +17,7 @@ export interface Store {
   max_seats: number;
   curr_seats: number;
   is_popular: boolean;
-  type: string | null;
+  type: string[];
 }
 
 export const useFetchStores = () => {
