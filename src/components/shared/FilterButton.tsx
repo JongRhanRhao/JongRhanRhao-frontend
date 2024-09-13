@@ -9,14 +9,22 @@ type FilterButtonProps = {
   onClick: (type: string) => void;
   icon?: IconDefinition;
   className?: string;
+  selectedClassName?: string;
 };
 
 export const FilterButton = React.memo(
-  ({ title, selectedTitle, onClick, icon, className }: FilterButtonProps) => (
+  ({
+    title,
+    selectedTitle,
+    onClick,
+    icon,
+    className,
+    selectedClassName,
+  }: FilterButtonProps) => (
     <button
       className={`btn btn-sm ${
         selectedTitle === title
-          ? "bg-primary text-secondary border-none"
+          ? `bg-primary text-secondary border-none ${selectedClassName}`
           : "bg-transparent text-text hover:bg-secondary"
       } ${className}`}
       onClick={() => onClick(title)}
