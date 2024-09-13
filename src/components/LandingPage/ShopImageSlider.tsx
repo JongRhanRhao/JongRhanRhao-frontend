@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ShopCard from "@/components/LandingPage/ShopCard";
 import { useFetchStores } from "@/hooks/useFetchStores";
 import { Link } from "react-router-dom";
+import { STORE_AVAILABILITY_STATUS } from "@/lib/variables";
 
 const ImageSlider: React.FC = () => {
   const { data: stores } = useFetchStores();
@@ -32,8 +33,8 @@ const ImageSlider: React.FC = () => {
             title={store.shop_name}
             reservationStatus={
               store.curr_seats < store.max_seats
-                ? "can reserve"
-                : "cannot reserve"
+                ? STORE_AVAILABILITY_STATUS.AVAILABLE
+                : STORE_AVAILABILITY_STATUS.UNAVAILABLE
             }
             rating={store.rating}
             maxSeats={store.max_seats}
