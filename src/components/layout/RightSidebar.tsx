@@ -43,12 +43,9 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
     >
       <button
         onClick={toggleRightSidebar}
-        className="self-end mb-4 text-white btn btn-circle btn-sm bg-primary hover:bg-primary-focus"
+        className="self-end mb-4 btn btn-circle btn-sm text-secondary bg-primary hover:bg-secondary hover:text-primary"
       >
-        <FontAwesomeIcon
-          icon={rightSidebarExpanded ? faX : faUser}
-          className="text-secondary"
-        />
+        <FontAwesomeIcon icon={rightSidebarExpanded ? faX : faUser} />
       </button>
 
       {rightSidebarExpanded && (
