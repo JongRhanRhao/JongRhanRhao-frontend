@@ -120,7 +120,7 @@ const StoreListWithFilterFeature = () => {
   return (
     <div className="container">
       <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
-        คันหารัานที่ใช่ & จองโต๊ะ
+        คันหารัาน & จองโต๊ะ
       </h2>
       <div className="mb-4 space-x-2">
         <FilterButton
