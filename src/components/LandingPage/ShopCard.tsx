@@ -24,8 +24,8 @@ const ShopCard: React.FC<ShopCardProps> = ({
   currSeats,
 }) => {
   const isAvailable = currSeats < maxSeats;
-  const reservationClass = `absolute top-3 text-[#121212] text-xs font-bold px-2 py-1 rounded-r-lg ${
-    isAvailable ? "bg-primary" : "bg-rose-500"
+  const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
+    isAvailable ? "bg-primary/50" : "bg-rose-500/50"
   }`;
   const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
   const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
