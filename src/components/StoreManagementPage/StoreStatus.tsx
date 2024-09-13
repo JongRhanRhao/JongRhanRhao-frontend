@@ -91,8 +91,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               key={option.value}
               title={option.label}
               selectedTitle={status}
+              selectedClassName={option.selectedClassName}
               onClick={() => setStatus(option.value)}
-              className={`${option.className} flex-grow ml-1 border sm:flex-grow-0 border-primary hover:text-primary hover:bg-secondary`}
+              className={`${option.className} flex-grow ml-1 border sm:flex-grow-0`}
             />
           ))}
         </div>
