@@ -50,8 +50,8 @@ const StoreSelector = ({
     return (
       <p className="p-2 bg-bg text-rose-500">
         No stores available. <br />
-        <span className="text-xs text-text">
-          Staff might forgot to assign a store for you
+        <span className="text-sm  text-text">
+          Please ask staff for permissions.
         </span>
       </p>
     );
