@@ -2,6 +2,7 @@ import axios from "axios";
 import { useCallback, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
 
 import { SERVER_URL } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
@@ -34,7 +35,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
   const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
 
-  const { user } = useUser();
+  const { user, isAuthenticated } = useUser();
   const customerId = user?.userId?.toString() || "";
 
   const { data: isFavoriteState, refetch } = useFavoriteStatus(
@@ -77,6 +78,10 @@ const ShopCard: React.FC<ShopCardProps> = ({
   const handleFavoriteClick = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.preventDefault();
+      if (!isAuthenticated) {
+        toast.error("Please log in before adding a favorite store.");
+        return;
+      }
       try {
         if (isFavorite) {
           handleUnfavoriteClick(e);
@@ -97,7 +102,14 @@ const ShopCard: React.FC<ShopCardProps> = ({
         setIsFavorite(false);
       }
     },
-    [isFavorite, handleUnfavoriteClick, customerId, storeId, refetch]
+    [
+      isFavorite,
+      handleUnfavoriteClick,
+      customerId,
+      storeId,
+      refetch,
+      isAuthenticated,
+    ]
   );
 
   return (
