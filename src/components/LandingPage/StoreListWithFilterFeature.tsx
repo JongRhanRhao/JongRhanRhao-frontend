@@ -11,8 +11,10 @@ import {
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
+import { useTranslation } from "react-i18next";
 
 const StoreListWithFilterFeature = () => {
+  const { t } = useTranslation();
   const [selectedType, setSelectedType] = useState(
     STORE_TYPES_FOR_FILTER_BTN.ALL
   );
@@ -75,7 +77,7 @@ const StoreListWithFilterFeature = () => {
     return (
       <div>
         <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
-          คันหารัาน & จองโต๊ะ
+          {t("DiscoverAndBooking")}
         </h2>
         <div className="mb-4 space-x-2">
           <FilterButton
@@ -120,7 +122,7 @@ const StoreListWithFilterFeature = () => {
   return (
     <div className="container">
       <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
-        คันหารัาน & จองโต๊ะ
+        {t("DiscoverAndBooking")}
       </h2>
       <div className="mb-4 space-x-2">
         <FilterButton
