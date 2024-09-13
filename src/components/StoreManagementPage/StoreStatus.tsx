@@ -177,7 +177,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             </div>
           </div>
         </div>
-        <div className="text-base bg-secondary w-fit rounded-xl space-y-3 collapse collapse-arrow">
+        <div className="text-base bg-secondary w-fit rounded-xl collapse collapse-arrow">
           <input type="checkbox" />
           <span className="collapse-title font-bold">Store Categories:</span>
           <div className="space-y-2 collapse-content">
