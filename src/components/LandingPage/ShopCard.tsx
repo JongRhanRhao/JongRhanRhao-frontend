@@ -1,12 +1,8 @@
-import axios from "axios";
-import { useCallback, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import toast from "react-hot-toast";
 
-import { SERVER_URL } from "@/lib/variables";
-import { useUser } from "@/hooks/useUserStore";
-import { useFavoriteStatus } from "@/hooks/useFavoriteStatus";
+import { STORE_AVAILABILITY_STATUS } from "@/lib/variables";
+import FavoriteButton from "@/components/shared/FavoriteButton";
 
 export interface ShopCardProps {
   id: string;
@@ -28,89 +24,12 @@ const ShopCard: React.FC<ShopCardProps> = ({
   maxSeats,
   currSeats,
 }) => {
-  const isAvailable = reservationStatus === "can reserve";
+  const isAvailable = reservationStatus === STORE_AVAILABILITY_STATUS.AVAILABLE;
   const reservationClass = `absolute top-3 text-[#121212] text-xs font-bold px-2 py-1 rounded-r-lg ${
     isAvailable ? "bg-primary" : "bg-rose-500"
   }`;
   const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
   const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
-
-  const { user, isAuthenticated } = useUser();
-  const customerId = user?.userId?.toString() || "";
-
-  const { data: isFavoriteState, refetch } = useFavoriteStatus(
-    customerId,
-    storeId
-  );
-
-  const [isFavorite, setIsFavorite] = useState<boolean>(
-    isFavoriteState || false
-  );
-
-  useEffect(() => {
-    if (isFavoriteState !== undefined) {
-      setIsFavorite(isFavoriteState);
-    }
-  }, [isFavoriteState]);
-
-  const handleUnfavoriteClick = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      e.preventDefault();
-      try {
-        await axios.post(`${SERVER_URL}/stores/api/favorites/remove`, {
-          customerId,
-          storeId,
-        });
-        setIsFavorite(false);
-        refetch();
-      } catch (err) {
-        if (axios.isAxiosError(err)) {
-          console.error("Axios error:", err.response);
-        } else {
-          console.error("Error removing favorite:", err);
-        }
-        setIsFavorite(true);
-      }
-    },
-    [customerId, storeId, refetch]
-  );
-
-  const handleFavoriteClick = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      e.preventDefault();
-      if (!isAuthenticated) {
-        toast.error("Please log in before adding a favorite store.");
-        return;
-      }
-      try {
-        if (isFavorite) {
-          handleUnfavoriteClick(e);
-        } else {
-          await axios.post(`${SERVER_URL}/stores/api/favorites`, {
-            customerId,
-            storeId,
-          });
-          setIsFavorite(true);
-          refetch();
-        }
-      } catch (err) {
-        if (axios.isAxiosError(err)) {
-          console.error("Axios error:", err.response);
-        } else {
-          console.error("Error adding favorite:", err);
-        }
-        setIsFavorite(false);
-      }
-    },
-    [
-      isFavorite,
-      handleUnfavoriteClick,
-      customerId,
-      storeId,
-      refetch,
-      isAuthenticated,
-    ]
-  );
 
   return (
     <div className="relative bg-gray-900 rounded shadow-lg cursor-pointer ovrflow-hidden m-a1 wh-auto sflex-shrink-0 card">
@@ -129,14 +48,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           {reservationStatus}
         </div>
         <div className="absolute text-xl text-white top-2 right-2">
-          <button onClick={handleFavoriteClick}>
-            <FontAwesomeIcon
-              className={`${
-                isFavorite ? "text-yellow-400" : "text-white"
-              } shadow-lg`}
-              icon={faStar}
-            />
-          </button>
+          <FavoriteButton storeId={storeId} />
         </div>
         <div className="absolute px-2 py-1 text-xs font-bold text-white rounded bottom-2 left-2">
           <div className="flex items-center">
