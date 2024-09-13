@@ -36,17 +36,17 @@ export const RESERVATION_STATUS_FOR_SELECTOR = [
 ];
 
 export const STORE_TYPES_FOR_FILTER_BTN = {
-  HOT: "มาแรง",
-  FAVORITE: "ร้านโปรด",
-  ALL: "ทั้งหมด",
-  BAR: "บาร์",
-  JAZZ: "แจ๊ส",
-  COCKTAIL: "ค็อกเทล",
-  PUB: "ผับ",
-  CHILL: "ชิลล์",
+  HOT: "Hot",
+  FAVORITE: "Favorite",
+  ALL: "All",
+  BAR: "Bar",
+  JAZZ: "Jazz",
+  COCKTAIL: "Cocktail",
+  PUB: "Pub",
+  CHILL: "Chill",
   NINETIES: "90s",
-  DANCE: "แดนซ์",
-  CLUB: "คลับ",
+  DANCE: "Dance",
+  CLUB: "Club",
 };
 
 export const STORE_TYPES_FOR_SELECTOR = [
