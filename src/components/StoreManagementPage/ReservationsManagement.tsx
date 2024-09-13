@@ -1,11 +1,19 @@
+import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+
 import { useFetchReservations } from "@/hooks/useFetchReservations";
 import { Store } from "@/hooks/useFetchStores";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect } from "react";
+import ReservationsStatusSelector from "@/components/StoreManagementPage/ReservationsStatusSelector";
 
+// TODO: more data description
 const ReservationsManagement = ({ store }: { store: Store | null }) => {
-  const { data, isLoading, error, refetch } = useFetchReservations({
+  const {
+    data: reservation,
+    isLoading,
+    error,
+    refetch,
+  } = useFetchReservations({
     type: "store",
     id: store?.store_id || "",
   });
@@ -32,6 +40,12 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
             <tr className="bg-secondary">
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 id reservation
+              </th>
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
+                customer name
+              </th>
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
+                number of people
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 customer id
@@ -81,6 +95,9 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
               customer name
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
+              number of people
+            </th>
+            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               date & time
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
@@ -89,25 +106,27 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
               Status
             </th>
-            <th className="w-1/4 font-bold text-left uppercase text-text"></th>
           </tr>
         </thead>
         <tbody className="bg-secondary text-text">
-          {Array.isArray(data) && data.length > 0 ? (
-            data.map((data) => (
-              <tr key={data.reservation_id}>
+          {Array.isArray(reservation) && reservation.length > 0 ? (
+            reservation.map((reservation) => (
+              <tr key={reservation.reservation_id}>
                 <td className="px-6 py-4 border-b border-neutral-500">
-                  {data.reservation_id}
+                  {reservation.reservation_id}
                 </td>
                 <td className="px-6 py-4 truncate border-b border-neutral-500">
-                  {data.user_name}
+                  {reservation.user_name}
+                </td>
+                <td className="px-6 py-4 truncate border-b border-neutral-500">
+                  {reservation.number_of_people}
                 </td>
                 <td className="px-6 py-4 border-b border-neutral-500">
-                  {data.reservation_date}, {data.reservation_time}
+                  {reservation.reservation_date}, {reservation.reservation_time}
                 </td>
                 <td className="px-6 py-4 border-b border-neutral-500">
-                  <a className="link" href={`tel:${data.phone_number}`}>
-                    {data.phone_number}
+                  <a className="link" href={`tel:${reservation.phone_number}`}>
+                    {reservation.phone_number}
                     <FontAwesomeIcon
                       icon={faPhone}
                       className="ml-2 text-primary"
@@ -115,17 +134,10 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                   </a>
                 </td>
                 <td className="px-6 py-4 border-b border-neutral-500">
-                  <span className="px-2 py-1 text-sm rounded-full text-secondary bg-primary">
-                    {data.reservation_status}
-                  </span>
-                </td>
-                <td className="border-b border-neutral-500">
-                  <a
-                    href={`/shop/${data.store_id}`}
-                    className="underline text-primary"
-                  >
-                    View Shop
-                  </a>
+                  <ReservationsStatusSelector
+                    currentStatus={reservation.reservation_status}
+                    reservationId={reservation.reservation_id}
+                  />
                 </td>
               </tr>
             ))
