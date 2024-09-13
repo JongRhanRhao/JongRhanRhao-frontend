@@ -2,6 +2,7 @@ import React from "react";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 
 type FilterButtonProps = {
   title: string;
@@ -20,22 +21,25 @@ export const FilterButton = React.memo(
     icon,
     className,
     selectedClassName,
-  }: FilterButtonProps) => (
-    <button
-      className={`btn btn-sm ${
-        selectedTitle === title
-          ? `bg-primary text-secondary border-none ${selectedClassName}`
-          : "bg-transparent text-text hover:bg-secondary"
-      } ${className}`}
-      onClick={() => onClick(title)}
-    >
-      {icon && (
-        <FontAwesomeIcon
-          icon={icon}
-          className={`${icon === faFire ? "text-error" : "text-yellow-400"}`}
-        />
-      )}
-      {title}
-    </button>
-  )
+  }: FilterButtonProps) => {
+    const { t } = useTranslation();
+    return (
+      <button
+        className={`btn btn-sm ${
+          selectedTitle === title
+            ? `bg-primary text-secondary border-none ${selectedClassName}`
+            : "bg-transparent text-text hover:bg-secondary"
+        } ${className}`}
+        onClick={() => onClick(title)}
+      >
+        {icon && (
+          <FontAwesomeIcon
+            icon={icon}
+            className={`${icon === faFire ? "text-error" : "text-yellow-400"}`}
+          />
+        )}
+        {t(title)}
+      </button>
+    );
+  }
 );
