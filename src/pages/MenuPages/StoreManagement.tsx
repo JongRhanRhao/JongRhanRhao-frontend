@@ -13,7 +13,7 @@ import LinkBack from "@/components/shared/LinkBack";
 
 const StoreManagement = () => {
   const { user } = useUser();
-  const userRole = user?.userRole;
+  const role = user?.role;
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState(
     STORE_MGMT_MENU.RESERVATIONS
@@ -30,10 +30,10 @@ const StoreManagement = () => {
   }, []);
 
   useEffect(() => {
-    if (userRole !== "owner" && userRole !== "staff") {
+    if (role !== "owner" && role !== "staff") {
       navigate("/");
     }
-  }, [userRole, navigate]);
+  }, [role, navigate]);
 
   const renderActiveSection = () => {
     switch (selectedType) {
