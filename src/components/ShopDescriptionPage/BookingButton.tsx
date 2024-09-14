@@ -11,6 +11,8 @@ import "@/styles/custom-phone-input.css";
 import { SERVER_URL } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
 import toast from "react-hot-toast";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 const BookingButton = ({
   disabled,
@@ -22,6 +24,7 @@ const BookingButton = ({
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [isOverAge, setIsOverAge] = useState<boolean>(false);
   const { user, isAuthenticated } = useUser();
   const { t } = useTranslation();
 
@@ -33,6 +36,10 @@ const BookingButton = ({
     }
     if (!selectedDate || !numberOfPeople || !phoneNumber) {
       toast.error("Please fill in all fields.");
+      return;
+    }
+    if (!isOverAge) {
+      toast.error("Please confirm that you are over 20 years old.");
       return;
     }
     BookingStatus();
@@ -118,7 +125,18 @@ const BookingButton = ({
               placeholder="+66 81 234 5678"
             />
           </div>
-          <p className="text-sm text-text/50">
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              className="checkbox checkbox-sm"
+              checked={isOverAge}
+              onChange={(e) => setIsOverAge(e.target.checked)}
+            />
+            <div className="text-rose-500 ml-2 text-sm font-semibold">
+              ข้าพเจ้ามีอายุมากกว่าหรือเท่ากับ 20 ปีบริบูรณ์
+            </div>
+          </div>
+          <p className="text-sm text-text/50 mt-3">
             Staff will call you to confirm your booking.
           </p>
           <div className="modal-action">
