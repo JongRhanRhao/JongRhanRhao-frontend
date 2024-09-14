@@ -95,8 +95,8 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
         </thead>
         <tbody>
           {Array.isArray(staff) &&
-            staff.map((s) => (
-              <tr key={s.userId} className="bg-bg">
+            staff.map((s, index) => (
+              <tr key={s.userId || index} className="bg-bg">
                 <td className="px-6 py-4">{s.userName}</td>
                 <td className="px-6 py-4">{s.userEmail}</td>
                 <td className="px-6 py-4">{s.role}</td>

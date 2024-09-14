@@ -23,11 +23,11 @@ const ImageSlider: React.FC = () => {
 
   return (
     <Slider {...settings}>
-      {stores?.map((store) => (
+      {stores?.map((store, index) => (
         <Link
           to={`/shop/${store.store_id}`}
           className="p-2"
-          key={store.store_id}
+          key={store.store_id || index}
         >
           <ShopCard
             id={store.store_id}
