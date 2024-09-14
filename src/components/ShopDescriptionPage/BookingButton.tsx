@@ -25,8 +25,10 @@ const BookingButton = ({
   const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [isOverAge, setIsOverAge] = useState<boolean>(false);
+  const [note, setNote] = useState<string>("");
   const { user, isAuthenticated } = useUser();
   const { t } = useTranslation();
+
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -57,6 +59,7 @@ const BookingButton = ({
     reservationTime: new Date().toLocaleTimeString(),
     numberOfPeople: numberOfPeople,
     phoneNumber: phoneNumber,
+    note: note,
     reservationStatus: "pending",
   };
 
@@ -77,7 +80,6 @@ const BookingButton = ({
     });
   };
 
-  // TODO: phone number field validation
   return (
     <>
       <button
@@ -129,6 +131,14 @@ const BookingButton = ({
               onChange={(phone) => setPhoneNumber(phone)}
               placeholder="+66 81 234 5678"
             />
+          </div>
+          <div className="mb-4 flex flex-col">
+            <label className="font-bold mb-">{t("note")}: </label>
+            <textarea
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              className="textarea resize-none w-full mt-1 p-2 rounded bg-secondary"
+            ></textarea>
           </div>
           <div className="flex items-center">
             <input
