@@ -36,7 +36,6 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
     }
     initialize();
   }, [initializeUser]);
-
   return (
     <div
       className={`flex flex-col transition-all duration-300 container ${
@@ -59,7 +58,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
               <div className="container p-4 rounded-lg shadow-inner bg-bg2/50">
                 <h2 className="mb-2 text-xl font-bold">{user?.userName}</h2>
                 <div className="text-sm uppercase opacity-50 mb-5">
-                  {user?.userRole}
+                  {user?.role}
                 </div>
                 {/* <div className="text-base text-text opacity-75">
                   Reservation Status
