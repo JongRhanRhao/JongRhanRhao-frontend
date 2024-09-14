@@ -2,13 +2,21 @@ export const resources = {
   en: {
     translation: {
       DiscoverAndBooking: "Discover & Booking",
+      back: "Back",
+      Reservable: "Reservable",
+      Unavailable: "Unavailable",
+      // Shop description
+      status: "Status",
+      address: "Address",
+      closeAndOpenTime: "Open hours",
+      cancel_condition: "Cancellation policy",
+      // Reservation
       reservation: "Reservations",
       id_reservation: "ID Reservation",
-      status: "Status",
       shop_name: "Shop name",
       dateNtime: "Date & Time",
       profile: "Profile",
-      back: "Back",
+      // Shop type
       Hot: "Hot",
       Favorite: "Favorite",
       All: "All",
@@ -20,20 +28,31 @@ export const resources = {
       "90s": "90s",
       Dance: "Dance",
       Club: "Club",
-      Reservable: "Reservable",
-      Unavailable: "Unavailable",
+      // Shop name
+      Minion: "Minion",
+      "LATE NIGHT TALKING MUSIC BAR": "LATE NIGHT TALKING MUSIC BAR",
+      TAWANDANG: "TAWANDANG",
+      // TODO: Add the rest of the shop names
     },
   },
   th: {
     translation: {
       DiscoverAndBooking: "ค้นหาร้าน & จองโต๊ะ",
+      back: "ย้อนกลับ",
+      Reservable: "สามารถจองได้",
+      Unavailable: "ไม่สามารถจองได้",
+      // รายละเอียดร้าน
+      status: "สถานะ",
+      address: "พิกัด",
+      closeAndOpenTime: "เวลาเปิด-ปิด",
+      cancel_condition: "เงื่อนไขการยกเลิกจอง",
+      // การจอง
       reservation: "การจอง",
       id_reservation: "ไอดีการจอง",
-      status: "สถานะ",
       shop_name: "ชื่อร้าน",
       dateNtime: "วันที่ & เวลา",
       profile: "ข้อมูลส่วนตัว",
-      back: "ย้อนกลับ",
+      // ประเภทร้าน
       Hot: "มาแรง",
       Favorite: "ร้านโปรด",
       All: "ทั้งหมด",
@@ -45,8 +64,11 @@ export const resources = {
       "90s": "90s",
       Dance: "แดนซ์",
       Club: "คลับ",
-      Reservable: "สามารถจองได้",
-      Unavailable: "ไม่สามารถจองได้",
+      // ชื่อร้าน
+      Minion: "มินเนี่ยน",
+      "LATE NIGHT TALKING MUSIC BAR": "LATE NIGHT TALKING MUSIC BAR",
+      TAWANDANG: "ตะวันแดง มหาชน",
+      // TODO: ใส่ชื่อร้านที่เหลือ
     },
   },
 } as const;
