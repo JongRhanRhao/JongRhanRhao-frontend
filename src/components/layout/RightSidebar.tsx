@@ -61,13 +61,13 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                 <div className="text-sm uppercase opacity-50 mb-5">
                   {user?.userRole}
                 </div>
-                <div className="text-base text-text opacity-75">
+                {/* <div className="text-base text-text opacity-75">
                   Reservation Status
                 </div>
                 <div className="font-semibold">
                   Status:{" "}
-                  {/* <span className="text-success">Successfully reserved</span> */}
-                </div>
+                  <span className="text-success">Successfully reserved</span>
+                </div> */}
               </div>
 
               <button
