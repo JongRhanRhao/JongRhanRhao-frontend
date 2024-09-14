@@ -95,8 +95,7 @@ const FavoriteButton = ({
       <button onClick={handleFavoriteClick}>
         <FontAwesomeIcon
           className={
-            `${isFavorite ? "text-yellow-400" : "text-white"} shadow-lg` +
-            className
+            `${isFavorite ? "text-yellow-400" : "text-white"} shadow-lg ${className}`
           }
           icon={faStar}
         />
