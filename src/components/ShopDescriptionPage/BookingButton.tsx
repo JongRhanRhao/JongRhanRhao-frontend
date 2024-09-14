@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import { format } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 import "@/styles/custom-phone-input.css";
 import { SERVER_URL } from "@/lib/variables";
@@ -22,6 +23,7 @@ const BookingButton = ({
   const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const { user, isAuthenticated } = useUser();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -84,10 +86,10 @@ const BookingButton = ({
       >
         <div className="modal-box shadow-lg border-secondary/70 border-2 bg-bg text-text">
           <h2 className="mb-4 text-2xl font-bold text-primary">
-            Book Your Reservation
+            {t("bookYourReservation")}
           </h2>
           <div className="mb-4">
-            <label className="mr-2 font-bold">Select Date:</label>
+            <label className="mr-2 font-bold">{t("date")}:</label>
             <DatePicker
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
@@ -97,17 +99,17 @@ const BookingButton = ({
             />
           </div>
           <div className="mb-4">
-            <label className="font-bold">Number of People:</label>
+            <div className="font-bold">{t("numberOfPeople")}</div>
             <input
               type="number"
               value={numberOfPeople}
               min={1}
               onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-              className="w-full p-2 mt-1 rounded bg-secondary"
+              className="w-fit p-2 mt-1 rounded bg-secondary"
             />
           </div>
           <div className="mb-4">
-            <label className="font-bold">Phone:</label>
+            <label className="font-bold">{t("phone")}</label>
             <PhoneInput
               defaultCountry="th"
               className="w-full mt-1"
@@ -116,7 +118,7 @@ const BookingButton = ({
               placeholder="+66 81 234 5678"
             />
           </div>
-          <p className="text-sm">
+          <p className="text-sm text-text/50">
             Staff will call you to confirm your booking.
           </p>
           <div className="modal-action">
