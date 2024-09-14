@@ -8,7 +8,6 @@ import "react-international-phone/style.css";
 import { SERVER_URL } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
 import { LoginSchema, RegisterSchema } from "@/lib/types";
-import toast from "react-hot-toast";
 
 interface FormDataProps {
   user_name: string;
