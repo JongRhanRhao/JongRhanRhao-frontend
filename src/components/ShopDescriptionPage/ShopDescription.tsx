@@ -9,6 +9,9 @@ import {
   faLocationDot,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+import { useTranslation } from "react-i18next";
 
 import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
@@ -19,7 +22,7 @@ import { Store } from "@/hooks/useFetchStores";
 import SmallScreenNavMenu from "@/components/shared/SmallScreenNavMenu";
 import LinkBack from "@/components/shared/LinkBack";
 import FavoriteButton from "@/components/shared/FavoriteButton";
-import { useTranslation } from "react-i18next";
+import { useFetchStoreImages } from "@/hooks/useFetchStoreImages";
 
 interface ShopDescriptionProps {
   selectedItem: string;
@@ -27,7 +30,7 @@ interface ShopDescriptionProps {
 }
 // TODO: Show store image as carousel, add social media links
 const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
-  const { id } = useParams<{ id: string }>();
+  const { id: storeId } = useParams<{ id: string }>();
   const { i18n } = useTranslation();
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
@@ -40,9 +43,15 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
     isLoading,
     error,
   } = useQuery<Store>({
-    queryKey: ["stores", id],
+    queryKey: ["stores", storeId],
     queryFn: () =>
-      fetch(`${SERVER_URL}/stores/api/stores/${id}`).then((res) => res.json()),
+      fetch(`${SERVER_URL}/stores/api/stores/${storeId}`).then((res) =>
+        res.json()
+      ),
+  });
+
+  const { data: storeImages } = useFetchStoreImages({
+    storeId: storeId as string,
   });
 
   if (isLoading) {
@@ -99,7 +108,23 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 </button>
               </div>
             </div>
-            <div className="flex flex-col justify-center md:flex-row">
+            <div className="flex flex-col justify-center md:flex-row items-center">
+              {storeImages && storeImages.length > 0 && (
+                <ImageGallery
+                  items={storeImages.map((image) => ({
+                    original: image.original,
+                    thumbnail: image.thumbnail,
+                  }))}
+                  showFullscreenButton={false}
+                  showPlayButton={false}
+                  showNav={false}
+                  autoPlay
+                  slideInterval={3000}
+                  lazyLoad
+                  additionalClass="custom-gallery"
+                />
+              )}
+              {/*  */}
               <img
                 src={stores.image_url as string}
                 className="object-cover w-full rounded-xl h-80 md:w-1/2"
@@ -112,7 +137,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   </div>
                   <FavoriteButton
                     className="text-2xl bg-secondary p-1 rounded"
-                    storeId={id ? id : ""}
+                    storeId={storeId ? storeId : ""}
                   />
                 </div>
                 {stores && Array.isArray(stores.type) ? (
