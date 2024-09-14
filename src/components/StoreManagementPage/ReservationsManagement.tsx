@@ -97,14 +97,18 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
       <h2 className="mb-4 text-xl font-bold text-text">
         Reservations for {store.shop_name}
       </h2>
-      <FontAwesomeIcon icon={faCalendarDay} className="text-primary" /> :{" "}
-      <DatePicker
-        className="w-full p-2 mt-1 rounded bg-secondary mb-3 text-text"
-        dateFormat={"d MMMM yyyy"}
-        selected={selectedDate}
-        onChange={(date) => setSelectedDate(date)}
-        placeholderText="Select a date"
-      />
+      <div className="relative flex items-center bg-secondary p-2 rounded mb-3 w-fit">
+        <div className="border-r">
+          <FontAwesomeIcon icon={faCalendarDay} className="text-primary mr-2" />
+        </div>
+        <DatePicker
+          className="w-full p-2 bg-secondary text-text"
+          dateFormat={"d MMMM yyyy"}
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          placeholderText="Select a date"
+        />
+      </div>
       <table className="table w-full table-fixed">
         <thead>
           <tr className="bg-secondary">
