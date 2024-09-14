@@ -76,7 +76,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   const isBusy = stores.status === "Busy";
   const isClosed = stores.status === "Closed";
   const statusClass = isAvailable
-    ? "text-success"
+    ? "text-primary"
     : isBusy
     ? "text-warning"
     : isClosed
