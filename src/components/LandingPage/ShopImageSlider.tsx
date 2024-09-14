@@ -1,6 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useTranslation } from "react-i18next";
 
 import ShopCard from "@/components/LandingPage/ShopCard";
 import { useFetchStores } from "@/hooks/useFetchStores";
@@ -9,6 +10,7 @@ import { STORE_AVAILABILITY_STATUS } from "@/lib/variables";
 
 const ImageSlider: React.FC = () => {
   const { data: stores } = useFetchStores();
+  const { t } = useTranslation();
   const settings = {
     infinite: true,
     speed: 500,
@@ -33,8 +35,8 @@ const ImageSlider: React.FC = () => {
             title={store.shop_name}
             reservationStatus={
               store.curr_seats < store.max_seats
-                ? STORE_AVAILABILITY_STATUS.AVAILABLE
-                : STORE_AVAILABILITY_STATUS.UNAVAILABLE
+                ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
+                : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
             }
             rating={store.rating}
             maxSeats={store.max_seats}
