@@ -59,7 +59,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
               />
             ))}
           </div>
-          <p className={`mt-2 ${seatCountClass} shadow-lg`}>
+          <p className={`mt-2 ${seatCountClass} shadow-lg animate-pulse`}>
             {currSeats} / {maxSeats}
           </p>
         </div>
