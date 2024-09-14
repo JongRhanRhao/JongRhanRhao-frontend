@@ -7,6 +7,7 @@ import { useUser } from "@/hooks/useUserStore";
 import { useFetchFavoriteStore } from "@/hooks/useFetchFavoriteStore";
 import {
   DATA_FETCHING_DELAY_TIME,
+  ERROR_TEXT,
   STORE_TYPES_FOR_FILTER_BTN,
 } from "@/lib/variables";
 import BackHomeButton from "@/components/shared/BackHomeButton";
@@ -113,7 +114,7 @@ const StoreListWithFilterFeature = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-full text-2xl mt-14">
-        Something went wrong, please try again later.
+        {ERROR_TEXT}
         <BackHomeButton className="mt-5 text-primary" />
       </div>
     );
