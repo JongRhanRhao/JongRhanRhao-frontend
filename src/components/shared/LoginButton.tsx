@@ -21,7 +21,6 @@ const LoginButton = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { setUser, setIsAuthenticated } = useUser();
   const schema = isLogin ? LoginSchema : RegisterSchema;
-
   const {
     register,
     handleSubmit,
@@ -71,6 +70,11 @@ const LoginButton = () => {
     setErrorMessage("");
     reset();
   };
+
+  const customTextInputClass: string =
+    "mb-2 block px-2.5 pb-2.5 pt-4 w-full text-sm text-text bg-secondary rounded-lg border border-secondary appearance-none focus:outline-none focus:ring-0 focus:border-primary peer";
+  const customTextInputLabel: string =
+    "absolute text-sm text-text duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-secondary px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1";
 
   return (
     <>
@@ -199,7 +203,7 @@ const LoginButton = () => {
                     })}
                     type="text"
                     id="username"
-                    className="mb-2 block px-2.5 pb-2.5 pt-4 w-full text-sm text-text bg-secondary rounded-lg border border-secondary appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
+                    className={customTextInputClass}
                     placeholder=" "
                   />
                   <label
@@ -241,13 +245,10 @@ const LoginButton = () => {
                   {...register("email", { required: "* Email is required" })}
                   type="email"
                   id="email"
-                  className="mb-2 block px-2.5 pb-2.5 pt-4 w-full text-sm text-text bg-secondary rounded-lg border border-secondary appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
+                  className={customTextInputClass}
                   placeholder=" "
                 />
-                <label
-                  htmlFor="email"
-                  className="absolute text-sm text-text duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-secondary px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
+                <label htmlFor="email" className={customTextInputLabel}>
                   E-mail
                 </label>
                 {errors.email && (
@@ -262,13 +263,10 @@ const LoginButton = () => {
                   })}
                   type="password"
                   id="password"
-                  className="mb-2 block px-2.5 pb-2.5 pt-4 w-full text-sm text-text bg-secondary rounded-lg border border-secondary appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
+                  className={customTextInputClass}
                   placeholder=" "
                 />
-                <label
-                  htmlFor="password"
-                  className="mb-2 absolute text-sm text-text duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-secondary px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
+                <label htmlFor="password" className={customTextInputLabel}>
                   Password
                 </label>
                 {errors.password && (
@@ -284,12 +282,12 @@ const LoginButton = () => {
                     {...register("confirm_password")}
                     type="password"
                     id="confirm_password"
-                    className="mb-2 block px-2.5 pb-2.5 pt-4 w-full text-sm text-text bg-secondary rounded-lg border border-secondary appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
+                    className={customTextInputClass}
                     placeholder=" "
                   />
                   <label
                     htmlFor="confirm_password"
-                    className="absolute text-sm text-text duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-secondary px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    className={customTextInputLabel}
                   >
                     Confirm Password
                   </label>
