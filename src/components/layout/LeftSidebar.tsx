@@ -27,8 +27,8 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
   const navigate = useNavigate();
   const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarStore();
   const { user, initializeUser } = useUser();
-  const userRole = user?.userRole;
-  const isOwnerOrStaff = userRole === "owner" || userRole === "staff";
+  const role = user?.role;
+  const isOwnerOrStaff = role === "owner" || role === "staff";
 
   useEffect(() => {
     async function initialize() {
