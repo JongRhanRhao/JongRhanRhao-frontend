@@ -119,6 +119,7 @@ const BookingButton = ({
               className="w-fit p-2 mt-1 rounded bg-secondary"
             />
           </div>
+          <div className="mb-4 font-bold">{t("slots")}:</div>
           <div className="mb-4">
             <label className="font-bold">{t("phone")}</label>
             <PhoneInput
@@ -137,7 +138,7 @@ const BookingButton = ({
               onChange={(e) => setIsOverAge(e.target.checked)}
             />
             <div className="text-rose-500 ml-2 text-sm font-semibold">
-              ข้าพเจ้ามีอายุมากกว่าหรือเท่ากับ 20 ปีบริบูรณ์
+              {t("overAge")}
             </div>
           </div>
           <p className="text-sm text-text/50 mt-3">
