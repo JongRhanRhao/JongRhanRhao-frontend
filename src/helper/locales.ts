@@ -3,7 +3,7 @@ export const resources = {
     translation: {
       DiscoverAndBooking: "Discover & Booking",
       back: "Back",
-      Reservable: "Reservable",
+      "Can walk-in": "Can walk-in",
       Unavailable: "Unavailable",
       // Booking
       numberOfPeople: "Number of people",
@@ -44,7 +44,7 @@ export const resources = {
     translation: {
       DiscoverAndBooking: "ค้นหาร้าน & จองโต๊ะ",
       back: "ย้อนกลับ",
-      Reservable: "สามารถจองได้",
+      "Can walk-in": "วอคอินได้",
       Unavailable: "ไม่สามารถจองได้",
       // การจอง
       numberOfPeople: "จำนวนคน",
