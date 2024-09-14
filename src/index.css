@@ -6,3 +6,13 @@
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 200 200"><circle cx="100" cy="100" r="50" fill="rgba(255, 255, 255, 0.1)"/><circle cx="50" cy="50" r="50" fill="rgba(255, 255, 255, 0.1)"/><circle cx="150" cy="150" r="50" fill="rgba(255, 255, 255, 0.1)"/></svg>');
   }
 }
+
+.filter-container {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #070707;
+  z-index: 10;
+  padding: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
