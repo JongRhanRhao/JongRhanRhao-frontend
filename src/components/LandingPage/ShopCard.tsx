@@ -12,6 +12,7 @@ export interface ShopCardProps {
   maxSeats: number;
   currSeats: number;
   description: string | null;
+  className?: string;
 }
 
 const ShopCard: React.FC<ShopCardProps> = ({
@@ -22,6 +23,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   rating,
   maxSeats,
   currSeats,
+  className,
 }) => {
   const isAvailable = currSeats < maxSeats;
   const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
@@ -31,7 +33,9 @@ const ShopCard: React.FC<ShopCardProps> = ({
   const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
 
   return (
-    <div className="relative bg-gray-900 rounded shadow-lg cursor-pointer ovrflow-hidden m-a1 wh-auto sflex-shrink-0 card">
+    <div
+      className={`relative bg-gray-900 rounded shadow-lg cursor-pointer ovrflow-hidden m-a1 wh-auto sflex-shrink-0 card ${className}`}
+    >
       <div className="relative">
         <img
           src={
