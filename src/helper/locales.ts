@@ -9,6 +9,8 @@ export const resources = {
       numberOfPeople: "Number of people",
       date: "Date",
       phone: "Phone",
+      slots: "Slots",
+      overAge: "* I am over 20 years old.",
       // Shop description
       status: "Status",
       address: "Address",
@@ -50,6 +52,7 @@ export const resources = {
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
       phone: "เบอร์โทรศัพท์",
+      slots: "จำนวนที่ว่าง",
       // รายละเอียดร้าน
       status: "สถานะ",
       address: "พิกัด",
@@ -62,6 +65,7 @@ export const resources = {
       shop_name: "ชื่อร้าน",
       dateNtime: "วันที่ & เวลา",
       profile: "ข้อมูลส่วนตัว",
+      overAge: "* ข้าพเจ้ามีอายุมากกว่าหรือเท่ากับ 20 ปีบริบูรณ์",
       // ประเภทร้าน
       Hot: "มาแรง",
       Favorite: "ร้านโปรด",
