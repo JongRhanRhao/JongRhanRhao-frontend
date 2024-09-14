@@ -1,4 +1,4 @@
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useUser } from "@/hooks/useUserStore";
@@ -7,6 +7,7 @@ import LinkBack from "@/components/shared/LinkBack";
 
 const Reservations = () => {
   const user = useUser();
+  const { t } = useTranslation();
   const { isAuthenticated } = user;
   const {
     data: reservation,
