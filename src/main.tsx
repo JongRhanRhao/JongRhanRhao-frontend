@@ -24,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             padding: "16px",
             accentColor: "#89fc00",
             color: "#e7ecef",
+            zIndex: 9999,
           },
           iconTheme: {
             primary: "#89fc00",
