@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import DatePicker from "react-datepicker";
 
 import { useFetchReservations } from "@/hooks/useFetchReservations";
 import { Store } from "@/hooks/useFetchStores";
@@ -17,6 +18,16 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
     type: "store",
     id: store?.store_id || "",
   });
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const reservationCount = Array.isArray(reservation) ? reservation.length : 0;
+
+  const filteredReservationsByDate = Array.isArray(reservation)
+    ? reservation.filter(
+        (res) =>
+          new Date(res.reservation_date).toDateString() ===
+          selectedDate?.toDateString()
+      )
+    : [];
 
   useEffect(() => {
     if (store?.store_id) {
@@ -83,8 +94,15 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   return (
     <div className="container mx-auto">
       <h2 className="mb-4 text-xl font-bold text-text">
-        Reservations for {store.shop_name}
+        Reservations for {store.shop_name} ({reservationCount})
       </h2>
+      <DatePicker
+        className="w-full p-2 mt-1 rounded bg-secondary mb-3"
+        dateFormat={"d MMMM yyyy"}
+        selected={selectedDate}
+        onChange={(date) => setSelectedDate(date)}
+        placeholderText="Select a date"
+      />
       <table className="table w-full table-fixed">
         <thead>
           <tr className="bg-secondary">
@@ -110,7 +128,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
         </thead>
         <tbody className="bg-secondary text-text">
           {Array.isArray(reservation) && reservation.length > 0 ? (
-            reservation.map((reservation) => (
+            filteredReservationsByDate.map((reservation) => (
               <tr key={reservation.reservation_id}>
                 <td className="px-6 py-4 border-b border-neutral-500">
                   {reservation.reservation_id}
