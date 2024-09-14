@@ -38,6 +38,10 @@ const BookingButton = ({
       toast.error("Please fill in all fields.");
       return;
     }
+    if (phoneNumber.length < 10) {
+      toast.error("Please enter a valid phone number.");
+      return;
+    }
     if (!isOverAge) {
       toast.error("Please confirm that you are over 20 years old.");
       return;
