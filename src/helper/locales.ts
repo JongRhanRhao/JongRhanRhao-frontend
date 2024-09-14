@@ -5,12 +5,17 @@ export const resources = {
       back: "Back",
       Reservable: "Reservable",
       Unavailable: "Unavailable",
+      // Booking
+      numberOfPeople: "Number of people",
+      date: "Date",
+      phone: "Phone",
       // Shop description
       status: "Status",
       address: "Address",
       closeAndOpenTime: "Open hours",
       cancel_condition: "Cancellation policy",
       // Reservation
+      bookYourReservation: "Book your reservation",
       reservation: "Reservations",
       id_reservation: "ID Reservation",
       shop_name: "Shop name",
@@ -41,12 +46,17 @@ export const resources = {
       back: "ย้อนกลับ",
       Reservable: "สามารถจองได้",
       Unavailable: "ไม่สามารถจองได้",
+      // การจอง
+      numberOfPeople: "จำนวนคน",
+      date: "วันที่",
+      phone: "เบอร์โทรศัพท์",
       // รายละเอียดร้าน
       status: "สถานะ",
       address: "พิกัด",
       closeAndOpenTime: "เวลาเปิด-ปิด",
       cancel_condition: "เงื่อนไขการยกเลิกจอง",
       // การจอง
+      bookYourReservation: "จองโต๊ะ",
       reservation: "การจอง",
       id_reservation: "ไอดีการจอง",
       shop_name: "ชื่อร้าน",
