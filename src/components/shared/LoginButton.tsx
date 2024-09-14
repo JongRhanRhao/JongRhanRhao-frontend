@@ -79,7 +79,7 @@ const LoginButton = () => {
   return (
     <>
       <button
-        className="w-full py-3 rounded-md btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
+        className="w-full py-3 rounded-xl btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
         onClick={() => {
           const dialog = document.getElementById("login") as HTMLDialogElement;
           if (dialog) {
@@ -220,26 +220,6 @@ const LoginButton = () => {
                 </div>
               )}
 
-              {!isLogin && (
-                <>
-                  <PhoneInput
-                    defaultCountry="th"
-                    className="w-full"
-                    placeholder="+66 81 234 5678"
-                    value={watch("phone_number") || ""}
-                    onChange={(phone) => {
-                      setValue("phone_number", phone);
-                    }}
-                    onBlur={() => trigger("phone_number")}
-                  />
-                  {errors.phone_number && (
-                    <p className="text-sm text-red-600">
-                      {errors.phone_number.message}
-                    </p>
-                  )}
-                </>
-              )}
-
               <div className="relative">
                 <input
                   {...register("email", { required: "* Email is required" })}
@@ -299,6 +279,25 @@ const LoginButton = () => {
                 </div>
               )}
             </div>
+            {!isLogin && (
+              <>
+                <PhoneInput
+                  defaultCountry="th"
+                  className="w-full"
+                  placeholder="+66 81 234 5678"
+                  value={watch("phone_number") || ""}
+                  onChange={(phone) => {
+                    setValue("phone_number", phone);
+                  }}
+                  onBlur={() => trigger("phone_number")}
+                />
+                {errors.phone_number && (
+                  <p className="text-sm text-red-600">
+                    {errors.phone_number.message}
+                  </p>
+                )}
+              </>
+            )}
             {errorMessage && (
               <p className="text-sm text-red-600">{errorMessage}</p>
             )}
