@@ -9,7 +9,7 @@ export interface User {
   userId: number;
   userName: string;
   userEmail: string;
-  userRole: string;
+  role: string;
 }
 
 interface UserState {
