@@ -14,7 +14,7 @@ export const GLOBAL_URL_ROUTES = {
 };
 
 export const STORE_AVAILABILITY_STATUS = {
-  AVAILABLE: "Reservable",
+  AVAILABLE: "Can walk-in",
   UNAVAILABLE: "Unavailable",
 };
 
