@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const BaseUserSchema = z.object({
-  email: z.string().email("* Invalid email address"),
+  email: z.string().email("* Email is required"),
   password: z.string().min(6, "* Password is required"),
 });
 
