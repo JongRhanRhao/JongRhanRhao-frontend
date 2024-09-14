@@ -26,7 +26,7 @@ const StoreListWithFilterFeature = () => {
     error,
     refetch: refetchStoreData,
   } = useFetchStores();
-  const { user } = useUser();
+  const { user, isAuthenticated } = useUser();
   const {
     data: favoriteStores,
     isLoading: isFetchingFavorites,
@@ -87,12 +87,14 @@ const StoreListWithFilterFeature = () => {
             onClick={handleTypeClick}
             icon={faFire}
           />
-          <FilterButton
-            title={STORE_TYPES_FOR_FILTER_BTN.FAVORITE}
-            selectedTitle={selectedType}
-            onClick={handleTypeClick}
-            icon={faStar}
-          />
+          {isAuthenticated && (
+            <FilterButton
+              title={STORE_TYPES_FOR_FILTER_BTN.FAVORITE}
+              selectedTitle={selectedType}
+              onClick={handleTypeClick}
+              icon={faStar}
+            />
+          )}
           {Object.values(STORE_TYPES_FOR_FILTER_BTN)
             .slice(2)
             .map((type) => (
@@ -132,12 +134,14 @@ const StoreListWithFilterFeature = () => {
           onClick={handleTypeClick}
           icon={faFire}
         />
-        <FilterButton
-          title={STORE_TYPES_FOR_FILTER_BTN.FAVORITE}
-          selectedTitle={selectedType}
-          onClick={handleTypeClick}
-          icon={faStar}
-        />
+        {isAuthenticated && (
+          <FilterButton
+            title={STORE_TYPES_FOR_FILTER_BTN.FAVORITE}
+            selectedTitle={selectedType}
+            onClick={handleTypeClick}
+            icon={faStar}
+          />
+        )}
         {Object.values(STORE_TYPES_FOR_FILTER_BTN)
           .slice(2)
           .map((type) => (
