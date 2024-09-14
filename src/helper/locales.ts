@@ -11,6 +11,7 @@ export const resources = {
       phone: "Phone",
       slots: "Slots",
       overAge: "* I am over 20 years old.",
+      note: "Note",
       // Shop description
       status: "Status",
       address: "Address",
@@ -53,6 +54,7 @@ export const resources = {
       date: "วันที่",
       phone: "เบอร์โทรศัพท์",
       slots: "จำนวนที่ว่าง",
+      note: "หมายเหตุถึงร้าน",
       // รายละเอียดร้าน
       status: "สถานะ",
       address: "พิกัด",
