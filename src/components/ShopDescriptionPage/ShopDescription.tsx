@@ -9,7 +9,6 @@ import {
   faLocationDot,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
-import { t } from "i18next";
 
 import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
@@ -34,6 +33,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
     i18n.changeLanguage(lang);
   };
   const isThai = i18n.language === "th";
+  const { t } = useTranslation();
 
   const {
     data: stores,
@@ -106,10 +106,15 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 alt="shopImage"
               />
               <div className="w-full h-auto p-5 mt-5 shadow-md rounded-xl md:ml-8 md:mt-0">
-                <div className="mb-2 text-4xl font-bold uppercase text-text">
-                  {stores.shop_name}
+                <div className="flex items-baseline space-x-2">
+                  <div className="mb-2 text-4xl font-bold uppercase text-text">
+                    {t(stores.shop_name)}
+                  </div>
+                  <FavoriteButton
+                    className="text-2xl bg-secondary p-1 rounded"
+                    storeId={id ? id : ""}
+                  />
                 </div>
-                <FavoriteButton storeId={id ? id : ""} />
                 {stores && Array.isArray(stores.type) ? (
                   stores.type.map((type: string, index: number) => (
                     <div
@@ -141,19 +146,19 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faClock} />
                     <span className="ml-2">
-                      เวลาเปิด-ปิด: {stores.open_timebooking}
+                      {t("closeAndOpenTime")}: {stores.open_timebooking}
                     </span>
                   </div>
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faCalendarTimes} />
                     <span className="ml-2">
-                      เงื่อนไขการยกเลิกจอง: {stores.cancel_reserve}
+                      {t("cancel_condition")}: {stores.cancel_reserve}
                     </span>
                   </div>
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faInfoCircle} />
                     <span className="ml-2">
-                      สถานะ:{" "}
+                      {t("status")}:{" "}
                       <span className={`${statusClass} font-semibold`}>
                         {stores.status}
                       </span>
@@ -162,7 +167,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faLocationDot} />
                     <span className="ml-2 font-thai">
-                      ตำแหน่งที่ตั้ง: {stores.address}
+                      {t("address")}: {stores.address}
                     </span>
                   </div>
                 </div>
