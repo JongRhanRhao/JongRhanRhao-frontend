@@ -4,6 +4,7 @@ import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useUser } from "@/hooks/useUserStore";
 import { useFetchReservations } from "@/hooks/useFetchReservations";
 import LinkBack from "@/components/shared/LinkBack";
+import { ERROR_TEXT } from "@/lib/variables";
 
 const Reservations = () => {
   const user = useUser();
@@ -72,7 +73,7 @@ const Reservations = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-full text-2xl text-text mt-14">
-        Something went wrong, please try again later.
+        {ERROR_TEXT}
         <BackHomeButton className="mt-5 text-primary" />
       </div>
     );
