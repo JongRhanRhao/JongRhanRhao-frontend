@@ -69,7 +69,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                 Phone
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                Status
+                action
               </th>
             </tr>
           </thead>
@@ -124,7 +124,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
               Phone
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              Status
+              action
             </th>
           </tr>
         </thead>
