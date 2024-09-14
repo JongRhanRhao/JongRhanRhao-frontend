@@ -21,7 +21,6 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(
     new Date(Date.now())
   );
-  const reservationCount = Array.isArray(reservation) ? reservation.length : 0;
 
   const filteredReservationsByDate = Array.isArray(reservation)
     ? reservation.filter(
@@ -96,7 +95,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   return (
     <div className="container mx-auto">
       <h2 className="mb-4 text-xl font-bold text-text">
-        Reservations for {store.shop_name} ({reservationCount})
+        Reservations for {store.shop_name}
       </h2>
       <FontAwesomeIcon icon={faCalendarDay} className="text-primary" /> :{" "}
       <DatePicker
