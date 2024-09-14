@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDay, faPhone } from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
 
 import { useFetchReservations } from "@/hooks/useFetchReservations";
@@ -18,7 +18,9 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
     type: "store",
     id: store?.store_id || "",
   });
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    new Date(Date.now())
+  );
   const reservationCount = Array.isArray(reservation) ? reservation.length : 0;
 
   const filteredReservationsByDate = Array.isArray(reservation)
@@ -96,8 +98,9 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
       <h2 className="mb-4 text-xl font-bold text-text">
         Reservations for {store.shop_name} ({reservationCount})
       </h2>
+      <FontAwesomeIcon icon={faCalendarDay} className="text-primary" /> :{" "}
       <DatePicker
-        className="w-full p-2 mt-1 rounded bg-secondary mb-3"
+        className="w-full p-2 mt-1 rounded bg-secondary mb-3 text-text"
         dateFormat={"d MMMM yyyy"}
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}
