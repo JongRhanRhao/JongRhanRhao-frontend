@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { faFire, faStar } from "@fortawesome/free-solid-svg-icons";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 import { useFetchStores } from "@/hooks/useFetchStores";
 import { useUser } from "@/hooks/useUserStore";
@@ -17,6 +17,7 @@ const StoreListWithFilterFeature = () => {
   const [selectedType, setSelectedType] = useState(
     STORE_TYPES_FOR_FILTER_BTN.ALL
   );
+  const { t } = useTranslation();
   const [isFakeLoading, setIsFakeLoading] = useState(true);
   const {
     data: stores,
