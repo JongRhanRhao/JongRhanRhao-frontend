@@ -2,10 +2,13 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 import { SERVER_URL } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
 import { LoginSchema, RegisterSchema } from "@/lib/types";
+import toast from "react-hot-toast";
 
 interface FormDataProps {
   user_name: string;
@@ -14,7 +17,6 @@ interface FormDataProps {
   confirm_password: string;
   phone_number: string;
 }
-
 const LoginButton = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,17 +28,19 @@ const LoginButton = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
+    watch,
+    trigger,
   } = useForm<FormDataProps>({
     resolver: zodResolver(schema),
     mode: "onSubmit",
   });
 
+  const endpoint = isLogin ? "login" : "register";
+
   const handleAuth = async (data: FormDataProps) => {
-    // console.log("handleAuth called with data:", data);
     setErrorMessage("");
-    const endpoint = isLogin ? "login" : "register";
     try {
-      // console.log(`Sending request to ${SERVER_URL}/users/auth/${endpoint}`);
       const response = await axios.post(
         `${SERVER_URL}/users/auth/${endpoint}`,
         {
@@ -44,19 +48,13 @@ const LoginButton = () => {
           role: "user",
         }
       );
-      // console.log("Server response:", response.data);
       if (response.data.user) {
         setUser(response.data.user);
         setIsAuthenticated(true);
         closeModal();
       }
     } catch (error) {
-      // console.error("Error in handleAuth:", error);
-      setErrorMessage(
-        axios.isAxiosError(error)
-          ? `Error: ${error.response?.data}`
-          : `Unknown error: ${error}`
-      );
+      setErrorMessage("Invalid credentials.");
     }
   };
 
@@ -90,7 +88,7 @@ const LoginButton = () => {
       </button>
 
       <dialog id="login" className="modal">
-        <div className="p-8 rounded-lg shadow-lg modal-box bg-bg">
+        <div className="p-8 rounded-lg shadow-lg modal-box bg-bg border-secondary/75 border-2">
           <form className="space-y-4" onSubmit={handleSubmit(handleAuth)}>
             <button
               className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
@@ -109,14 +107,9 @@ const LoginButton = () => {
                   : "Sign up to get started."}
               </p>
             </div>
-
-            {errorMessage && (
-              <p className="text-center text-red-600">{errorMessage}</p>
-            )}
-
             <button
               onClick={() => handleOAuthLogin("google")}
-              className="flex items-center justify-center w-full py-3 text-white rounded-md shadow-sm btn bg-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="flex items-center justify-center w-full py-3 text-white rounded-md shadow-sm btn bg-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-secondary"
             >
               <svg
                 className="w-6 h-6 mr-2"
@@ -162,7 +155,7 @@ const LoginButton = () => {
 
             <button
               onClick={() => handleOAuthLogin("facebook")}
-              className="flex items-center justify-center w-full py-3 text-white border rounded-md shadow-sm btn bg-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="flex items-center justify-center w-full py-3 text-white border rounded-md shadow-sm btn bg-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-secondary"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -197,72 +190,121 @@ const LoginButton = () => {
               <div className="w-full h-px bg-neutral-700"></div>
             </div>
 
-            {/* email & pass login */}
-            <div className="flex flex-col w-full space-y-3">
+            {/* email & pass */}
+            <div className="flex flex-col w-full space-y-8">
               {!isLogin && (
-                <>
-                  <label className="text-text">Username</label>
+                <div className="relative">
                   <input
                     {...register("user_name", {
                       required: "* Username is required",
                     })}
                     type="text"
-                    className="input bg-secondary"
-                    placeholder="Enter username"
+                    id="username"
+                    className="mb-2 block px-2.5 pb-2.5 pt-4 w-full text-sm text-text bg-secondary rounded-lg border border-secondary appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
+                    placeholder=" "
                   />
+                  <label
+                    htmlFor="username"
+                    className="absolute text-sm text-text duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-secondary px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Username
+                  </label>
                   {errors.user_name && (
                     <p className="text-sm text-red-600">
                       {errors.user_name.message}
                     </p>
                   )}
+                </div>
+              )}
+
+              {!isLogin && (
+                <>
+                  <PhoneInput
+                    defaultCountry="th"
+                    className="w-full"
+                    placeholder="+66 81 234 5678"
+                    value={watch("phone_number") || ""}
+                    onChange={(phone) => {
+                      setValue("phone_number", phone);
+                    }}
+                    onBlur={() => trigger("phone_number")}
+                  />
+                  {errors.phone_number && (
+                    <p className="text-sm text-red-600">
+                      {errors.phone_number.message}
+                    </p>
+                  )}
                 </>
               )}
 
-              <label className="text-text">E-mail</label>
-              <input
-                {...register("email", { required: "* Email is required" })}
-                type="email"
-                className="input bg-secondary"
-                placeholder="Enter email"
-              />
-              {errors.email && (
-                <p className="text-sm text-red-600">{errors.email.message}</p>
-              )}
+              <div className="relative">
+                <input
+                  {...register("email", { required: "* Email is required" })}
+                  type="email"
+                  id="email"
+                  className="mb-2 block px-2.5 pb-2.5 pt-4 w-full text-sm text-text bg-secondary rounded-lg border border-secondary appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="email"
+                  className="absolute text-sm text-text duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-secondary px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  E-mail
+                </label>
+                {errors.email && (
+                  <p className="text-sm text-red-600">{errors.email.message}</p>
+                )}
+              </div>
 
-              <label className="text-text">Password</label>
-              <input
-                {...register("password", {
-                  required: "* Password is required",
-                })}
-                type="password"
-                className="input bg-secondary"
-                placeholder="Enter password"
-              />
-              {errors.password && (
-                <p className="text-sm text-red-600">
-                  {errors.password.message}
-                </p>
-              )}
+              <div className="relative">
+                <input
+                  {...register("password", {
+                    required: "* Password is required",
+                  })}
+                  type="password"
+                  id="password"
+                  className="mb-2 block px-2.5 pb-2.5 pt-4 w-full text-sm text-text bg-secondary rounded-lg border border-secondary appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="password"
+                  className="mb-2 absolute text-sm text-text duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-secondary px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Password
+                </label>
+                {errors.password && (
+                  <p className="text-sm text-red-600">
+                    {errors.password.message}
+                  </p>
+                )}
+              </div>
 
-              {/* Uncomment if confirm_password is required */}
               {!isLogin && (
-                <>
-                  <label className="text-text">Confirm Password</label>
+                <div className="relative">
                   <input
                     {...register("confirm_password")}
                     type="password"
-                    className="input bg-secondary"
-                    placeholder="Confirm password"
+                    id="confirm_password"
+                    className="mb-2 block px-2.5 pb-2.5 pt-4 w-full text-sm text-text bg-secondary rounded-lg border border-secondary appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
+                    placeholder=" "
                   />
+                  <label
+                    htmlFor="confirm_password"
+                    className="absolute text-sm text-text duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-secondary px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Confirm Password
+                  </label>
                   {errors.confirm_password && (
                     <p className="text-sm text-red-600">
                       {errors.confirm_password.message}
                     </p>
                   )}
-                </>
+                </div>
               )}
             </div>
-
+            {errorMessage && (
+              <p className="text-sm text-red-600">{errorMessage}</p>
+            )}
             <button
               type="submit"
               className="w-full py-3 rounded-lg mt- btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
