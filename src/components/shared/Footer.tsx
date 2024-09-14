@@ -6,6 +6,7 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ className }) => {
+  const footerTextclass: string = "hover:text-text text-text/75";
   return (
     <footer
       className={`flex flex-col space-y-10 justify-center m-10 ${className}`}
@@ -38,13 +39,13 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         </a>
       </div>
       <div className="flex justify-center space-x-5">
-        <a className="hover:text-gray-900" href="#">
+        <a className={footerTextclass} href="#">
           Privacy Policy
         </a>
-        <a className="hover:text-gray-900" href="#">
+        <a className={footerTextclass} href="#">
           Terms of Use
         </a>
-        <a className="hover:text-gray-900" href="#">
+        <a className={footerTextclass} href="#">
           Contact Us
         </a>
       </div>
