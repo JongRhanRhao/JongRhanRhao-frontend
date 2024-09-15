@@ -71,10 +71,13 @@ const ShopCard: React.FC<ShopCardProps> = ({
         <div
           className={`${ImageSliderClass} absolute px-2 py-1 rounded-r bottom-1`}
         >
-          <div className={`space-x-2 bg-secondary/70 w-fit rounded-xl px-1`}>
+          <div
+            className={`badge space-x-2 bg-secondary/70 w-fit rounded-xl px-1`}
+          >
             <FontAwesomeIcon icon={faClock} className="text-primary text-xs" />
-            <span className={`text-text text-xs`}>{open_timebooking}</span>
+            <div className={`text-text text-xs`}>{open_timebooking}</div>
           </div>
+          <br />
           {type && Array.isArray(type) ? (
             type.map((type: string, index: number) => (
               <div
