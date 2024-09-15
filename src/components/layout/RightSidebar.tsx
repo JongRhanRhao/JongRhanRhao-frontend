@@ -65,7 +65,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
             <LoginButton />
           ) : (
             <>
-              <div className="container p-4 rounded-lg shadow-inner bg-bg2/50">
+              <div className="p-4 rounded-lg shadow-inner bg-bg2/50">
                 <div className="flex">
                   <h2 className="mb-2 text-xl font-bold">{user?.userName}</h2>
                   <div className="size-14 avatar">
