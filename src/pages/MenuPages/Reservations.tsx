@@ -1,3 +1,5 @@
+import { socket } from "@/socket";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import BackHomeButton from "@/components/shared/BackHomeButton";
@@ -14,10 +16,24 @@ const Reservations = () => {
     data: reservation,
     isLoading,
     error,
+    refetch: refetchReservation,
   } = useFetchReservations({
     type: "customer",
     id: user.user?.userId?.toString() || "",
   });
+
+  useEffect(() => {
+    if (reservation) {
+      socket.on("reservation_update", (data) => {
+        if (data.reservationId) {
+          refetchReservation();
+        }
+      });
+    }
+    return () => {
+      socket.off("reservation_update");
+    };
+  }, [reservation, refetchReservation]);
 
   if (!isAuthenticated) {
     return (
