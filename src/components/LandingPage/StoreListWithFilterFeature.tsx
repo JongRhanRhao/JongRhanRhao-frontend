@@ -13,6 +13,7 @@ import {
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
+import { socket } from "@/socket";
 
 const StoreListWithFilterFeature = () => {
   const [selectedType, setSelectedType] = useState(
@@ -32,6 +33,19 @@ const StoreListWithFilterFeature = () => {
     isLoading: isFetchingFavorites,
     refetch: refetchFavroiteStore,
   } = useFetchFavoriteStore(user?.userId?.toString() || "");
+
+  useEffect(() => {
+    if (stores) {
+      socket.on("store_update", (data) => {
+        if (data.storeId) {
+          refetchStoreData();
+        }
+      });
+    }
+    return () => {
+      socket.off("store_update");
+    };
+  }, [stores, refetchStoreData]);
 
   const handleTypeClick = useCallback(
     (type: React.SetStateAction<string>) => {
