@@ -46,7 +46,17 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
         onClick={toggleRightSidebar}
         className="self-end mb-4 btn btn-circle btn-sm text-secondary bg-primary hover:bg-secondary hover:text-primary"
       >
-        <FontAwesomeIcon icon={rightSidebarExpanded ? faX : faUser} />
+        {rightSidebarExpanded ? (
+          <FontAwesomeIcon icon={faX} />
+        ) : user?.profilePicture ? (
+          <div className="size-10 avatar">
+            <div className="w-24 rounded-full ring-primary ring-2 ring-offset-base-100 ring-offset-2">
+              <img src={user?.profilePicture} />
+            </div>
+          </div>
+        ) : (
+          <FontAwesomeIcon icon={faUser} />
+        )}
       </button>
 
       {rightSidebarExpanded && (
@@ -56,7 +66,14 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
           ) : (
             <>
               <div className="container p-4 rounded-lg shadow-inner bg-bg2/50">
-                <h2 className="mb-2 text-xl font-bold">{user?.userName}</h2>
+                <div className="flex">
+                  <h2 className="mb-2 text-xl font-bold">{user?.userName}</h2>
+                  <div className="size-14 avatar">
+                    <div className="w-24 rounded-full">
+                      <img src={user?.profilePicture} />
+                    </div>
+                  </div>
+                </div>
                 <div className="mb-5 text-sm uppercase opacity-50">
                   {user?.role}
                 </div>
