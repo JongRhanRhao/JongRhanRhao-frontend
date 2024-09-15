@@ -46,7 +46,7 @@ const Reservations = () => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto space-x-2 space-y-4">
+      <div className="space-x-2 space-y-4">
         <div className="text-2xl font-bold text-text"> {t("reservation")}</div>
         <table className="w-full table-fixed">
           <thead>
@@ -97,7 +97,7 @@ const Reservations = () => {
 
   // TODO: Add refresh button, control button
   return (
-    <div className="container mx-auto">
+    <div>
       <LinkBack />
       <div className="mb-4 text-2xl font-bold text-text">
         {t("reservation")}
