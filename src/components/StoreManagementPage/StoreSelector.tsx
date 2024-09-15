@@ -48,7 +48,7 @@ const StoreSelector = ({
 
   if (!Array.isArray(stores) || stores.length === 0) {
     return (
-      <p className="p-2 text-rose-500 border-rose-500 border rounded">
+      <p className="p-2 border rounded text-rose-500 border-rose-500">
         No stores available. <br />
       </p>
     );

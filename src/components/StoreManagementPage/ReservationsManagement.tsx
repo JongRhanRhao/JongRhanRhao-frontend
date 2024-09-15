@@ -97,9 +97,9 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
       <h2 className="mb-4 text-xl font-bold text-text">
         Reservations for {store.shop_name}
       </h2>
-      <div className="relative flex items-center bg-secondary p-2 rounded mb-3 w-fit">
+      <div className="relative flex items-center p-2 mb-3 rounded bg-secondary w-fit">
         <div className="border-r">
-          <FontAwesomeIcon icon={faCalendarDay} className="text-primary mr-2" />
+          <FontAwesomeIcon icon={faCalendarDay} className="mr-2 text-primary" />
         </div>
         <DatePicker
           className="w-full p-2 bg-secondary text-text"

@@ -105,7 +105,7 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
                     onClick={() => {
                       updateDeleteStatus(s.userId.toString());
                     }}
-                    className="btn btn-xs btn-outline text-rose-500 uppercase hover:border-rose-500 hover:text-rose-500 hover:bg-rose-500/50"
+                    className="uppercase btn btn-xs btn-outline text-rose-500 hover:border-rose-500 hover:text-rose-500 hover:bg-rose-500/50"
                   >
                     Delete
                   </button>

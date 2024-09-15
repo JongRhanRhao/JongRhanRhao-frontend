@@ -17,16 +17,16 @@ const ReservationsStatusSelector = ({
 
   switch (status) {
     case "pending":
-      className = "bg-yellow-500/30 text-yellow-500 border-yellow-500";
+      className = "text-yellow-500 border-yellow-500 bg-yellow-500/30";
       break;
     case "confirmed":
       className = "bg-primary/30 text-primary border-primary";
       break;
     case "cancelled":
-      className = "bg-red-500/30 text-red-500 border-red-500";
+      className = "text-red-500 border-red-500 bg-red-500/30";
       break;
     default:
-      className = "bg-yellow-500/30 text-yellow-500 border-yellow-500";
+      className = "text-yellow-500 border-yellow-500 bg-yellow-500/30";
   }
 
   const updateReservationStatus = async (newStatus: string) => {

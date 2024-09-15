@@ -97,7 +97,7 @@ const BookingButton = ({
         id="BookingButton"
         className="modal modal-bottom sm:modal-middle md:modal-middle lg:modal-middle xl:modal-middle"
       >
-        <div className="modal-box shadow-lg border-secondary/70 border-2 bg-bg text-text">
+        <div className="border-2 shadow-lg modal-box border-secondary/70 bg-bg text-text">
           <h2 className="mb-4 text-2xl font-bold text-primary">
             {t("bookYourReservation")}
           </h2>
@@ -118,7 +118,7 @@ const BookingButton = ({
               value={numberOfPeople}
               min={1}
               onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-              className="w-fit p-2 mt-1 rounded bg-secondary"
+              className="p-2 mt-1 rounded w-fit bg-secondary"
             />
           </div>
           <div className="mb-4 font-bold">{t("slots")}:</div>
@@ -132,12 +132,12 @@ const BookingButton = ({
               placeholder="+66 81 234 5678"
             />
           </div>
-          <div className="mb-4 flex flex-col">
+          <div className="flex flex-col mb-4">
             <label className="font-bold mb-">{t("note")}: </label>
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="textarea resize-none w-full mt-1 p-2 rounded bg-secondary"
+              className="w-full p-2 mt-1 rounded resize-none textarea bg-secondary"
             ></textarea>
           </div>
           <div className="flex items-center">
@@ -147,11 +147,11 @@ const BookingButton = ({
               checked={isOverAge}
               onChange={(e) => setIsOverAge(e.target.checked)}
             />
-            <div className="text-rose-500 ml-2 text-sm font-semibold">
+            <div className="ml-2 text-sm font-semibold text-rose-500">
               {t("overAge")}
             </div>
           </div>
-          <p className="text-sm text-text/50 mt-3">
+          <p className="mt-3 text-sm text-text/50">
             Staff will call you to confirm your booking.
           </p>
           <div className="modal-action">

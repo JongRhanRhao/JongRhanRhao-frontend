@@ -91,7 +91,7 @@ const LoginButton = () => {
       </button>
 
       <dialog id="login" className="modal">
-        <div className="p-8 rounded-lg shadow-lg modal-box bg-bg border-secondary/75 border-2">
+        <div className="p-8 border-2 rounded-lg shadow-lg modal-box bg-bg border-secondary/75">
           <form className="space-y-6" onSubmit={handleSubmit(handleAuth)}>
             <button
               className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"

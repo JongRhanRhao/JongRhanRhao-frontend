@@ -106,9 +106,9 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
         <LeftSidebar onItemClick={onItemClick} />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <main className="flex-1 p-6 bg-bg">
-            <div className="flex justify-between items-baseline">
+            <div className="flex items-baseline justify-between">
               <LinkBack />
-              <div className=" justify-end">
+              <div className="justify-end ">
                 <button
                   className={`${isThai ? "" : "text-text"}`}
                   onClick={() => changeLanguage("en")}
@@ -124,7 +124,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 </button>
               </div>
             </div>
-            <div className="flex flex-col justify-center md:flex-row items-center">
+            <div className="flex flex-col items-center justify-center md:flex-row">
               {storeImages && storeImages.length > 0 && (
                 <ImageGallery
                   items={storeImages.map((image) => ({
@@ -152,7 +152,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                     {t(stores.shop_name)}
                   </div>
                   <FavoriteButton
-                    className="text-2xl bg-secondary p-1 rounded"
+                    className="p-1 text-2xl rounded bg-secondary"
                     storeId={storeId ? storeId : ""}
                   />
                 </div>

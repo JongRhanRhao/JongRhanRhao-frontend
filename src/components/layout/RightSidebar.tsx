@@ -57,10 +57,10 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
             <>
               <div className="container p-4 rounded-lg shadow-inner bg-bg2/50">
                 <h2 className="mb-2 text-xl font-bold">{user?.userName}</h2>
-                <div className="text-sm uppercase opacity-50 mb-5">
+                <div className="mb-5 text-sm uppercase opacity-50">
                   {user?.role}
                 </div>
-                {/* <div className="text-base text-text opacity-75">
+                {/* <div className="text-base opacity-75 text-text">
                   Reservation Status
                 </div>
                 <div className="font-semibold">

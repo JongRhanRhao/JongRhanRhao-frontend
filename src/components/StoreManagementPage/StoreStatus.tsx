@@ -84,7 +84,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   return (
     <div className="container flex flex-col text-text">
       <div className="space-y-3">
-        <div className="text-base bg-secondary w-fit p-4 rounded-xl space-y-3">
+        <div className="p-4 text-base bg-secondary w-fit rounded-xl space-y-3">
           <span className="font-bold">
             Store Status <br />
           </span>
@@ -99,7 +99,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             />
           ))}
         </div>
-        <div className=" bg-secondary w-fit rounded-xl p-3">
+        <div className="p-3  bg-secondary w-fit rounded-xl">
           <span className="font-bold">
             Seat slots: <br />
           </span>
@@ -122,7 +122,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="w-full collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
-          <div className="collapse-title font-bold">Description:</div>
+          <div className="font-bold collapse-title">Description:</div>
           <div className="collapse-content">
             <textarea
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
@@ -137,7 +137,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="collapse collapse-arrow bg-secondary w-fit">
           <input type="checkbox" />
-          <div className="text-base collapse-title font-bold">
+          <div className="text-base font-bold collapse-title">
             Opening Hours:
           </div>
           <div className="collapse-content">
@@ -166,7 +166,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="w-fit collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
-          <div className="collapse-title font-bold">Address:</div>
+          <div className="font-bold collapse-title">Address:</div>
           <div className="collapse-content">
             <textarea
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
@@ -181,7 +181,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="text-base bg-secondary w-fit rounded-xl collapse collapse-arrow">
           <input type="checkbox" />
-          <span className="collapse-title font-bold">Store Categories:</span>
+          <span className="font-bold collapse-title">Store Categories:</span>
           <div className="space-y-2 collapse-content">
             {STORE_TYPES_FOR_SELECTOR.map((option) => (
               <div key={option.value} className="flex items-center space-x-2">

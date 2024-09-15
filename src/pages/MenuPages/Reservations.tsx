@@ -153,7 +153,7 @@ const Reservations = () => {
                   </td>
                   <td className="px-6 py-4 border-b border-neutral-500">
                     <span
-                      className={`px-2 py-1 text-sm rounded-full ${statusClass}`}
+                      className={`animate-pulse px-2 py-1 text-sm rounded-full ${statusClass}`}
                     >
                       {reservation.reservation_status}
                     </span>
