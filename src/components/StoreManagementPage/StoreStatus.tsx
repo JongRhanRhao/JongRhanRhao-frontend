@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { socket } from "@/socket";
+import toast from "react-hot-toast";
 
 import { Store } from "@/hooks/useFetchStores";
 import {
@@ -7,9 +9,8 @@ import {
   STORE_MGMT_STATUS,
   STORE_TYPES_FOR_SELECTOR,
 } from "@/lib/variables";
-import { FilterButton } from "../shared/FilterButton";
-import toast from "react-hot-toast";
-// TODO: add icon for each status
+import { FilterButton } from "@/components/shared/FilterButton";
+
 const StoreStatus = ({ store }: { store: Store | null }) => {
   const splitOldTime = store?.open_timebooking.split(" - ");
   const storeId = store?.store_id;
@@ -51,6 +52,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         imageUrl: store.image_url,
         rating: store.rating,
       });
+      socket.emit("store_update", { storeId });
     } catch (error) {
       console.error("Error updating store:", error);
       throw error;
