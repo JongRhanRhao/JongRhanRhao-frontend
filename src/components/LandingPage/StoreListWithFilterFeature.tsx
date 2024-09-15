@@ -137,7 +137,7 @@ const StoreListWithFilterFeature = () => {
   }
 
   return (
-    <div className="container">
+    <div>
       <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
         {t("DiscoverAndBooking")}
       </h2>
