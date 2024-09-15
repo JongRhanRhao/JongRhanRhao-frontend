@@ -29,14 +29,15 @@ const ShopCard: React.FC<ShopCardProps> = ({
   // storeStatus,
   reservationStatus,
   // rating,
-  maxSeats,
-  currSeats,
+  // maxSeats,
+  // currSeats,
+  storeStatus,
   open_timebooking,
   className,
   ImageSliderClass,
   type,
 }) => {
-  const isAvailable = currSeats < maxSeats;
+  const isAvailable = storeStatus === "Available";
   const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
     isAvailable ? "bg-primary/70" : "bg-rose-500/70"
   }`;
