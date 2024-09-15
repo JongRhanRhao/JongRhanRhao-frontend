@@ -15,6 +15,7 @@ export const ShopCardLink = React.memo(({ store }: { store: Store }) => {
         image={store.image_url || ""}
         title={store.shop_name}
         storeStatus={store.status}
+        open_timebooking={store.open_timebooking}
         reservationStatus={
           store.curr_seats < store.max_seats
             ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)

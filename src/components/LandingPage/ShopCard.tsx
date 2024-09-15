@@ -3,6 +3,8 @@
 import { useTranslation } from "react-i18next";
 
 import FavoriteButton from "@/components/shared/FavoriteButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 export interface ShopCardProps {
   id: string;
@@ -13,6 +15,7 @@ export interface ShopCardProps {
   rating: number;
   maxSeats: number;
   type: string[];
+  open_timebooking: string;
   currSeats: number;
   description: string | null;
   className?: string;
@@ -27,6 +30,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   // rating,
   maxSeats,
   currSeats,
+  open_timebooking,
   className,
   type,
 }) => {
@@ -61,11 +65,15 @@ const ShopCard: React.FC<ShopCardProps> = ({
         </div>
 
         <div className="absolute px-2 py-1 rounded-r bottom-1">
+          <div className="space-x-2 bg-secondary/70 w-fit rounded-xl px-1">
+            <FontAwesomeIcon icon={faClock} className="text-primary text-xs" />
+            <span className="text-text text-xs">{open_timebooking}</span>
+          </div>
           {type && Array.isArray(type) ? (
             type.map((type: string, index: number) => (
               <div
                 key={index}
-                className="badge badge-ghost bg-secondary/75 text-xs text-primary mr-0.5"
+                className="badge badge-ghost bg-secondary/70 text-xs text-primary mr-0.5"
               >
                 {t(type)}
               </div>
