@@ -93,8 +93,8 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {Array.isArray(staff) &&
+        <tbody className="bg-secondary text-text">
+          {Array.isArray(staff) && staff.length > 0 ? (
             staff.map((s, index) => (
               <tr key={s.userId || index} className="bg-bg">
                 <td className="px-6 py-4">{s.userName}</td>
@@ -111,7 +111,14 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
                   </button>
                 </td>
               </tr>
-            ))}
+            ))
+          ) : (
+            <tr>
+              <td colSpan={5} className="px-6 py-4 text-center">
+                No staff found for this store.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
