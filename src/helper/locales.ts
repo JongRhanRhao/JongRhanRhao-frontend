@@ -12,6 +12,7 @@ export const resources = {
       slots: "Slots",
       overAge: "* I am over 20 years old.",
       note: "Note",
+      staffWillConfirm: "Staff will call you to confirm your reservation.",
       // Shop description
       status: "Status",
       address: "Address",
@@ -50,13 +51,14 @@ export const resources = {
       DiscoverAndBooking: "ค้นหาร้าน & จองโต๊ะ",
       back: "ย้อนกลับ",
       "Can walk-in": "วอคอินได้",
-      Unavailable: "ไม่สามารถจองได้",
+      Unavailable: "ไม่รับวอคอิน",
       // การจอง
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
       phone: "เบอร์โทรศัพท์",
       slots: "จำนวนที่ว่าง",
       note: "หมายเหตุถึงร้าน",
+      staffWillConfirm: "พนักงานจะโทรไปยืนยันการจองกับคุณ",
       // รายละเอียดร้าน
       status: "สถานะ",
       address: "พิกัด",
