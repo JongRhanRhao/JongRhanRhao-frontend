@@ -18,7 +18,7 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto space-x-2 space-y-4">
+      <div className="space-x-2 space-y-4">
         <table className="table w-full table-fixed">
           <thead>
             <tr className="bg-secondary">
@@ -75,7 +75,7 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
   };
 
   return (
-    <div className="container mx-auto space-x-2 space-y-4">
+    <div className="space-x-2 space-y-4">
       <table className="table w-full table-fixed">
         <thead>
           <tr className="bg-secondary">

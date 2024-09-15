@@ -82,7 +82,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     : store.open_timebooking;
 
   return (
-    <div className="container flex flex-col text-text">
+    <div className="flex flex-col text-text">
       <div className="space-y-3">
         <div className="p-4 text-base bg-secondary w-fit rounded-xl space-y-3">
           <span className="font-bold">

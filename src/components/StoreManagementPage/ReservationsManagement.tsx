@@ -46,7 +46,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto space-x-2 space-y-4">
+      <div className="space-x-2 space-y-4">
         <table className="table w-full table-fixed">
           <thead>
             <tr className="bg-secondary">
@@ -83,7 +83,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
 
   if (error) {
     return (
-      <div className="container mx-auto space-x-2 space-y-4">
+      <div className=" space-x-2 space-y-4">
         <div className="text-xl font-bold text-text">Reservations</div>
         <div className="text-lg text-text">
           There was an error fetching the data. Please try again later.
@@ -93,7 +93,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   }
 
   return (
-    <div className="container mx-auto">
+    <div>
       <h2 className="mb-4 text-xl font-bold text-text">
         Reservations for {store.shop_name}
       </h2>
