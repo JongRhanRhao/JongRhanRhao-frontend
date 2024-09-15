@@ -29,7 +29,6 @@ const BookingButton = ({
   const { user, isAuthenticated } = useUser();
   const { t } = useTranslation();
 
-
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!isAuthenticated) {
@@ -151,9 +150,7 @@ const BookingButton = ({
               {t("overAge")}
             </div>
           </div>
-          <p className="mt-3 text-sm text-text/50">
-            Staff will call you to confirm your booking.
-          </p>
+          <p className="mt-3 text-sm text-text/50">{t("staffWillConfirm")}</p>
           <div className="modal-action">
             <form method="dialog" className="flex justify-end w-full space-x-2">
               <button className="btn text-text rounded-xl">Close</button>
