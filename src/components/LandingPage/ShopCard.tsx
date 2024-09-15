@@ -7,6 +7,7 @@ export interface ShopCardProps {
   id: string;
   image: string | null;
   title: string;
+  storeStatus: string;
   reservationStatus: string;
   rating: number;
   maxSeats: number;
@@ -19,6 +20,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   id: storeId,
   image,
   title,
+  // storeStatus,
   reservationStatus,
   rating,
   maxSeats,
@@ -53,8 +55,14 @@ const ShopCard: React.FC<ShopCardProps> = ({
         <div className="absolute text-xl text-white top-2 right-2">
           <FavoriteButton storeId={storeId} />
         </div>
-        <div className="absolute px-2 py-1 text-xs font-bold text-white rounded bottom-2 left-2">
-          <div className="flex items-center">
+        <div className="absolute px-2 py-0.5 text-xs font-bold text-white rounded-r bottom-1 bg-secondary/80">
+          {/* <div className="opacity-75">
+            <span>{storeStatus}</span>
+          </div> */}
+          <p className={`mb-1 ${seatCountClass} shadow-lg animate-pulse`}>
+            {currSeats} / {maxSeats}
+          </p>
+          <div>
             {[...Array(safeRating)].map((_, i) => (
               <FontAwesomeIcon
                 key={i}
@@ -63,9 +71,6 @@ const ShopCard: React.FC<ShopCardProps> = ({
               />
             ))}
           </div>
-          <p className={`mt-2 ${seatCountClass} shadow-lg animate-pulse`}>
-            {currSeats} / {maxSeats}
-          </p>
         </div>
       </div>
     </div>
