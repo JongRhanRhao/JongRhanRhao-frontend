@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,6 +23,7 @@ import SmallScreenNavMenu from "@/components/shared/SmallScreenNavMenu";
 import LinkBack from "@/components/shared/LinkBack";
 import FavoriteButton from "@/components/shared/FavoriteButton";
 import { useFetchStoreImages } from "@/hooks/useFetchStoreImages";
+import { socket } from "@/socket";
 
 interface ShopDescriptionProps {
   selectedItem: string;
@@ -42,6 +43,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
     data: stores,
     isLoading,
     error,
+    refetch,
   } = useQuery<Store>({
     queryKey: ["stores", storeId],
     queryFn: () =>
@@ -53,6 +55,20 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   const { data: storeImages } = useFetchStoreImages({
     storeId: storeId as string,
   });
+
+  useEffect(() => {
+    if (stores) {
+      socket.on("store_update", (data) => {
+        if (data.storeId === storeId) {
+          refetch();
+        }
+      });
+    }
+
+    return () => {
+      socket.off("store_update");
+    };
+  }, [stores, storeId, refetch]);
 
   if (isLoading) {
     return (
@@ -184,7 +200,9 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                     <FontAwesomeIcon icon={faInfoCircle} />
                     <span className="ml-2">
                       {t("status")}:{" "}
-                      <span className={`${statusClass} font-semibold`}>
+                      <span
+                        className={`${statusClass} animate-pulse font-semibold`}
+                      >
                         {stores.status}
                       </span>
                     </span>
