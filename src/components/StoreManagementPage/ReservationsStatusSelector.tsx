@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 import { SERVER_URL } from "@/lib/variables";
+import { socket } from "@/socket";
 
 const ReservationsStatusSelector = ({
   currentStatus,
@@ -37,6 +38,7 @@ const ReservationsStatusSelector = ({
           reservationStatus: newStatus,
         }
       );
+      socket.emit("reservation_update", { reservationId });
       setStatus(newStatus);
     } catch (err) {
       console.error("Error updating reservation status:", err);
