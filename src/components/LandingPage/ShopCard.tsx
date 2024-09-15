@@ -50,14 +50,19 @@ const ShopCard: React.FC<ShopCardProps> = ({
       className={`relative bg-gray-900 rounded shadow-lg cursor-pointer ovrflow-hidden m-a1 wh-auto sflex-shrink-0 card ${className}`}
     >
       <div className="relative">
-        <img
-          src={
-            image ||
-            "https://static.vecteezy.com/system/resources/previews/009/007/134/original/failed-to-load-page-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
-          }
-          alt={title}
-          className={`w-full object-cover duration-500 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32`}
-        />
+        {image ? (
+          <img
+            src={
+              image ||
+              "https://static.vecteezy.com/system/resources/previews/009/007/134/original/failed-to-load-page-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
+            }
+            alt={title}
+            className={`w-full object-cover duration-500 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32`}
+          />
+        ) : (
+          <div className="skeleton h-60 w-full"></div>
+        )}
+
         <div
           className={`${ImageSliderClass} absolute top-3 text-xs font-bold px-2 py-1 rounded-r-lg shadow-lg ${reservationClass}`}
         >
