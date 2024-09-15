@@ -33,6 +33,7 @@ const ImageSlider: React.FC = () => {
             id={store.store_id}
             image={store.image_url || ""}
             title={store.shop_name}
+            storeStatus={store.status}
             reservationStatus={
               store.curr_seats < store.max_seats
                 ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
