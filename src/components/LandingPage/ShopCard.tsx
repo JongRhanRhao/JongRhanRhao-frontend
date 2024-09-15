@@ -1,5 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 import FavoriteButton from "@/components/shared/FavoriteButton";
 
@@ -11,6 +12,7 @@ export interface ShopCardProps {
   reservationStatus: string;
   rating: number;
   maxSeats: number;
+  type: string[];
   currSeats: number;
   description: string | null;
   className?: string;
@@ -22,17 +24,19 @@ const ShopCard: React.FC<ShopCardProps> = ({
   title,
   // storeStatus,
   reservationStatus,
-  rating,
+  // rating,
   maxSeats,
   currSeats,
   className,
+  type,
 }) => {
   const isAvailable = currSeats < maxSeats;
   const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
-    isAvailable ? "bg-primary/65" : "bg-rose-500/65"
+    isAvailable ? "bg-primary/70" : "bg-rose-500/70"
   }`;
-  const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
-  const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
+  // const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
+  // const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
+  const { t } = useTranslation();
 
   return (
     <div
@@ -55,10 +59,23 @@ const ShopCard: React.FC<ShopCardProps> = ({
         <div className="absolute text-xl text-white top-2 right-2">
           <FavoriteButton storeId={storeId} />
         </div>
-        <div className="absolute px-2 py-0.5 text-xs font-bold text-white rounded-r bottom-1 bg-secondary/80">
+
+        <div className="absolute px-2 py-1 rounded-r bottom-1">
+          {type && Array.isArray(type) ? (
+            type.map((type: string, index: number) => (
+              <div
+                key={index}
+                className="badge badge-ghost bg-secondary/75 text-xs text-primary mr-0.5"
+              >
+                {t(type)}
+              </div>
+            ))
+          ) : (
+            <span>All</span>
+          )}
           {/* <div className="opacity-75">
             <span>{storeStatus}</span>
-          </div> */}
+          </div>
           <p className={`mb-1 ${seatCountClass} shadow-lg animate-pulse`}>
             {currSeats} / {maxSeats}
           </p>
@@ -70,7 +87,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
                 className="text-yellow-400 shadow-lg"
               />
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
