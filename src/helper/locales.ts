@@ -36,6 +36,8 @@ export const resources = {
       "90s": "90s",
       Dance: "Dance",
       Club: "Club",
+      Midnight: "Till Midnight",
+      "4AM": "Till 4AM",
       // Shop name
       Minion: "Minion",
       "LATE NIGHT TALKING MUSIC BAR": "LATE NIGHT TALKING MUSIC BAR",
@@ -80,6 +82,8 @@ export const resources = {
       "90s": "90s",
       Dance: "แดนซ์",
       Club: "คลับ",
+      Midnight: "ปิดเที่ยงคืน",
+      "4AM": "ปิดตี 4",
       // ชื่อร้าน
       Minion: "มินเนี่ยน",
       "LATE NIGHT TALKING MUSIC BAR": "LATE NIGHT TALKING MUSIC BAR",

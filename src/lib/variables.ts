@@ -51,6 +51,8 @@ export const STORE_TYPES_FOR_FILTER_BTN = {
   NINETIES: "90s",
   DANCE: "Dance",
   CLUB: "Club",
+  MIDNIGHT: "Midnight",
+  "4AM": "4AM",
 };
 
 export const STORE_TYPES_FOR_SELECTOR = [
@@ -85,6 +87,14 @@ export const STORE_TYPES_FOR_SELECTOR = [
   {
     value: STORE_TYPES_FOR_FILTER_BTN.CLUB,
     label: STORE_TYPES_FOR_FILTER_BTN.CLUB,
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.MIDNIGHT,
+    label: STORE_TYPES_FOR_FILTER_BTN.MIDNIGHT,
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN["4AM"],
+    label: STORE_TYPES_FOR_FILTER_BTN["4AM"],
   },
 ];
 
