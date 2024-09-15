@@ -19,6 +19,7 @@ export interface ShopCardProps {
   currSeats: number;
   description: string | null;
   className?: string;
+  ImageSliderClass?: string;
 }
 
 const ShopCard: React.FC<ShopCardProps> = ({
@@ -32,6 +33,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   currSeats,
   open_timebooking,
   className,
+  ImageSliderClass,
   type,
 }) => {
   const isAvailable = currSeats < maxSeats;
@@ -56,24 +58,28 @@ const ShopCard: React.FC<ShopCardProps> = ({
           className={`w-full object-cover duration-500 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32`}
         />
         <div
-          className={`absolute top-3 text-xs font-bold px-2 py-1 rounded-r-lg shadow-lg ${reservationClass}`}
+          className={`${ImageSliderClass} absolute top-3 text-xs font-bold px-2 py-1 rounded-r-lg shadow-lg ${reservationClass}`}
         >
           {reservationStatus}
         </div>
-        <div className="absolute text-xl text-white top-2 right-2">
+        <div
+          className={`${ImageSliderClass} absolute text-xl text-white top-2 right-2`}
+        >
           <FavoriteButton storeId={storeId} />
         </div>
 
-        <div className="absolute px-2 py-1 rounded-r bottom-1">
-          <div className="space-x-2 bg-secondary/70 w-fit rounded-xl px-1">
+        <div
+          className={`${ImageSliderClass} absolute px-2 py-1 rounded-r bottom-1`}
+        >
+          <div className={`space-x-2 bg-secondary/70 w-fit rounded-xl px-1`}>
             <FontAwesomeIcon icon={faClock} className="text-primary text-xs" />
-            <span className="text-text text-xs">{open_timebooking}</span>
+            <span className={`text-text text-xs`}>{open_timebooking}</span>
           </div>
           {type && Array.isArray(type) ? (
             type.map((type: string, index: number) => (
               <div
                 key={index}
-                className="badge badge-ghost bg-secondary/70 text-xs text-primary mr-0.5"
+                className={`badge badge-ghost bg-secondary/70 text-xs text-primary mr-0.5`}
               >
                 {t(type)}
               </div>

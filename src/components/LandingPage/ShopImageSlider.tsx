@@ -39,10 +39,13 @@ const ImageSlider: React.FC = () => {
                 ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
                 : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
             }
+            type={store.type}
+            open_timebooking={store.open_timebooking}
             rating={store.rating}
             maxSeats={store.max_seats}
             currSeats={store.curr_seats}
             description={store.description || ""}
+            ImageSliderClass="hidden"
           />
         </Link>
       ))}
