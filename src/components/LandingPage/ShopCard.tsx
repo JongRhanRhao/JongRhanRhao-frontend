@@ -63,7 +63,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           {reservationStatus}
         </div>
         <div
-          className={`${ImageSliderClass} absolute text-xl text-white top-2 right-2`}
+          className={`${ImageSliderClass} absolute text-lg text-white top-2 right-2`}
         >
           <FavoriteButton storeId={storeId} />
         </div>
