@@ -72,7 +72,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           className={`${ImageSliderClass} absolute px-2 py-1 rounded-r bottom-1`}
         >
           <div
-            className={`badge space-x-2 bg-secondary/70 w-fit rounded-xl px-1`}
+            className={`badge space-x-2 bg-secondary/80 w-fit rounded-xl px-1`}
           >
             <FontAwesomeIcon icon={faClock} className="text-primary text-xs" />
             <div className={`text-text text-xs`}>{open_timebooking}</div>
@@ -82,7 +82,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
             type.map((type: string, index: number) => (
               <div
                 key={index}
-                className={`badge badge-ghost bg-secondary/70 text-xs text-primary mr-0.5`}
+                className={`badge badge-ghost bg-secondary/80 text-xs text-text mr-0.5`}
               >
                 {t(type)}
               </div>
