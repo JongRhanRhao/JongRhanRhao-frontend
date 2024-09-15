@@ -17,7 +17,7 @@ export const ShopCardLink = React.memo(({ store }: { store: Store }) => {
         storeStatus={store.status}
         open_timebooking={store.open_timebooking}
         reservationStatus={
-          store.curr_seats < store.max_seats
+          store.status === "Available"
             ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
             : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
         }
