@@ -23,6 +23,7 @@ export const ShopCardLink = React.memo(({ store }: { store: Store }) => {
         rating={store.rating}
         maxSeats={store.max_seats}
         currSeats={store.curr_seats}
+        type={store.type}
         description={store.description || ""}
       />
     </Link>
