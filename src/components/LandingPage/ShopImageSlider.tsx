@@ -23,32 +23,36 @@ const ImageSlider: React.FC = () => {
 
   return (
     <Slider {...settings}>
-      {stores?.map((store, index) => (
-        <Link
-          to={`/shop/${store.store_id}`}
-          className="p-2"
-          key={store.store_id || index}
-        >
-          <ShopCard
-            id={store.store_id}
-            image={store.image_url || ""}
-            title={store.shop_name}
-            storeStatus={store.status}
-            reservationStatus={
-              store.curr_seats < store.max_seats
-                ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
-                : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
-            }
-            type={store.type}
-            open_timebooking={store.open_timebooking}
-            rating={store.rating}
-            maxSeats={store.max_seats}
-            currSeats={store.curr_seats}
-            description={store.description || ""}
-            ImageSliderClass="hidden"
-          />
-        </Link>
-      ))}
+      {Array.isArray(stores) && stores.length > 0 ? (
+        stores.map((store, index) => (
+          <Link
+            to={`/shop/${store.store_id}`}
+            className="p-2"
+            key={store.store_id || index}
+          >
+            <ShopCard
+              id={store.store_id}
+              image={store.image_url || ""}
+              title={store.shop_name}
+              storeStatus={store.status}
+              reservationStatus={
+                store.curr_seats < store.max_seats
+                  ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
+                  : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
+              }
+              type={store.type}
+              open_timebooking={store.open_timebooking}
+              rating={store.rating}
+              maxSeats={store.max_seats}
+              currSeats={store.curr_seats}
+              description={store.description || ""}
+              ImageSliderClass="hidden"
+            />
+          </Link>
+        ))
+      ) : (
+        <div>{t("No stores available")}</div>
+      )}
     </Slider>
   );
 };
