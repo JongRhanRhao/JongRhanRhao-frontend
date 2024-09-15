@@ -1,5 +1,5 @@
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import FavoriteButton from "@/components/shared/FavoriteButton";
 
@@ -20,7 +20,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   image,
   title,
   reservationStatus,
-  // rating,
+  rating,
   maxSeats,
   currSeats,
   className,
@@ -29,8 +29,8 @@ const ShopCard: React.FC<ShopCardProps> = ({
   const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
     isAvailable ? "bg-primary/65" : "bg-rose-500/65"
   }`;
-  // const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
-  // const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
+  const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
+  const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
 
   return (
     <div
@@ -53,7 +53,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
         <div className="absolute text-xl text-white top-2 right-2">
           <FavoriteButton storeId={storeId} />
         </div>
-        {/* <div className="absolute px-2 py-1 text-xs font-bold text-white rounded bottom-2 left-2">
+        <div className="absolute px-2 py-1 text-xs font-bold text-white rounded bottom-2 left-2">
           <div className="flex items-center">
             {[...Array(safeRating)].map((_, i) => (
               <FontAwesomeIcon
@@ -66,7 +66,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           <p className={`mt-2 ${seatCountClass} shadow-lg animate-pulse`}>
             {currSeats} / {maxSeats}
           </p>
-        </div> */}
+        </div>
       </div>
     </div>
   );
