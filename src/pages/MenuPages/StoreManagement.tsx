@@ -49,7 +49,7 @@ const StoreManagement = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <>
       <LinkBack />
       <span className="mb-5 text-2xl font-bold text-text">
         Store Management
@@ -82,7 +82,7 @@ const StoreManagement = () => {
           <p className="text-text">Please select a store.</p>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
