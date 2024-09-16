@@ -10,8 +10,8 @@ interface Reservation {
   number_of_people: string;
   reservation_date: string;
   reservation_time: string;
-  reservationStatus: string;
   reservation_status: string;
+  note: string;
 }
 export const useFetchReservations = ({
   type,
