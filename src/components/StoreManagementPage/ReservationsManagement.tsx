@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDay, faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarDay,
+  faNoteSticky,
+  faPhone,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
+import { format } from "date-fns";
+import { socket } from "@/socket";
 
 import { useFetchReservations } from "@/hooks/useFetchReservations";
 import { Store } from "@/hooks/useFetchStores";
@@ -32,7 +39,12 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
 
   useEffect(() => {
     if (store?.store_id) {
-      refetch();
+      socket.on("reservation_update", (data) => {
+        console.log(data.storeId);
+        if (data.storeId === store.store_id) {
+          refetch();
+        }
+      });
     }
   }, [store?.store_id, refetch]);
 
@@ -142,11 +154,57 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                 <td className="px-6 py-4 truncate border-b border-neutral-500">
                   {reservation.user_name}
                 </td>
-                <td className="px-6 py-4 truncate border-b border-neutral-500">
+                <td className="px-6 py-4 truncate border-b border-neutral-500 text-center">
                   {reservation.number_of_people}
+                  {reservation.note && reservation.note.trim() !== "" && (
+                    <button
+                      className="btn btn-xs ml-2 bg-secondary text-text border-text"
+                      onClick={() => {
+                        const noteElement = document.getElementById(
+                          `note-${reservation.reservation_id}`
+                        ) as HTMLDialogElement;
+                        if (noteElement) {
+                          noteElement.showModal();
+                        }
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faNoteSticky} />
+                    </button>
+                  )}
+                  <dialog
+                    id={`note-${reservation.reservation_id}`}
+                    className="modal text-left"
+                  >
+                    <div className="modal-box bg-secondary text-text">
+                      <div className="font-bold text-lg flex items-center text-primary">
+                        <p className="ml-2">{reservation.reservation_id}</p>
+                      </div>
+                      <div className="text-text text-sm">
+                        <p>
+                          <FontAwesomeIcon icon={faUser} />{" "}
+                          {reservation.user_name}
+                        </p>
+                        <p>
+                          <FontAwesomeIcon icon={faPhone} />{" "}
+                          <a
+                            className="link ml-2"
+                            href={`tel:${reservation.phone_number}`}
+                          >
+                            {reservation.phone_number}
+                          </a>
+                        </p>
+                      </div>
+                      <div className="divider"></div>
+                      <p>{reservation.note || "No notes."}</p>
+                    </div>
+                    <form method="dialog" className="modal-backdrop">
+                      <button>close</button>
+                    </form>
+                  </dialog>
                 </td>
                 <td className="px-6 py-4 border-b border-neutral-500">
-                  {reservation.reservation_date}, {reservation.reservation_time}
+                  {format(new Date(reservation.reservation_date), "PPP")},{" "}
+                  {reservation.reservation_time}
                 </td>
                 <td className="px-6 py-4 border-b border-neutral-500">
                   <a className="link" href={`tel:${reservation.phone_number}`}>
