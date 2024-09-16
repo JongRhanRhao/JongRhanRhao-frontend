@@ -18,6 +18,8 @@ export interface Store {
   curr_seats: number;
   is_popular: boolean;
   type: string[];
+  facebook_link: string | null;
+  google_map_link: string | null;
 }
 
 export const useFetchStores = () => {
