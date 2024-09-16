@@ -243,7 +243,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                       <span
                         className={`${statusClass} animate-pulse font-semibold`}
                       >
-                        {stores.status}
+                        {t(stores.status)}
                       </span>
                     </span>
                   </div>
