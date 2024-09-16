@@ -24,6 +24,9 @@ export const resources = {
       cancel_condition: "Cancellation policy",
       Comments: "Comments",
       noComment: "There is no comments in this store yet.",
+      "BOOK NOW": "BOOK NOW",
+      Close: "Close",
+      "Cancel within 24 hours": "Cancel within 24 hours",
       // Reservation
       bookYourReservation: "Book your reservation",
       reservation: "Reservations",
@@ -94,6 +97,9 @@ export const resources = {
       note: "หมายเหตุถึงร้าน",
       overAge: "* ข้าพเจ้ามีอายุมากกว่าหรือเท่ากับ 20 ปีบริบูรณ์",
       staffWillConfirm: "พนักงานจะโทรไปยืนยันการจองกับคุณ",
+      "BOOK NOW": "จองโต๊ะ",
+      Close: "ปิด",
+      "Cancel within 24 hours": "ยกเลิกภายใน 24 ชั่วโมง",
       // รายละเอียดร้าน
       status: "สถานะ",
       address: "พิกัด",
