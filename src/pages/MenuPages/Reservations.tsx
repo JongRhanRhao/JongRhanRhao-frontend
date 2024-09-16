@@ -1,6 +1,7 @@
 import { socket } from "@/socket";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { format } from "date-fns";
 
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useUser } from "@/hooks/useUserStore";
@@ -148,7 +149,7 @@ const Reservations = () => {
                     {reservation.shop_name}
                   </td>
                   <td className="px-6 py-4 border-b border-neutral-500">
-                    {reservation.reservation_date},{" "}
+                    {format(new Date(reservation.reservation_date), "PPP")},{" "}
                     {reservation.reservation_time}
                   </td>
                   <td className="px-6 py-4 border-b border-neutral-500">
