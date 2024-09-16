@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { useUser } from "@/hooks/useUserStore";
 import { STORE_MGMT_MENU } from "@/lib/variables";
@@ -19,6 +20,7 @@ const StoreManagement = () => {
     STORE_MGMT_MENU.RESERVATIONS
   );
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
+  const { t } = useTranslation();
 
   const handleTypeClick = useCallback((title: string) => {
     setSelectedType(title);
@@ -52,10 +54,10 @@ const StoreManagement = () => {
     <>
       <LinkBack />
       <span className="mb-5 text-2xl font-bold text-text">
-        Store Management
+        {t("storeManagement")}
       </span>
       <p className="mt-2 text-sm text-text">
-        You can control all store details from this panel.
+        {t("storeManagementDesc")}
       </p>
       <div className="flex items-center mt-4 shadow-lg w-fit rounded-xl bg-secondary">
         <StoreSelector
@@ -64,7 +66,7 @@ const StoreManagement = () => {
           onStoreSelect={handleStoreSelect}
         />
       </div>
-      <div className="flex flex-wrap mt-4 mb-4 gap-2">
+      <div className="flex flex-wrap gap-2 mt-4 mb-4">
         {Object.values(STORE_MGMT_MENU).map((title) => (
           <FilterButton
             key={title}
@@ -79,7 +81,7 @@ const StoreManagement = () => {
         {selectedStore ? (
           renderActiveSection()
         ) : (
-          <p className="text-text">Please select a store.</p>
+          <p className="text-text">{t('pleaseSelectYourStore')}</p>
         )}
       </div>
     </>
