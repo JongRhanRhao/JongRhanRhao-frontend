@@ -22,6 +22,8 @@ export const resources = {
       address: "Address",
       closeAndOpenTime: "Open hours",
       cancel_condition: "Cancellation policy",
+      Comments: "Comments",
+      noComment: "There is no comments in this store yet.",
       // Reservation
       bookYourReservation: "Book your reservation",
       reservation: "Reservations",
@@ -97,6 +99,8 @@ export const resources = {
       address: "พิกัด",
       closeAndOpenTime: "เวลาเปิด-ปิด",
       cancel_condition: "เงื่อนไขการยกเลิกจอง",
+      Comments: "ความคิดเห็น",
+      noComment: "ยังไม่มีความคิดเห็นในร้านนี้",
       // การจอง
       bookYourReservation: "จองโต๊ะ",
       reservCount: "จำนวนการจอง",
