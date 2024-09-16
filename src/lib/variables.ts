@@ -53,6 +53,7 @@ export const STORE_TYPES_FOR_FILTER_BTN = {
   CLUB: "Club",
   MIDNIGHT: "Midnight",
   "4AM": "4AM",
+  NIMMAN: "Nimman",
 };
 
 export const STORE_TYPES_FOR_SELECTOR = [
@@ -95,6 +96,10 @@ export const STORE_TYPES_FOR_SELECTOR = [
   {
     value: STORE_TYPES_FOR_FILTER_BTN["4AM"],
     label: STORE_TYPES_FOR_FILTER_BTN["4AM"],
+  },
+  {
+    value: STORE_TYPES_FOR_FILTER_BTN.NIMMAN,
+    label: STORE_TYPES_FOR_FILTER_BTN.NIMMAN,
   },
 ];
 
