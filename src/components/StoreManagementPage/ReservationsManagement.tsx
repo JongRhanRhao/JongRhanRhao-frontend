@@ -101,7 +101,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
 
   if (error) {
     return (
-      <div className=" space-x-2 space-y-4">
+      <div className="space-x-2 space-y-4">
         <div className="text-xl font-bold text-text">Reservations</div>
         <div className="text-lg text-text">
           There was an error fetching the data. Please try again later.
@@ -146,7 +146,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   return (
     <div>
       <h2 className="mb-4 text-xl font-bold text-text">
-        Reservations for {store.shop_name}
+        {t("Reservations for")} {t(store.shop_name)}
       </h2>
       <div className="relative flex items-center p-1 rounded bg-secondary w-fit">
         <button
@@ -182,7 +182,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
         </button>
       </div>
       <div className="my-4">
-        <div className="space-y-1 space-x-1">
+        <div className="space-x-1 space-y-1">
           <FilterButton
             onClick={() => setSelectedStatus("All")}
             selectedTitle={selectedStatus}
@@ -208,7 +208,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
             className={FilterBtnClass(RESERVATION_STATUS.CONFIRMED)}
           />
         </div>
-        <div className="flex mt-2 gap-2">
+        <div className="flex gap-2 mt-2">
           <p className="p-1 font-semibold rounded bg-secondary text-text">
             {t("reservCount")}:{" "}
             {selectedDate ? TotalReservationByDate(selectedDate) : 0}
@@ -223,22 +223,22 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
         <thead>
           <tr className="bg-secondary">
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              id reservation
+              {t("id_reservation")}
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              customer name
+              {t("customerName")}
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              number of people
+              {t("numberOfPeople")}
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              date & time
+              {t("dateNtime")}
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              Phone
+              {t("phone")}
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              action
+              {t("action")}
             </th>
           </tr>
         </thead>
@@ -326,7 +326,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
           ) : (
             <tr>
               <td colSpan={6} className="py-4 text-center">
-                No reservations found
+                {t("noReservFound")}
               </td>
             </tr>
           )}
