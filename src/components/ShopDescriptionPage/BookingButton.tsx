@@ -94,7 +94,7 @@ const BookingButton = ({
           )?.showModal()
         }
       >
-        BOOK NOW
+        {t("BOOK NOW")}
       </button>
       <dialog
         id="BookingButton"
@@ -124,7 +124,7 @@ const BookingButton = ({
               className="p-2 mt-1 rounded w-fit bg-secondary"
             />
           </div>
-          <div className="mb-4 font-bold">{t("slots")}:</div>
+          {/* <div className="mb-4 font-bold">{t("slots")}:</div> */}
           <div className="mb-4">
             <label className="font-bold">{t("phone")}</label>
             <PhoneInput
@@ -157,12 +157,12 @@ const BookingButton = ({
           <p className="mt-3 text-sm text-text/50">{t("staffWillConfirm")}</p>
           <div className="modal-action">
             <form method="dialog" className="flex justify-end w-full space-x-2">
-              <button className="btn text-text rounded-xl">Close</button>
+              <button className="btn text-text rounded-xl">{t("Close")}</button>
               <button
                 onClick={handleSubmit}
                 className="px-4 py-2 mr-2 font-bold rounded-xl btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
               >
-                Book Now
+                {t("BOOK NOW")}
               </button>
             </form>
           </div>
