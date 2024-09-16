@@ -263,7 +263,7 @@ const Reservations = () => {
                     </button>
                     <a
                       href={`/shop/${reservation.shop_id}`}
-                      className="underline text-text"
+                      className="underline text-text/75"
                     >
                       <FontAwesomeIcon icon={faShop} />
                     </a>
