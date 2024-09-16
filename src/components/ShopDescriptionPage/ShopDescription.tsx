@@ -7,7 +7,7 @@ import {
   faClock,
   faInfoCircle,
   faLocationDot,
-  faMapLocationDot,
+  // faMapLocationDot,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import ImageGallery from "react-image-gallery";
@@ -53,9 +53,9 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
       ),
   });
 
-  const { data: storeImages } = useFetchStoreImages({
-    storeId: storeId as string,
-  });
+  // const { data: storeImages } = useFetchStoreImages({
+  //   storeId: storeId as string,
+  // });
 
   useEffect(() => {
     if (stores) {
@@ -126,7 +126,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-center md:flex-row">
-              {storeImages && storeImages.length > 0 && (
+              {/* {storeImages && storeImages.length > 0 && (
                 <ImageGallery
                   items={storeImages.map((image) => ({
                     original: image.original,
@@ -140,7 +140,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   lazyLoad
                   additionalClass="custom-gallery"
                 />
-              )}
+              )} */}
               {/*  */}
               <img
                 src={stores.image_url as string}
@@ -181,12 +181,12 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                     ({stores.rating})
                   </span>
                   <div className="flex ml-2 text-text">
-                    <a
+                    {/* <a
                       href={stores.google_map_link || undefined}
                       target="_blank"
                     >
                       <FontAwesomeIcon icon={faMapLocationDot} />
-                    </a>
+                    </a> */}
                     <a href={stores.facebook_link || undefined}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -233,7 +233,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faCalendarTimes} />
                     <span className="ml-2">
-                      {t("cancel_condition")}: {stores.cancel_reserve}
+                      {t("cancel_condition")}: {t(stores.cancel_reserve)}
                     </span>
                   </div>
                   <div className="mb-3 text-text/70">
@@ -249,9 +249,15 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   </div>
                   <div className="mb-3 text-text/70">
                     <FontAwesomeIcon icon={faLocationDot} />
-                    <span className="ml-2 font-thai">
-                      {t("address")}: {stores.address}
-                    </span>
+                    <a
+                      href={stores.google_map_link || undefined}
+                      target="_blank"
+                    >
+                      <span className="ml-2 font-thai">
+                        {t("address")}:{" "}
+                        <span className="link">{stores.address}</span>
+                      </span>
+                    </a>
                   </div>
                 </div>
                 <div className="mt-6">
