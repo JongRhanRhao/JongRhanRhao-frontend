@@ -7,7 +7,7 @@ export default {
       colors: {
         primary: "#89fc00",
         secondary: "#121212",
-        text: "#e7ecef",
+        text: "#FAF9F6",
         bg: "#070707",
         bg2: "#070707",
       },
