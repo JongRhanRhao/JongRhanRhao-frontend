@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { socket } from "@/socket";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import { Store } from "@/hooks/useFetchStores";
 import {
@@ -28,10 +29,11 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     splitOldTime ? splitOldTime[1] || "" : ""
   );
   const [address, setAddress] = useState(store?.address);
+  const { t } = useTranslation();
   const descriptionMaxLength = 500;
 
   if (!store) {
-    return <p>No store selected.</p>;
+    return <p>{t("noStoreSelect")}</p>;
   }
 
   const handleStatusChange = async () => {
@@ -84,9 +86,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   return (
     <div className="flex flex-col text-text">
       <div className="space-y-3">
-        <div className="p-4 text-base bg-secondary w-fit rounded-xl space-y-3">
+        <div className="p-4 space-y-3 text-base bg-secondary w-fit rounded-xl">
           <span className="font-bold">
-            Store Status <br />
+            {t("status")} <br />
           </span>
           {STORE_MGMT_STATUS.map((option) => (
             <FilterButton
@@ -99,9 +101,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             />
           ))}
         </div>
-        <div className="p-3  bg-secondary w-fit rounded-xl">
+        <div className="p-3 bg-secondary w-fit rounded-xl">
           <span className="font-bold">
-            Seat slots: <br />
+            {t("seatSlots")}: <br />
           </span>
           <input
             type="number"
@@ -122,7 +124,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="w-full collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
-          <div className="font-bold collapse-title">Description:</div>
+          <div className="font-bold collapse-title">
+            {t("storeDescription")}:
+          </div>
           <div className="collapse-content">
             <textarea
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
@@ -138,7 +142,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         <div className="collapse collapse-arrow bg-secondary w-fit">
           <input type="checkbox" />
           <div className="text-base font-bold collapse-title">
-            Opening Hours:
+            {t("openingHours")}:
           </div>
           <div className="collapse-content">
             <input
@@ -166,7 +170,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="w-fit collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
-          <div className="font-bold collapse-title">Address:</div>
+          <div className="font-bold collapse-title">{t("address")}:</div>
           <div className="collapse-content">
             <textarea
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
@@ -181,7 +185,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="text-base bg-secondary w-fit rounded-xl collapse collapse-arrow">
           <input type="checkbox" />
-          <span className="font-bold collapse-title">Store Categories:</span>
+          <span className="font-bold collapse-title">
+            {t("storeCategories")}:
+          </span>
           <div className="space-y-2 collapse-content">
             {STORE_TYPES_FOR_SELECTOR.map((option) => (
               <div key={option.value} className="flex items-center space-x-2">
@@ -203,7 +209,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         className="mt-4 uppercase btn btn-sm bg-primary text-secondary sm:w-fit"
         onClick={updateStoreStatus}
       >
-        Update
+        {t("Update")}
       </button>
     </div>
   );
