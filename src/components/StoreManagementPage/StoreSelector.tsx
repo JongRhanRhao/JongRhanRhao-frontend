@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Store } from "@/hooks/useFetchStores";
 import { SERVER_URL } from "@/lib/variables";
@@ -15,6 +16,7 @@ const StoreSelector = ({
   onStoreSelect?: (store: Store | null) => void;
 }) => {
   const [, setSelectedStore] = useState<Store | null>(null);
+  const { t } = useTranslation();
 
   const handleStoreSelection = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -57,7 +59,7 @@ const StoreSelector = ({
   return (
     <div>
       <select className={`${className}`} onChange={handleStoreSelection}>
-        <option value="">Select your store</option>
+        <option value="">{t("selectYourStore")}</option>
         {stores.map((store: Store) => (
           <option key={store.store_id} value={store.store_id}>
             {store.shop_name}
