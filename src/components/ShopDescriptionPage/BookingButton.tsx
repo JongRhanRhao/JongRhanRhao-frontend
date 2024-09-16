@@ -6,11 +6,12 @@ import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
-
-import "@/styles/custom-phone-input.css";
-import { SERVER_URL } from "@/lib/variables";
-import { useUser } from "@/hooks/useUserStore";
 import toast from "react-hot-toast";
+
+import { socket } from "@/socket";
+import "@/styles/custom-phone-input.css";
+import { RESERVATION_STATUS, SERVER_URL } from "@/lib/variables";
+import { useUser } from "@/hooks/useUserStore";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
@@ -59,13 +60,16 @@ const BookingButton = ({
     numberOfPeople: numberOfPeople,
     phoneNumber: phoneNumber,
     note: note,
-    reservationStatus: "pending",
+    reservationStatus: RESERVATION_STATUS.PENDING,
   };
 
   const handleBooking = async () => {
     try {
+      // console.log(bookingData);
       await axios.post(`${SERVER_URL}/stores/api/reservations`, bookingData);
       (document.getElementById("BookingButton") as HTMLDialogElement)?.close();
+      socket.emit("reservation_update", { storeId });
+      console.log(storeId);
     } catch (error) {
       console.error("Error booking:", error);
     }
