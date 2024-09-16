@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowLeft,
+  faArrowRight,
   faCalendarDay,
   faNoteSticky,
   faPhone,
@@ -8,13 +10,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
-import { socket } from "@/socket";
+import { useTranslation } from "react-i18next";
 
 import { useFetchReservations } from "@/hooks/useFetchReservations";
 import { Store } from "@/hooks/useFetchStores";
 import ReservationsStatusSelector from "@/components/StoreManagementPage/ReservationsStatusSelector";
+import { FilterButton } from "@/components/shared/FilterButton";
+import { RESERVATION_STATUS } from "@/lib/variables";
 
-// TODO: more data description
 const ReservationsManagement = ({ store }: { store: Store | null }) => {
   const {
     data: reservation,
@@ -28,23 +31,26 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(
     new Date(Date.now())
   );
+  const [selectedStatus, setSelectedStatus] = useState<string | undefined>(
+    "All"
+  );
+  const { t } = useTranslation();
 
-  const filteredReservationsByDate = Array.isArray(reservation)
-    ? reservation.filter(
-        (res) =>
+  const filteredReservations = Array.isArray(reservation)
+    ? reservation.filter((res) => {
+        const matchesDate =
+          selectedDate &&
           new Date(res.reservation_date).toDateString() ===
-          selectedDate?.toDateString()
-      )
+            selectedDate.toDateString();
+        const matchesStatus =
+          selectedStatus === "All" || res.reservation_status === selectedStatus;
+        return matchesDate && matchesStatus;
+      })
     : [];
 
   useEffect(() => {
     if (store?.store_id) {
-      socket.on("reservation_update", (data) => {
-        console.log(data.storeId);
-        if (data.storeId === store.store_id) {
-          refetch();
-        }
-      });
+      refetch();
     }
   }, [store?.store_id, refetch]);
 
@@ -104,14 +110,59 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
     );
   }
 
+  const FilterBtnClass = (reservationStatus: string) => {
+    switch (reservationStatus) {
+      case RESERVATION_STATUS.PENDING:
+        return "border-yellow-500";
+      case RESERVATION_STATUS.CONFIRMED:
+        return "bg-primary text-primary border-primary";
+      case RESERVATION_STATUS.CANCELLED:
+        return "text-red-500 border-red-500";
+      default:
+        return "";
+    }
+  };
+
+  const TotalPeopleByDate = (date: Date) => {
+    const totalPeople = filteredReservations.reduce((acc, res) => {
+      if (
+        new Date(res.reservation_date).toDateString() === date.toDateString()
+      ) {
+        return acc + res.number_of_people;
+      }
+      return acc;
+    }, 0);
+    return totalPeople;
+  };
+
+  const TotalReservationByDate = (date: Date) => {
+    const totalReservations = filteredReservations.filter(
+      (res) =>
+        new Date(res.reservation_date).toDateString() === date.toDateString()
+    ).length;
+    return totalReservations;
+  };
+
   return (
     <div>
       <h2 className="mb-4 text-xl font-bold text-text">
         Reservations for {store.shop_name}
       </h2>
-      <div className="relative flex items-center p-2 mb-3 rounded bg-secondary w-fit">
+      <div className="relative flex items-center p-1 rounded bg-secondary w-fit">
+        <button
+          onClick={() =>
+            setSelectedDate(
+              new Date((selectedDate?.getTime() || Date.now()) - 86400000)
+            )
+          }
+        >
+          <FontAwesomeIcon icon={faArrowLeft} className="mr-2 text-primary" />
+        </button>
         <div className="border-r">
-          <FontAwesomeIcon icon={faCalendarDay} className="mr-2 text-primary" />
+          <FontAwesomeIcon
+            icon={faCalendarDay}
+            className="mr-2 ml-7 text-primary"
+          />
         </div>
         <DatePicker
           className="w-full p-2 bg-secondary text-text"
@@ -120,6 +171,53 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
           onChange={(date) => setSelectedDate(date)}
           placeholderText="Select a date"
         />
+        <button
+          onClick={() =>
+            setSelectedDate(
+              new Date((selectedDate?.getTime() || Date.now()) + 86400000)
+            )
+          }
+        >
+          <FontAwesomeIcon icon={faArrowRight} className="mr-2 text-primary" />
+        </button>
+      </div>
+      <div className="my-4">
+        <div className="space-y-1 space-x-1">
+          <FilterButton
+            onClick={() => setSelectedStatus("All")}
+            selectedTitle={selectedStatus}
+            title="All"
+            className={FilterBtnClass("All")}
+          />
+          <FilterButton
+            onClick={() => setSelectedStatus(RESERVATION_STATUS.PENDING)}
+            selectedTitle={selectedStatus}
+            title={RESERVATION_STATUS.PENDING}
+            className={FilterBtnClass(RESERVATION_STATUS.PENDING)}
+          />
+          <FilterButton
+            onClick={() => setSelectedStatus(RESERVATION_STATUS.CANCELLED)}
+            selectedTitle={selectedStatus}
+            title={RESERVATION_STATUS.CANCELLED}
+            className={FilterBtnClass(RESERVATION_STATUS.CANCELLED)}
+          />
+          <FilterButton
+            onClick={() => setSelectedStatus(RESERVATION_STATUS.CONFIRMED)}
+            selectedTitle={selectedStatus}
+            title={RESERVATION_STATUS.CONFIRMED}
+            className={FilterBtnClass(RESERVATION_STATUS.CONFIRMED)}
+          />
+        </div>
+        <div className="flex mt-2 gap-2">
+          <p className="p-1 font-semibold rounded bg-secondary text-text">
+            {t("reservCount")}:{" "}
+            {selectedDate ? TotalReservationByDate(selectedDate) : 0}
+          </p>
+          <p className="p-1 font-semibold rounded bg-secondary text-text">
+            {t("numbOfPpl")}:{" "}
+            {selectedDate ? TotalPeopleByDate(selectedDate) : 0}
+          </p>
+        </div>
       </div>
       <table className="table w-full table-fixed">
         <thead>
@@ -145,8 +243,9 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
           </tr>
         </thead>
         <tbody className="bg-secondary text-text">
-          {Array.isArray(reservation) && reservation.length > 0 ? (
-            filteredReservationsByDate.map((reservation) => (
+          {Array.isArray(filteredReservations) &&
+          filteredReservations.length > 0 ? (
+            filteredReservations.map((reservation) => (
               <tr key={reservation.reservation_id}>
                 <td className="px-6 py-4 border-b border-neutral-500">
                   {reservation.reservation_id}
@@ -154,11 +253,11 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                 <td className="px-6 py-4 truncate border-b border-neutral-500">
                   {reservation.user_name}
                 </td>
-                <td className="px-6 py-4 truncate border-b border-neutral-500 text-center">
+                <td className="px-6 py-4 text-center truncate border-b border-neutral-500">
                   {reservation.number_of_people}
                   {reservation.note && reservation.note.trim() !== "" && (
                     <button
-                      className="btn btn-xs ml-2 bg-secondary text-text border-text"
+                      className="ml-2 btn btn-xs bg-secondary text-text border-text"
                       onClick={() => {
                         const noteElement = document.getElementById(
                           `note-${reservation.reservation_id}`
@@ -173,13 +272,13 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                   )}
                   <dialog
                     id={`note-${reservation.reservation_id}`}
-                    className="modal text-left"
+                    className="text-left modal"
                   >
                     <div className="modal-box bg-secondary text-text">
-                      <div className="font-bold text-lg flex items-center text-primary">
+                      <div className="flex items-center text-lg font-bold text-primary">
                         <p className="ml-2">{reservation.reservation_id}</p>
                       </div>
-                      <div className="text-text text-sm">
+                      <div className="text-sm text-text">
                         <p>
                           <FontAwesomeIcon icon={faUser} />{" "}
                           {reservation.user_name}
@@ -187,7 +286,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                         <p>
                           <FontAwesomeIcon icon={faPhone} />{" "}
                           <a
-                            className="link ml-2"
+                            className="ml-2 link"
                             href={`tel:${reservation.phone_number}`}
                           >
                             {reservation.phone_number}
@@ -195,6 +294,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                         </p>
                       </div>
                       <div className="divider"></div>
+                      <p className="mb-1 text-text/50">Notes:</p>
                       <p>{reservation.note || "No notes."}</p>
                     </div>
                     <form method="dialog" className="modal-backdrop">
@@ -225,8 +325,8 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
             ))
           ) : (
             <tr>
-              <td colSpan={6} className="px-6 py-4 text-center">
-                No reservations found for this store.
+              <td colSpan={6} className="py-4 text-center">
+                No reservations found
               </td>
             </tr>
           )}
