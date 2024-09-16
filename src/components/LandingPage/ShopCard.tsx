@@ -60,7 +60,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
             className={`w-full object-cover duration-500 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32`}
           />
         ) : (
-          <div className="skeleton h-60 w-full"></div>
+          <div className="w-full skeleton h-60"></div>
         )}
 
         <div
@@ -80,7 +80,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           <div
             className={`badge space-x-2 bg-secondary/80 w-fit rounded-xl px-1`}
           >
-            <FontAwesomeIcon icon={faClock} className="text-primary text-xs" />
+            <FontAwesomeIcon icon={faClock} className="text-xs text-primary" />
             <div className={`text-text text-xs`}>{open_timebooking}</div>
           </div>
           <br />
