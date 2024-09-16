@@ -141,7 +141,7 @@ const StoreListWithFilterFeature = () => {
       <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
         {t("DiscoverAndBooking")}
       </h2>
-      <div className="filter-container space-x-1">
+      <div className="filter-container space-x-1 overflow-x-auto whitespace-nowrap">
         <FilterButton
           title={STORE_TYPES_FOR_FILTER_BTN.HOT}
           selectedTitle={selectedType}
