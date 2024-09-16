@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-import { SERVER_URL } from "@/lib/variables";
+import { RESERVATION_STATUS, SERVER_URL } from "@/lib/variables";
 import { socket } from "@/socket";
 
 const ReservationsStatusSelector = ({
@@ -16,13 +16,13 @@ const ReservationsStatusSelector = ({
   const [status, setStatus] = useState(currentStatus);
 
   switch (status) {
-    case "pending":
+    case RESERVATION_STATUS.PENDING:
       className = "text-yellow-500 border-yellow-500 bg-yellow-500/30";
       break;
-    case "confirmed":
+    case RESERVATION_STATUS.CONFIRMED:
       className = "bg-primary/30 text-primary border-primary";
       break;
-    case "cancelled":
+    case RESERVATION_STATUS.CANCELLED:
       className = "text-red-500 border-red-500 bg-red-500/30";
       break;
     default:
@@ -46,17 +46,23 @@ const ReservationsStatusSelector = ({
   };
 
   return (
-    <div>
+    <>
       <select
-        className={`px-2 py-1 text-sm  border ${className}`}
+        className={`px-2 py-1 text-sm  border ${className} w-full`}
         value={status}
         onChange={(e) => updateReservationStatus(e.target.value)}
       >
-        <option value="pending">Pending</option>
-        <option value="confirmed">Confirmed</option>
-        <option value="cancelled">Cancelled</option>
+        <option value={`${RESERVATION_STATUS.PENDING}`}>
+          {RESERVATION_STATUS.PENDING}
+        </option>
+        <option value={`${RESERVATION_STATUS.CONFIRMED}`}>
+          {RESERVATION_STATUS.CONFIRMED}
+        </option>
+        <option value={`${RESERVATION_STATUS.CANCELLED}`}>
+          {RESERVATION_STATUS.CANCELLED}
+        </option>
       </select>
-    </div>
+    </>
   );
 };
 
