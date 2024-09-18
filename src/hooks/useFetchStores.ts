@@ -20,6 +20,7 @@ export interface Store {
   type: string[];
   facebook_link: string | null;
   google_map_link: string | null;
+  default_slots: object;
 }
 
 export const useFetchStores = () => {
