@@ -66,7 +66,7 @@ const StoreManagement = () => {
           onStoreSelect={handleStoreSelect}
         />
       </div>
-      <div className="flex flex-wrap gap-2 mt-4 mb-4">
+      <div className="flex flex-wrap mt-4 mb-4 gap-2">
         {Object.values(STORE_MGMT_MENU).map((title) => (
           <FilterButton
             key={title}
