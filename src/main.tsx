@@ -26,10 +26,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             color: "#e7ecef",
             zIndex: 9999,
           },
-          iconTheme: {
-            primary: "#89fc00",
-            secondary: "#121212",
-          },
         }}
       />
       <App />
