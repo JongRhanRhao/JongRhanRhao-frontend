@@ -9,6 +9,7 @@ export const resources = {
       Closed: "Closed",
       Available: "Available",
       Update: "Update",
+      Search: "Search",
       // Booking
       numberOfPeople: "Number of people",
       date: "Date",
@@ -70,6 +71,8 @@ export const resources = {
       Reservations: "Reservations",
       "Store Management": "Store Management",
       "Staff Management": "Staff Management",
+      "Map link": "Map link",
+      "FB link": "Facebook link",
       // Reserv mgmt
       "Reservations for": "Reservations for",
       // Shop name
@@ -89,6 +92,7 @@ export const resources = {
       Busy: "คนเยอะ",
       Closed: "ปิด",
       Update: "อัพเดท",
+      Search: "ค้นหาร้าน",
       // การจอง
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
@@ -150,6 +154,8 @@ export const resources = {
       Reservations: "การจอง",
       "Store Management": "การจัดการร้าน",
       "Staff Management": "การจัดการพนักงาน",
+      "Map link": "ลิงค์แผนที่",
+      "FB link": "ลิงค์เฟสบุ๊ค",
       // การจอง
       "Reservations for": "การจองสำหรับ",
       // ชื่อร้าน
