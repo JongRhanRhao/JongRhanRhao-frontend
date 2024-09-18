@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
+import { th } from "date-fns/locale";
 import { useTranslation } from "react-i18next";
 
 import { useFetchReservations } from "@/hooks/useFetchReservations";
@@ -208,7 +209,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
             className={FilterBtnClass(RESERVATION_STATUS.CONFIRMED)}
           />
         </div>
-        <div className="flex gap-2 mt-2">
+        <div className="flex mt-2 gap-2">
           <p className="p-1 font-semibold rounded bg-secondary text-text">
             {t("reservCount")}:{" "}
             {selectedDate ? TotalReservationByDate(selectedDate) : 0}
@@ -303,8 +304,10 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                   </dialog>
                 </td>
                 <td className="px-6 py-4 border-b border-neutral-500">
-                  {format(new Date(reservation.reservation_date), "PPP")},{" "}
-                  {reservation.reservation_time}
+                  {format(new Date(reservation.reservation_date), "PPP", {
+                    locale: th,
+                  })}
+                  , {reservation.reservation_time} น.
                 </td>
                 <td className="px-6 py-4 border-b border-neutral-500">
                   <a className="link" href={`tel:${reservation.phone_number}`}>
