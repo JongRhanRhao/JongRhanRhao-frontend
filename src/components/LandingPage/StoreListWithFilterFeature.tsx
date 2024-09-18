@@ -14,6 +14,7 @@ import BackHomeButton from "@/components/shared/BackHomeButton";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
 import { socket } from "@/socket";
+import SearchBar from "@/components/shared/SearchBar";
 
 const StoreListWithFilterFeature = () => {
   const [selectedType, setSelectedType] = useState(
@@ -94,7 +95,7 @@ const StoreListWithFilterFeature = () => {
         <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
           {t("DiscoverAndBooking")}
         </h2>
-        <div className="filter-container space-x-1">
+        <div className="overflow-x-auto filter-container space-x-1 whitespace-nowrap">
           <FilterButton
             title={STORE_TYPES_FOR_FILTER_BTN.HOT}
             selectedTitle={selectedType}
@@ -138,10 +139,15 @@ const StoreListWithFilterFeature = () => {
 
   return (
     <div>
-      <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
-        {t("DiscoverAndBooking")}
-      </h2>
-      <div className="filter-container space-x-1 overflow-x-auto whitespace-nowrap">
+      <div className="flex items-center justify-between">
+        <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
+          {t("DiscoverAndBooking")}
+        </h2>
+        <div className="hidden mr-4 md:block lg:block xl:block">
+          <SearchBar />
+        </div>
+      </div>
+      <div className="overflow-x-auto filter-container space-x-1 whitespace-nowrap">
         <FilterButton
           title={STORE_TYPES_FOR_FILTER_BTN.HOT}
           selectedTitle={selectedType}
