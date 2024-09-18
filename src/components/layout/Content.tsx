@@ -5,6 +5,7 @@ import ReserveStatus from "@/pages/MenuPages/Reservations";
 import StoreManagement from "@/pages/MenuPages/StoreManagement";
 import NotFoundPage from "@/pages/NotFoundPage";
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
+import ProfileSetting from "@/pages/MenuPages/ProfileSetting";
 
 const Content: React.FC = () => {
   return (
@@ -23,7 +24,7 @@ const Content: React.FC = () => {
       />
       <Route
         path={`${GLOBAL_URL_ROUTES.setting}`}
-        element={<div>Setting Content</div>}
+        element={<ProfileSetting />}
       />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
