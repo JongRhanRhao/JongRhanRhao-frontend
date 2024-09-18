@@ -29,13 +29,14 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     splitOldTime ? splitOldTime[1] || "" : ""
   );
   const [address, setAddress] = useState(store?.address);
+  const [googleMapLink, setGoogleMapLink] = useState(store?.google_map_link);
+  const [facebookLink, setFacebookLink] = useState(store?.facebook_link);
   const { t } = useTranslation();
   const descriptionMaxLength = 500;
 
   if (!store) {
     return <p>{t("noStoreSelect")}</p>;
   }
-
   const handleStatusChange = async () => {
     try {
       await axios.put(`${SERVER_URL}/stores/api/stores/${storeId}`, {
@@ -53,6 +54,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         description: description || store.description,
         imageUrl: store.image_url,
         rating: store.rating,
+        googleMapLink: googleMapLink || store.google_map_link,
+        facebookLink: facebookLink || store.facebook_link,
+        // defaultSlots: store.default_slots,
       });
       socket.emit("store_update", { storeId });
     } catch (error) {
@@ -86,7 +90,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   return (
     <div className="flex flex-col text-text">
       <div className="space-y-3">
-        <div className="p-4 space-y-3 text-base bg-secondary w-fit rounded-xl">
+        <div className="p-4 text-base space-y-3 bg-secondary w-fit rounded-xl">
           <span className="font-bold">
             {t("status")} <br />
           </span>
@@ -181,6 +185,30 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             <div className="text-sm text-right text-gray-500">
               {address?.length}/{50}
             </div>
+          </div>
+        </div>
+        <div className="w-fit collapse collapse-arrow bg-secondary">
+          <input type="checkbox" />
+          <div className="font-bold collapse-title">{t("Map link")}:</div>
+          <div className="collapse-content">
+            <textarea
+              className="w-full h-auto input bg-secondary textarea textarea-bordered"
+              value={googleMapLink || ""}
+              onChange={(e) => setGoogleMapLink(e.target.value)}
+            />
+            <div className="text-sm text-right text-gray-500"></div>
+          </div>
+        </div>
+        <div className="w-fit collapse collapse-arrow bg-secondary">
+          <input type="checkbox" />
+          <div className="font-bold collapse-title">{t("FB link")}:</div>
+          <div className="collapse-content">
+            <textarea
+              className="w-full h-auto input bg-secondary textarea textarea-bordered"
+              value={facebookLink || ""}
+              onChange={(e) => setFacebookLink(e.target.value)}
+            />
+            <div className="text-sm text-right text-gray-500"></div>
           </div>
         </div>
         <div className="text-base bg-secondary w-fit rounded-xl collapse collapse-arrow">
