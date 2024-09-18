@@ -188,16 +188,16 @@ const Reservations = () => {
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="table w-full min-w-full table-fixed">
+        <table className="table w-full min-w-full table-fixed rounded-xl">
           <thead>
             <tr className="bg-secondary">
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 {t("id_reservation")}
               </th>
-              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text hidden md:table-cell">
+              <th className="hidden w-1/4 px-6 py-4 font-bold text-left uppercase text-text md:table-cell">
                 {t("shop_name")}
               </th>
-              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text hidden sm:table-cell">
+              <th className="hidden w-1/4 px-6 py-4 font-bold text-left uppercase text-text sm:table-cell">
                 {t("dateNtime")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
@@ -235,10 +235,10 @@ const Reservations = () => {
                       <td className="px-6 py-4 border-b border-neutral-500">
                         {reservation.reservation_id}
                       </td>
-                      <td className="px-6 py-4 truncate border-b border-neutral-500 hidden md:table-cell">
+                      <td className="hidden px-6 py-4 truncate border-b border-neutral-500 md:table-cell">
                         {reservation.shop_name}
                       </td>
-                      <td className="px-6 py-4 border-b border-neutral-500 hidden sm:table-cell">
+                      <td className="hidden px-6 py-4 border-b border-neutral-500 sm:table-cell">
                         {format(new Date(reservation.reservation_date), "PPP")},{" "}
                         {reservation.reservation_time}
                       </td>
