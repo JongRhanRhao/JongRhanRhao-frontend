@@ -50,7 +50,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
           <FontAwesomeIcon icon={faX} />
         ) : user?.profilePicture ? (
           <div className="size-10 avatar">
-            <div className="w-24 rounded-full ring-primary ring-2 ring-offset-base-100 ring-offset-2">
+            <div className="w-24 rounded-full ring-primary ring-2 ring-offset-base-100 ring-offset-2 hover:ring-primary/70 duration-150">
               <img src={user?.profilePicture} />
             </div>
           </div>
@@ -94,6 +94,15 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                 }}
               >
                 Check Reservation
+              </button>
+              <button
+                className="w-full btn btn-outline text-text"
+                onClick={() => {
+                  navigate("/profile");
+                  toggleRightSidebar();
+                }}
+              >
+                Profile Settings
               </button>
 
               {/* <button className="w-full btn btn-outline text-text">
