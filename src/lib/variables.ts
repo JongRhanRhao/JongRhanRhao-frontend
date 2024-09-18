@@ -5,11 +5,16 @@ export const DATA_FETCHING_DELAY_TIME: number = 444;
 export const ERROR_TEXT: string =
   "Something went wrong, please try again later.";
 
+export const CUSTOM_BUTTON_CLASS =
+  "btn bg-primary text-secondary hover:text-primary hover:bg-secondary";
+export const CUSTIOM_BUTTON_OUTLINE_CLASS =
+  "btn btn-outline text-primary hover:bg-primary hover:text-secondary hover:border-none";
+
 export const GLOBAL_URL_ROUTES = {
   landingPage: "/",
   reserveStatus: "/reservations",
   storeManagement: "/store-management",
-  setting: "/settings",
+  setting: "/profile",
   notFound: "*",
 };
 
