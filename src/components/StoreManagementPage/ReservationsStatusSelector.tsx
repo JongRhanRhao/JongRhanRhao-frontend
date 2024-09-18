@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { RESERVATION_STATUS, SERVER_URL } from "@/lib/variables";
 import { socket } from "@/socket";
@@ -14,7 +15,7 @@ const ReservationsStatusSelector = ({
   className?: string;
 }) => {
   const [status, setStatus] = useState(currentStatus);
-
+  const { t } = useTranslation();
   switch (status) {
     case RESERVATION_STATUS.PENDING:
       className = "text-yellow-500 border-yellow-500 bg-yellow-500/30";
@@ -53,13 +54,13 @@ const ReservationsStatusSelector = ({
         onChange={(e) => updateReservationStatus(e.target.value)}
       >
         <option value={`${RESERVATION_STATUS.PENDING}`}>
-          {RESERVATION_STATUS.PENDING}
+          {t(RESERVATION_STATUS.PENDING)}
         </option>
         <option value={`${RESERVATION_STATUS.CONFIRMED}`}>
-          {RESERVATION_STATUS.CONFIRMED}
+          {t(RESERVATION_STATUS.CONFIRMED)}
         </option>
         <option value={`${RESERVATION_STATUS.CANCELLED}`}>
-          {RESERVATION_STATUS.CANCELLED}
+          {t(RESERVATION_STATUS.CANCELLED)}
         </option>
       </select>
     </>
