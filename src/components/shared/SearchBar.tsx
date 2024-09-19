@@ -61,11 +61,13 @@ const SearchBar = () => {
             filteredStores.length > 0 ? "block" : "hidden"
           }`}
         >
-          <ul className="text-sm text-text hover:bg-bg/50">
+          <ul className="text-sm text-text">
             {filteredStores.map((store) => (
               <Link to={`/shop/${store.store_id}`} key={store.store_id}>
                 {" "}
-                <li className="p-2">{store.shop_name}</li>
+                <li className="p-2 hover:bg-bg/50 rounded-xl">
+                  {store.shop_name}
+                </li>
               </Link>
             ))}
           </ul>
