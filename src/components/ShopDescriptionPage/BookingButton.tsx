@@ -7,6 +7,7 @@ import "react-international-phone/style.css";
 import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
+import { th } from "date-fns/locale";
 
 import { socket } from "@/socket";
 import "@/styles/custom-phone-input.css";
@@ -120,6 +121,7 @@ const BookingButton = ({
               dateFormat="d MMMM yyyy"
               className="w-full p-2 mt-1 rounded bg-secondary"
               minDate={new Date()}
+              locale={th}
             />
           </div>
           <div className="mb-4">
