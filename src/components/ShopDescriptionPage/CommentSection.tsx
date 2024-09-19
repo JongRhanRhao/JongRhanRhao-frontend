@@ -88,39 +88,38 @@ const CommentSection = () => {
                   type="radio"
                   name="rating-5"
                   className="bg-yellow-500 mask mask-star-2"
-                  value={rating}
+                  checked={rating === 1}
                   onChange={() => setRating(1)}
                 />
                 <input
                   type="radio"
                   name="rating-5"
                   className="bg-yellow-500 mask mask-star-2"
-                  defaultChecked
-                  value={rating}
+                  checked={rating === 2}
                   onChange={() => setRating(2)}
                 />
                 <input
                   type="radio"
                   name="rating-5"
                   className="bg-yellow-500 mask mask-star-2"
-                  value={rating}
+                  checked={rating === 3}
                   onChange={() => setRating(3)}
                 />
                 <input
                   type="radio"
                   name="rating-5"
                   className="bg-yellow-500 mask mask-star-2"
-                  value={rating}
+                  checked={rating === 4}
                   onChange={() => setRating(4)}
                 />
                 <input
                   type="radio"
                   name="rating-5"
                   className="bg-yellow-500 mask mask-star-2"
-                  value={rating}
+                  checked={rating === 5}
                   onChange={() => setRating(5)}
                 />
-                <div className="ml-1 text-sm text-text/50">({rating})</div>
+                <div className="ml-1 mt-1 text-sm text-text/50">({rating})</div>
               </div>
             )}
           </div>
