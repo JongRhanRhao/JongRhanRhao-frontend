@@ -10,6 +10,8 @@ export const resources = {
       Available: "Available",
       Update: "Update",
       Search: "Search",
+      AddToFavorite: "Add to favorite",
+      Unfavorite: "Unfavorite",
       // Booking
       numberOfPeople: "Number of people",
       date: "Date",
@@ -97,6 +99,8 @@ export const resources = {
       Closed: "ปิด",
       Update: "อัพเดท",
       Search: "ค้นหาร้าน",
+      AddToFavorite: "เพิ่มร้านโปรด",
+      Unfavorite: "ลบร้านโปรด",
       // การจอง
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
