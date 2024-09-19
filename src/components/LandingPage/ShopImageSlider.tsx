@@ -23,7 +23,8 @@ const ImageSlider: React.FC = () => {
 
   return (
     <Slider {...settings}>
-      {Array.isArray(stores) && stores.length > 0 ? (
+      {Array.isArray(stores) &&
+        stores.length > 0 &&
         stores.map((store, index) => (
           <Link
             to={`/shop/${store.store_id}`}
@@ -49,10 +50,7 @@ const ImageSlider: React.FC = () => {
               ImageSliderClass="hidden"
             />
           </Link>
-        ))
-      ) : (
-        <div>{t("No stores available")}</div>
-      )}
+        ))}
     </Slider>
   );
 };
