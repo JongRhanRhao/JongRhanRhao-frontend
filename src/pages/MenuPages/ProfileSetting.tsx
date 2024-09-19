@@ -17,6 +17,7 @@ const ProfileSetting = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>(
     user?.phoneNumber || ""
   );
+  const [profilePicture, setProfilePicture] = useState<File>();
 
   if (!isAuthenticated) {
     return (
@@ -46,6 +47,45 @@ const ProfileSetting = () => {
     });
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setProfilePicture(file);
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!profilePicture) {
+      toast.error("No file selected.");
+      return Promise.reject();
+    }
+
+    const formData = new FormData();
+    formData.append("profileImage", profilePicture);
+
+    try {
+      await axios.post(
+        `${SERVER_URL}/users/${user?.userId}/profile-image`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
+  const uploadStatus = () => {
+    toast.promise(handleUpload(), {
+      loading: "Uploading image...",
+      success: "Image uploaded successfully!",
+      error: "Error uploading image, please try again.",
+    });
+  };
+
   return (
     <>
       <div className="container mx-auto">
@@ -64,9 +104,12 @@ const ProfileSetting = () => {
               <input
                 type="file"
                 className="w-full max-w-xs file-input file-input-bordered file-input-xs bg-secondary text-text"
+                accept=".jpg,.jpeg,.png"
+                onChange={handleFileChange}
               />
               <button
                 className={`btn-sm w-fit ${CUSTIOM_BUTTON_OUTLINE_CLASS}`}
+                onClick={uploadStatus}
               >
                 Upload new photo
               </button>
@@ -90,6 +133,11 @@ const ProfileSetting = () => {
                 setPhoneNumber(phone);
               }}
             />
+            {/* //TODO: cnx, bkk  */}
+            {/* <select className="w-full mt-4 input input-md bg-secondary text-text">
+              <option value="th">Thailand</option>
+              <option value="en">English</option>
+            </select> */}
             <div className="card-actions">
               <button
                 onClick={userUpdateStatus}
