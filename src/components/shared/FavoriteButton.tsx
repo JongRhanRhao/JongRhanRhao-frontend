@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useCallback, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 import { useFavoriteStatus } from "@/hooks/useFavoriteStatus";
 import { useUser } from "@/hooks/useUserStore";
@@ -24,6 +25,7 @@ const FavoriteButton = ({
   const [isFavorite, setIsFavorite] = useState<boolean>(
     isFavoriteState || false
   );
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isFavoriteState !== undefined) {
@@ -91,15 +93,21 @@ const FavoriteButton = ({
   );
 
   return (
-    <div>
+    <div className="relative group">
       <button onClick={handleFavoriteClick}>
         <FontAwesomeIcon
           className={`${
             isFavorite ? "text-yellow-400" : "text-white"
-          } shadow-lg ${className}`}
+          } shadow-lg hover:text-yellow-400 duration-150 ${className}`}
           icon={faStar}
         />
       </button>
+      <div
+        className="absolute top-full left-1/2 z-10 -translate-x-1/2 mt-1 px-2 py-1 text-sm text-text bg-secondary rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        role="tooltip"
+      >
+        {isFavorite ? t("Unfavorite") : t("Favorite")}
+      </div>
     </div>
   );
 };
