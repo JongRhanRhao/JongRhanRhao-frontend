@@ -28,6 +28,10 @@ export const resources = {
       "BOOK NOW": "BOOK NOW",
       Close: "Close",
       "Cancel within 24 hours": "Cancel within 24 hours",
+      "Reply as": "Reply as",
+      // Comment
+      "Reviewed on": "Reviewed on",
+      "Login to comment": "Login to comment",
       // Reservation
       bookYourReservation: "Book your reservation",
       reservation: "Reservations",
@@ -111,6 +115,10 @@ export const resources = {
       cancel_condition: "เงื่อนไขการยกเลิกจอง",
       Comments: "ความคิดเห็น",
       noComment: "ยังไม่มีความคิดเห็นในร้านนี้",
+      "Reply as": "ตอบในชื่อ",
+      // ความคิดเห็น
+      "Reviewed on": "รีวิวเมื่อ",
+      "Login to comment": "เข้าสู่ระบบเพื่อแสดงความคิดเห็น",
       // การจอง
       bookYourReservation: "จองโต๊ะ",
       reservCount: "จำนวนการจอง",
