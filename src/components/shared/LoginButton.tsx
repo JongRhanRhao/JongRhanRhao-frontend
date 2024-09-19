@@ -112,7 +112,7 @@ const LoginButton = () => {
             </div>
             <button
               onClick={() => handleOAuthLogin("google")}
-              className="flex items-center justify-center w-full py-3 text-white rounded-md shadow-sm btn bg-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-secondary"
+              className="flex items-center justify-center w-full py-3 text-white rounded-md shadow-sm btn bg-secondary hover:bg-bg/50 focus:outline-none focus:ring-2 focus:ring-secondary"
             >
               <svg
                 className="w-6 h-6 mr-2"
@@ -158,7 +158,7 @@ const LoginButton = () => {
 
             <button
               onClick={() => handleOAuthLogin("facebook")}
-              className="flex items-center justify-center w-full py-3 text-white border rounded-md shadow-sm btn bg-secondary hover:bg-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-secondary"
+              className="flex items-center justify-center w-full py-3 text-white border rounded-md shadow-sm btn bg-secondary hover:bg-bg/50 focus:outline-none focus:ring-2 focus:ring-secondary"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
