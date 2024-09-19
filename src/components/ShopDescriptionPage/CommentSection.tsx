@@ -19,7 +19,7 @@ const CommentSection = () => {
   const [isReply, setIsReply] = useState(false);
   const [rating, setRating] = useState(5);
   const [reviewText, setReviewText] = useState("");
-  const { data: reviews } = useFetchReviews(shopId);
+  const { data: reviews, refetch } = useFetchReviews(shopId);
 
   const reviewData: Review = {
     customerId: user?.userId ? String(user.userId) : "",
@@ -33,7 +33,9 @@ const CommentSection = () => {
 
   const handleReview = async () => {
     try {
-      axios.post(`${SERVER_URL}/stores/api/reviews`, reviewData);
+      await axios.post(`${SERVER_URL}/stores/api/reviews`, reviewData);
+      await refetch();
+      setReviewText("");
     } catch (error) {
       return Promise.reject(error);
     }
