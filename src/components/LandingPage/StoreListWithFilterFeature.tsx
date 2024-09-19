@@ -59,23 +59,29 @@ const StoreListWithFilterFeature = () => {
   );
 
   const filteredShopCards = useMemo(() => {
-    if (!stores) return [];
+    if (!Array.isArray(stores)) return [];
 
     switch (selectedType) {
       case STORE_TYPES_FOR_FILTER_BTN.ALL:
-        return stores;
+        return Array.isArray(stores) ? stores : [];
       case STORE_TYPES_FOR_FILTER_BTN.HOT:
-        return stores.filter((store) => store.is_popular);
+        return Array.isArray(stores)
+          ? stores.filter((store) => store.is_popular)
+          : [];
       case STORE_TYPES_FOR_FILTER_BTN.FAVORITE:
         if (favoriteStores && Array.isArray(favoriteStores)) {
           const favoriteStoreIds = favoriteStores.map((fav) => fav.store_id);
-          return stores.filter((store) =>
-            favoriteStoreIds.includes(store.store_id)
-          );
+          return Array.isArray(stores)
+            ? stores.filter((store) =>
+                favoriteStoreIds.includes(store.store_id)
+              )
+            : [];
         }
         return [];
       default:
-        return stores.filter((store) => store.type.includes(selectedType));
+        return Array.isArray(stores)
+          ? stores.filter((store) => store.type.includes(selectedType))
+          : [];
     }
   }, [selectedType, stores, favoriteStores]);
 
