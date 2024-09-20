@@ -1,14 +1,13 @@
-import SearchBar from "@/components/shared/SearchBar";
 import StoreListWithFilterFeature from "@/components/LandingPage/StoreListWithFilterFeature";
-import ShopImageSlider from "@/components/LandingPage/ShopImageSlider";
+import SynchronizedImageSlider from "@/components/LandingPage/SynchronizedImageSlider";
 
+// TODO: Add location filter and selector feature e.g. by city, by district
 const DashboardContent = () => {
   return (
-    <>
-      {/* <SearchBar /> */}
-      <ShopImageSlider />
+    <div className="relative">
+      <SynchronizedImageSlider />
       <StoreListWithFilterFeature />
-    </>
+    </div>
   );
 };
 
