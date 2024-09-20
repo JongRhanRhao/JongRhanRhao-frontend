@@ -47,7 +47,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
 
   return (
     <div
-      className={`relative rounded shadow-lg cursor-pointer ovrflow-hidden m-a1 wh-auto flex-shrink-0 card ${className}`}
+      className={`relative shadow-lg cursor-pointer overflow-hidden m-a1 wh-auto flex-shrink-0`}
     >
       <div className="relative">
         {image ? (
@@ -57,7 +57,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
               "https://static.vecteezy.com/system/resources/previews/009/007/134/original/failed-to-load-page-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
             }
             alt={title}
-            className={`w-full object-cover duration-500 ease-out rounded-3xl aspect-auto lg:h-60 md:h-80 sm:h-32`}
+            className={`w-full object-cover duration-150 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32 ${className}`}
           />
         ) : (
           <div className="w-full skeleton h-60"></div>
