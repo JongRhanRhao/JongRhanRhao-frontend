@@ -6,6 +6,7 @@ const DashboardContent = () => {
   return (
     <div className="relative">
       <SynchronizedImageSlider />
+      <div className="mt-5" />
       <StoreListWithFilterFeature />
     </div>
   );
