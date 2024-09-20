@@ -12,7 +12,7 @@ interface RootLayoutProps {
   selectedItem: string;
   onItemClick: (item: string) => void;
 }
-// TODO: add chat with admin feature ??? (maybe)
+
 const RootLayout: React.FC<RootLayoutProps> = ({ onItemClick }) => {
   const { i18n } = useTranslation();
   const changeLanguage = (lang: string) => {
@@ -23,11 +23,14 @@ const RootLayout: React.FC<RootLayoutProps> = ({ onItemClick }) => {
   return (
     <div className="flex h-screen overflow-hidden bg-bg">
       <LoginModal />
-      <LeftSidebar onItemClick={onItemClick} className="hidden lg:block" />
-      <main className="flex flex-col flex-1 overflow-hidden">
-        <div className="flex-1 overflow-y-auto">
+      <LeftSidebar
+        onItemClick={onItemClick}
+        className="relative z-10 hidden lg:block"
+      />
+      <main className="relative flex flex-col flex-1 overflow-hidden">
+        <div className="relative z-10 flex-1 overflow-y-auto">
           <div className="px-4 py-6 md:px-6 lg:px-8">
-            <div className="flex justify-end">
+            <div className="flex justify-end mb-4">
               <button
                 className={`${isThai ? "" : "text-text"}`}
                 onClick={() => changeLanguage("en")}
@@ -47,12 +50,10 @@ const RootLayout: React.FC<RootLayoutProps> = ({ onItemClick }) => {
           <Footer className="mt-8" />
         </div>
       </main>
-
-      <RightSidebar className="hidden lg:block md:block" />
-
+      <RightSidebar className="relative z-10 hidden lg:block md:block" />
       <SmallScreenNavMenu
         onItemClick={onItemClick}
-        className="block md:hidden lg:hidden"
+        className="z-20 block md:hidden lg:hidden"
       />
     </div>
   );
