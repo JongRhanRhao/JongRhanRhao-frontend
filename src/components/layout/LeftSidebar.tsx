@@ -9,7 +9,7 @@ import {
   faAngleLeft,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
-import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
+// import UpgradeToVIPCard from "@/components/shared/UpgradeToVIPCard";
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
 import { useSidebarStore } from "@/hooks/useSidebarStore";
@@ -90,7 +90,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
         >
           <FontAwesomeIcon
             icon={leftSidebarExpanded ? faAngleLeft : faAngleRight}
-            className="text-secondary"
+            className={`hover:text-primary`}
           />
         </button>
       </div>
@@ -131,11 +131,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
         </ul>
       </nav>
 
-      {leftSidebarExpanded && (
-        <div>
-          <UpgradeToVIPCard />
-        </div>
-      )}
+      {leftSidebarExpanded && <div>{/* <UpgradeToVIPCard /> */}</div>}
     </div>
   );
 };
