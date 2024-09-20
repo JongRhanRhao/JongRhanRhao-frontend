@@ -106,7 +106,7 @@ const StoreListWithFilterFeature = () => {
             <SearchBar />
           </div>
         </div>
-        <div className="overflow-x-auto filter-container space-x-1 whitespace-nowrap">
+        <div className="overflow-x-auto space-x-1 filter-container whitespace-nowrap">
           <FilterButton
             title={STORE_TYPES_FOR_FILTER_BTN.HOT}
             selectedTitle={selectedType}
@@ -158,7 +158,7 @@ const StoreListWithFilterFeature = () => {
           <SearchBar />
         </div>
       </div>
-      <div className="overflow-x-auto filter-container space-x-1 whitespace-nowrap">
+      <div className="overflow-x-auto space-x-1 filter-container whitespace-nowrap">
         <FilterButton
           title={STORE_TYPES_FOR_FILTER_BTN.HOT}
           selectedTitle={selectedType}
