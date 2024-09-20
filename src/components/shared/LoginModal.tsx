@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+import { useTranslation } from "react-i18next";
 
 import { SERVER_URL } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
@@ -35,6 +36,7 @@ const LoginModal = () => {
     mode: "onSubmit",
   });
   const { isLoginModalOpen, closeLoginModal } = useLoginModal();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const dialog = document.getElementById("login") as HTMLDialogElement;
@@ -109,12 +111,12 @@ const LoginModal = () => {
 
             <div className="text-center">
               <h2 className="mb-2 text-2xl font-bold text-primary">
-                {isLogin ? "Login to your account" : "Create an account"}
+                {isLogin ? t("Login to your account") : t("Create an account")}
               </h2>
               <p className="text-sm text-white">
                 {isLogin
-                  ? "You must be logged in to continue."
-                  : "Sign up to get started."}
+                  ? t("You must be logged in to continue.")
+                  : t("Sign up to get started.")}
               </p>
             </div>
             <button
@@ -160,7 +162,7 @@ const LoginModal = () => {
                   </g>
                 </g>
               </svg>
-              Continue with Google
+              {t("Continue with Google")}
             </button>
 
             <button
@@ -192,11 +194,12 @@ const LoginModal = () => {
                   d="M26.707,29.301h5.176l0.813-5.258h-5.989v-2.874c0-2.184,0.714-4.121,2.757-4.121h3.283V12.46 c-0.577-0.078-1.797-0.248-4.102-0.248c-4.814,0-7.636,2.542-7.636,8.334v3.498H16.06v5.258h4.948v14.452 C21.988,43.9,22.981,44,24,44c0.921,0,1.82-0.084,2.707-0.204V29.301z"
                 ></path>
               </svg>
-              Continue with Facebook
+              {t("Continue with Facebook")}
             </button>
 
             <div className="flex items-center my-4 text-sm gap-2 text-neutral-700">
-              <div className="w-full h-px bg-neutral-700"></div>OR
+              <div className="w-full h-px bg-neutral-700"></div>
+              {t("OR")}
               <div className="w-full h-px bg-neutral-700"></div>
             </div>
 
@@ -217,7 +220,7 @@ const LoginModal = () => {
                     htmlFor="username"
                     className="absolute text-sm text-text duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-secondary px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
-                    Username
+                    {t("Username")}
                   </label>
                   {errors.user_name && (
                     <p className="text-sm text-red-600">
@@ -236,7 +239,7 @@ const LoginModal = () => {
                   placeholder=" "
                 />
                 <label htmlFor="email" className={customTextInputLabel}>
-                  E-mail
+                  {t("E-mail")}
                 </label>
                 {errors.email && (
                   <p className="text-sm text-red-600">{errors.email.message}</p>
@@ -254,7 +257,7 @@ const LoginModal = () => {
                   placeholder=" "
                 />
                 <label htmlFor="password" className={customTextInputLabel}>
-                  Password
+                  {t("Password")}
                 </label>
                 {errors.password && (
                   <p className="text-sm text-red-600">
@@ -276,7 +279,7 @@ const LoginModal = () => {
                     htmlFor="confirm_password"
                     className={customTextInputLabel}
                   >
-                    Confirm Password
+                    {t("Confirm Password")}
                   </label>
                   {errors.confirm_password && (
                     <p className="text-sm text-red-600">
@@ -315,13 +318,13 @@ const LoginModal = () => {
               {isLogin ? "Login" : "Sign Up"}
             </button>
             <p className="text-sm text-center text-text">
-              {isLogin ? "New here? " : "Already have an account? "}
+              {isLogin ? t("New here? ") : t("Already have an account? ")}
               <button
                 type="button"
                 className="text-primary hover:underline"
                 onClick={toggleForm}
               >
-                {isLogin ? "Create an account" : "Login"}
+                {isLogin ? t("Create an account") : t("Login")}
               </button>
             </p>
           </form>
