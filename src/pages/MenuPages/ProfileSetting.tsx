@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { PhoneInput } from "react-international-phone";
 
-import BackHomeButton from "@/components/shared/BackHomeButton";
 import LinkBack from "@/components/shared/LinkBack";
 import { useUser } from "@/hooks/useUserStore";
 import {
@@ -12,6 +11,7 @@ import {
   CUSTOM_BUTTON_CLASS,
   SERVER_URL,
 } from "@/lib/variables";
+import LoginButton from "@/components/shared/LoginButton";
 
 const ProfileSetting = () => {
   const { user, isAuthenticated } = useUser();
@@ -24,10 +24,13 @@ const ProfileSetting = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="flex flex-col items-center justify-center mt-20 text-xl text-text">
-        {t("You need to log in to view this page.")}
-        <BackHomeButton className="mt-5 text-primary" />
-      </div>
+      <>
+        <LinkBack />
+        <div className="flex flex-col items-center justify-center mt-20 text-xl text-text">
+          {t("You need to log in to view this page.")}
+          <LoginButton className="mt-4" />
+        </div>
+      </>
     );
   }
 
