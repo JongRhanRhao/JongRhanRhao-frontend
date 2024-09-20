@@ -1,5 +1,6 @@
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import { useFetchStaffList } from "@/hooks/useFetchStaffList";
 import { Store } from "@/hooks/useFetchStores";
@@ -15,6 +16,7 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
   } = useFetchStaffList({
     storeId: store?.store_id || "",
   });
+  const { t } = useTranslation();
 
   if (isLoading) {
     return (
@@ -23,19 +25,19 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
           <thead>
             <tr className="bg-secondary">
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                name
+                {t("name")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                email/phone
+                {t("E-mail")}/{t("phone")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                role
+                {t("Role")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                status
+                {t("status")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                action
+                {t("action")}
               </th>
             </tr>
           </thead>
@@ -80,16 +82,16 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
         <thead>
           <tr className="bg-secondary">
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              name
+              {t("Name")}
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              email/phone
+              {t("E-mail")}/{t("phone")}
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              role
+              {t("Role")}
             </th>
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-              action
+              {t("action")}
             </th>
           </tr>
         </thead>
@@ -115,7 +117,7 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
           ) : (
             <tr>
               <td colSpan={5} className="px-6 py-4 text-center">
-                No staff found for this store.
+                {t("No staff found for this store.")}
               </td>
             </tr>
           )}
