@@ -15,11 +15,14 @@ export const resources = {
       // Booking
       numberOfPeople: "Number of people",
       date: "Date",
+      time: "Time",
       phone: "Phone",
       slots: "Slots",
       overAge: "* I am over 20 years old.",
       note: "Note",
       staffWillConfirm: "Staff will call you to confirm your reservation.",
+      notePlaceholder:
+        "Please type your estimated arrival time & additional notes.",
       // Shop description
       status: "Status",
       address: "Address",
@@ -104,6 +107,7 @@ export const resources = {
       // การจอง
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
+      time: "เวลา",
       phone: "เบอร์โทรศัพท์",
       slots: "จำนวนที่ว่าง",
       note: "หมายเหตุถึงร้าน",
@@ -112,6 +116,7 @@ export const resources = {
       "BOOK NOW": "จองโต๊ะ",
       Close: "ปิด",
       "Cancel within 24 hours": "ยกเลิกภายใน 24 ชั่วโมง",
+      notePlaceholder: "กรุณากรอกเวลามาถึง & ข้อความเพิ่มเติมถึงร้าน",
       // รายละเอียดร้าน
       status: "สถานะ",
       address: "พิกัด",
