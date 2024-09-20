@@ -27,9 +27,11 @@ const SearchBar = () => {
 
   const filteredStores = useMemo(() => {
     if (!stores) return [];
-    return stores.filter((store) =>
-      store.shop_name.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    return Array.isArray(stores)
+      ? stores.filter((store) =>
+          store.shop_name.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      : [];
   }, [stores, searchValue]);
 
   const { t } = useTranslation();
