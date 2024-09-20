@@ -12,6 +12,7 @@ import { Review, useFetchReviews } from "@/hooks/useFetchReviews";
 import { SERVER_URL } from "@/lib/variables";
 
 const CommentSection = () => {
+  const REVIEW_TEXT_LIMIT = 100;
   const { id } = useParams<{ id: string }>();
   const shopId = id!;
   const { t } = useTranslation();
@@ -66,9 +67,19 @@ const CommentSection = () => {
               onFocus={setIsReply.bind(null, true)}
               className="w-full pr-10 mt-2 textarea focus:border-none focus:outline-none bg-secondary placeholder:text-text/50 placeholder:text-sm"
               placeholder={`${t("Reply as")} ${user?.userName}`}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  reviewStatus();
+                }
+              }}
+              maxLength={REVIEW_TEXT_LIMIT}
               value={reviewText}
               onChange={(e) => setReviewText(e.target.value)}
             />
+            <div className="text-sm text-left text-gray-500 ml-4 mb-2">
+              {reviewText?.length}/{REVIEW_TEXT_LIMIT}
+            </div>
             <div className="absolute bottom-3 right-4">
               <button disabled={reviewText == ""} onClick={reviewStatus}>
                 <FontAwesomeIcon
