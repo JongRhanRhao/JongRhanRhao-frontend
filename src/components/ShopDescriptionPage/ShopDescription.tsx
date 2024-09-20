@@ -9,6 +9,8 @@ import {
   faLocationDot,
   faMapLocationDot,
   faStar,
+  faStarHalfAlt,
+  faStar as faStarOutline,
 } from "@fortawesome/free-solid-svg-icons";
 // import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -25,6 +27,7 @@ import LinkBack from "@/components/shared/LinkBack";
 import FavoriteButton from "@/components/shared/FavoriteButton";
 // import { useFetchStoreImages } from "@/hooks/useFetchStoreImages";
 import { socket } from "@/socket";
+import { useFetchReviews } from "@/hooks/useFetchReviews";
 
 interface ShopDescriptionProps {
   selectedItem: string;
@@ -52,6 +55,8 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
         res.json()
       ),
   });
+
+  const { data: reviews } = useFetchReviews(stores?.store_id as string);
 
   // const { data: storeImages } = useFetchStoreImages({
   //   storeId: storeId as string,
@@ -99,7 +104,16 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
     : isClosed
     ? "text-error"
     : "text-error";
-  const safeRating = Math.max(0, Math.min(5, Math.floor(stores.rating)));
+  const totalReviews = reviews?.length ?? 0;
+  const totalRating = (reviews ?? [])
+    .map((review) => review.rating)
+    .reduce((a, b) => a + b, 0);
+  const rating = totalReviews > 0 ? (totalRating / totalReviews).toFixed(1) : 0;
+  const base5Rating = Math.min(Math.max(Number(rating), 0), 5);
+  const safeRating = Math.max(0, Math.min(5, Math.floor(base5Rating)));
+  const fullStars = Math.floor(safeRating);
+  const hasHalfStar = safeRating % 1 !== 0;
+  const emptyStars = 5 - Math.ceil(safeRating);
 
   return (
     <div className="flex justify-center h-screen">
@@ -171,15 +185,32 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                   <span>All</span>
                 )}
                 <div className="flex items-center mt-1">
-                  {[...Array(safeRating)].map((_, i) => (
+                  {[...Array(fullStars)].map((_, i) => (
                     <FontAwesomeIcon
-                      key={i}
+                      key={`full-${i}`}
                       icon={faStar}
                       className="text-yellow-400"
                     />
                   ))}
+
+                  {hasHalfStar && (
+                    <FontAwesomeIcon
+                      key="half"
+                      icon={faStarHalfAlt}
+                      className="text-yellow-400"
+                    />
+                  )}
+
+                  {[...Array(emptyStars)].map((_, i) => (
+                    <FontAwesomeIcon
+                      key={`empty-${i}`}
+                      icon={faStarOutline}
+                      className="text-gray-300"
+                    />
+                  ))}
+
                   <span className="ml-2 text-lg font-medium">
-                    ({stores.rating})
+                    ({safeRating.toFixed(1)})
                   </span>
                   <div className="flex ml-2 text-text">
                     <a
