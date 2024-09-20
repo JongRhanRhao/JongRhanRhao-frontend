@@ -1,4 +1,3 @@
-import { socket } from "@/socket";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
@@ -6,7 +5,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShop, faX } from "@fortawesome/free-solid-svg-icons";
+import { th } from "date-fns/locale";
 
+import { socket } from "@/socket";
 import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useUser } from "@/hooks/useUserStore";
 import { useFetchReservations } from "@/hooks/useFetchReservations";
@@ -16,7 +17,7 @@ import { FilterButton } from "@/components/shared/FilterButton";
 
 const Reservations = () => {
   const user = useUser();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { isAuthenticated } = user;
   const {
     data: reservation,
@@ -239,14 +240,16 @@ const Reservations = () => {
                         {reservation.shop_name}
                       </td>
                       <td className="hidden px-6 py-4 border-b border-neutral-500 sm:table-cell">
-                        {format(new Date(reservation.reservation_date), "PPP")},{" "}
-                        {reservation.reservation_time}
+                        {format(new Date(reservation.reservation_date), "PPP", {
+                          locale: i18n.language === "th" ? th : undefined,
+                        })}
+                        , {reservation.reservation_time}
                       </td>
                       <td className="px-6 py-4 border-b border-neutral-500">
                         <span
                           className={`${isPending(
                             reservation.reservation_status
-                          )} px-2 py-1 text-sm rounded-full uppercase ${statusColorClass}`}
+                          )} px-2 py-1 text-sm rounded-full ${statusColorClass}`}
                         >
                           {t(reservation.reservation_status)}
                         </span>
