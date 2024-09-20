@@ -10,6 +10,7 @@ import { useUser } from "@/hooks/useUserStore";
 import CommentCard from "@/components/ShopDescriptionPage/CommentCard";
 import { Review, useFetchReviews } from "@/hooks/useFetchReviews";
 import { SERVER_URL } from "@/lib/variables";
+import useModalStore from "@/hooks/useModalStore";
 
 const CommentSection = () => {
   const REVIEW_TEXT_LIMIT = 100;
@@ -21,6 +22,7 @@ const CommentSection = () => {
   const [rating, setRating] = useState(5);
   const [reviewText, setReviewText] = useState("");
   const { data: reviews, refetch } = useFetchReviews(shopId);
+  const { openLoginModal } = useModalStore();
 
   const reviewData: Review = {
     customerId: user?.userId ? String(user.userId) : "",
@@ -56,7 +58,11 @@ const CommentSection = () => {
         {t("Comments")} ({reviews?.length})
       </div>
       {!isAuthenticated && (
-        <div className="text-text/50">{t("Login to comment")}</div>
+        <button onClick={openLoginModal}>
+          <div className="text-text/50 hover:text-text/70 duration-150">
+            {t("Login to comment")}
+          </div>
+        </button>
       )}
       {isAuthenticated && (
         <div className="relative flex flex-col  text-text">
