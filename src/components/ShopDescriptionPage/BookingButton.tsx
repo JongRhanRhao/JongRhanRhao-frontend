@@ -76,11 +76,9 @@ const BookingButton = ({
 
   const handleBooking = async () => {
     try {
-      // console.log(bookingData);
       await axios.post(`${SERVER_URL}/stores/api/reservations`, bookingData);
       (document.getElementById("BookingButton") as HTMLDialogElement)?.close();
       socket.emit("reservation_update", { storeId });
-      console.log(storeId);
     } catch (error) {
       console.error("Error booking:", error);
     }
