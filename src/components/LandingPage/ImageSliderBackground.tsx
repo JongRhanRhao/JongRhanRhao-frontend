@@ -1,31 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useFetchStores } from "@/hooks/useFetchStores";
+import { Store } from "@/hooks/useFetchStores";
+import React from "react";
 
 interface ImageSliderBackgroundProps {
   height: string;
+  currentImageIndex: number;
+  stores: Store[];
 }
 
 const ImageSliderBackground: React.FC<ImageSliderBackgroundProps> = ({
   height,
+  currentImageIndex,
+  stores,
 }) => {
-  const { data: stores } = useFetchStores();
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    if (stores && stores.length > 0) {
-      const intervalId = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % stores.length);
-      }, 5400);
-
-      return () => clearInterval(intervalId);
-    }
-  }, [stores]);
-
   if (!stores || stores.length === 0) {
     return null;
   }
 
-  const currentStore = stores[currentImageIndex];
+  const currentStore = stores[currentImageIndex % stores.length];
 
   return (
     <div
