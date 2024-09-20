@@ -28,6 +28,7 @@ import FavoriteButton from "@/components/shared/FavoriteButton";
 // import { useFetchStoreImages } from "@/hooks/useFetchStoreImages";
 import { socket } from "@/socket";
 import { useFetchReviews } from "@/hooks/useFetchReviews";
+import LoginModal from "@/components/shared/LoginModal";
 
 interface ShopDescriptionProps {
   selectedItem: string;
@@ -117,6 +118,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
 
   return (
     <div className="flex justify-center h-screen">
+      <LoginModal />
       <div className="flex w-full h-full">
         <LeftSidebar onItemClick={onItemClick} />
         <div className="flex flex-col flex-1 overflow-y-auto">
