@@ -194,6 +194,8 @@ export const resources = {
       "Staff Management": "การจัดการพนักงาน",
       "Map link": "ลิงค์แผนที่",
       "FB link": "ลิงค์เฟสบุ๊ค",
+      Role: "ตำแหน่ง",
+      "No staff found for this store.": "ไม่พบพนักงานสำหรับร้านนี้",
       // การจอง
       "Reservations for": "การจองสำหรับ",
       "Upload new photo": "อัพโหลดรูป",
