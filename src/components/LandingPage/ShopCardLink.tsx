@@ -26,7 +26,7 @@ export const ShopCardLink = React.memo(({ store }: { store: Store }) => {
         currSeats={store.curr_seats}
         type={store.type}
         description={store.description || ""}
-        className="rounded-3xl"
+        className="rounded"
       />
     </Link>
   );
