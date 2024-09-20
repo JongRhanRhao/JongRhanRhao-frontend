@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+// import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   // faAngleRight,
@@ -8,10 +9,11 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-import LoginButton from "@/components/shared/LoginButton";
 import { useSidebarStore } from "@/hooks/useSidebarStore";
 import { useUser } from "@/hooks/useUserStore";
 import { useNavigate } from "react-router-dom";
+import LoginButton from "@/components/shared/LoginButton";
+// import { SERVER_URL } from "@/lib/variables";
 
 interface RightSidebarProps {
   className?: string;
@@ -62,13 +64,13 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
       {rightSidebarExpanded && (
         <div className="space-y-4">
           {!isAuthenticated ? (
-            <LoginButton />
+              <LoginButton className="w-full"  />
           ) : (
             <>
               <div className="p-4 rounded-lg shadow-inner bg-bg2/50">
-                <div className="flex">
+                <div className="flex items-center">
                   <h2 className="mb-2 text-xl font-bold">{user?.userName}</h2>
-                  <div className="size-14 avatar">
+                  <div className="ml-2 size-14 avatar">
                     <div className="w-24 rounded-full">
                       <img src={user?.profilePicture} />
                     </div>
