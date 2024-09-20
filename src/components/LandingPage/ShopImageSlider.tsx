@@ -19,6 +19,7 @@ const ImageSlider: React.FC = () => {
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
+    pauseOnHover: false,
   };
 
   return (
