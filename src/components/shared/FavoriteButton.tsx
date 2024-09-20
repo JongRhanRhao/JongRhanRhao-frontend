@@ -28,10 +28,13 @@ const FavoriteButton = ({
   const { t } = useTranslation();
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      return;
+    }
     if (isFavoriteState !== undefined) {
       setIsFavorite(isFavoriteState);
     }
-  }, [isFavoriteState]);
+  }, [isFavoriteState, isAuthenticated]);
 
   const handleUnfavoriteClick = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
