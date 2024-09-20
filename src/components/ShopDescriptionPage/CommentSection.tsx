@@ -43,7 +43,6 @@ const CommentSection = () => {
   };
 
   const reviewStatus = () => {
-    // console.log(reviewData)
     toast.promise(handleReview(), {
       loading: "Submitting review...",
       success: "Review submitted successfully!",
