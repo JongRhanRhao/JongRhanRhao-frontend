@@ -1,17 +1,20 @@
+import { useTranslation } from "react-i18next";
+
 import useModalStore from "@/hooks/useModalStore";
-import { CUSTIOM_BUTTON_OUTLINE_CLASS } from "@/lib/variables";
+import { CUSTOM_BUTTON_CLASS } from "@/lib/variables";
 
 const LoginButton = ({ className }: { className?: string }) => {
   const { openLoginModal } = useModalStore();
+  const { t } = useTranslation();
   return (
     <button
-      className={`mt-4 ${className} ${CUSTIOM_BUTTON_OUTLINE_CLASS}`}
+      className={`${className} ${CUSTOM_BUTTON_CLASS}`}
       onClick={(e) => {
         e.preventDefault();
         openLoginModal();
       }}
     >
-      Log In / Sign Up
+      {t("Log In / Sign Up")}
     </button>
   );
 };
