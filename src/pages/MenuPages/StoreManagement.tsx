@@ -13,7 +13,7 @@ import { Store } from "@/hooks/useFetchStores";
 import LinkBack from "@/components/shared/LinkBack";
 
 const StoreManagement = () => {
-  const { user } = useUser();
+  const { user, isAuthenticated } = useUser();
   const role = user?.role;
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState(
@@ -32,10 +32,13 @@ const StoreManagement = () => {
   }, []);
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      return;
+    }
     if (role !== "owner" && role !== "staff") {
       navigate("/");
     }
-  }, [role, navigate]);
+  }, [role, navigate, isAuthenticated]);
 
   const renderActiveSection = () => {
     switch (selectedType) {
@@ -56,9 +59,7 @@ const StoreManagement = () => {
       <span className="mb-5 text-2xl font-bold text-text">
         {t("storeManagement")}
       </span>
-      <p className="mt-2 text-sm text-text">
-        {t("storeManagementDesc")}
-      </p>
+      <p className="mt-2 text-sm text-text">{t("storeManagementDesc")}</p>
       <div className="flex items-center mt-4 shadow-lg w-fit rounded-xl bg-secondary">
         <StoreSelector
           userId={user?.userId?.toString() || ""}
@@ -81,7 +82,7 @@ const StoreManagement = () => {
         {selectedStore ? (
           renderActiveSection()
         ) : (
-          <p className="text-text">{t('pleaseSelectYourStore')}</p>
+          <p className="text-text">{t("pleaseSelectYourStore")}</p>
         )}
       </div>
     </>
