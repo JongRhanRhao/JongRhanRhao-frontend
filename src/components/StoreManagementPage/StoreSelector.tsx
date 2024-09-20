@@ -62,7 +62,7 @@ const StoreSelector = ({
         <option value="">{t("selectYourStore")}</option>
         {stores.map((store: Store) => (
           <option key={store.store_id} value={store.store_id}>
-            {store.shop_name}
+            {t(store.shop_name)}
           </option>
         ))}
       </select>
