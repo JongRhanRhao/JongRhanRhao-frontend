@@ -27,12 +27,14 @@ const BookingButton = ({
   disabled: boolean;
   storeId: string;
 }) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const { user, isAuthenticated } = useUser();
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>(
+    user?.phoneNumber || ""
+  );
   const [isOverAge, setIsOverAge] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
-  const { user, isAuthenticated } = useUser();
   const { t, i18n } = useTranslation();
 
   const handleSubmit = async (e: React.MouseEvent) => {
