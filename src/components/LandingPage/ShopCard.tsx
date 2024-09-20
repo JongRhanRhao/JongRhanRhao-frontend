@@ -47,7 +47,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
 
   return (
     <div
-      className={`relative rounded shadow-lg cursor-pointer ovrflow-hidden m-a1 wh-auto sflex-shrink-0 card ${className}`}
+      className={`relative rounded shadow-lg cursor-pointer ovrflow-hidden m-a1 wh-auto flex-shrink-0 card ${className}`}
     >
       <div className="relative">
         {image ? (
