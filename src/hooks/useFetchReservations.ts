@@ -26,5 +26,6 @@ export const useFetchReservations = ({
         res.json()
       ),
     queryKey: ["reservations"],
+    refetchInterval: 1000,
   });
 };
