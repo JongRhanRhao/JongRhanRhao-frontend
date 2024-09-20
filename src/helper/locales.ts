@@ -109,6 +109,7 @@ export const resources = {
       Search: "ค้นหาร้าน",
       AddToFavorite: "เพิ่มร้านโปรด",
       Unfavorite: "ลบร้านโปรด",
+      "Log In / Sign Up": "เข้าสู่ระบบ / สมัครสมาชิก",
       // การจอง
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
