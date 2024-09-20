@@ -1,16 +1,21 @@
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import ShopCard from "@/components/LandingPage/ShopCard";
-import { useFetchStores } from "@/hooks/useFetchStores";
-import { Link } from "react-router-dom";
 import { STORE_AVAILABILITY_STATUS } from "@/lib/variables";
+import { useFetchStores } from "@/hooks/useFetchStores";
 
-const ImageSlider: React.FC = () => {
-  const { data: stores } = useFetchStores();
+interface ShopImageSliderProps {
+  currentImageIndex: number;
+}
+
+const ShopImageSlider: React.FC<ShopImageSliderProps> = () => {
   const { t } = useTranslation();
+  const { data: stores } = useFetchStores();
   const settings = {
     infinite: true,
     speed: 500,
@@ -56,4 +61,4 @@ const ImageSlider: React.FC = () => {
   );
 };
 
-export default ImageSlider;
+export default ShopImageSlider;
