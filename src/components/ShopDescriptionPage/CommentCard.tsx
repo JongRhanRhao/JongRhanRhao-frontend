@@ -29,7 +29,9 @@ const CommentCard = ({
           <div className="font-medium text text-text">{name}</div>
         </div>
       </div>
-      <p className="mb-6 leading-relaxed text-text">{comment}</p>
+      <p className="mb-6 leading-relaxed text-text whitespace-pre-wrap">
+        {comment}
+      </p>
       <div className="flex items-center justify-between gap-8">
         <div className="text-text/50">
           {Array.from({ length: rating }).map((_, index) => (
