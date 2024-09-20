@@ -33,7 +33,7 @@ const BookingButton = ({
   const [isOverAge, setIsOverAge] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
   const { user, isAuthenticated } = useUser();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -113,15 +113,15 @@ const BookingButton = ({
           <h2 className="mb-4 text-2xl font-bold text-primary">
             {t("bookYourReservation")}
           </h2>
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col">
             <label className="mr-2 font-bold">{t("date")}:</label>
             <DatePicker
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
               dateFormat="d MMMM yyyy"
-              className="w-full p-2 mt-1 rounded bg-secondary"
+              className="w-fit p-2 mt-1 rounded-xl bg-secondary"
               minDate={new Date()}
-              locale={th}
+              locale={i18n.language == "th" ? th : ""}
             />
           </div>
           <div className="mb-4">
@@ -131,7 +131,7 @@ const BookingButton = ({
               value={numberOfPeople}
               min={1}
               onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-              className="p-2 mt-1 rounded w-fit bg-secondary"
+              className="p-2 mt-1 rounded-xl w-fit bg-secondary"
             />
           </div>
           {/* <div className="mb-4 font-bold">{t("slots")}:</div> */}
@@ -146,11 +146,12 @@ const BookingButton = ({
             />
           </div>
           <div className="flex flex-col mb-4">
-            <label className="font-bold mb-">{t("note")}: </label>
+            <label className="font-bold">{t("note")}: </label>
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="w-full p-2 mt-1 rounded resize-none textarea bg-secondary"
+              className="w-full p-2 mt-1 rounded-xl resize-none textarea bg-secondary"
+              placeholder={t("notePlaceholder")}
             ></textarea>
           </div>
           <div className="flex items-center">
