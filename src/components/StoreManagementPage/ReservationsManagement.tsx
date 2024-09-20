@@ -35,7 +35,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   const [selectedStatus, setSelectedStatus] = useState<string | undefined>(
     "All"
   );
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const filteredReservations = Array.isArray(reservation)
     ? reservation.filter((res) => {
@@ -171,6 +171,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
           placeholderText="Select a date"
+          locale={i18n.language === "th" ? th : undefined}
         />
         <button
           onClick={() =>
@@ -303,11 +304,11 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                     </form>
                   </dialog>
                 </td>
-                <td className="px-6 py-4 border-b border-neutral-500">
+                <td className="hidden px-6 py-4 border-b border-neutral-500 sm:table-cell">
                   {format(new Date(reservation.reservation_date), "PPP", {
-                    locale: th,
+                    locale: i18n.language === "th" ? th : undefined,
                   })}
-                  , {reservation.reservation_time} น.
+                  , {reservation.reservation_time}
                 </td>
                 <td className="px-6 py-4 border-b border-neutral-500">
                   <a className="link" href={`tel:${reservation.phone_number}`}>
