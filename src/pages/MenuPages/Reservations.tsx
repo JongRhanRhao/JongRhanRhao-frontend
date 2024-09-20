@@ -53,7 +53,7 @@ const Reservations = () => {
   if (!isAuthenticated) {
     return (
       <div className="flex flex-col items-center justify-center mt-20 text-xl text-text">
-        You need to log in to view this page.
+        {t("You need to log in to view this page.")}
         <BackHomeButton className="mt-5 text-primary" />
       </div>
     );
