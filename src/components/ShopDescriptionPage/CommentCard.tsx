@@ -29,7 +29,7 @@ const CommentCard = ({
           <div className="font-medium text text-text">{name}</div>
         </div>
       </div>
-      <p className="mb-6 leading-relaxed text-text whitespace-pre-wrap">
+      <p className="mb-6 leading-relaxed whitespace-pre-wrap text-text">
         {comment}
       </p>
       <div className="flex items-center justify-between gap-8">

@@ -106,7 +106,7 @@ const FavoriteButton = ({
         />
       </button>
       <div
-        className="absolute top-full left-1/2 z-10 -translate-x-1/2 mt-1 px-2 py-1 text-sm text-text bg-secondary rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute z-10 px-2 py-1 mt-1 text-sm rounded opacity-0 top-full left-1/2 -translate-x-1/2 text-text bg-secondary group-hover:opacity-100 transition-opacity duration-300"
         role="tooltip"
       >
         {isFavorite ? t("Unfavorite") : t("AddToFavorite")}

@@ -82,7 +82,7 @@ const CommentSection = () => {
               value={reviewText}
               onChange={(e) => setReviewText(e.target.value)}
             />
-            <div className="text-sm text-left text-gray-500 ml-4 mb-2">
+            <div className="mb-2 ml-4 text-sm text-left text-gray-500">
               {reviewText?.length}/{REVIEW_TEXT_LIMIT}
             </div>
             <div className="absolute bottom-3 right-4">
@@ -135,7 +135,7 @@ const CommentSection = () => {
                   checked={rating === 5}
                   onChange={() => setRating(5)}
                 />
-                <div className="ml-1 mt-1 text-sm text-text/50">({rating})</div>
+                <div className="mt-1 ml-1 text-sm text-text/50">({rating})</div>
               </div>
             )}
           </div>
