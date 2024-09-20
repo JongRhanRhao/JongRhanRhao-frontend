@@ -114,13 +114,13 @@ const BookingButton = ({
           <h2 className="mb-4 text-2xl font-bold text-primary">
             {t("bookYourReservation")}
           </h2>
-          <div className="mb-4 flex flex-col">
+          <div className="flex flex-col mb-4">
             <label className="mr-2 font-bold">{t("date")}:</label>
             <DatePicker
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
               dateFormat="d MMMM yyyy"
-              className="w-fit p-2 mt-1 rounded-xl bg-secondary"
+              className="p-2 mt-1 w-fit rounded-xl bg-secondary"
               minDate={new Date()}
               locale={i18n.language == "th" ? th : ""}
             />
@@ -151,7 +151,7 @@ const BookingButton = ({
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="w-full p-2 mt-1 rounded-xl resize-none textarea bg-secondary"
+              className="w-full p-2 mt-1 resize-none rounded-xl placeholder:text-text/50 textarea bg-secondary"
               placeholder={t("notePlaceholder")}
             ></textarea>
           </div>
