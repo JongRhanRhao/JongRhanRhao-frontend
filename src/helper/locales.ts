@@ -82,6 +82,8 @@ export const resources = {
       "Staff Management": "Staff Management",
       "Map link": "Map link",
       "FB link": "Facebook link",
+      // Profile Setting
+      "Edit Profile": "Edit Profile",
       // Reserv mgmt
       "Reservations for": "Reservations for",
       // Shop name
@@ -89,6 +91,9 @@ export const resources = {
       "LATE NIGHT TALKING MUSIC BAR": "LATE NIGHT TALKING MUSIC BAR",
       TAWANDANG: "TAWANDANG",
       // TODO: Add the rest of the shop names
+      // Error
+      "You need to log in to view this page.":
+        "You need to log in to view this page.",
     },
   },
   th: {
@@ -175,11 +180,18 @@ export const resources = {
       "FB link": "ลิงค์เฟสบุ๊ค",
       // การจอง
       "Reservations for": "การจองสำหรับ",
+      "Upload new photo": "อัพโหลดรูป",
+      // จัดการโปรไฟล์
+      "Edit Profile": "แก้ไขโปรไฟล์",
+      Name: "ชื่อ",
       // ชื่อร้าน
       Minion: "มินเนี่ยน",
       "LATE NIGHT TALKING MUSIC BAR": "LATE NIGHT TALKING MUSIC BAR",
       TAWANDANG: "ตะวันแดง มหาชน",
       // TODO: ใส่ชื่อร้านที่เหลือ
+      // ข้อผิดพลาด
+      "You need to log in to view this page.":
+        "คุณต้องเข้าสู่ระบบเพื่อดูหน้านี้",
     },
   },
 } as const;
