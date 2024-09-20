@@ -6,6 +6,7 @@ import RightSidebar from "@/components/layout/RightSidebar";
 import Content from "@/components/layout/Content";
 import Footer from "@/components/shared/Footer";
 import SmallScreenNavMenu from "@/components/shared/SmallScreenNavMenu";
+import LoginModal from "@/components/shared/LoginModal";
 
 interface RootLayoutProps {
   selectedItem: string;
@@ -21,6 +22,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ onItemClick }) => {
 
   return (
     <div className="flex h-screen overflow-hidden bg-bg">
+      <LoginModal />
       <LeftSidebar onItemClick={onItemClick} className="hidden lg:block" />
       <main className="flex flex-col flex-1 overflow-hidden">
         <div className="flex-1 overflow-y-auto">
