@@ -17,6 +17,7 @@ import {
   SERVER_URL,
 } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
+import LoginButton from "@/components/shared/LoginButton";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
@@ -39,10 +40,6 @@ const BookingButton = ({
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!isAuthenticated) {
-      toast.error("Please log in before making a reservation.");
-      return;
-    }
     if (!selectedDate || !numberOfPeople || !phoneNumber) {
       toast.error("Please fill in all fields.");
       return;
@@ -94,17 +91,21 @@ const BookingButton = ({
 
   return (
     <>
-      <button
-        disabled={disabled}
-        className={`w-48 px-4 py-2 font-bold rounded-xl ${CUSTOM_BUTTON_CLASS}`}
-        onClick={() =>
-          (
-            document.getElementById("BookingButton") as HTMLDialogElement
-          )?.showModal()
-        }
-      >
-        {t("BOOK NOW")}
-      </button>
+      {!isAuthenticated ? (
+        <LoginButton />
+      ) : (
+        <button
+          disabled={disabled}
+          className={`w-48 px-4 py-2 font-bold rounded-xl ${CUSTOM_BUTTON_CLASS}`}
+          onClick={() =>
+            (
+              document.getElementById("BookingButton") as HTMLDialogElement
+            )?.showModal()
+          }
+        >
+          {t("BOOK NOW")}
+        </button>
+      )}
       <dialog
         id="BookingButton"
         className="modal modal-bottom sm:modal-middle md:modal-middle lg:modal-middle xl:modal-middle"
