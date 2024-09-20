@@ -20,7 +20,7 @@ const ImageSliderBackground: React.FC<ImageSliderBackgroundProps> = ({
 
   return (
     <div
-      className="absolute top-0 left-0 right-0 z-0 bg-cover bg-center blur-lg transform scale-110"
+      className="absolute top-0 left-0 right-0 z-0 bg-cover bg-center blur-lg transform"
       style={{
         height,
         backgroundImage: `url(${currentStore.image_url})`,
