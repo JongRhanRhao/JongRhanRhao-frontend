@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 export const ShopCardLink = React.memo(({ store }: { store: Store }) => {
   const { t } = useTranslation();
   return (
-    <Link to={`/shop/${store.store_id}`} className="no-underline">
+    <Link to={`/shop/${store.store_id}`}>
       <ShopCard
         id={store.store_id}
         image={store.image_url || ""}
@@ -26,6 +26,7 @@ export const ShopCardLink = React.memo(({ store }: { store: Store }) => {
         currSeats={store.curr_seats}
         type={store.type}
         description={store.description || ""}
+        className="rounded-3xl"
       />
     </Link>
   );
