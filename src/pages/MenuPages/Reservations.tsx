@@ -14,6 +14,7 @@ import { useFetchReservations } from "@/hooks/useFetchReservations";
 import LinkBack from "@/components/shared/LinkBack";
 import { ERROR_TEXT, RESERVATION_STATUS, SERVER_URL } from "@/lib/variables";
 import { FilterButton } from "@/components/shared/FilterButton";
+import LoginButton from "@/components/shared/LoginButton";
 
 const Reservations = () => {
   const user = useUser();
@@ -38,6 +39,7 @@ const Reservations = () => {
     reservStatus === RESERVATION_STATUS.CONFIRMED ? true : false;
 
   useEffect(() => {
+    if (!isAuthenticated) return;
     if (reservation) {
       socket.on("reservation_update", (data) => {
         if (data.reservationId) {
@@ -52,10 +54,13 @@ const Reservations = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="flex flex-col items-center justify-center mt-20 text-xl text-text">
-        {t("You need to log in to view this page.")}
-        <BackHomeButton className="mt-5 text-primary" />
-      </div>
+      <>
+        <LinkBack />
+        <div className="flex flex-col items-center justify-center mt-20 text-xl text-text">
+          {t("You need to log in to view this page.")}
+          <LoginButton className="mt-4" />
+        </div>
+      </>
     );
   }
 
@@ -237,7 +242,7 @@ const Reservations = () => {
                         {reservation.reservation_id}
                       </td>
                       <td className="hidden px-6 py-4 truncate border-b border-neutral-500 md:table-cell">
-                        {reservation.shop_name}
+                        {t(reservation.shop_name)}
                       </td>
                       <td className="hidden px-6 py-4 border-b border-neutral-500 sm:table-cell">
                         {format(new Date(reservation.reservation_date), "PPP", {
