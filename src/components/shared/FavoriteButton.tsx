@@ -48,21 +48,21 @@ const FavoriteButton = ({
         refetch();
       } catch (err) {
         if (axios.isAxiosError(err)) {
-          console.error("Axios error:", err.response);
+          toast.error(t("Something went wrong. Please try again."));
         } else {
-          console.error("Error removing favorite:", err);
+          toast.error(t("Something went wrong. Please try again."));
         }
         setIsFavorite(true);
       }
     },
-    [customerId, storeId, refetch]
+    [customerId, storeId, refetch, t]
   );
 
   const handleFavoriteClick = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.preventDefault();
       if (!isAuthenticated) {
-        toast.error("Please log in before adding a favorite store.");
+        toast.error(t("Please log in before adding a favorite store."));
         return;
       }
       try {
@@ -78,20 +78,21 @@ const FavoriteButton = ({
         }
       } catch (err) {
         if (axios.isAxiosError(err)) {
-          console.error("Axios error:", err.response);
+          toast.error(t("Something went wrong. Please try again."));
         } else {
-          console.error("Error adding favorite:", err);
+          toast.error(t("Something went wrong. Please try again."));
         }
         setIsFavorite(false);
       }
     },
     [
+      isAuthenticated,
       isFavorite,
-      handleUnfavoriteClick,
       customerId,
       storeId,
+      handleUnfavoriteClick,
       refetch,
-      isAuthenticated,
+      t,
     ]
   );
 
