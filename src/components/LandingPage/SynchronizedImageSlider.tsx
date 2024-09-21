@@ -12,7 +12,7 @@ const SynchronizedImageSlider: React.FC = () => {
     if (stores && stores.length > 0) {
       const intervalId = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % stores.length);
-      }, 5000);
+      }, 5250);
 
       return () => clearInterval(intervalId);
     }
