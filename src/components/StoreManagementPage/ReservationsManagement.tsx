@@ -38,15 +38,26 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
   const { t, i18n } = useTranslation();
 
   const filteredReservations = Array.isArray(reservation)
-    ? reservation.filter((res) => {
-        const matchesDate =
-          selectedDate &&
-          new Date(res.reservation_date).toDateString() ===
-            selectedDate.toDateString();
-        const matchesStatus =
-          selectedStatus === "All" || res.reservation_status === selectedStatus;
-        return matchesDate && matchesStatus;
-      })
+    ? reservation
+        .filter((res) => {
+          const matchesDate =
+            selectedDate &&
+            new Date(res.reservation_date).toDateString() ===
+              selectedDate.toDateString();
+          const matchesStatus =
+            selectedStatus === "All" ||
+            res.reservation_status === selectedStatus;
+          return matchesDate && matchesStatus;
+        })
+        .sort((a, b) => {
+          const timeA = new Date(
+            `1970-01-01T${a.reservation_time}:00`
+          ).getTime();
+          const timeB = new Date(
+            `1970-01-01T${b.reservation_time}:00`
+          ).getTime();
+          return timeB - timeA;
+        })
     : [];
 
   useEffect(() => {
