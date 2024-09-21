@@ -75,9 +75,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
 
   const updateStoreStatus = () => {
     toast.promise(handleStatusChange(), {
-      loading: "Updating store...",
-      success: "Store updated successfully!",
-      error: "Error updating, please try again.",
+      loading: t("Updating store..."),
+      success: t("Store updated successfully!"),
+      error: t("Something went wrong. Please try again."),
     });
   };
 
