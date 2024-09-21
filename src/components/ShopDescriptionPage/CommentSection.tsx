@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWineBottle } from "@fortawesome/free-solid-svg-icons";
 
 import { useUser } from "@/hooks/useUserStore";
 import CommentCard from "@/components/ShopDescriptionPage/CommentCard";
@@ -66,11 +64,11 @@ const CommentSection = () => {
       )}
       {isAuthenticated && (
         <div className="relative flex flex-col  text-text">
-          <div className="relative w-1/3 min-w-fit bg-secondary rounded-xl">
+          <div className="relative w-1/3 min-w-fit bg-bg rounded-xl">
             <input
               type="text"
               onFocus={setIsReply.bind(null, true)}
-              className="w-full pr-10 mt-2 textarea focus:border-none focus:outline-none bg-secondary placeholder:text-text/50 placeholder:text-sm"
+              className="w-full break-words pr-10 mt-2 textarea focus:border-none focus:outline-none bg-secondary placeholder:text-text/50 placeholder:text-sm"
               placeholder={`${t("Reply as")} ${user?.userName}`}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
@@ -82,20 +80,21 @@ const CommentSection = () => {
               value={reviewText}
               onChange={(e) => setReviewText(e.target.value)}
             />
-            <div className="mb-2 ml-4 text-sm text-left text-gray-500">
-              {reviewText?.length}/{REVIEW_TEXT_LIMIT}
-            </div>
-            <div className="absolute bottom-3 right-4">
-              <button disabled={reviewText == ""} onClick={reviewStatus}>
-                <FontAwesomeIcon
-                  className={`p-1 rounded-full duration-150 ${
-                    reviewText == ""
-                      ? "text-secondary/50 bg-primary/50"
-                      : "text-secondary bg-primary"
-                  }`}
-                  icon={faWineBottle}
-                />
-              </button>
+            {isReply && (
+              <div className="mb-2 mt-1 ml-4 text-sm text-left text-gray-500">
+                {reviewText?.length}/{REVIEW_TEXT_LIMIT}
+              </div>
+            )}
+            <div className="absolute bottom-11 right-0">
+              {isReply && (
+                <button
+                  className="text-sm btn btn-xs bg-primary text-secondary"
+                  disabled={reviewText == ""}
+                  onClick={reviewStatus}
+                >
+                  {t("Send")}
+                </button>
+              )}
             </div>
             {isReply && (
               <div className="items-center mb-4 ml-4 rating rating-sm">
