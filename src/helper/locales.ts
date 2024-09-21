@@ -146,6 +146,7 @@ export const resources = {
       Comments: "ความคิดเห็น",
       noComment: "ยังไม่มีความคิดเห็นในร้านนี้",
       "Reply as": "ตอบในชื่อ",
+      Send: "ส่ง",
       // ความคิดเห็น
       "Reviewed on": "รีวิวเมื่อ",
       "Login to comment": "เข้าสู่ระบบเพื่อแสดงความคิดเห็น",
