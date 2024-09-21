@@ -70,9 +70,9 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
 
   const updateDeleteStatus = (staffId: string) => {
     toast.promise(handleDelete(staffId, store?.store_id || ""), {
-      loading: "Deleting...",
-      success: "Deleted successfully",
-      error: "Failed to delete",
+      loading: t("Deleting..."),
+      success: t("Deleted successfully"),
+      error: t("Something went wrong. Please try again."),
     });
   };
 
