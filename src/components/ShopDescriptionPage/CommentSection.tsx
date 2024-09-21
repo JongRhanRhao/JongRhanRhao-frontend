@@ -44,9 +44,9 @@ const CommentSection = () => {
 
   const reviewStatus = () => {
     toast.promise(handleReview(), {
-      loading: "Submitting review...",
-      success: "Review submitted successfully!",
-      error: "Error submitting review, please try again.",
+      loading: t("Submitting review..."),
+      success: t("Review submitted successfully!"),
+      error: t("Something went wrong. Please try again."),
     });
   };
 
