@@ -17,13 +17,14 @@ const ImageSliderBackground: React.FC<ImageSliderBackgroundProps> = ({
   }
 
   const currentStore = stores[currentImageIndex % stores.length];
+  const currentImage = currentStore.image_url;
 
   return (
     <div
       className="absolute top-0 left-0 right-0 z-0 bg-cover bg-center blur-lg duration-500 ease-in transform"
       style={{
         height,
-        backgroundImage: `url(${currentStore.image_url})`,
+        backgroundImage: `url(${currentImage ? currentImage : ""})`,
       }}
     />
   );
