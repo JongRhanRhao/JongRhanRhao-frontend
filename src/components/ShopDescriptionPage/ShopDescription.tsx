@@ -228,6 +228,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                         <BookingButton
                           disabled={isClosed}
                           storeId={stores.store_id}
+                          storeName={stores.shop_name}
                         />
                       </div>
                     </div>
