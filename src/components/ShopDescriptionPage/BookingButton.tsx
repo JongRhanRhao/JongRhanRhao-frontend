@@ -42,16 +42,16 @@ const BookingButton = ({
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!selectedDate || !numberOfPeople || !phoneNumber) {
-      toast.error("Please fill in all fields.");
+    if (!selectedDate || !numberOfPeople || !phoneNumber || !note) {
+      toast.error(t("Please fill in all fields."));
       return;
     }
     if (phoneNumber.length < 10) {
-      toast.error("Please enter a valid phone number.");
+      toast.error(t("Please enter a valid phone number."));
       return;
     }
     if (!isOverAge) {
-      toast.error("Please confirm that you are over 20 years old.");
+      toast.error(t("Please confirm that you are over 20 years old."));
       return;
     }
     BookingStatus();
@@ -79,15 +79,15 @@ const BookingButton = ({
       (document.getElementById("BookingButton") as HTMLDialogElement)?.close();
       socket.emit("reservation_update", { storeId });
     } catch (error) {
-      console.error("Error booking:", error);
+      return Promise.reject(error);
     }
   };
 
   const BookingStatus = () => {
     toast.promise(handleBooking(), {
-      loading: "Booking...",
-      success: "Booking successfully!",
-      error: "Error booking, please try again.",
+      loading: t("Booking..."),
+      success: t("Booking successfully!"),
+      error: t("Something went wrong, please try again."),
     });
   };
 
