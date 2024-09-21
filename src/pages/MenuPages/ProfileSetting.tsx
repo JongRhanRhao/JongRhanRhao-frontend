@@ -47,9 +47,9 @@ const ProfileSetting = () => {
 
   const userUpdateStatus = () => {
     toast.promise(handleUserUpdate(), {
-      loading: "Updating user...",
-      success: "Updated successfully!",
-      error: "Error updating, please try again.",
+      loading: t("Updating user..."),
+      success: t("Updated successfully!"),
+      error: t("Something went wrong. Please try again."),
     });
   };
 
@@ -62,7 +62,7 @@ const ProfileSetting = () => {
 
   const handleUpload = async () => {
     if (!profilePicture) {
-      toast.error("No file selected.");
+      toast.error(t("No file selected."));
       return Promise.reject();
     }
 
@@ -86,9 +86,9 @@ const ProfileSetting = () => {
 
   const uploadStatus = () => {
     toast.promise(handleUpload(), {
-      loading: "Uploading image...",
-      success: "Image uploaded successfully!",
-      error: "Error uploading image, please try again.",
+      loading: t("Uploading image..."),
+      success: t("Image uploaded successfully!"),
+      error: t("Something went wrong. Please try again."),
     });
   };
 
