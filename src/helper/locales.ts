@@ -165,6 +165,7 @@ export const resources = {
       noReservFound: "ไม่พบการจอง",
       Confirmed: "ยืนยันแล้ว",
       Cancelled: "ยกเลิก",
+      "Total Reservations": "จำนวนการจอง",
       // ประเภทร้าน
       Hot: "มาแรง",
       Favorite: "ร้านโปรด",
