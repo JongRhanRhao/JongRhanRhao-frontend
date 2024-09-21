@@ -134,15 +134,15 @@ const Reservations = () => {
       );
       socket.emit("reservation_update", { reservationId });
     } catch (err) {
-      console.error("Error updating reservation status:", err);
+      toast.error(t("Something went wrong. Please try again."));
     }
   };
 
   const updateCancelReserv = (reservationId: string) => {
     toast.promise(handleCancelReserv(reservationId), {
-      loading: "Cancelling...",
-      success: "Cancelled successfully!",
-      error: "Error cancelling, please try again.",
+      loading: t("Cancelling..."),
+      success: t("Cancelled successfully!"),
+      error: t("Something went wrong. Please try again."),
     });
   };
 
