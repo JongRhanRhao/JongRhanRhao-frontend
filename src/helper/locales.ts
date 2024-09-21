@@ -125,6 +125,10 @@ export const resources = {
       "Create an account": "สร้างบัญชี",
       Login: "เข้าสู่ระบบ",
       "Login to your account": "เข้าสู่ระบบ",
+      "Please log in before adding a favorite store.":
+        "กรุณาเข้าสู่ระบบก่อนเพิ่มร้านโปรด",
+      "Something went wrong. Please try again.":
+        "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
       // การจอง
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
@@ -146,7 +150,16 @@ export const resources = {
       Comments: "ความคิดเห็น",
       noComment: "ยังไม่มีความคิดเห็นในร้านนี้",
       "Reply as": "ตอบในชื่อ",
+      "Please fill in all fields.": "กรุณากรอกข้อมูลให้ครบถ้วน",
+      "Please enter a valid phone number.": "กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง",
+      "Please confirm that you are over 20 years old.":
+        "กรุณายืนยันว่าคุณมีอายุมากกว่า 20 ปี",
+      "Booking...": "กำลังจอง...",
+      "Booking successfully!": "จองโต๊ะสำเร็จ!",
+      "Error booking, please try again.": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
       Send: "ส่ง",
+      "Submitting review...": "กำลังส่งความคิดเห็น...",
+      "Review submitted successfully!": "ส่งความคิดเห็นสำเร็จ!",
       // ความคิดเห็น
       "Reviewed on": "รีวิวเมื่อ",
       "Login to comment": "เข้าสู่ระบบเพื่อแสดงความคิดเห็น",
@@ -196,13 +209,24 @@ export const resources = {
       "Staff Management": "การจัดการพนักงาน",
       "Map link": "ลิงค์แผนที่",
       "FB link": "ลิงค์เฟสบุ๊ค",
+      "Updating store...": "กำลังอัพเดทร้าน...",
+      "Store updated successfully!": "อัพเดทร้านสำเร็จ!",
       Role: "ตำแหน่ง",
+      "Deleting...": "กำลังลบ...",
+      "Deleted successfully": "ลบสำเร็จ",
       "No staff found for this store.": "ไม่พบพนักงานสำหรับร้านนี้",
       // การจอง
       "Reservations for": "การจองสำหรับ",
-      "Upload new photo": "อัพโหลดรูป",
+      "Cancelling...": "กำลังยกเลิก...",
+      "Cancelled successfully!": "ยกเลิกสำเร็จ!",
       // จัดการโปรไฟล์
+      "Upload new photo": "อัพโหลดรูป",
       "Edit Profile": "แก้ไขโปรไฟล์",
+      "No file selected.": "ยังไม่ได้เลือกไฟล์",
+      "Uploading image...": "กำลังอัพโหลดรูป...",
+      "Image uploaded successfully!": "อัพโหลดรูปสำเร็จ!",
+      "Updating user...": "กำลังอัพเดทข้อมูล...",
+      "Updated successfully!": "อัพเดทสำเร็จ!",
       Name: "ชื่อ",
       // ชื่อร้าน
       Minion: "มินเนี่ยน",
