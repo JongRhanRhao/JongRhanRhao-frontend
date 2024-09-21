@@ -236,12 +236,14 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 </div>
               </div>
             </div>
-            <div className="divider"></div>
+            <div className="divider mb-10"></div>
             <div className="h-auto flex flex-col items-center gap-y-10">
               <img src={stores.image_url ?? ""} className="size-1/2"></img>
-              <p className="text-text">{stores.description}</p>
+              <p className="text-text mt-4 leading-relaxed">
+                {stores.description}
+              </p>
             </div>
-            <div className="mt-10">
+            <div className="mt-20">
               <CommentSection />
             </div>
           </main>
