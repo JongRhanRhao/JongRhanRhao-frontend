@@ -24,9 +24,11 @@ import LoginButton from "@/components/shared/LoginButton";
 const BookingButton = ({
   disabled,
   storeId,
+  storeName,
 }: {
   disabled: boolean;
   storeId: string;
+  storeName: string;
 }) => {
   const { user, isAuthenticated } = useUser();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -112,7 +114,7 @@ const BookingButton = ({
       >
         <div className="border-2 shadow-lg modal-box border-secondary/70 bg-bg text-text">
           <h2 className="mb-4 text-2xl font-bold text-primary">
-            {t("bookYourReservation")}
+            {t("bookYourReservation")} {t(storeName)}
           </h2>
           <div className="flex flex-col mb-4">
             <label className="mr-2 font-bold">{t("date")}:</label>
