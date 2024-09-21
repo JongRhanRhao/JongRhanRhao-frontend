@@ -4,8 +4,15 @@ import { format } from "date-fns";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShop, faX } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faCalendarDay,
+  faShop,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 import { th } from "date-fns/locale";
+import DatePicker from "react-datepicker";
 
 import { socket } from "@/socket";
 import BackHomeButton from "@/components/shared/BackHomeButton";
@@ -30,6 +37,7 @@ const Reservations = () => {
     id: user.user?.userId?.toString() || "",
   });
   const [selectedStatus, setSelectedStatus] = useState("All");
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
   const isPending = (reservStatus: string) =>
     reservStatus === RESERVATION_STATUS.PENDING ? "animate-pulse" : "";
@@ -50,7 +58,7 @@ const Reservations = () => {
     return () => {
       socket.off("reservation_update");
     };
-  }, [reservation, refetchReservation]);
+  }, [isAuthenticated, reservation, refetchReservation]);
 
   if (!isAuthenticated) {
     return (
@@ -151,11 +159,35 @@ const Reservations = () => {
     }
   };
 
-  const filteredReservationsByStatus = (status: string) => {
-    if (status === "All") return Array.isArray(reservation) ? reservation : [];
-    return Array.isArray(reservation)
-      ? reservation.filter((reserv) => reserv.reservation_status === status)
-      : [];
+  const filteredReservations = Array.isArray(reservation)
+    ? reservation
+        .filter((res) => {
+          const matchesDate =
+            selectedDate &&
+            new Date(res.reservation_date).toDateString() ===
+              selectedDate.toDateString();
+          const matchesStatus =
+            selectedStatus === "All" ||
+            res.reservation_status === selectedStatus;
+          return matchesDate && matchesStatus;
+        })
+        .sort((a, b) => {
+          const timeA = new Date(
+            `1970-01-01T${a.reservation_time}:00`
+          ).getTime();
+          const timeB = new Date(
+            `1970-01-01T${b.reservation_time}:00`
+          ).getTime();
+          return timeB - timeA;
+        })
+    : [];
+
+  const TotalReservationByDate = (date: Date) => {
+    const totalReservations = filteredReservations.filter(
+      (res) =>
+        new Date(res.reservation_date).toDateString() === date.toDateString()
+    ).length;
+    return totalReservations;
   };
 
   return (
@@ -164,7 +196,46 @@ const Reservations = () => {
       <div className="mb-4 text-2xl font-bold text-text">
         {t("reservation")}
       </div>
-
+      <div className="relative flex items-center p-1 rounded bg-secondary w-fit">
+        <button
+          onClick={() =>
+            setSelectedDate(
+              new Date((selectedDate?.getTime() || Date.now()) - 86400000)
+            )
+          }
+        >
+          <FontAwesomeIcon icon={faArrowLeft} className="mr-2 text-primary" />
+        </button>
+        <div className="border-r">
+          <FontAwesomeIcon
+            icon={faCalendarDay}
+            className="mr-2 ml-7 text-primary"
+          />
+        </div>
+        <DatePicker
+          className="w-full p-2 bg-secondary text-text"
+          dateFormat={"d MMMM yyyy"}
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          placeholderText="Select a date"
+          locale={i18n.language === "th" ? th : undefined}
+        />
+        <button
+          onClick={() =>
+            setSelectedDate(
+              new Date((selectedDate?.getTime() || Date.now()) + 86400000)
+            )
+          }
+        >
+          <FontAwesomeIcon icon={faArrowRight} className="mr-2 text-primary" />
+        </button>
+      </div>
+      <div className="flex mt-2 gap-2">
+        <p className="p-1 font-semibold rounded bg-secondary text-text">
+          {t("Total Reservations")}:{" "}
+          {TotalReservationByDate(selectedDate || new Date())}
+        </p>
+      </div>
       <div className="my-4">
         <div className="space-x-1 space-y-1">
           <FilterButton
@@ -215,74 +286,72 @@ const Reservations = () => {
             </tr>
           </thead>
           <tbody className="bg-secondary text-text">
-            {Array.isArray(filteredReservationsByStatus(selectedStatus)) &&
-              filteredReservationsByStatus(selectedStatus).map(
-                (reservation) => {
-                  let statusColorClass = "";
-                  switch (reservation.reservation_status) {
-                    case RESERVATION_STATUS.PENDING:
-                      statusColorClass =
-                        "bg-yellow-500/30 text-yellow-500 border-yellow-500";
-                      break;
-                    case RESERVATION_STATUS.CONFIRMED:
-                      statusColorClass =
-                        "bg-primary/30 text-primary border-primary";
-                      break;
-                    case RESERVATION_STATUS.CANCELLED:
-                      statusColorClass =
-                        "bg-red-500/30 text-red-500 border-red-500";
-                      break;
-                    default:
-                      statusColorClass =
-                        "bg-yellow-500/30 text-yellow-500 border-yellow-500";
-                  }
-                  return (
-                    <tr key={reservation.reservation_id}>
-                      <td className="px-6 py-4 border-b border-neutral-500">
-                        {reservation.reservation_id}
-                      </td>
-                      <td className="hidden px-6 py-4 truncate border-b border-neutral-500 md:table-cell">
-                        {t(reservation.shop_name)}
-                      </td>
-                      <td className="hidden px-6 py-4 border-b border-neutral-500 sm:table-cell">
-                        {format(new Date(reservation.reservation_date), "PPP", {
-                          locale: i18n.language === "th" ? th : undefined,
-                        })}
-                        , {reservation.reservation_time}
-                      </td>
-                      <td className="px-6 py-4 border-b border-neutral-500">
-                        <span
-                          className={`${isPending(
-                            reservation.reservation_status
-                          )} px-2 py-1 text-sm rounded-full ${statusColorClass}`}
-                        >
-                          {t(reservation.reservation_status)}
-                        </span>
-                      </td>
-                      <td className="border-b border-neutral-500">
-                        <button
-                          onClick={() => {
-                            updateCancelReserv(reservation.reservation_id);
-                          }}
-                          className="mr-2 btn btn-outline btn-xs text-rose-500 hover:bg-rose-500/70 hover:border-rose-500"
-                          disabled={
-                            isCancelled(reservation.reservation_status) ||
-                            isConfirmed(reservation.reservation_status)
-                          }
-                        >
-                          <FontAwesomeIcon icon={faX} />
-                        </button>
-                        <a
-                          href={`/shop/${reservation.shop_id}`}
-                          className="underline text-text/75"
-                        >
-                          <FontAwesomeIcon icon={faShop} />
-                        </a>
-                      </td>
-                    </tr>
-                  );
+            {Array.isArray(filteredReservations) &&
+              filteredReservations.map((reservation) => {
+                let statusColorClass = "";
+                switch (reservation.reservation_status) {
+                  case RESERVATION_STATUS.PENDING:
+                    statusColorClass =
+                      "bg-yellow-500/30 text-yellow-500 border-yellow-500";
+                    break;
+                  case RESERVATION_STATUS.CONFIRMED:
+                    statusColorClass =
+                      "bg-primary/30 text-primary border-primary";
+                    break;
+                  case RESERVATION_STATUS.CANCELLED:
+                    statusColorClass =
+                      "bg-red-500/30 text-red-500 border-red-500";
+                    break;
+                  default:
+                    statusColorClass =
+                      "bg-yellow-500/30 text-yellow-500 border-yellow-500";
                 }
-              )}
+                return (
+                  <tr key={reservation.reservation_id}>
+                    <td className="px-6 py-4 border-b border-neutral-500">
+                      {reservation.reservation_id}
+                    </td>
+                    <td className="hidden px-6 py-4 truncate border-b border-neutral-500 md:table-cell">
+                      {t(reservation.shop_name)}
+                    </td>
+                    <td className="hidden px-6 py-4 border-b border-neutral-500 sm:table-cell">
+                      {format(new Date(reservation.reservation_date), "PPP", {
+                        locale: i18n.language === "th" ? th : undefined,
+                      })}
+                      , {reservation.reservation_time}
+                    </td>
+                    <td className="px-6 py-4 border-b border-neutral-500">
+                      <span
+                        className={`${isPending(
+                          reservation.reservation_status
+                        )} px-2 py-1 text-sm rounded-full ${statusColorClass}`}
+                      >
+                        {t(reservation.reservation_status)}
+                      </span>
+                    </td>
+                    <td className="border-b border-neutral-500">
+                      <button
+                        onClick={() => {
+                          updateCancelReserv(reservation.reservation_id);
+                        }}
+                        className="mr-2 btn btn-outline btn-xs text-rose-500 hover:bg-rose-500/70 hover:border-rose-500"
+                        disabled={
+                          isCancelled(reservation.reservation_status) ||
+                          isConfirmed(reservation.reservation_status)
+                        }
+                      >
+                        <FontAwesomeIcon icon={faX} />
+                      </button>
+                      <a
+                        href={`/shop/${reservation.shop_id}`}
+                        className="underline text-text/75"
+                      >
+                        <FontAwesomeIcon icon={faShop} />
+                      </a>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
