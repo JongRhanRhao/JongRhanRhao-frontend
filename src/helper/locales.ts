@@ -136,6 +136,7 @@ export const resources = {
       // ตำแหน่ง
       owner: "เจ้าของร้าน",
       user: "ผู้ใช้",
+      staff: "พนักงาน",
       // การจอง
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
