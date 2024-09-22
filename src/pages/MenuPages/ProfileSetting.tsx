@@ -128,6 +128,7 @@ const ProfileSetting = () => {
               className="w-auto mb-4 input input-md bg-secondary text-text"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
+              maxLength={16}
             />
             <p className="text-sm text-text/50">{t("phone")}</p>
             <PhoneInput
