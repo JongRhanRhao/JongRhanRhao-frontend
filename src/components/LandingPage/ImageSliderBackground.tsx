@@ -17,7 +17,7 @@ const ImageSliderBackground: React.FC<ImageSliderBackgroundProps> = ({
   }
 
   const currentStore = stores[currentImageIndex % stores.length];
-  const currentImage = currentStore.image_url;
+  const currentImage = currentStore.image_url ? currentStore.image_url : "";
 
   return (
     <div
