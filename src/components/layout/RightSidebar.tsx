@@ -8,11 +8,14 @@ import {
   faX,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { useSidebarStore } from "@/hooks/useSidebarStore";
 import { useUser } from "@/hooks/useUserStore";
-import { useNavigate } from "react-router-dom";
 import LoginButton from "@/components/shared/LoginButton";
+import { CUSTIOM_BUTTON_OUTLINE_CLASS } from "@/lib/variables";
 // import { SERVER_URL } from "@/lib/variables";
 
 interface RightSidebarProps {
@@ -23,12 +26,13 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
   const { rightSidebarExpanded, toggleRightSidebar } = useSidebarStore();
   const { user, isAuthenticated, logout, initializeUser } = useUser();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleLogout = async () => {
     try {
       await logout();
     } catch (error) {
-      console.error("Error during logout:", error);
+      toast.error(t("Something went wrong. Please try again."));
     }
   };
 
@@ -64,7 +68,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
       {rightSidebarExpanded && (
         <div className="space-y-4">
           {!isAuthenticated ? (
-              <LoginButton className="w-full"  />
+            <LoginButton className="w-full" />
           ) : (
             <>
               <div className="p-4 rounded-lg shadow-inner bg-bg2/50">
@@ -77,7 +81,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                   </div>
                 </div>
                 <div className="mb-5 text-sm uppercase opacity-50">
-                  {user?.role}
+                  {t(user?.role || "user")}
                 </div>
                 {/* <div className="text-base opacity-75 text-text">
                   Reservation Status
@@ -89,13 +93,13 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
               </div>
 
               <button
-                className="w-full btn btn-outline text-text"
+                className={`w-full ${CUSTIOM_BUTTON_OUTLINE_CLASS}`}
                 onClick={() => {
                   navigate("/reservations");
                   toggleRightSidebar();
                 }}
               >
-                Check Reservation
+                {t("Check Reservation")}
               </button>
               <button
                 className="w-full btn btn-outline text-text"
@@ -104,7 +108,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                   toggleRightSidebar();
                 }}
               >
-                Profile Settings
+                {t("Profile Settings")}
               </button>
 
               {/* <button className="w-full btn btn-outline text-text">
@@ -118,7 +122,16 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                 className="w-full mt-auto btn btn-outline btn-error"
               >
                 <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
-                Logout
+                {t("Logout")}
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/feedback");
+                  toggleRightSidebar();
+                }}
+                className="text-sm w-full text-center text-text/50 hover:text-text duration-150 cursor-pointer"
+              >
+                {t("Have feedback?")}
               </button>
             </>
           )}
