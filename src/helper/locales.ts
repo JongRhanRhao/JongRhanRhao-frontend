@@ -129,6 +129,13 @@ export const resources = {
         "กรุณาเข้าสู่ระบบก่อนเพิ่มร้านโปรด",
       "Something went wrong. Please try again.":
         "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
+      "Check Reservation": "ตรวจสอบการจอง",
+      "Profile Settings": "ตั้งค่าโปรไฟล์",
+      Logout: "ออกจากระบบ",
+      "Have feedback?": "มีข้อเสนอแนะ?",
+      // ตำแหน่ง
+      owner: "เจ้าของร้าน",
+      user: "ผู้ใช้",
       // การจอง
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
@@ -163,6 +170,16 @@ export const resources = {
       // ความคิดเห็น
       "Reviewed on": "รีวิวเมื่อ",
       "Login to comment": "เข้าสู่ระบบเพื่อแสดงความคิดเห็น",
+      Review: "รีวิว",
+      // ข้อเสนอแนะ
+      "Customer Feedback": "ข้อเสนอแนะจากผู้ใช้บริการ",
+      "Thank you for using our service. Please leave us a feedback.":
+        "ขอบคุณที่ใช้บริการของเรา กรุณาแสดงความคิดเห็น",
+      Message: "ข้อความ",
+      "Enter your full name": "กรอกชื่อเต็ม",
+      "Enter your email address": "กรอกอีเมล",
+      "Write your message...": "เขียนข้อความ...",
+      "Submit Feedback": "ส่งข้อเสนอแนะ",
       // การจอง
       bookYourReservation: "จองโต๊ะ",
       reservCount: "จำนวนการจอง",
