@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import FavoriteButton from "@/components/shared/FavoriteButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 
 export interface ShopCardProps {
   id: string;
@@ -32,7 +32,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
   // maxSeats,
   // currSeats,
   storeStatus,
-  // open_timebooking,
+  open_timebooking,
   className,
   ImageSliderClass,
   type,
@@ -84,13 +84,13 @@ const ShopCard: React.FC<ShopCardProps> = ({
             />
             <div>{safeRating}</div>
           </div>
-          <br />
-          {/* <div
+          <div
             className={`badge space-x-2 bg-secondary/80 w-fit rounded-xl px-1`}
           >
-            <FontAwesomeIcon icon={faClock} className="text-xs text-primary" />
+            <FontAwesomeIcon icon={faClock} className="text-xs text-text" />
             <div className={`text-text text-xs`}>{open_timebooking}</div>
-          </div> */}
+          </div>
+          <br />
           {type && Array.isArray(type) ? (
             type.map((type: string, index: number) => (
               <div
