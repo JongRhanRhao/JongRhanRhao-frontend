@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import FavoriteButton from "@/components/shared/FavoriteButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export interface ShopCardProps {
   id: string;
@@ -28,21 +28,21 @@ const ShopCard: React.FC<ShopCardProps> = ({
   title,
   // storeStatus,
   reservationStatus,
-  // rating,
+  rating,
   // maxSeats,
   // currSeats,
   storeStatus,
-  open_timebooking,
+  // open_timebooking,
   className,
   ImageSliderClass,
   type,
 }) => {
   const isAvailable = storeStatus === "Available";
   const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
-    isAvailable ? "bg-primary/70" : "bg-rose-500/70"
+    isAvailable ? "bg-primary/80" : "bg-rose-500/80"
   }`;
   // const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
-  // const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
+  const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
   const { t } = useTranslation();
 
   return (
@@ -69,7 +69,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           {reservationStatus}
         </div>
         <div
-          className={`${ImageSliderClass} absolute text-lg text-white top-2 right-2`}
+          className={`${ImageSliderClass} bg-secondary/80 rounded-xl px-1 absolute text-lg text-white top-2 right-2`}
         >
           <FavoriteButton storeId={storeId} />
         </div>
@@ -77,13 +77,20 @@ const ShopCard: React.FC<ShopCardProps> = ({
         <div
           className={`${ImageSliderClass} absolute px-2 py-1 rounded-r bottom-1`}
         >
-          <div
+          <div className="badge w-fit rounded-xl px-1 space-x-2 bg-secondary/80 text-sm text-text">
+            <FontAwesomeIcon
+              icon={faStar}
+              className="text-yellow-400 shadow-lg"
+            />
+            <div>{safeRating}</div>
+          </div>
+          <br />
+          {/* <div
             className={`badge space-x-2 bg-secondary/80 w-fit rounded-xl px-1`}
           >
             <FontAwesomeIcon icon={faClock} className="text-xs text-primary" />
             <div className={`text-text text-xs`}>{open_timebooking}</div>
-          </div>
-          <br />
+          </div> */}
           {type && Array.isArray(type) ? (
             type.map((type: string, index: number) => (
               <div
@@ -101,16 +108,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           </div>
           <p className={`mb-1 ${seatCountClass} shadow-lg animate-pulse`}>
             {currSeats} / {maxSeats}
-          </p>
-          <div>
-            {[...Array(safeRating)].map((_, i) => (
-              <FontAwesomeIcon
-                key={i}
-                icon={faStar}
-                className="text-yellow-400 shadow-lg"
-              />
-            ))}
-          </div> */}
+          </p> */}
         </div>
       </div>
     </div>
