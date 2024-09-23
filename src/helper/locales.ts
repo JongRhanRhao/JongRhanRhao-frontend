@@ -173,7 +173,7 @@ export const resources = {
       "Login to comment": "เข้าสู่ระบบเพื่อแสดงความคิดเห็น",
       Review: "รีวิว",
       // ข้อเสนอแนะ
-      "Customer Feedback": "ข้อเสนอแนะจากผู้ใช้บริการ",
+      "Customer Feedback": "ข้อเสนอแนะ",
       "Thank you for using our service. Please leave us a feedback.":
         "ขอบคุณที่ใช้บริการของเรา กรุณาแสดงความคิดเห็น",
       Message: "ข้อความ",
