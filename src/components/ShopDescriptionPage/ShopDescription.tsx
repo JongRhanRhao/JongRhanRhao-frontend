@@ -12,6 +12,8 @@ import {
   faStar as faStarOutline,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 import LeftSidebar from "@/components/layout/LeftSidebar";
 import RightSidebar from "@/components/layout/RightSidebar";
@@ -53,6 +55,18 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
   });
 
   const { data: reviews } = useFetchReviews(stores?.store_id as string);
+  const controls = useAnimation();
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden");
+    }
+  }, [controls, inView]);
 
   useEffect(() => {
     if (stores) {
@@ -116,7 +130,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
           <main className="flex-1 p-6 bg-bg">
             <div className="flex items-baseline justify-between">
               <LinkBack />
-              <div className="justify-end ">
+              <div className="justify-end">
                 <button
                   className={`${isThai ? "" : "text-text"}`}
                   onClick={() => changeLanguage("en")}
@@ -237,11 +251,33 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
               </div>
             </div>
             <div className="divider mb-10"></div>
-            <div className="h-auto flex flex-col items-center gap-y-10">
-              <img src={stores.image_url ?? ""} className="size-1/2"></img>
-              <p className="text-text mt-4 leading-relaxed">
+            <div
+              ref={ref}
+              className="h-auto flex flex-col items-center gap-y-10"
+            >
+              <motion.img
+                src={stores.image_url ?? ""}
+                className="size-1/2"
+                initial="hidden"
+                animate={controls}
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              />
+              <motion.p
+                className="text-text mt-4 leading-relaxed"
+                initial="hidden"
+                animate={controls}
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              >
                 {stores.description}
-              </p>
+              </motion.p>
             </div>
             <div className="mt-20">
               <CommentSection />
