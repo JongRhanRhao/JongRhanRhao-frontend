@@ -98,6 +98,10 @@ export const resources = {
   },
   th: {
     translation: {
+      Discover: "หน้าหลัก",
+      Status: "สถานะการจอง",
+      Setting: "ตั้งค่าโปรไฟล์",
+      "My Store": "จัดการร้าน",
       DiscoverAndBooking: "ค้นหาร้าน & จองโต๊ะ",
       back: "ย้อนกลับ",
       "Can walk-in": "วอคอินได้",
