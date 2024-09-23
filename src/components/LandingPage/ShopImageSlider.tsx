@@ -10,7 +10,7 @@ import { STORE_AVAILABILITY_STATUS } from "@/lib/variables";
 import { useFetchStores } from "@/hooks/useFetchStores";
 
 interface ShopImageSliderProps {
-  currentImageIndex: number;
+  currentImageIndex?: number;
 }
 
 const ShopImageSlider: React.FC<ShopImageSliderProps> = () => {
@@ -29,34 +29,39 @@ const ShopImageSlider: React.FC<ShopImageSliderProps> = () => {
 
   return (
     <Slider {...settings}>
-      {Array.isArray(stores) &&
-        stores.length > 0 &&
-        stores.map((store, index) => (
-          <Link
-            to={`/shop/${store.store_id}`}
-            className="p-2"
-            key={store.store_id || index}
-          >
-            <ShopCard
-              id={store.store_id}
-              image={store.image_url || ""}
-              title={store.shop_name}
-              storeStatus={store.status}
-              reservationStatus={
-                store.curr_seats < store.max_seats
-                  ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
-                  : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
-              }
-              type={store.type}
-              open_timebooking={store.open_timebooking}
-              rating={store.rating}
-              maxSeats={store.max_seats}
-              currSeats={store.curr_seats}
-              description={store.description || ""}
-              ImageSliderClass="hidden"
-            />
-          </Link>
-        ))}
+      {Array.isArray(stores) && stores.length > 0 ? (
+        stores.map(
+          (store, index) =>
+            store && (
+              <Link
+                to={`/shop/${store.store_id}`}
+                className="p-2"
+                key={store.store_id || index}
+              >
+                <ShopCard
+                  id={store.store_id}
+                  image={store.image_url || ""}
+                  title={store.shop_name || "No Title"}
+                  storeStatus={store.status || "unknown"}
+                  reservationStatus={
+                    store.curr_seats < store.max_seats
+                      ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
+                      : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
+                  }
+                  type={store.type || "unknown"}
+                  open_timebooking={store.open_timebooking || "unknown"}
+                  rating={store.rating || 0}
+                  maxSeats={store.max_seats || 0}
+                  currSeats={store.curr_seats || 0}
+                  description={store.description || "No description available"}
+                  ImageSliderClass="hidden"
+                />
+              </Link>
+            )
+        )
+      ) : (
+        <p>{t("No stores available at the moment.")}</p>
+      )}
     </Slider>
   );
 };
