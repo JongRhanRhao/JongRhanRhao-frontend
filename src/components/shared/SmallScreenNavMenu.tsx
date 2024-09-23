@@ -5,7 +5,7 @@ import {
   faHome,
   faClock,
   faStore,
-  faCog,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
@@ -42,7 +42,7 @@ const SmallScreenNavMenu: React.FC<SmallScreenNavMenuProps> = ({
     {
       name: "Setting",
       key: "Item 6",
-      icon: faCog,
+      icon: faUser,
       path: `${GLOBAL_URL_ROUTES.setting}`,
     },
   ];
