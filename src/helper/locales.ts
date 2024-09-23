@@ -145,6 +145,7 @@ export const resources = {
       "Profile Settings": "ตั้งค่าโปรไฟล์",
       Logout: "ออกจากระบบ",
       "Have feedback?": "มีข้อเสนอแนะ?",
+      "No Rating": "ยังไม่มีคะแนน",
       // ตำแหน่ง
       owner: "เจ้าของร้าน",
       user: "ผู้ใช้",
