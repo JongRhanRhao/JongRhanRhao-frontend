@@ -128,6 +128,14 @@ export const resources = {
       "Already have an account? ": "มีบัญชีอยู่แล้วใช่ไหม? ",
       "Create an account": "สร้างบัญชี",
       Login: "เข้าสู่ระบบ",
+      "Sign Up": "สมัครสมาชิก",
+      "* Email is required": "* กรุณากรอกอีเมล",
+      "* Password is required": "* กรุณากรอกรหัสผ่าน",
+      "* Username is required": "* กรุณากรอกชื่อผู้ใช้",
+      "* Invalid phone number": "* เบอร์โทรศัพท์ไม่ถูกต้อง",
+      "* Password must be at least 6 characters long":
+        "* รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
+      "* Passwords do not match": "* รหัสผ่านไม่ตรงกัน",
       "Login to your account": "เข้าสู่ระบบ",
       "Please log in before adding a favorite store.":
         "กรุณาเข้าสู่ระบบก่อนเพิ่มร้านโปรด",
