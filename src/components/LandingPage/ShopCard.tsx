@@ -1,10 +1,9 @@
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import FavoriteButton from "@/components/shared/FavoriteButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
+import { useFetchReviews } from "@/hooks/useFetchReviews";
 
 export interface ShopCardProps {
   id: string;
@@ -28,7 +27,6 @@ const ShopCard: React.FC<ShopCardProps> = ({
   title,
   // storeStatus,
   reservationStatus,
-  rating,
   // maxSeats,
   // currSeats,
   storeStatus,
@@ -42,8 +40,16 @@ const ShopCard: React.FC<ShopCardProps> = ({
     isAvailable ? "bg-primary/80" : "bg-rose-500/80"
   }`;
   // const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
-  const safeRating = Math.max(0, Math.min(5, Math.floor(rating)));
   const { t } = useTranslation();
+
+  const { data: reviews } = useFetchReviews(storeId as string);
+  const totalReviews = reviews?.length ?? 0;
+  const totalRating = (reviews ?? [])
+    .map((review) => review.rating)
+    .reduce((a, b) => a + b, 0);
+  const rating = totalReviews > 0 ? (totalRating / totalReviews).toFixed(1) : 0;
+  const base5Rating = Math.min(Math.max(Number(rating), 0), 5);
+  const safeRating = Math.max(0, Math.min(5, Math.floor(base5Rating)));
 
   return (
     <div
@@ -82,7 +88,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
               icon={faStar}
               className="text-yellow-400 shadow-lg"
             />
-            <div>{safeRating}</div>
+            <div>{safeRating.toFixed(1)}</div>
           </div>
           <div
             className={`badge space-x-2 bg-secondary/80 w-fit rounded-xl px-1`}
