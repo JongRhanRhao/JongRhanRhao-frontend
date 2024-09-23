@@ -26,7 +26,12 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { leftSidebarExpanded, toggleLeftSidebar } = useSidebarStore();
+  const {
+    leftSidebarExpanded,
+    toggleLeftSidebar,
+    rightSidebarExpanded,
+    toggleRightSidebar,
+  } = useSidebarStore();
   const { user, initializeUser } = useUser();
   const role = user?.role;
   const isOwnerOrStaff = role === "owner" || role === "staff";
@@ -74,6 +79,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
     navigate(item.path);
     {
       leftSidebarExpanded ? toggleLeftSidebar() : null;
+    }
+    {
+      rightSidebarExpanded ? toggleRightSidebar() : null;
     }
   };
 
