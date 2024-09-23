@@ -88,7 +88,9 @@ const ShopCard: React.FC<ShopCardProps> = ({
               icon={faStar}
               className="text-yellow-400 shadow-lg"
             />
-            <div>{safeRating.toFixed(1)}</div>
+            <div>
+              {safeRating === 0 ? t("No Rating") : safeRating.toFixed(1)}
+            </div>
           </div>
           <div
             className={`badge space-x-2 bg-secondary/80 w-fit rounded-xl px-1`}
