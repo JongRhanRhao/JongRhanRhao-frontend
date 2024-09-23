@@ -12,9 +12,11 @@ import {
   SERVER_URL,
 } from "@/lib/variables";
 import LoginButton from "@/components/shared/LoginButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 const ProfileSetting = () => {
-  const { user, isAuthenticated } = useUser();
+  const { user, isAuthenticated, logout } = useUser();
   const [userName, setUserName] = useState<string>(user?.userName || "");
   const [phoneNumber, setPhoneNumber] = useState<string>(
     user?.phoneNumber || ""
@@ -92,6 +94,14 @@ const ProfileSetting = () => {
     });
   };
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      toast.error(t("Something went wrong. Please try again."));
+    }
+  };
+
   return (
     <>
       <div className="container mx-auto">
@@ -148,11 +158,18 @@ const ProfileSetting = () => {
             <div className="card-actions">
               <button
                 onClick={userUpdateStatus}
-                className={`btn-sm mt-4 ${CUSTOM_BUTTON_CLASS}`}
+                className={`min-w-fit mt-2 ${CUSTOM_BUTTON_CLASS}`}
               >
                 {t("Update")}
               </button>
             </div>
+            <button
+              onClick={handleLogout}
+              className="min-w-fit mt-2 btn btn-outline btn-error"
+            >
+              <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
+              {t("Logout")}
+            </button>
           </div>
         </div>
       </div>
