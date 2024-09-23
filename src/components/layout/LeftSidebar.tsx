@@ -13,6 +13,7 @@ import {
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
 import { useSidebarStore } from "@/hooks/useSidebarStore";
+import { useTranslation } from "react-i18next";
 
 interface LeftSidebarProps {
   onItemClick: (item: string) => void;
@@ -29,6 +30,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
   const { user, initializeUser } = useUser();
   const role = user?.role;
   const isOwnerOrStaff = role === "owner" || role === "staff";
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function initialize() {
@@ -39,19 +41,19 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
 
   const items = [
     {
-      name: "Discover",
+      name: t("Discover"),
       key: "Item1",
       icon: faHome,
       path: GLOBAL_URL_ROUTES.landingPage,
     },
     {
-      name: "Status",
+      name: t("Status"),
       key: "Item4",
       icon: faClock,
       path: GLOBAL_URL_ROUTES.reserveStatus,
     },
     {
-      name: "Setting",
+      name: t("Setting"),
       key: "Item6",
       icon: faCog,
       path: GLOBAL_URL_ROUTES.setting,
@@ -60,7 +62,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
 
   if (isOwnerOrStaff) {
     items.splice(2, 0, {
-      name: "My Store",
+      name: t("My Store"),
       key: "Item5",
       icon: faStore,
       path: GLOBAL_URL_ROUTES.storeManagement,
