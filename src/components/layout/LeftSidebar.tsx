@@ -70,6 +70,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
   const handleItemClick = (item: { key: string; path: string }) => {
     onItemClick(item.key);
     navigate(item.path);
+    {
+      leftSidebarExpanded ? toggleLeftSidebar() : null;
+    }
   };
 
   return (
