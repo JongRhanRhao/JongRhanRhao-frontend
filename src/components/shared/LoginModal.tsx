@@ -224,7 +224,7 @@ const LoginModal = () => {
                   </label>
                   {errors.user_name && (
                     <p className="text-sm text-red-600">
-                      {errors.user_name.message}
+                      {errors.user_name.message && t(errors.user_name.message)}
                     </p>
                   )}
                 </div>
@@ -242,7 +242,9 @@ const LoginModal = () => {
                   {t("E-mail")}
                 </label>
                 {errors.email && (
-                  <p className="text-sm text-red-600">{errors.email.message}</p>
+                  <p className="text-sm text-red-600">
+                    {errors.email.message && t(errors.email.message)}
+                  </p>
                 )}
               </div>
 
@@ -261,7 +263,7 @@ const LoginModal = () => {
                 </label>
                 {errors.password && (
                   <p className="text-sm text-red-600">
-                    {errors.password.message}
+                    {errors.password.message && t(errors.password.message)}
                   </p>
                 )}
               </div>
@@ -283,7 +285,8 @@ const LoginModal = () => {
                   </label>
                   {errors.confirm_password && (
                     <p className="text-sm text-red-600">
-                      {errors.confirm_password.message}
+                      {errors.confirm_password.message &&
+                        t(errors.confirm_password.message)}
                     </p>
                   )}
                 </div>
@@ -303,7 +306,8 @@ const LoginModal = () => {
                 />
                 {errors.phone_number && (
                   <p className="text-sm text-red-600">
-                    {errors.phone_number.message}
+                    {errors.phone_number.message &&
+                      t(errors.phone_number.message)}
                   </p>
                 )}
               </>
@@ -315,7 +319,7 @@ const LoginModal = () => {
               type="submit"
               className="w-full py-3 rounded-lg mt- btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
             >
-              {isLogin ? "Login" : "Sign Up"}
+              {isLogin ? t("Login") : t("Sign Up")}
             </button>
             <p className="text-sm text-center text-text">
               {isLogin ? t("New here? ") : t("Already have an account? ")}
