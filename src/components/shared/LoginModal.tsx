@@ -17,6 +17,7 @@ interface FormDataProps {
   password: string;
   confirm_password: string;
   phone_number: string;
+  birthYear: number;
 }
 const LoginModal = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -62,6 +63,7 @@ const LoginModal = () => {
   const handleAuth = async (data: FormDataProps) => {
     setErrorMessage("");
     try {
+      console.log(data);
       const response = await axios.post(
         `${SERVER_URL}/users/auth/${endpoint}`,
         {
@@ -292,6 +294,32 @@ const LoginModal = () => {
                 </div>
               )}
             </div>
+            {!isLogin && (
+              <>
+                <select
+                  {...register("birthYear", {
+                    required: "* Birth year is required",
+                    valueAsNumber: true,
+                  })}
+                  className="select font-normal max-w-xs placeholder-text-text py-3 rounded-lg mt- btn bg-secondary text-text hover:bg-secondary hover:text-text"
+                >
+                  <option value="">{t("Select Birth Year")}</option>
+                  {Array.from({ length: 100 }, (_, i) => {
+                    const year = new Date().getFullYear() - i - 20;
+                    return (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    );
+                  })}
+                </select>
+                {errors.birthYear && (
+                  <p className="text-sm text-red-600">
+                    {errors.birthYear.message && t(errors.birthYear.message)}
+                  </p>
+                )}
+              </>
+            )}
             {!isLogin && (
               <>
                 <PhoneInput
