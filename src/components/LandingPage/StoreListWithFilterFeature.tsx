@@ -184,7 +184,7 @@ const StoreListWithFilterFeature = () => {
             />
           ))}
       </div>
-      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 animate-fade-in">
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 animate-fade-in">
         {filteredShopCards.map((store) => (
           <ShopCardLink key={store.store_id} store={store} />
         ))}
