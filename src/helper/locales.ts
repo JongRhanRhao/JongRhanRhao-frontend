@@ -128,6 +128,7 @@ export const resources = {
       "Already have an account? ": "มีบัญชีอยู่แล้วใช่ไหม? ",
       "Create an account": "สร้างบัญชี",
       Login: "เข้าสู่ระบบ",
+      "Select Birth Year": "เลือกปีเกิด",
       "Sign Up": "สมัครสมาชิก",
       "* Email is required": "* กรุณากรอกอีเมล",
       "* Password is required": "* กรุณากรอกรหัสผ่าน",
