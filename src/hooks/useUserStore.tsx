@@ -12,6 +12,7 @@ export interface User {
   role: string;
   profilePicture: string;
   phoneNumber: string;
+  birthYear: number;
 }
 
 interface UserState {
