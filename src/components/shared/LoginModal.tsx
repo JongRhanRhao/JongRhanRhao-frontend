@@ -313,11 +313,6 @@ const LoginModal = () => {
                     );
                   })}
                 </select>
-                {errors.birthYear && (
-                  <p className="text-sm text-red-600">
-                    {errors.birthYear.message && t(errors.birthYear.message)}
-                  </p>
-                )}
               </>
             )}
             {!isLogin && (
