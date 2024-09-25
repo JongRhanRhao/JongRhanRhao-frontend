@@ -21,6 +21,7 @@ export interface Store {
   facebook_link: string | null;
   google_map_link: string | null;
   default_slots: object;
+  age_range: string;
 }
 
 export const useFetchStores = () => {
