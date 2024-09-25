@@ -17,9 +17,14 @@ import { socket } from "@/socket";
 import SearchBar from "@/components/shared/SearchBar";
 
 const StoreListWithFilterFeature = () => {
-  const [selectedType, setSelectedType] = useState(
-    STORE_TYPES_FOR_FILTER_BTN.FORYOU
-  );
+  const LAST_SELECTED_TYPE_KEY = "lastSelectedFilterType";
+  const [selectedType, setSelectedType] = useState(() => {
+    const savedType = localStorage.getItem(LAST_SELECTED_TYPE_KEY);
+    return savedType &&
+      Object.values(STORE_TYPES_FOR_FILTER_BTN).includes(savedType)
+      ? savedType
+      : STORE_TYPES_FOR_FILTER_BTN.FORYOU;
+  });
   const { t } = useTranslation();
   const [isFakeLoading, setIsFakeLoading] = useState(true);
   const {
@@ -51,6 +56,7 @@ const StoreListWithFilterFeature = () => {
   const handleTypeClick = useCallback(
     (type: React.SetStateAction<string>) => {
       setSelectedType(type);
+      localStorage.setItem(LAST_SELECTED_TYPE_KEY, type as string);
       setIsFakeLoading(true);
       refetchFavroiteStore();
       refetchStoreData();
