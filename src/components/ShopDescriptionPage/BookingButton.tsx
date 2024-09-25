@@ -124,6 +124,7 @@ const BookingButton = ({
               dateFormat="d MMMM yyyy"
               className="p-2 mt-1 w-fit rounded-xl bg-secondary"
               minDate={new Date()}
+              maxDate={new Date(new Date().setDate(new Date().getDate() + 30))}
               locale={i18n.language == "th" ? th : ""}
             />
           </div>
