@@ -18,7 +18,7 @@ import SearchBar from "@/components/shared/SearchBar";
 
 const StoreListWithFilterFeature = () => {
   const [selectedType, setSelectedType] = useState(
-    STORE_TYPES_FOR_FILTER_BTN.ALL
+    STORE_TYPES_FOR_FILTER_BTN.FORYOU
   );
   const { t } = useTranslation();
   const [isFakeLoading, setIsFakeLoading] = useState(true);
@@ -57,9 +57,20 @@ const StoreListWithFilterFeature = () => {
     },
     [refetchFavroiteStore, refetchStoreData]
   );
+  const currentYear = new Date().getFullYear();
+  const userAge = currentYear - (user?.birthYear ?? 0);
+
+  const parseStoreAgeRange = useMemo(() => {
+    return stores?.map((store) => {
+      const [minAge, maxAge] = store.age_range.split("-").map(Number);
+      return { ...store, minAge, maxAge };
+    });
+  }, [stores]);
 
   const filteredShopCards = useMemo(() => {
     if (!Array.isArray(stores)) return [];
+
+    const filteredStores = parseStoreAgeRange;
 
     switch (selectedType) {
       case STORE_TYPES_FOR_FILTER_BTN.ALL:
@@ -78,12 +89,27 @@ const StoreListWithFilterFeature = () => {
             : [];
         }
         return [];
+      case STORE_TYPES_FOR_FILTER_BTN.FORYOU:
+        if (userAge === currentYear) {
+          return filteredStores;
+        } else {
+          return (filteredStores ?? []).filter(
+            (store) => userAge >= store.minAge && userAge <= store.maxAge
+          );
+        }
       default:
         return Array.isArray(stores)
           ? stores.filter((store) => store.type.includes(selectedType))
           : [];
     }
-  }, [selectedType, stores, favoriteStores]);
+  }, [
+    stores,
+    selectedType,
+    favoriteStores,
+    userAge,
+    currentYear,
+    parseStoreAgeRange,
+  ]);
 
   useEffect(() => {
     if (!isFetchingStores && !isFetchingFavorites) {
