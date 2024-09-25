@@ -1,6 +1,6 @@
 export const SERVER_URL: string = "http://localhost:3000";
 
-export const DATA_FETCHING_DELAY_TIME: number = 444;
+export const DATA_FETCHING_DELAY_TIME: number = 0;
 
 export const ERROR_TEXT: string =
   "Something went wrong, please try again later.";
