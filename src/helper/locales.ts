@@ -214,6 +214,7 @@ export const resources = {
       // ประเภทร้าน
       Hot: "มาแรง",
       Favorite: "ร้านโปรด",
+      "For you": "สำหรับคุณ",
       All: "ทั้งหมด",
       Bar: "บาร์",
       Jazz: "แจ๊ส",
