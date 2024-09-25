@@ -12,7 +12,7 @@ type FeedbackProps = {
   message?: string;
   onClick?: () => void;
 };
-
+//TODO: implement feedback data submission
 const FeedbackPage: React.FC<FeedbackProps> = () => {
   const titleClass = "mt-4 text-text font-semibold text-sm";
   const inputClass =
@@ -47,7 +47,12 @@ const FeedbackPage: React.FC<FeedbackProps> = () => {
           <p className="text-sm text-text/50 mt-2">
             {t("Thank you for using our service. Please leave us a feedback.")}
           </p>
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            action="https://formsubmit.co/el/rokase"
+            method="POST"
+            className="mt-10"
+          >
             <div className={titleClass}>
               {t("Name")} <span className="text-rose-500">*</span>
             </div>
