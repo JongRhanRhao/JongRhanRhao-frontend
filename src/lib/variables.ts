@@ -47,6 +47,7 @@ export const RESERVATION_STATUS_FOR_SELECTOR = [
 export const STORE_TYPES_FOR_FILTER_BTN = {
   HOT: "Hot",
   FAVORITE: "Favorite",
+  FORYOU: "For you",
   ALL: "All",
   BAR: "Bar",
   JAZZ: "Jazz",
