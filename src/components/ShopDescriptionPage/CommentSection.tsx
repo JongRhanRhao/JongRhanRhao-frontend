@@ -140,7 +140,7 @@ const CommentSection = () => {
           </div>
         </div>
       )}
-      <div className="flex overflow-x-auto gap-2 whitespace-nowrap">
+      <div className="flex overflow-x-auto gap-2 whitespace-nowrap break-words">
         {reviews?.map((review) => (
           <CommentCard
             key={review.reviewId}
