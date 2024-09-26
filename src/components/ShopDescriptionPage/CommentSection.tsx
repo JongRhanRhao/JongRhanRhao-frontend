@@ -24,7 +24,7 @@ const CommentSection = () => {
   const { openLoginModal } = useModalStore();
 
   const sliderSettings = {
-    infinite: true,
+    infinite: (reviews ?? []).length > 3,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
