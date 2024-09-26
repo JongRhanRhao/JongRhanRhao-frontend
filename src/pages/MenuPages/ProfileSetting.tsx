@@ -165,7 +165,7 @@ const ProfileSetting = () => {
             </div>
             <button
               onClick={handleLogout}
-              className="min-w-fit mt-2 btn btn-outline btn-error"
+              className="mt-2 min-w-fit btn btn-outline btn-error"
             >
               <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
               {t("Logout")}
