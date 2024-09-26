@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Slider from "react-slick";
 
 import { useUser } from "@/hooks/useUserStore";
 import CommentCard from "@/components/ShopDescriptionPage/CommentCard";
@@ -21,6 +22,14 @@ const CommentSection = () => {
   const [reviewText, setReviewText] = useState("");
   const { data: reviews, refetch } = useFetchReviews(shopId);
   const { openLoginModal } = useModalStore();
+
+  const sliderSettings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    pauseOnHover: false,
+  };
 
   const reviewData: Review = {
     customerId: user?.userId ? String(user.userId) : "",
@@ -140,18 +149,23 @@ const CommentSection = () => {
           </div>
         </div>
       )}
-      <div className="flex overflow-x-auto gap-2 whitespace-nowrap break-words">
-        {reviews?.map((review) => (
-          <CommentCard
-            key={review.reviewId}
-            name={review.userName}
-            avatar={review.avatarUrl}
-            comment={review.reviewText}
-            date={review.createdAt}
-            rating={review.rating}
-          />
-        ))}
-      </div>
+      {(reviews?.length ?? 0) > 0 && (
+        <div className="relative whitespace-nowrap break-words">
+          <Slider {...sliderSettings}>
+            {reviews?.map((review) => (
+              <CommentCard
+                key={review.reviewId}
+                name={review.userName}
+                avatar={review.avatarUrl}
+                comment={review.reviewText}
+                date={review.createdAt}
+                rating={review.rating}
+                // reviewCount={review.reviewCount}
+              />
+            ))}
+          </Slider>
+        </div>
+      )}
     </div>
   );
 };
