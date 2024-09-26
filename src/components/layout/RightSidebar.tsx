@@ -129,7 +129,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                   navigate("/feedback");
                   toggleRightSidebar();
                 }}
-                className="text-sm w-full text-center text-text/50 hover:text-text duration-150 cursor-pointer"
+                className="w-full text-sm text-center cursor-pointer text-text/50 hover:text-text duration-150"
               >
                 {t("Have feedback?")}
               </button>
