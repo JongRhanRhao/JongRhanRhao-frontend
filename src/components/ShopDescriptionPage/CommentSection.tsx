@@ -77,7 +77,7 @@ const CommentSection = () => {
             <input
               type="text"
               onFocus={setIsReply.bind(null, true)}
-              className="w-full break-words pr-10 mt-2 textarea focus:border-none focus:outline-none bg-secondary placeholder:text-text/50 placeholder:text-sm"
+              className="w-full pr-10 mt-2 break-words textarea focus:border-none focus:outline-none bg-secondary placeholder:text-text/50 placeholder:text-sm"
               placeholder={`${t("Reply as")} ${user?.userName}`}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
@@ -90,11 +90,11 @@ const CommentSection = () => {
               onChange={(e) => setReviewText(e.target.value)}
             />
             {isReply && (
-              <div className="mb-2 mt-1 ml-4 text-sm text-left text-gray-500">
+              <div className="mt-1 mb-2 ml-4 text-sm text-left text-gray-500">
                 {reviewText?.length}/{REVIEW_TEXT_LIMIT}
               </div>
             )}
-            <div className="absolute bottom-11 right-0">
+            <div className="absolute right-0 bottom-11">
               {isReply && (
                 <button
                   className="text-sm btn btn-xs bg-primary text-secondary"
@@ -150,7 +150,7 @@ const CommentSection = () => {
         </div>
       )}
       {(reviews?.length ?? 0) > 0 && (
-        <div className="relative whitespace-nowrap break-words">
+        <div className="break-words whitespace-nowrap">
           <Slider {...sliderSettings}>
             {reviews?.map((review) => (
               <CommentCard
