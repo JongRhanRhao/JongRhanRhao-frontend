@@ -1,13 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import { th } from "date-fns/locale";
 
 import { socket } from "@/socket";
 import "@/styles/custom-phone-input.css";
@@ -18,6 +16,8 @@ import {
 } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
 import LoginButton from "@/components/shared/LoginButton";
+import BookingCalendar from "@/components/ShopDescriptionPage/BookingCalendar";
+import { useFetchReservations } from "@/hooks/useFetchReservations";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
@@ -36,9 +36,13 @@ const BookingButton = ({
   const [phoneNumber, setPhoneNumber] = useState<string>(
     user?.phoneNumber || ""
   );
+  const { data: reservations } = useFetchReservations({
+    type: "store",
+    id: storeId || "",
+  });
   const [isOverAge, setIsOverAge] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -74,6 +78,9 @@ const BookingButton = ({
   };
 
   const handleBooking = async () => {
+    if (availableSeats < numberOfPeople) {
+      return Promise.reject("Not enough seats");
+    }
     try {
       await axios.post(`${SERVER_URL}/stores/api/reservations`, bookingData);
       (document.getElementById("BookingButton") as HTMLDialogElement)?.close();
@@ -87,10 +94,17 @@ const BookingButton = ({
     toast.promise(handleBooking(), {
       loading: t("Booking..."),
       success: t("Booking successfully!"),
-      error: t("Something went wrong, please try again."),
+      error: t("Something went wrong. Please try again."),
     });
   };
 
+  const totalPeople = Array.isArray(reservations)
+    ? reservations
+        .map((reservation) => reservation.number_of_people)
+        .reduce((acc, curr) => acc + curr, 0)
+    : 0;
+  // TODO: Change the number of available seats to the actual number of available seats
+  const availableSeats = 50 - totalPeople;
   return (
     <>
       {!isAuthenticated ? (
@@ -118,14 +132,9 @@ const BookingButton = ({
           </h2>
           <div className="flex flex-col mb-4">
             <label className="mr-2 font-bold">{t("date")}:</label>
-            <DatePicker
-              selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
-              dateFormat="d MMMM yyyy"
-              className="p-2 mt-1 w-fit rounded-xl bg-secondary"
-              minDate={new Date()}
-              maxDate={new Date(new Date().setDate(new Date().getDate() + 30))}
-              locale={i18n.language == "th" ? th : ""}
+            <BookingCalendar
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
             />
           </div>
           <div className="mb-4">
@@ -134,11 +143,14 @@ const BookingButton = ({
               type="number"
               value={numberOfPeople}
               min={1}
+              max={availableSeats}
               onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
               className="p-2 mt-1 rounded-xl w-fit bg-secondary"
             />
           </div>
-          {/* <div className="mb-4 font-bold">{t("slots")}:</div> */}
+          <div className="mb-4 font-bold">
+            {t("slots")}: {availableSeats}
+          </div>
           <div className="mb-4">
             <label className="font-bold">{t("phone")}</label>
             <PhoneInput
