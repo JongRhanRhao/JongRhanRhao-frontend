@@ -9,7 +9,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
   const footerTextclass: string = "hover:text-text text-text/75";
   return (
     <footer
-      className={`flex flex-col space-y-10 justify-center m-10 ${className}`}
+      className={`flex text-xs flex-col space-y-10 justify-center m-10 ${className}`}
     >
       <nav className="flex flex-wrap justify-center font-medium text-gray-500 gap-6"></nav>
       <div className="flex justify-center space-x-5">
