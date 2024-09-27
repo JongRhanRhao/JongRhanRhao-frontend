@@ -26,10 +26,18 @@ const CommentSection = () => {
   const sliderSettings = {
     infinite: (reviews ?? []).length > 3,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
+    className: "overflow-hidden",
+    arrows: true,
     pauseOnHover: false,
     responsive: [
+      {
+        breakpoint: 1366,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
       {
         breakpoint: 1024,
         settings: {
