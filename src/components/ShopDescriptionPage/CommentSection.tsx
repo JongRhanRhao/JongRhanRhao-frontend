@@ -106,7 +106,7 @@ const CommentSection = () => {
               )}
             </div>
             {isReply && (
-              <div className="items-center mb-4 ml-4 rating rating-sm">
+              <div className="items-center mb-4 ml-4 rating rating-sm bg-secondary p-2 rounded-xl">
                 <p className="mr-2 text-sm text-text">{t("Rating")}: </p>
                 <input
                   type="radio"
@@ -160,7 +160,7 @@ const CommentSection = () => {
                 comment={review.reviewText}
                 date={review.createdAt}
                 rating={review.rating}
-                // reviewCount={review.reviewCount}
+                reviewCount={2}
               />
             ))}
           </Slider>
