@@ -115,7 +115,7 @@ const CommentSection = () => {
               )}
             </div>
             {isReply && (
-              <div className="items-center mb-4 ml-4 rating rating-sm bg-secondary p-2 rounded-xl">
+              <div className="items-center p-2 mb-4 ml-4 rating rating-sm bg-secondary rounded-xl">
                 <p className="mr-2 text-sm text-text">{t("Rating")}: </p>
                 <input
                   type="radio"
@@ -160,16 +160,18 @@ const CommentSection = () => {
       )}
       {(reviews?.length ?? 0) > 0 && (
         <div className="relative">
-          <button
-            onClick={scrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-secondary/50 p-2 rounded-full shadow-md"
-          >
-            <FontAwesomeIcon icon={faChevronLeft} />
-          </button>
+          {(reviews?.length ?? 0) > 4 && (
+            <button
+              onClick={scrollLeft}
+              className="absolute left-0 z-10 px-2 rounded-full shadow-md top-1/2 transform -translate-y-1/2 bg-secondary/50 text-text"
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </button>
+          )}
 
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-2 whitespace-nowrap break-words scroll-smooth"
+            className="flex overflow-x-auto break-words gap-2 whitespace-nowrap scroll-smooth"
           >
             {reviews?.map((review) => (
               <CommentCard
@@ -183,12 +185,14 @@ const CommentSection = () => {
             ))}
           </div>
 
-          <button
-            onClick={scrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-secondary/50 p-2 rounded-full shadow-md"
-          >
-            <FontAwesomeIcon icon={faChevronRight} />
-          </button>
+          {(reviews?.length ?? 0) > 4 && (
+            <button
+              onClick={scrollRight}
+              className="absolute right-0 z-10 px-2 rounded-full shadow-md top-1/2 transform -translate-y-1/2 bg-secondary/50 text-text"
+            >
+              <FontAwesomeIcon icon={faChevronRight} />
+            </button>
+          )}
         </div>
       )}
     </div>
