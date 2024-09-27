@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Slider from "react-slick";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { useUser } from "@/hooks/useUserStore";
 import CommentCard from "@/components/ShopDescriptionPage/CommentCard";
@@ -22,37 +26,6 @@ const CommentSection = () => {
   const [reviewText, setReviewText] = useState("");
   const { data: reviews, refetch } = useFetchReviews(shopId);
   const { openLoginModal } = useModalStore();
-
-  const sliderSettings = {
-    infinite: (reviews ?? []).length > 3,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    className: "overflow-hidden",
-    arrows: true,
-    pauseOnHover: false,
-    responsive: [
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
   const reviewData: Review = {
     customerId: user?.userId ? String(user.userId) : "",
     shopId,
@@ -79,6 +52,20 @@ const CommentSection = () => {
       success: t("Review submitted successfully!"),
       error: t("Something went wrong. Please try again."),
     });
+  };
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
   };
 
   return (
@@ -172,8 +159,18 @@ const CommentSection = () => {
         </div>
       )}
       {(reviews?.length ?? 0) > 0 && (
-        <div className="break-words whitespace-nowrap">
-          <Slider {...sliderSettings}>
+        <div className="relative">
+          <button
+            onClick={scrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-secondary/50 p-2 rounded-full shadow-md"
+          >
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+
+          <div
+            ref={scrollRef}
+            className="flex overflow-x-auto gap-2 whitespace-nowrap break-words scroll-smooth"
+          >
             {reviews?.map((review) => (
               <CommentCard
                 key={review.reviewId}
@@ -182,10 +179,16 @@ const CommentSection = () => {
                 comment={review.reviewText}
                 date={review.createdAt}
                 rating={review.rating}
-                reviewCount={2}
               />
             ))}
-          </Slider>
+          </div>
+
+          <button
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-secondary/50 p-2 rounded-full shadow-md"
+          >
+            <FontAwesomeIcon icon={faChevronRight} />
+          </button>
         </div>
       )}
     </div>
