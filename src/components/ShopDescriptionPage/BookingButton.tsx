@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
@@ -36,13 +36,24 @@ const BookingButton = ({
   const [phoneNumber, setPhoneNumber] = useState<string>(
     user?.phoneNumber || ""
   );
-  const { data: reservations } = useFetchReservations({
-    type: "store",
-    id: storeId || "",
-  });
+  const { data: reservations, refetch: refetchReservations } =
+    useFetchReservations({
+      type: "store",
+      id: storeId || "",
+    });
   const [isOverAge, setIsOverAge] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
   const { t } = useTranslation();
+
+  useEffect(() => {
+    socket.on("reservation_update", () => {
+      refetchReservations();
+    });
+    return () => {
+      socket.off("reservation_update");
+    };
+  }),
+    [refetchReservations];
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
