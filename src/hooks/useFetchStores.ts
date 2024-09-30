@@ -14,8 +14,7 @@ export interface Store {
   cancel_reserve: string;
   address: string | null;
   status: string;
-  max_seats: number;
-  curr_seats: number;
+  default_seats: number;
   is_popular: boolean;
   type: string[];
   facebook_link: string | null;
