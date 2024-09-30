@@ -18,8 +18,7 @@ import { useUser } from "@/hooks/useUserStore";
 import LoginButton from "@/components/shared/LoginButton";
 import BookingCalendar from "@/components/ShopDescriptionPage/BookingCalendar";
 import { useFetchReservations } from "@/hooks/useFetchReservations";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { useFetchAvailability } from "@/hooks/useFetchAvailability";
 
 const BookingButton = ({
   disabled,
@@ -43,6 +42,10 @@ const BookingButton = ({
     });
   const [isOverAge, setIsOverAge] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
+  const { data: availability } = useFetchAvailability(
+    storeId,
+    selectedDate ? format(selectedDate, "yyyy-MM-dd") : ""
+  );
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -114,8 +117,11 @@ const BookingButton = ({
         .map((reservation) => reservation.number_of_people)
         .reduce((acc, curr) => acc + curr, 0)
     : 0;
-  // TODO: Change the number of available seats to the actual number of available seats
-  const availableSeats = 50 - totalPeople;
+
+  const availableSeats = availability?.availableSeats
+    ? availability.availableSeats - totalPeople
+    : 0;
+
   return (
     <>
       {!isAuthenticated ? (
@@ -141,11 +147,12 @@ const BookingButton = ({
           <h2 className="mb-4 text-2xl font-bold text-primary">
             {t("bookYourReservation")} {t(storeName)}
           </h2>
-          <div className="flex flex-col mb-4">
+          <div className="flex flex-col mb-4 w-fit">
             <label className="mr-2 font-bold">{t("date")}:</label>
             <BookingCalendar
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
+              storeId={storeId}
             />
           </div>
           <div className="mb-4">
