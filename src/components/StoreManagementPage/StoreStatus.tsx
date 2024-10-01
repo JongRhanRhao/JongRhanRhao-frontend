@@ -1,9 +1,12 @@
-import { useState } from "react";
 import axios from "axios";
-import { socket } from "@/socket";
+import { useState } from "react";
+import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { th } from "date-fns/locale";
+import DatePicker from "react-datepicker";
 
+import { socket } from "@/socket";
 import { Store } from "@/hooks/useFetchStores";
 import {
   SERVER_URL,
@@ -11,6 +14,8 @@ import {
   STORE_TYPES_FOR_SELECTOR,
 } from "@/lib/variables";
 import { FilterButton } from "@/components/shared/FilterButton";
+import i18n from "@/helper/i18n";
+import { useFetchAvailability } from "@/hooks/useFetchAvailability";
 
 const StoreStatus = ({ store }: { store: Store | null }) => {
   const splitOldTime = store?.open_timebooking.split(" - ");
@@ -19,8 +24,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   const [selectedStoreTypes, setSelectedStoreTypes] = useState<string[]>(
     store?.type || []
   );
-  const [currSeat, setCurrSeat] = useState(store?.curr_seats);
-  const [maxSeat, setMaxSeat] = useState(store?.max_seats);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [openingTime, setOpeningTime] = useState(
     splitOldTime ? splitOldTime[0] || "" : ""
   );
@@ -33,7 +37,10 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   const [facebookLink, setFacebookLink] = useState(store?.facebook_link);
   const { t } = useTranslation();
   const descriptionMaxLength = 500;
-
+  const { data: availability } = useFetchAvailability(
+    storeId || "",
+    selectedDate ? format(selectedDate, "yyyy-MM-dd") : ""
+  );
   if (!store) {
     return <p>{t("noStoreSelect")}</p>;
   }
@@ -47,8 +54,6 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         staffId: store.staff_id,
         address: address || store.address,
         status: status || store.status,
-        maxSeats: maxSeat || store.max_seats,
-        currSeats: currSeat || store.curr_seats,
         isPopular: store.is_popular,
         type: selectedStoreTypes || store.type,
         description: description || store.description,
@@ -56,7 +61,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         rating: store.rating,
         googleMapLink: googleMapLink || store.google_map_link,
         facebookLink: facebookLink || store.facebook_link,
-        // defaultSlots: store.default_slots,
+        defaultSeats: store.default_seats,
       });
       socket.emit("store_update", { storeId });
     } catch (error) {
@@ -105,31 +110,47 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             />
           ))}
         </div>
-        <div className="p-3 bg-secondary w-fit rounded-xl">
-          <span className="font-bold">
-            {t("seatSlots")}: <br />
+        <div className="p-3 bg-secondary collapse w-fit rounded-xl">
+          <input type="checkbox" />
+          <span className="font-bold collapse-title">
+            {t("defaultSeatsSlots")} <br />
           </span>
-          <input
-            type="number"
-            min={0}
-            value={currSeat}
-            className="w-20 input bg-secondary"
-            onChange={(e) => setCurrSeat(parseInt(e.target.value))}
-            max={maxSeat}
-          />
-          <span className="m-2 text-center">/</span>
-          <input
-            type="number"
-            value={maxSeat}
-            min={0}
-            className="w-20 input bg-secondary"
-            onChange={(e) => setMaxSeat(parseInt(e.target.value))}
-          />
+          <div className="flex flex-col space-y-4">
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              dateFormat="d MMMM yyyy"
+              minDate={new Date()}
+              locale={i18n.language === "th" ? th : undefined}
+              inline
+              maxDate={new Date(new Date().setMonth(new Date().getMonth() + 1))}
+            />
+            <p className="text-sm text-text">
+              {t("Booking Seats Slots")}{" "}
+              {selectedDate
+                ? format(selectedDate, "d MMMM yyyy", {
+                    locale: i18n.language === "th" ? th : undefined,
+                  })
+                : ""}
+            </p>
+            <div className="flex items-center gap-2">
+              {availability ? (
+                <input
+                  type="text"
+                  className="input input-sm bg-bg/70 text-text w-fit"
+                  defaultValue={availability.availableSeats || 0}
+                />
+              ) : (
+                <p>{t("No availability data")}</p>
+              )}
+              <p>{t("Seats")}</p>
+            </div>
+          </div>
         </div>
         <div className="w-full collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
           <div className="font-bold collapse-title">
-            {t("storeDescription")}:
+            {t("storeDescription")}
           </div>
           <div className="collapse-content">
             <textarea
@@ -146,7 +167,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         <div className="collapse collapse-arrow bg-secondary w-fit">
           <input type="checkbox" />
           <div className="text-base font-bold collapse-title">
-            {t("openingHours")}:
+            {t("openingHours")}
           </div>
           <div className="collapse-content">
             <input
@@ -174,7 +195,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="w-fit collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
-          <div className="font-bold collapse-title">{t("address")}:</div>
+          <div className="font-bold collapse-title">{t("address")}</div>
           <div className="collapse-content">
             <textarea
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
@@ -189,7 +210,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="w-fit collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
-          <div className="font-bold collapse-title">{t("Map link")}:</div>
+          <div className="font-bold collapse-title">{t("Map link")}</div>
           <div className="collapse-content">
             <textarea
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
@@ -201,7 +222,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         </div>
         <div className="w-fit collapse collapse-arrow bg-secondary">
           <input type="checkbox" />
-          <div className="font-bold collapse-title">{t("FB link")}:</div>
+          <div className="font-bold collapse-title">{t("FB link")}</div>
           <div className="collapse-content">
             <textarea
               className="w-full h-auto input bg-secondary textarea textarea-bordered"
@@ -214,7 +235,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         <div className="text-base bg-secondary w-fit rounded-xl collapse collapse-arrow">
           <input type="checkbox" />
           <span className="font-bold collapse-title">
-            {t("storeCategories")}:
+            {t("storeCategories")}
           </span>
           <div className="space-y-2 collapse-content">
             {STORE_TYPES_FOR_SELECTOR.map((option) => (
