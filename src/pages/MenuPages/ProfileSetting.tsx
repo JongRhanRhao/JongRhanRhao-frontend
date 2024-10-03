@@ -21,7 +21,7 @@ const ProfileSetting = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>(
     user?.phoneNumber || ""
   );
-  const [profilePicture, setProfilePicture] = useState<File>();
+  // const [profilePicture, setProfilePicture] = useState<File>();
   const { t } = useTranslation();
 
   if (!isAuthenticated) {
@@ -68,23 +68,23 @@ const ProfileSetting = () => {
   //     return Promise.reject();
   //   }
 
-    const formData = new FormData();
-    // formData.append("profileImage", profilePicture);
+  //   const formData = new FormData();
+  //   // formData.append("profileImage", profilePicture);
 
-    try {
-      await axios.post(
-        `${SERVER_URL}/users/${user?.userId}/profile-image`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-    } catch (error) {
-      return Promise.reject(error);
-    }
-  };
+  //   try {
+  //     await axios.post(
+  //       `${SERVER_URL}/users/${user?.userId}/profile-image`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  //   } catch (error) {
+  //     return Promise.reject(error);
+  //   }
+  // };
 
   // const uploadStatus = () => {
   //   toast.promise(handleUpload(), {
