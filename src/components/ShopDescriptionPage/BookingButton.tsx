@@ -17,8 +17,8 @@ import {
 import { useUser } from "@/hooks/useUserStore";
 import LoginButton from "@/components/shared/LoginButton";
 import BookingCalendar from "@/components/ShopDescriptionPage/BookingCalendar";
-import { useFetchReservations } from "@/hooks/useFetchReservations";
 import { useFetchAvailability } from "@/hooks/useFetchAvailability";
+import { useFetchReservationsByShopIdAndDate } from "@/hooks/useFetchReservationsByShopIdAndDate";
 
 const BookingButton = ({
   disabled,
@@ -36,15 +36,16 @@ const BookingButton = ({
     user?.phoneNumber || ""
   );
   const { data: reservations, refetch: refetchReservations } =
-    useFetchReservations({
-      type: "store",
-      id: storeId || "",
-    });
+    useFetchReservationsByShopIdAndDate(
+      storeId,
+      format(selectedDate || new Date(), "yyyy-MM-dd")
+    );
   const [isOverAge, setIsOverAge] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
   const { data: availability } = useFetchAvailability(
     storeId,
-    selectedDate ? format(selectedDate, "yyyy-MM-dd") : ""
+    format(selectedDate || new Date(), "yyyy-MM-dd"),
+    format(selectedDate || new Date(), "yyyy-MM-dd")
   );
   const { t } = useTranslation();
 
@@ -74,7 +75,6 @@ const BookingButton = ({
     }
     BookingStatus();
   };
-
   const formattedDate = selectedDate ? format(selectedDate, "d MMM yyyy") : "";
   const bookingData = {
     customerId: user?.userId,
@@ -113,15 +113,16 @@ const BookingButton = ({
   };
 
   const totalPeople = Array.isArray(reservations)
-    ? reservations
-        .map((reservation) => reservation.number_of_people)
-        .reduce((acc, curr) => acc + curr, 0)
+    ? reservations.reduce(
+        (acc, curr) => acc + (curr.reservations.numberOfPeople || 0),
+        0
+      )
     : 0;
 
-  const availableSeats = availability?.availableSeats
-    ? availability.availableSeats - totalPeople
-    : 0;
-
+  const availableSeats =
+    availability?.map(
+      (slot: { availableSeats: number }) => slot.availableSeats
+    )[0] - totalPeople;
   return (
     <>
       {!isAuthenticated ? (
@@ -148,7 +149,7 @@ const BookingButton = ({
             {t("bookYourReservation")} {t(storeName)}
           </h2>
           <div className="flex flex-col mb-4 w-fit">
-            <label className="mr-2 font-bold">{t("date")}:</label>
+            <label className="mr-2 font-bold">{t("date")}</label>
             <BookingCalendar
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
