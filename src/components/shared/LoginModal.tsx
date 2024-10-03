@@ -198,7 +198,7 @@ const LoginModal = () => {
               {t("Continue with Facebook")}
             </button>
 
-            <div className="flex items-center gap-2 my-4 text-sm text-neutral-700">
+            <div className="flex items-center my-4 text-sm gap-2 text-neutral-700">
               <div className="w-full h-px bg-neutral-700"></div>
               {t("OR")}
               <div className="w-full h-px bg-neutral-700"></div>
