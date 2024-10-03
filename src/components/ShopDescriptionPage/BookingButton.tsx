@@ -112,7 +112,7 @@ const BookingButton = ({
     });
   };
 
-  const totalPeople = Array.isArray(reservations)
+  const totalBookedSeatsbyDate = Array.isArray(reservations)
     ? reservations.reduce(
         (acc, curr) => acc + (curr.reservations.numberOfPeople || 0),
         0
@@ -122,7 +122,7 @@ const BookingButton = ({
   const availableSeats =
     availability?.map(
       (slot: { availableSeats: number }) => slot.availableSeats
-    )[0] - totalPeople;
+    )[0] - totalBookedSeatsbyDate;
   return (
     <>
       {!isAuthenticated ? (
