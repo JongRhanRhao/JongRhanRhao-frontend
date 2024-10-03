@@ -104,10 +104,8 @@ const ProfileSetting = () => {
 
   return (
     <>
-      <div className="container mx-auto">
-        <LinkBack />
-        <h1 className="text-3xl font-bold text-text">{t("Edit Profile")}</h1>
-      </div>
+      <LinkBack />
+      <h1 className="text-2xl font-bold text-text">{t("Edit Profile")}</h1>
       <div className="min-w-full mt-4 shadow-xl card">
         <div className="p-6 card-body">
           <div className="flex items-center gap-4">
