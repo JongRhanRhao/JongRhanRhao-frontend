@@ -109,7 +109,7 @@ export const resources = {
       Available: "ว่าง",
       Busy: "คนเยอะ",
       Closed: "ปิด",
-      Update: "อัพเดท",
+      Update: "อัพเดทข้อมูล",
       Search: "ค้นหาร้าน",
       AddToFavorite: "เพิ่มร้านโปรด",
       Unfavorite: "ลบร้านโปรด",
@@ -244,6 +244,8 @@ export const resources = {
       "Store Management": "การจัดการร้าน",
       "Staff Management": "การจัดการพนักงาน",
       Seats: "ที่นั่ง",
+      "Closed for booking": "ปิดรับจอง",
+      "Default Available Seats": "จำนวนที่นั่งที่รับจองปกติ",
       "Map link": "ลิงค์แผนที่",
 
       "FB link": "ลิงค์เฟสบุ๊ค",
