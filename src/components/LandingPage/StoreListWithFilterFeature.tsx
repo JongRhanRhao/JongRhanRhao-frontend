@@ -67,15 +67,17 @@ const StoreListWithFilterFeature = () => {
   const userAge = currentYear - (user?.birthYear ?? 0);
 
   const parseStoreAgeRange = useMemo(() => {
-    return stores?.map((store) => {
-      const ageRange = store.age_range ?? "";
-      const [minAge, maxAge] = ageRange.split("-").map(Number);
-      return {
-        ...store,
-        minAge: isNaN(minAge) ? null : minAge,
-        maxAge: isNaN(maxAge) ? null : maxAge,
-      };
-    });
+    return Array.isArray(stores)
+      ? stores.map((store) => {
+          const ageRange = store.age_range ?? "";
+          const [minAge, maxAge] = ageRange.split("-").map(Number);
+          return {
+            ...store,
+            minAge: isNaN(minAge) ? null : minAge,
+            maxAge: isNaN(maxAge) ? null : maxAge,
+          };
+        })
+      : [];
   }, [stores]);
 
   const filteredShopCards = useMemo(() => {
@@ -85,26 +87,22 @@ const StoreListWithFilterFeature = () => {
 
     switch (selectedType) {
       case STORE_TYPES_FOR_FILTER_BTN.ALL:
-        return Array.isArray(stores) ? stores : [];
+        return stores;
       case STORE_TYPES_FOR_FILTER_BTN.HOT:
-        return Array.isArray(stores)
-          ? stores.filter((store) => store.is_popular)
-          : [];
+        return stores.filter((store) => store.is_popular);
       case STORE_TYPES_FOR_FILTER_BTN.FAVORITE:
-        if (favoriteStores && Array.isArray(favoriteStores)) {
+        if (Array.isArray(favoriteStores)) {
           const favoriteStoreIds = favoriteStores.map((fav) => fav.store_id);
-          return Array.isArray(stores)
-            ? stores.filter((store) =>
-                favoriteStoreIds.includes(store.store_id)
-              )
-            : [];
+          return stores.filter((store) =>
+            favoriteStoreIds.includes(store.store_id)
+          );
         }
         return [];
       case STORE_TYPES_FOR_FILTER_BTN.FORYOU:
         if (userAge === currentYear) {
           return filteredStores;
         } else {
-          return (filteredStores ?? []).filter(
+          return filteredStores.filter(
             (store) =>
               store.minAge !== null &&
               store.maxAge !== null &&
@@ -113,9 +111,7 @@ const StoreListWithFilterFeature = () => {
           );
         }
       default:
-        return Array.isArray(stores)
-          ? stores.filter((store) => store.type.includes(selectedType))
-          : [];
+        return stores.filter((store) => store.type.includes(selectedType));
     }
   }, [
     stores,
@@ -125,7 +121,7 @@ const StoreListWithFilterFeature = () => {
     currentYear,
     parseStoreAgeRange,
   ]);
-
+  
   useEffect(() => {
     if (!isFetchingStores && !isFetchingFavorites) {
       const timer = setTimeout(() => {
