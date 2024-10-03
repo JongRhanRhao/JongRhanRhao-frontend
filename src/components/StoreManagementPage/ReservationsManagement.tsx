@@ -18,6 +18,7 @@ import { Store } from "@/hooks/useFetchStores";
 import ReservationsStatusSelector from "@/components/StoreManagementPage/ReservationsStatusSelector";
 import { FilterButton } from "@/components/shared/FilterButton";
 import { RESERVATION_STATUS } from "@/lib/variables";
+import { socket } from "@/socket";
 
 const ReservationsManagement = ({ store }: { store: Store | null }) => {
   const {
@@ -64,6 +65,14 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
     if (store?.store_id) {
       refetch();
     }
+    socket.on("reservation_update", (data) => {
+      if (data) {
+        refetch();
+      }
+    });
+    return () => {
+      socket.off("reservation_update");
+    };
   }, [store?.store_id, refetch]);
 
   if (!store) {

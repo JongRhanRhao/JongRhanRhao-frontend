@@ -38,13 +38,13 @@ const FeedbackPage: React.FC<FeedbackProps> = () => {
   };
 
   return (
-    <div className="w-4/5 min-w-full flex mx-auto">
-      <div className="card card-body bg-secondary/30 w-1/2">
+    <div className="flex w-4/5 min-w-full mx-auto">
+      <div className="w-1/2 card card-body bg-secondary/30">
         <div>
-          <h1 className="text-3xl text-text font-bold">
+          <h1 className="text-3xl font-bold text-text">
             {t("Customer Feedback")}
           </h1>
-          <p className="text-sm text-text/50 mt-2">
+          <p className="mt-2 text-sm text-text/50">
             {t("Thank you for using our service. Please leave us a feedback.")}
           </p>
           <form
@@ -79,7 +79,7 @@ const FeedbackPage: React.FC<FeedbackProps> = () => {
               {...register("message")}
               name="message"
               id="message"
-              className="mt-2 textarea textarea-lg text-sm bg-secondary text-text placeholder-text/50 w-full"
+              className="w-full mt-2 text-sm textarea textarea-lg bg-secondary text-text placeholder-text/50"
               placeholder={t("Write your message...")}
             ></textarea>
             {errors.message && (

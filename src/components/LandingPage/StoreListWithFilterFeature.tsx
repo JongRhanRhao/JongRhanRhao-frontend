@@ -68,8 +68,13 @@ const StoreListWithFilterFeature = () => {
 
   const parseStoreAgeRange = useMemo(() => {
     return stores?.map((store) => {
-      const [minAge, maxAge] = store.age_range.split("-").map(Number);
-      return { ...store, minAge, maxAge };
+      const ageRange = store.age_range ?? "";
+      const [minAge, maxAge] = ageRange.split("-").map(Number);
+      return {
+        ...store,
+        minAge: isNaN(minAge) ? null : minAge,
+        maxAge: isNaN(maxAge) ? null : maxAge,
+      };
     });
   }, [stores]);
 
@@ -100,7 +105,11 @@ const StoreListWithFilterFeature = () => {
           return filteredStores;
         } else {
           return (filteredStores ?? []).filter(
-            (store) => userAge >= store.minAge && userAge <= store.maxAge
+            (store) =>
+              store.minAge !== null &&
+              store.maxAge !== null &&
+              userAge >= store.minAge &&
+              userAge <= store.maxAge
           );
         }
       default:

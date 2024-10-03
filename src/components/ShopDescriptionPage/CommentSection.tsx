@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { useUser } from "@/hooks/useUserStore";
 import CommentCard from "@/components/ShopDescriptionPage/CommentCard";
@@ -21,7 +26,6 @@ const CommentSection = () => {
   const [reviewText, setReviewText] = useState("");
   const { data: reviews, refetch } = useFetchReviews(shopId);
   const { openLoginModal } = useModalStore();
-
   const reviewData: Review = {
     customerId: user?.userId ? String(user.userId) : "",
     shopId,
@@ -50,6 +54,20 @@ const CommentSection = () => {
     });
   };
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="space-y-3">
       <div className="text-xl font-medium text-text">
@@ -68,7 +86,7 @@ const CommentSection = () => {
             <input
               type="text"
               onFocus={setIsReply.bind(null, true)}
-              className="w-full break-words pr-10 mt-2 textarea focus:border-none focus:outline-none bg-secondary placeholder:text-text/50 placeholder:text-sm"
+              className="w-full pr-10 mt-2 break-words textarea focus:border-none focus:outline-none bg-secondary placeholder:text-text/50 placeholder:text-sm"
               placeholder={`${t("Reply as")} ${user?.userName}`}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
@@ -81,11 +99,11 @@ const CommentSection = () => {
               onChange={(e) => setReviewText(e.target.value)}
             />
             {isReply && (
-              <div className="mb-2 mt-1 ml-4 text-sm text-left text-gray-500">
+              <div className="mt-1 mb-2 ml-4 text-sm text-left text-gray-500">
                 {reviewText?.length}/{REVIEW_TEXT_LIMIT}
               </div>
             )}
-            <div className="absolute bottom-11 right-0">
+            <div className="absolute right-0 bottom-11">
               {isReply && (
                 <button
                   className="text-sm btn btn-xs bg-primary text-secondary"
@@ -97,7 +115,7 @@ const CommentSection = () => {
               )}
             </div>
             {isReply && (
-              <div className="items-center mb-4 ml-4 rating rating-sm">
+              <div className="items-center p-2 mb-4 ml-4 rating rating-sm bg-secondary rounded-xl">
                 <p className="mr-2 text-sm text-text">{t("Rating")}: </p>
                 <input
                   type="radio"
@@ -140,18 +158,43 @@ const CommentSection = () => {
           </div>
         </div>
       )}
-      <div className="flex overflow-x-auto gap-2 whitespace-nowrap break-words">
-        {reviews?.map((review) => (
-          <CommentCard
-            key={review.reviewId}
-            name={review.userName}
-            avatar={review.avatarUrl}
-            comment={review.reviewText}
-            date={review.createdAt}
-            rating={review.rating}
-          />
-        ))}
-      </div>
+      {(reviews?.length ?? 0) > 0 && (
+        <div className="relative">
+          {(reviews?.length ?? 0) > 4 && (
+            <button
+              onClick={scrollLeft}
+              className="absolute left-0 z-10 px-2 rounded-full shadow-md top-1/2 transform -translate-y-1/2 bg-secondary/50 text-text"
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </button>
+          )}
+
+          <div
+            ref={scrollRef}
+            className="flex overflow-x-auto break-words gap-2 whitespace-nowrap scroll-smooth"
+          >
+            {reviews?.map((review) => (
+              <CommentCard
+                key={review.reviewId}
+                name={review.userName}
+                avatar={review.avatarUrl}
+                comment={review.reviewText}
+                date={review.createdAt}
+                rating={review.rating}
+              />
+            ))}
+          </div>
+
+          {(reviews?.length ?? 0) > 4 && (
+            <button
+              onClick={scrollRight}
+              className="absolute right-0 z-10 px-2 rounded-full shadow-md top-1/2 transform -translate-y-1/2 bg-secondary/50 text-text"
+            >
+              <FontAwesomeIcon icon={faChevronRight} />
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

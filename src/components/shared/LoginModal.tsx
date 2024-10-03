@@ -63,7 +63,6 @@ const LoginModal = () => {
   const handleAuth = async (data: FormDataProps) => {
     setErrorMessage("");
     try {
-      console.log(data);
       const response = await axios.post(
         `${SERVER_URL}/users/auth/${endpoint}`,
         {
@@ -301,7 +300,7 @@ const LoginModal = () => {
                     required: "* Birth year is required",
                     valueAsNumber: true,
                   })}
-                  className="select font-normal max-w-xs placeholder-text-text py-3 rounded-lg mt- btn bg-secondary text-text hover:bg-secondary hover:text-text"
+                  className="max-w-xs py-3 font-normal rounded-lg select placeholder-text-text mt- btn bg-secondary text-text hover:bg-secondary hover:text-text"
                 >
                   <option value="">{t("Select Birth Year")}</option>
                   {Array.from({ length: 100 }, (_, i) => {

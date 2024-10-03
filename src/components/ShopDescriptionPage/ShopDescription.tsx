@@ -147,30 +147,30 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
               </div>
             </div>
             <div className="relative w-full h-auto">
-              <div className="container mx-auto px-4 py-8">
-                <div className="flex flex-col md:flex-row bg-secondary/20 rounded-lg overflow-hidden">
-                  <div className="md:w-1/2 relative">
+              <div className="container px-4 py-8 mx-auto">
+                <div className="flex flex-col overflow-hidden rounded-lg md:flex-row bg-secondary/20">
+                  <div className="relative md:w-1/2">
                     <img
                       src={stores.image_url ?? ""}
                       alt={stores.shop_name}
-                      className="w-full h-full object-cover"
+                      className="object-cover w-full h-full"
                     />
                   </div>
 
-                  <div className="md:w-1/2 relative overflow-hidden">
+                  <div className="relative overflow-hidden md:w-1/2">
                     <div
-                      className="absolute inset-0 bg-cover bg-center filter blur-md opacity-50"
+                      className="absolute inset-0 bg-center bg-cover opacity-50 filter blur-md"
                       style={{
                         backgroundImage: `url(${stores.image_url ?? ""})`,
                       }}
                     ></div>
 
-                    <div className="relative z-10 p-8 text-text bg-secondary/50 h-full">
-                      <h1 className="text-4xl font-bold mb-4">
+                    <div className="relative z-10 h-full p-8 text-text bg-secondary/50">
+                      <h1 className="mb-4 text-4xl font-bold">
                         {t(stores.shop_name)}
                       </h1>
 
-                      <div className="space-y-4 mb-8">
+                      <div className="mb-8 space-y-4">
                         <div className="flex items-center">
                           <FontAwesomeIcon icon={faClock} className="mr-2" />
                           <span>
@@ -214,9 +214,8 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                           </span>
                         </div>
                       </div>
-
                       <div className="flex space-x-4">
-                        <button className="border border-text px-4 py-2 rounded-full flex items-center">
+                        <button className="flex items-center px-4 py-2 border rounded-full border-text">
                           <FontAwesomeIcon
                             icon={faInfoCircle}
                             className="mr-2"
@@ -232,7 +231,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                           href={stores.google_map_link || "#"}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="border border-text p-2 rounded-full"
+                          className="p-2 border rounded-full border-text"
                         >
                           <FontAwesomeIcon icon={faMapLocationDot} />
                         </a>
@@ -250,10 +249,10 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 </div>
               </div>
             </div>
-            <div className="divider mb-10"></div>
+            <div className="mb-10 divider"></div>
             <div
               ref={ref}
-              className="h-auto flex flex-col items-center gap-y-10"
+              className="flex flex-col items-center h-auto gap-y-10"
             >
               <motion.img
                 src={stores.image_url ?? ""}
@@ -267,7 +266,7 @@ const ShopDescription: FC<ShopDescriptionProps> = ({ onItemClick }) => {
                 transition={{ duration: 0.8, ease: "easeOut" }}
               />
               <motion.p
-                className="text-text mt-4 leading-relaxed"
+                className="mt-4 leading-relaxed text-text"
                 initial="hidden"
                 animate={controls}
                 variants={{

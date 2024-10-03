@@ -1,13 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
-import DatePicker from "react-datepicker";
+import { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import { th } from "date-fns/locale";
 
 import { socket } from "@/socket";
 import "@/styles/custom-phone-input.css";
@@ -18,8 +16,9 @@ import {
 } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
 import LoginButton from "@/components/shared/LoginButton";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import BookingCalendar from "@/components/ShopDescriptionPage/BookingCalendar";
+import { useFetchAvailability } from "@/hooks/useFetchAvailability";
+import { useFetchReservationsByShopIdAndDate } from "@/hooks/useFetchReservationsByShopIdAndDate";
 
 const BookingButton = ({
   disabled,
@@ -36,9 +35,29 @@ const BookingButton = ({
   const [phoneNumber, setPhoneNumber] = useState<string>(
     user?.phoneNumber || ""
   );
+  const { data: reservations, refetch: refetchReservations } =
+    useFetchReservationsByShopIdAndDate(
+      storeId,
+      format(selectedDate || new Date(), "yyyy-MM-dd")
+    );
   const [isOverAge, setIsOverAge] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
-  const { t, i18n } = useTranslation();
+  const { data: availability } = useFetchAvailability(
+    storeId,
+    format(selectedDate || new Date(), "yyyy-MM-dd"),
+    format(selectedDate || new Date(), "yyyy-MM-dd")
+  );
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    socket.on("reservation_update", () => {
+      refetchReservations();
+    });
+    return () => {
+      socket.off("reservation_update");
+    };
+  }),
+    [refetchReservations];
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -56,7 +75,6 @@ const BookingButton = ({
     }
     BookingStatus();
   };
-
   const formattedDate = selectedDate ? format(selectedDate, "d MMM yyyy") : "";
   const bookingData = {
     customerId: user?.userId,
@@ -74,6 +92,9 @@ const BookingButton = ({
   };
 
   const handleBooking = async () => {
+    if (availableSeats < numberOfPeople) {
+      return Promise.reject("Not enough seats");
+    }
     try {
       await axios.post(`${SERVER_URL}/stores/api/reservations`, bookingData);
       (document.getElementById("BookingButton") as HTMLDialogElement)?.close();
@@ -87,10 +108,21 @@ const BookingButton = ({
     toast.promise(handleBooking(), {
       loading: t("Booking..."),
       success: t("Booking successfully!"),
-      error: t("Something went wrong, please try again."),
+      error: t("Something went wrong. Please try again."),
     });
   };
 
+  const totalPeople = Array.isArray(reservations)
+    ? reservations.reduce(
+        (acc, curr) => acc + (curr.reservations.numberOfPeople || 0),
+        0
+      )
+    : 0;
+
+  const availableSeats =
+    availability?.map(
+      (slot: { availableSeats: number }) => slot.availableSeats
+    )[0] - totalPeople;
   return (
     <>
       {!isAuthenticated ? (
@@ -116,15 +148,12 @@ const BookingButton = ({
           <h2 className="mb-4 text-2xl font-bold text-primary">
             {t("bookYourReservation")} {t(storeName)}
           </h2>
-          <div className="flex flex-col mb-4">
-            <label className="mr-2 font-bold">{t("date")}:</label>
-            <DatePicker
-              selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
-              dateFormat="d MMMM yyyy"
-              className="p-2 mt-1 w-fit rounded-xl bg-secondary"
-              minDate={new Date()}
-              locale={i18n.language == "th" ? th : ""}
+          <div className="flex flex-col mb-4 w-fit">
+            <label className="mr-2 font-bold">{t("date")}</label>
+            <BookingCalendar
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+              storeId={storeId}
             />
           </div>
           <div className="mb-4">
@@ -133,11 +162,14 @@ const BookingButton = ({
               type="number"
               value={numberOfPeople}
               min={1}
+              max={availableSeats}
               onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
               className="p-2 mt-1 rounded-xl w-fit bg-secondary"
             />
           </div>
-          {/* <div className="mb-4 font-bold">{t("slots")}:</div> */}
+          <div className="mb-4 font-bold">
+            {t("slots")}: {availableSeats}
+          </div>
           <div className="mb-4">
             <label className="font-bold">{t("phone")}</label>
             <PhoneInput

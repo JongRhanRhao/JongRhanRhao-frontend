@@ -16,7 +16,7 @@ interface ShopImageSliderProps {
 const ShopImageSlider: React.FC<ShopImageSliderProps> = () => {
   const { t } = useTranslation();
   const { data: stores } = useFetchStores();
-  const settings = {
+  const sliderSettings = {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -28,7 +28,7 @@ const ShopImageSlider: React.FC<ShopImageSliderProps> = () => {
   };
 
   return (
-    <Slider {...settings}>
+    <Slider {...sliderSettings}>
       {Array.isArray(stores) && stores.length > 0 ? (
         stores.map(
           (store, index) =>

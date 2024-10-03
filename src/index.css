@@ -16,3 +16,7 @@
   padding: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.slick-slider .slick-slide {
+  padding: 0 1rem;
+}
