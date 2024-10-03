@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
@@ -119,10 +119,16 @@ const BookingButton = ({
       )
     : 0;
 
-  const availableSeats =
-    availability?.map(
+  const availableSeats = useMemo(() => {
+    const availableSlots = availability?.map(
       (slot: { availableSeats: number }) => slot.availableSeats
-    )[0] - totalBookedSeatsbyDate;
+    );
+    const firstSlot = availableSlots?.[0];
+    return typeof firstSlot === "number"
+      ? firstSlot - totalBookedSeatsbyDate
+      : 0;
+  }, [availability, totalBookedSeatsbyDate]);
+
   return (
     <>
       {!isAuthenticated ? (
