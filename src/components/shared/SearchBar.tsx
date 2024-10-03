@@ -81,6 +81,19 @@ const SearchBar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (dropdownRef.current && highlightedIndex >= 0) {
+      const listItems = dropdownRef.current.querySelectorAll("li");
+      const highlightedItem = listItems[highlightedIndex];
+      if (highlightedItem) {
+        highlightedItem.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }
+  }, [highlightedIndex]);
+
   if (isFetchingStores) return <p>Loading stores...</p>;
   if (error) return <p>Error fetching stores: {error.message}</p>;
 
