@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -16,6 +16,7 @@ import {
 import { FilterButton } from "@/components/shared/FilterButton";
 import i18n from "@/helper/i18n";
 import { useFetchAvailability } from "@/hooks/useFetchAvailability";
+import { useFetchReservationsByShopIdAndDate } from "@/hooks/useFetchReservationsByShopIdAndDate";
 
 const StoreStatus = ({ store }: { store: Store | null }) => {
   const splitOldTime = store?.open_timebooking.split(" - ");
@@ -25,6 +26,11 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     store?.type || []
   );
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const { data: availability } = useFetchAvailability(
+    storeId || "",
+    selectedDate ? format(selectedDate, "yyyy-MM-dd") : "",
+    selectedDate ? format(selectedDate, "yyyy-MM-dd") : ""
+  );
   const [openingTime, setOpeningTime] = useState(
     splitOldTime ? splitOldTime[0] || "" : ""
   );
@@ -35,12 +41,33 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   const [address, setAddress] = useState(store?.address);
   const [googleMapLink, setGoogleMapLink] = useState(store?.google_map_link);
   const [facebookLink, setFacebookLink] = useState(store?.facebook_link);
-  const { t } = useTranslation();
-  const descriptionMaxLength = 500;
-  const { data: availability } = useFetchAvailability(
-    storeId || "",
-    selectedDate ? format(selectedDate, "yyyy-MM-dd") : ""
+  const [defaultSeats, setDefaultSeats] = useState(store?.default_seats);
+  const [customSeats, setCustomSeats] = useState<number | undefined>(
+    availability?.[0]?.availableSeats ?? store?.default_seats
   );
+  const { data: reservations } = useFetchReservationsByShopIdAndDate(
+    storeId || "",
+    format(selectedDate || new Date(), "yyyy-MM-dd")
+  );
+  const totalBookedSeatsbyDate = Array.isArray(reservations)
+    ? reservations.reduce(
+        (acc, curr) =>
+          curr.reservations.reservationStatus === "Confirmed"
+            ? acc + (curr.reservations.numberOfPeople || 0)
+            : acc,
+        0
+      )
+    : 0;
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    const availableSeats = availability?.[0]?.availableSeats;
+    setCustomSeats(
+      availableSeats !== undefined ? availableSeats : store?.default_seats
+    );
+  }, [availability, store?.default_seats]);
+
+  const descriptionMaxLength = 500;
   if (!store) {
     return <p>{t("noStoreSelect")}</p>;
   }
@@ -61,11 +88,29 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         rating: store.rating,
         googleMapLink: googleMapLink || store.google_map_link,
         facebookLink: facebookLink || store.facebook_link,
-        defaultSeats: store.default_seats,
+        defaultSeats: defaultSeats || store.default_seats,
       });
+      handleAvailabilityChange();
       socket.emit("store_update", { storeId });
     } catch (error) {
       console.error("Error updating store:", error);
+      throw error;
+    }
+  };
+
+  const handleAvailabilityChange = async () => {
+    try {
+      await axios.post(
+        `${SERVER_URL}/stores/api/stores/${storeId}/availability`,
+        {
+          date: format(selectedDate || new Date(), "yyyy-MM-dd"),
+          availableSeats: customSeats,
+          isReservable: true,
+        },
+        { withCredentials: true }
+      );
+    } catch (error) {
+      console.error("Error updating availability:", error);
       throw error;
     }
   };
@@ -138,7 +183,26 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
                 <input
                   type="text"
                   className="input input-sm bg-bg/70 text-text w-fit"
-                  defaultValue={availability.availableSeats || 0}
+                  value={customSeats || ""}
+                  onChange={(e) => setCustomSeats(+e.target.value)}
+                />
+              ) : (
+                <p>{t("No availability data")}</p>
+              )}
+              <p>{t("Seats")}</p>
+            </div>
+            <p className="text-sm text-text">
+              {t("Booked Seats: ")} {totalBookedSeatsbyDate} {t("Seats")}
+            </p>
+            <p className="divider"></p>
+            <p className="text-sm text-text">{t("Default Available Seats")} </p>
+            <div className="flex items-center gap-2">
+              {availability ? (
+                <input
+                  type="text"
+                  className="input input-sm bg-bg/70 text-text w-fit"
+                  defaultValue={defaultSeats || 0}
+                  onChange={(e) => setDefaultSeats(+e.target.value)}
                 />
               ) : (
                 <p>{t("No availability data")}</p>
