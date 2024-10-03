@@ -97,15 +97,15 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
         </thead>
         <tbody className="bg-secondary text-text">
           {Array.isArray(staff) && staff.length > 0 ? (
-            staff.map((s, index) => (
-              <tr key={s.userId || index} className="bg-bg">
-                <td className="px-6 py-4">{s.userName}</td>
-                <td className="px-6 py-4">{s.userEmail}</td>
-                <td className="px-6 py-4">{s.role}</td>
+            staff.map((staff, index) => (
+              <tr key={staff.userId || index} className="bg-bg">
+                <td className="px-6 py-4">{staff.userName}</td>
+                <td className="px-6 py-4">{staff.userEmail}</td>
+                <td className="px-6 py-4">{t(staff.role)}</td>
                 <td className="px-6 py-4">
                   <button
                     onClick={() => {
-                      updateDeleteStatus(s.userId.toString());
+                      updateDeleteStatus(staff.userId.toString());
                     }}
                     className="uppercase btn btn-xs btn-outline text-rose-500 hover:border-rose-500 hover:text-rose-500 hover:bg-rose-500/50"
                   >
