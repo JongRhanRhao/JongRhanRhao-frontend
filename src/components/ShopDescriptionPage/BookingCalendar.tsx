@@ -19,8 +19,8 @@ const BookingCalendar = ({
       dateFormat="d MMMM yyyy"
       minDate={new Date()}
       locale={i18n.language === "th" ? th : undefined}
-      inline
       maxDate={new Date(new Date().setMonth(new Date().getMonth() + 1))}
+      className="p-2 rounded-xl"
     />
   );
 };
