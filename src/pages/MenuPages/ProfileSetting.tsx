@@ -7,7 +7,7 @@ import { PhoneInput } from "react-international-phone";
 import LinkBack from "@/components/shared/LinkBack";
 import { useUser } from "@/hooks/useUserStore";
 import {
-  CUSTIOM_BUTTON_OUTLINE_CLASS,
+  // CUSTIOM_BUTTON_OUTLINE_CLASS,
   CUSTOM_BUTTON_CLASS,
   SERVER_URL,
 } from "@/lib/variables";
@@ -55,21 +55,21 @@ const ProfileSetting = () => {
     });
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setProfilePicture(file);
-    }
-  };
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     setProfilePicture(file);
+  //   }
+  // };
 
-  const handleUpload = async () => {
-    if (!profilePicture) {
-      toast.error(t("No file selected."));
-      return Promise.reject();
-    }
+  // const handleUpload = async () => {
+  //   if (!profilePicture) {
+  //     toast.error(t("No file selected."));
+  //     return Promise.reject();
+  //   }
 
     const formData = new FormData();
-    formData.append("profileImage", profilePicture);
+    // formData.append("profileImage", profilePicture);
 
     try {
       await axios.post(
@@ -86,13 +86,13 @@ const ProfileSetting = () => {
     }
   };
 
-  const uploadStatus = () => {
-    toast.promise(handleUpload(), {
-      loading: t("Uploading image..."),
-      success: t("Image uploaded successfully!"),
-      error: t("Something went wrong. Please try again."),
-    });
-  };
+  // const uploadStatus = () => {
+  //   toast.promise(handleUpload(), {
+  //     loading: t("Uploading image..."),
+  //     success: t("Image uploaded successfully!"),
+  //     error: t("Something went wrong. Please try again."),
+  //   });
+  // };
 
   const handleLogout = async () => {
     try {
@@ -117,7 +117,7 @@ const ProfileSetting = () => {
               </div>
             </div>
             <div className="flex flex-col ml-4 space-y-2">
-              <input
+              {/* <input
                 type="file"
                 className="w-full max-w-xs file-input file-input-bordered file-input-xs bg-secondary text-text"
                 accept=".jpg,.jpeg,.png"
@@ -128,7 +128,7 @@ const ProfileSetting = () => {
                 onClick={uploadStatus}
               >
                 {t("Upload new photo")}
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="w-full p-4 mt-6 text-text bg-secondary/50 rounded-xl">
