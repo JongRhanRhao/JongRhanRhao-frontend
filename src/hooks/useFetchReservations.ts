@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { SERVER_URL } from "@/lib/variables";
 
-interface Reservation {
+export interface Reservation {
   shop_name: string;
   reservation_id: string;
   shop_id: string;
