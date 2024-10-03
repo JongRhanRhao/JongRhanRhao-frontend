@@ -247,7 +247,7 @@ export const resources = {
       "Closed for booking": "ปิดรับจอง",
       "Default Available Seats": "จำนวนที่นั่งที่รับจองปกติ",
       "Map link": "ลิงค์แผนที่",
-      "Booked Seats:": "จำนวนที่นั่งที่จองไปแล้ว: ",
+      "Booked Seats: ": "จำนวนที่นั่งที่จองไปแล้ว: ",
 
       "FB link": "ลิงค์เฟสบุ๊ค",
       "Updating store...": "กำลังอัพเดทร้าน...",
