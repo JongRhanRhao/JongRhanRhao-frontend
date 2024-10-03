@@ -49,7 +49,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
     .reduce((a, b) => a + b, 0);
   const rating = totalReviews > 0 ? (totalRating / totalReviews).toFixed(1) : 0;
   const base5Rating = Math.min(Math.max(Number(rating), 0), 5);
-  const safeRating = Math.max(0, Math.min(5, Math.floor(base5Rating)));
+  const safeRating = Math.max(0, Math.min(5, base5Rating));
 
   return (
     <div
