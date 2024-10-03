@@ -241,7 +241,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
           </p>
         </div>
       </div>
-      <table className="table w-full table-fixed">
+      <table className="table w-full table-fixed overflow-x-scroll">
         <thead>
           <tr className="bg-secondary">
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
