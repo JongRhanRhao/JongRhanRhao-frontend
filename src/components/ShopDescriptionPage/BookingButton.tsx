@@ -114,7 +114,10 @@ const BookingButton = ({
 
   const totalBookedSeatsbyDate = Array.isArray(reservations)
     ? reservations.reduce(
-        (acc, curr) => acc + (curr.reservations.numberOfPeople || 0),
+        (acc, curr) =>
+          curr.reservations.reservationStatus !== RESERVATION_STATUS.CANCELLED
+            ? acc + (curr.reservations.numberOfPeople || 0)
+            : acc,
         0
       )
     : 0;
