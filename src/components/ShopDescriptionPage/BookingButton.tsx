@@ -176,8 +176,13 @@ const BookingButton = ({
               className="p-2 mt-1 rounded-xl w-fit bg-secondary"
             />
           </div>
-          <div className="mb-4 font-bold">
-            {t("slots")}: {availableSeats}
+          <div
+            className={`mb-4 font-bold ${
+              availableSeats === 0 ? "text-rose-500" : "text-text"
+            }`}
+          >
+            {t("slots")}:{" "}
+            {availableSeats === 0 ? t("Fully Booked") : availableSeats}
           </div>
           <div className="mb-4">
             <label className="font-bold">{t("phone")}</label>
@@ -217,6 +222,7 @@ const BookingButton = ({
               </button>
               <button
                 onClick={handleSubmit}
+                disabled={availableSeats === 0}
                 className="px-4 py-2 mr-2 font-bold rounded-xl btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
               >
                 {t("BOOK NOW")}
