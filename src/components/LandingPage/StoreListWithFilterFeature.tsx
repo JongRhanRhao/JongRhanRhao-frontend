@@ -21,7 +21,7 @@ const StoreListWithFilterFeature = () => {
   const [selectedType, setSelectedType] = useState(() => {
     const savedType = localStorage.getItem(LAST_SELECTED_TYPE_KEY);
     const types = Object.values(STORE_TYPES_FOR_FILTER_BTN);
-    return savedType && types.includes(savedType)
+    return savedType && types.includes(savedType as string)
       ? savedType
       : STORE_TYPES_FOR_FILTER_BTN.FORYOU;
   });
