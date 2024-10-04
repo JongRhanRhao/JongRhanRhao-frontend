@@ -20,8 +20,8 @@ const StoreListWithFilterFeature = () => {
   const LAST_SELECTED_TYPE_KEY = "lastSelectedFilterType";
   const [selectedType, setSelectedType] = useState(() => {
     const savedType = localStorage.getItem(LAST_SELECTED_TYPE_KEY);
-    return savedType &&
-      Object.values(STORE_TYPES_FOR_FILTER_BTN).includes(savedType)
+    const types = Object.values(STORE_TYPES_FOR_FILTER_BTN);
+    return savedType && types.includes(savedType)
       ? savedType
       : STORE_TYPES_FOR_FILTER_BTN.FORYOU;
   });
@@ -121,7 +121,7 @@ const StoreListWithFilterFeature = () => {
     currentYear,
     parseStoreAgeRange,
   ]);
-  
+
   useEffect(() => {
     if (!isFetchingStores && !isFetchingFavorites) {
       const timer = setTimeout(() => {
