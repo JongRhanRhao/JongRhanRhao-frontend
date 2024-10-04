@@ -211,6 +211,7 @@ export const resources = {
       Confirmed: "ยืนยันแล้ว",
       Cancelled: "ยกเลิก",
       "Total Reservations": "จำนวนการจอง",
+      "Fully Booked": "เต็ม",
       // ประเภทร้าน
       Hot: "มาแรง",
       Favorite: "ร้านโปรด",
