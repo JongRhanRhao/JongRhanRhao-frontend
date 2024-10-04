@@ -1,4 +1,3 @@
-// TODO: add social media links
 import React from "react";
 
 interface FooterProps {
@@ -12,7 +11,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
       className={`flex text-xs flex-col space-y-10 justify-center m-10 ${className}`}
     >
       <nav className="flex flex-wrap justify-center font-medium text-gray-500 gap-6"></nav>
-      <div className="flex justify-center space-x-5">
+      {/* <div className="flex justify-center space-x-5">
         <a
           href="https://facebook.com"
           target="_blank"
@@ -37,7 +36,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
           <img src="https://img.icons8.com/fluent/30/000000/twitter.png" />
         </a>
-      </div>
+      </div> */}
       <div className="flex justify-center space-x-5">
         <a className={footerTextclass} href="#">
           Privacy Policy
