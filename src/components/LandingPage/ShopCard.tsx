@@ -12,10 +12,8 @@ export interface ShopCardProps {
   storeStatus: string;
   reservationStatus: string;
   rating: number;
-  maxSeats: number;
   type: string[];
   open_timebooking: string;
-  currSeats: number;
   description: string | null;
   className?: string;
   ImageSliderClass?: string;
@@ -27,8 +25,6 @@ const ShopCard: React.FC<ShopCardProps> = ({
   title,
   // storeStatus,
   reservationStatus,
-  // maxSeats,
-  // currSeats,
   storeStatus,
   open_timebooking,
   className,
@@ -75,7 +71,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
           {reservationStatus}
         </div>
         <div
-          className={`${ImageSliderClass} bg-secondary/80 rounded-xl px-1 absolute text-lg text-white top-2 right-2`}
+          className={`${ImageSliderClass} bg-secondary rounded-xl px-1 absolute text-lg text-white top-2 right-2`}
         >
           <FavoriteButton storeId={storeId} />
         </div>
