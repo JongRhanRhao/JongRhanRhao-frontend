@@ -83,9 +83,9 @@ const CommentSection = () => {
         </button>
       )}
       {isAuthenticated && (
-        <div className="w-full max-w-md p-2 space-y-1 bg-secondary/50 rounded-xl shadow-lg">
+        <div className="w-full max-w-md p-2 shadow-lg space-y-1 bg-secondary/50 rounded-xl">
           <textarea
-            className="w-full p-3 text-sm bg-bg rounded-lg focus:ring-2 focus:ring-primary focus:outline-none resize-none"
+            className="w-full p-3 text-sm rounded-lg resize-none bg-bg focus:ring-2 focus:ring-primary focus:outline-none"
             rows={4}
             placeholder={`${t("Reply as")} ${user?.userName}`}
             value={reviewText}
