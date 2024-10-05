@@ -48,7 +48,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           Contact Us
         </a>
       </div>
-      <p className="font-medium text-center text-gray-700">
+      <p className="font-medium text-center text-text/50">
         © 2024 Jongrhanrhao Ltd. All rights reservered.
       </p>
     </footer>
