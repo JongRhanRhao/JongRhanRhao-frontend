@@ -180,6 +180,7 @@ export const resources = {
       "Booking successfully!": "จองโต๊ะสำเร็จ!",
       "Error booking, please try again.": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
       Send: "ส่ง",
+      Rating: "คะแนน",
       "Submitting review...": "กำลังส่งความคิดเห็น...",
       "Review submitted successfully!": "ส่งความคิดเห็นสำเร็จ!",
       // ความคิดเห็น
@@ -249,13 +250,14 @@ export const resources = {
       "Default Available Seats": "จำนวนที่นั่งที่รับจองปกติ",
       "Map link": "ลิงค์แผนที่",
       "Booked Seats: ": "จำนวนที่นั่งที่จองไปแล้ว: ",
-
+      "Customer Notes": "หมายเหตุจากลูกค้า",
       "FB link": "ลิงค์เฟสบุ๊ค",
       "Updating store...": "กำลังอัพเดทร้าน...",
       "Store updated successfully!": "อัพเดทร้านสำเร็จ!",
       Role: "ตำแหน่ง",
       "Deleting...": "กำลังลบ...",
       "Deleted successfully": "ลบสำเร็จ",
+      Delete: "ลบ",
       "No staff found for this store.": "ไม่พบพนักงานสำหรับร้านนี้",
       // การจอง
       "Reservations for": "การจองสำหรับ",
