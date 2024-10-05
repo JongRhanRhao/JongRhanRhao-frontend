@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
+  faPaperPlane,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useUser } from "@/hooks/useUserStore";
@@ -81,81 +83,64 @@ const CommentSection = () => {
         </button>
       )}
       {isAuthenticated && (
-        <div className="relative flex flex-col  text-text">
-          <div className="relative w-1/3 min-w-fit bg-bg rounded-xl">
-            <input
-              type="text"
-              onFocus={setIsReply.bind(null, true)}
-              className="w-full pr-10 mt-2 break-words textarea focus:border-none focus:outline-none bg-secondary placeholder:text-text/50 placeholder:text-sm"
-              placeholder={`${t("Reply as")} ${user?.userName}`}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  reviewStatus();
-                }
-              }}
-              maxLength={REVIEW_TEXT_LIMIT}
-              value={reviewText}
-              onChange={(e) => setReviewText(e.target.value)}
-            />
-            {isReply && (
-              <div className="mt-1 mb-2 ml-4 text-sm text-left text-gray-500">
-                {reviewText?.length}/{REVIEW_TEXT_LIMIT}
+        <div className="w-full max-w-md p-2 space-y-1 bg-secondary/50 rounded-xl shadow-lg">
+          <textarea
+            className="w-full p-3 text-sm bg-bg rounded-lg focus:ring-2 focus:ring-primary focus:outline-none resize-none"
+            rows={4}
+            placeholder={`${t("Reply as")} ${user?.userName}`}
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
+            onFocus={() => setIsReply(true)}
+            maxLength={REVIEW_TEXT_LIMIT}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                reviewStatus();
+              }
+            }}
+          />
+
+          {isReply && (
+            <>
+              <div className="flex items-center justify-between text-sm text-text/70">
+                <div className="flex items-center space-x-1">
+                  <span>{t("Rating")}:</span>
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      onClick={() => setRating(star)}
+                      className={`focus:outline-none transition-colors ${
+                        star <= rating
+                          ? "text-yellow-500"
+                          : "text-text hover:text-yellow-200"
+                      }`}
+                    >
+                      <FontAwesomeIcon icon={faStar} />
+                    </button>
+                  ))}
+                  <span className="ml-2">({rating})</span>
+                </div>
+                <span>
+                  {reviewText.length}/{REVIEW_TEXT_LIMIT}
+                </span>
               </div>
-            )}
-            <div className="absolute right-0 bottom-11">
-              {isReply && (
+
+              <div className="flex justify-end">
                 <button
-                  className="text-sm btn btn-xs bg-primary text-secondary"
-                  disabled={reviewText == ""}
+                  className={`px-4 py-2 text-sm font-medium text-secondary rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary ${
+                    reviewText === ""
+                      ? "bg-gray-300 cursor-not-allowed"
+                      : "bg-primary hover:bg-primary/80"
+                  }`}
+                  disabled={reviewText === ""}
                   onClick={reviewStatus}
                 >
+                  <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
                   {t("Send")}
                 </button>
-              )}
-            </div>
-            {isReply && (
-              <div className="items-center p-2 mb-4 ml-4 rating rating-sm bg-secondary rounded-xl">
-                <p className="mr-2 text-sm text-text">{t("Rating")}: </p>
-                <input
-                  type="radio"
-                  name="rating-5"
-                  className="bg-yellow-500 mask mask-star-2"
-                  checked={rating === 1}
-                  onChange={() => setRating(1)}
-                />
-                <input
-                  type="radio"
-                  name="rating-5"
-                  className="bg-yellow-500 mask mask-star-2"
-                  checked={rating === 2}
-                  onChange={() => setRating(2)}
-                />
-                <input
-                  type="radio"
-                  name="rating-5"
-                  className="bg-yellow-500 mask mask-star-2"
-                  checked={rating === 3}
-                  onChange={() => setRating(3)}
-                />
-                <input
-                  type="radio"
-                  name="rating-5"
-                  className="bg-yellow-500 mask mask-star-2"
-                  checked={rating === 4}
-                  onChange={() => setRating(4)}
-                />
-                <input
-                  type="radio"
-                  name="rating-5"
-                  className="bg-yellow-500 mask mask-star-2"
-                  checked={rating === 5}
-                  onChange={() => setRating(5)}
-                />
-                <div className="mt-1 ml-1 text-sm text-text/50">({rating})</div>
               </div>
-            )}
-          </div>
+            </>
+          )}
         </div>
       )}
       {(reviews?.length ?? 0) > 0 && (
