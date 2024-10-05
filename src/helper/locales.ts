@@ -232,7 +232,7 @@ export const resources = {
       // การจัดการร้าน
       storeManagement: "การจัดการร้าน",
       storeManagementDesc: "จัดการร้านของคุณที่นี่",
-      "No stores available.": "ไม่มีร้านที่สามารถใช้งานได้",
+      "No stores available.": "ไม่มีร้านที่จัดการได้",
       pleaseSelectYourStore: "กรุณาเลือกร้านของคุณ",
       selectYourStore: "เลือกร้านของคุณ",
       noStoreSelect: "ยังไม่ได้เลือกร้าน",
