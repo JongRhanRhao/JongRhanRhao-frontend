@@ -1,7 +1,7 @@
 const TermsOfServicePage = () => {
   return (
-    <div className="mx-autorounded-lg shadow-lg text-text">
-      <h1 className="text-3xl font-bold mb-6 text-primary text-center">
+    <div className="p-6 mx-auto rounded-lg shadow-lg text-text">
+      <h1 className="mb-6 text-3xl font-bold text-center text-primary">
         Terms of Service
       </h1>
       <p className="text-center text-text/50">
@@ -26,14 +26,14 @@ const TermsOfServicePage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-primary">
+        <h2 className="mb-4 text-2xl font-semibold text-primary">
           1. User Registration and Account
         </h2>
         <p className="mb-4">
           To access certain features and services of the Website, users may be
           required to create an account. By registering, you agree to:
         </p>
-        <ul className="list-disc pl-6 mb-4">
+        <ul className="pl-6 mb-4 list-disc">
           <li>
             Provide accurate, current, and complete information during the
             registration process.
@@ -60,7 +60,7 @@ const TermsOfServicePage = () => {
           The Company reserves the right to suspend or terminate your account at
           its discretion if:
         </p>
-        <ul className="list-disc pl-6 mb-4">
+        <ul className="pl-6 mb-4 list-disc">
           <li>
             False or inaccurate information was provided during registration.
           </li>
@@ -73,14 +73,14 @@ const TermsOfServicePage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-primary">
+        <h2 className="mb-4 text-2xl font-semibold text-primary">
           2. Limitations on Use
         </h2>
         <p className="mb-4">
           When using the Website, you agree to comply with all applicable laws
           and not to:
         </p>
-        <ul className="list-disc pl-6 mb-4">
+        <ul className="pl-6 mb-4 list-disc">
           <li>Publish defamatory or harmful content.</li>
           <li>Engage in unlawful, threatening, or abusive behavior.</li>
           <li>
@@ -96,7 +96,7 @@ const TermsOfServicePage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-primary">
+        <h2 className="mb-4 text-2xl font-semibold text-primary">
           3. Purchases and Payment
         </h2>
         <p className="mb-4">
@@ -104,7 +104,7 @@ const TermsOfServicePage = () => {
           services, including event tickets. By making purchases through the
           Website, you agree to the following terms:
         </p>
-        <ul className="list-disc pl-6 mb-4">
+        <ul className="pl-6 mb-4 list-disc">
           <li>
             The Company acts solely as an intermediary for the sale of goods or
             services provided by third-party organizers ("Organizers").
@@ -126,7 +126,7 @@ const TermsOfServicePage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-primary">
+        <h2 className="mb-4 text-2xl font-semibold text-primary">
           4. Postponement and Cancellation of Events
         </h2>
         <p className="mb-4">
@@ -139,7 +139,7 @@ const TermsOfServicePage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-primary">
+        <h2 className="mb-4 text-2xl font-semibold text-primary">
           5. Intellectual Property Rights
         </h2>
         <p className="mb-4">
@@ -152,7 +152,7 @@ const TermsOfServicePage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-primary">
+        <h2 className="mb-4 text-2xl font-semibold text-primary">
           6. Disclaimers and Limitation of Liability
         </h2>
         <p className="mb-4">
@@ -171,7 +171,7 @@ const TermsOfServicePage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-primary">
+        <h2 className="mb-4 text-2xl font-semibold text-primary">
           7. Indemnification
         </h2>
         <p className="mb-4">
@@ -179,7 +179,7 @@ const TermsOfServicePage = () => {
           directors, employees, and agents from and against any claims, damages,
           liabilities, costs, or expenses arising out of:
         </p>
-        <ul className="list-disc pl-6 mb-4">
+        <ul className="pl-6 mb-4 list-disc">
           <li>Your use of the Website.</li>
           <li>Your violation of these Terms of Service.</li>
           <li>Your violation of any third-party rights.</li>
@@ -187,7 +187,7 @@ const TermsOfServicePage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-primary">
+        <h2 className="mb-4 text-2xl font-semibold text-primary">
           8. Governing Law
         </h2>
         <p className="mb-4">
