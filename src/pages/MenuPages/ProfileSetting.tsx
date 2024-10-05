@@ -157,6 +157,10 @@ const ProfileSetting = () => {
               <button
                 onClick={userUpdateStatus}
                 className={`min-w-fit mt-2 ${CUSTOM_BUTTON_CLASS}`}
+                disabled={
+                  userName === user?.userName &&
+                  phoneNumber === user?.phoneNumber
+                }
               >
                 {t("Update")}
               </button>
