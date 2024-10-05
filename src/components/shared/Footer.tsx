@@ -12,32 +12,6 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
       className={`flex text-sm flex-col space-y-6 justify-center m-10 ${className}`}
     >
       <nav className="flex flex-wrap justify-center font-medium text-gray-500 gap-6"></nav>
-      {/* <div className="flex justify-center space-x-5">
-        <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://img.icons8.com/fluent/30/000000/facebook-new.png" />
-        </a>
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://img.icons8.com/fluent/30/000000/instagram-new.png" />
-        </a>
-        <a
-          href="https://messenger.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://img.icons8.com/fluent/30/000000/facebook-messenger--v2.png" />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          <img src="https://img.icons8.com/fluent/30/000000/twitter.png" />
-        </a>
-      </div> */}
       <div className="flex justify-center space-x-5">
         <Link to={"/privacy"} className={footerTextclass}>
           Privacy Policy
@@ -47,9 +21,9 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           Terms of Service
         </Link>
         <div className="divider lg:divider-horizontal"></div>
-        <a className={footerTextclass} href="#">
+        <Link to={"/feedback"} className={footerTextclass}>
           Contact Us
-        </a>
+        </Link>
       </div>
       <p className="font-medium text-center text-text/50">
         © 2024 Jongrhanrhao Ltd. All rights reservered.
