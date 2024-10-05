@@ -41,7 +41,7 @@ const FeedbackPage: React.FC<FeedbackProps> = () => {
     <div className="flex w-4/5 min-w-full mx-auto">
       <div className="w-1/2 card card-body bg-secondary/30">
         <div>
-          <h1 className="text-3xl font-bold text-text">
+          <h1 className="text-3xl font-bold text-primary">
             {t("Customer Feedback")}
           </h1>
           <p className="mt-2 text-sm text-text/50">
