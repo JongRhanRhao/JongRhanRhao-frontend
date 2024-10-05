@@ -109,7 +109,7 @@ const StaffManagement = ({ store }: { store: Store | null }) => {
                     }}
                     className="uppercase btn btn-xs btn-outline text-rose-500 hover:border-rose-500 hover:text-rose-500 hover:bg-rose-500/50"
                   >
-                    Delete
+                    {t("Delete")}
                   </button>
                 </td>
               </tr>
