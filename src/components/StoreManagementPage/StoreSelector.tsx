@@ -68,7 +68,7 @@ const StoreSelector = ({
 
   if (!Array.isArray(stores) || stores.length === 0) {
     return (
-      <p className="p-2 text-rose-500">
+      <p className="p-2 bg-bg text-rose-500">
         {t("No stores available.")}
         <br />
       </p>
