@@ -22,8 +22,6 @@ export const ShopCardLink = React.memo(({ store }: { store: Store }) => {
             : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
         }
         rating={store.rating}
-        maxSeats={store.max_seats}
-        currSeats={store.curr_seats}
         type={store.type}
         description={store.description || ""}
         className="rounded"
