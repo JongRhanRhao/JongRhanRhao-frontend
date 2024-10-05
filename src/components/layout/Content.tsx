@@ -7,6 +7,7 @@ import NotFoundPage from "@/pages/NotFoundPage";
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
 import ProfileSetting from "@/pages/MenuPages/ProfileSetting";
 import FeedbackPage from "@/pages/FeedbackPage";
+import PrivacyAndPolicyPage from "@/pages/PrivacyAndPolicyPage";
 
 const Content: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const Content: React.FC = () => {
         element={<ProfileSetting />}
       />
       <Route path="/feedback" element={<FeedbackPage />} />
+      <Route path="/privacy" element={<PrivacyAndPolicyPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
