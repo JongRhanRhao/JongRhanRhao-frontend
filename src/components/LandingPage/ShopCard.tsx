@@ -33,7 +33,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
 }) => {
   const isAvailable = storeStatus === "Available";
   const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
-    isAvailable ? "bg-primary/80" : "bg-rose-500/80"
+    isAvailable ? "bg-primary" : "bg-rose-500"
   }`;
   // const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
   const { t } = useTranslation();
