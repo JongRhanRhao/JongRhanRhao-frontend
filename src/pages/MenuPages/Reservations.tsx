@@ -231,7 +231,7 @@ const Reservations = () => {
         </button>
       </div>
       <div className="flex mt-2 gap-2">
-        <p className="p-1 font-semibold rounded bg-secondary text-text">
+        <p className="p-1 font-semibold rounded text-text">
           {t("Total Reservations")}:{" "}
           {TotalReservationByDate(selectedDate || new Date())}
         </p>
