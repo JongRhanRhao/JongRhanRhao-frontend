@@ -206,7 +206,7 @@ const BookingButton = ({
           <div className="flex items-center">
             <input
               type="checkbox"
-              className="checkbox checkbox-sm"
+              className="checkbox checkbox-sm checkbox-error"
               checked={isOverAge}
               onChange={(e) => setIsOverAge(e.target.checked)}
             />
@@ -222,7 +222,7 @@ const BookingButton = ({
               </button>
               <button
                 onClick={handleSubmit}
-                disabled={availableSeats === 0}
+                disabled={availableSeats === 0 || !note}
                 className="px-4 py-2 mr-2 font-bold rounded-xl btn bg-primary text-secondary hover:bg-secondary hover:text-primary"
               >
                 {t("BOOK NOW")}
