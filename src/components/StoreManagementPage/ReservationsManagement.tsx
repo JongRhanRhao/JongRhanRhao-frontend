@@ -231,17 +231,17 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
           />
         </div>
         <div className="flex mt-2 gap-2">
-          <p className="p-1 font-semibold rounded bg-secondary text-text">
+          <p className="p-1 font-semibold rounded text-text">
             {t("reservCount")}:{" "}
             {selectedDate ? TotalReservationByDate(selectedDate) : 0}
           </p>
-          <p className="p-1 font-semibold rounded bg-secondary text-text">
+          <p className="p-1 font-semibold rounded text-text">
             {t("numbOfPpl")}:{" "}
             {selectedDate ? TotalPeopleByDate(selectedDate) : 0}
           </p>
         </div>
       </div>
-      <table className="table w-full table-fixed overflow-x-scroll">
+      <table className="table w-full overflow-x-scroll">
         <thead>
           <tr className="bg-secondary">
             <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
@@ -275,7 +275,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                 <td className="px-6 py-4 truncate border-b border-neutral-500">
                   {reservation.user_name}
                 </td>
-                <td className="px-6 py-4 text-center truncate border-b border-neutral-500">
+                <td className="px-6 py-4 text-center border-b border-neutral-500">
                   {reservation.number_of_people}
                   {reservation.note && reservation.note.trim() !== "" && (
                     <button
@@ -289,7 +289,10 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                         }
                       }}
                     >
-                      <FontAwesomeIcon icon={faNoteSticky} />
+                      <FontAwesomeIcon icon={faNoteSticky} />{" "}
+                      <p className="hidden sm:block md:hidden xl:block">
+                        {t("Customer Notes")}
+                      </p>
                     </button>
                   )}
                   <dialog
