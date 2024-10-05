@@ -1,8 +1,8 @@
 const PrivacyAndPolicyPage = () => {
   return (
     <>
-      <div className="rounded-lg shadow-lg text-text">
-        <h1 className="text-3xl font-bold mb-6 text-primary text-center">
+      <div className="p-6 mx-auto rounded-lg shadow-lg text-text">
+        <h1 className="mb-6 text-3xl font-bold text-center text-primary">
           Privacy Policy
         </h1>
         <p className="text-center text-text/50">
@@ -25,7 +25,7 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
+          <h2 className="mb-4 text-2xl font-semibold text-primary">
             Scope of Policy
           </h2>
           <p>
@@ -38,13 +38,13 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
+          <h2 className="mb-4 text-2xl font-semibold text-primary">
             Information We Collect
           </h2>
           <p className="mb-2">
             To provide our services, we may collect the following PII:
           </p>
-          <ul className="list-disc pl-6 mb-4">
+          <ul className="pl-6 mb-4 list-disc">
             <li>
               Direct Identifiable Information: Name, age, nationality, date of
               birth.
@@ -63,11 +63,11 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
+          <h2 className="mb-4 text-2xl font-semibold text-primary">
             How We Use Your Information
           </h2>
           <p className="mb-2">We collect and use your PII to:</p>
-          <ol className="list-decimal pl-6 mb-4">
+          <ol className="pl-6 mb-4 list-decimal">
             <li>Verify your identity and eligibility.</li>
             <li>Process and monitor transactions.</li>
             <li>Contact you regarding your bookings or Platform updates.</li>
@@ -87,13 +87,13 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
+          <h2 className="mb-4 text-2xl font-semibold text-primary">
             Lawful Bases for Processing
           </h2>
           <p className="mb-2">
             We process your PII under the following legal bases:
           </p>
-          <ul className="list-disc pl-6 mb-4">
+          <ul className="pl-6 mb-4 list-disc">
             <li>Contractual necessity to provide services.</li>
             <li>Compliance with legal obligations.</li>
             <li>Legitimate business interests.</li>
@@ -106,7 +106,7 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
+          <h2 className="mb-4 text-2xl font-semibold text-primary">
             Data Retention
           </h2>
           <p>
@@ -117,13 +117,13 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
+          <h2 className="mb-4 text-2xl font-semibold text-primary">
             Disclosure of Information
           </h2>
           <p className="mb-2">
             We may disclose your PII in the following circumstances:
           </p>
-          <ol className="list-decimal pl-6 mb-4">
+          <ol className="pl-6 mb-4 list-decimal">
             <li>To event organizers for verification purposes.</li>
             <li>
               To third-party service providers (e.g., cloud storage providers
@@ -137,7 +137,7 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
+          <h2 className="mb-4 text-2xl font-semibold text-primary">
             Security Measures
           </h2>
           <p>
@@ -149,13 +149,13 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
+          <h2 className="mb-4 text-2xl font-semibold text-primary">
             User Rights
           </h2>
           <p className="mb-2">
             As a user, you have the following rights regarding your PII:
           </p>
-          <ul className="list-disc pl-6 mb-4">
+          <ul className="pl-6 mb-4 list-disc">
             <li>
               Right to Withdraw Consent: You can withdraw your consent at any
               time.
@@ -193,14 +193,14 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">Cookies</h2>
+          <h2 className="mb-4 text-2xl font-semibold text-primary">Cookies</h2>
           <p className="mb-2">
             We use cookies to enhance your experience on the Platform. Cookies
             are small text files stored on your browser to track your
             preferences, site interactions, and activity. The types of cookies
             we use include:
           </p>
-          <ul className="list-disc pl-6 mb-4">
+          <ul className="pl-6 mb-4 list-disc">
             <li>
               Functionality Cookies: Store your settings like language
               preferences.
@@ -221,7 +221,7 @@ const PrivacyAndPolicyPage = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-primary">
+          <h2 className="mb-4 text-2xl font-semibold text-primary">
             Updates to This Policy
           </h2>
           <p className="mb-4">
