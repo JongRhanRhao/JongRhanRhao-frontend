@@ -8,7 +8,10 @@ const NotFoundPage = () => {
           <p className="mb-8">
             The page you're looking for doesn't exist or has been moved.
           </p>
-          <a href="/" className="btn btn-outline border-primary text-primary">
+          <a
+            href="/"
+            className="btn btn-outline border-primary text-primary hover:bg-primary hover:text-secondary hover:border-none"
+          >
             Go Home
           </a>
         </div>
