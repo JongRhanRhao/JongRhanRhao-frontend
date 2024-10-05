@@ -321,6 +321,20 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
       <button
         className="mt-4 uppercase btn btn-sm bg-primary text-secondary sm:w-fit"
         onClick={updateStoreStatus}
+        disabled={
+          status === store?.status &&
+          selectedStoreTypes.join(",") === (store?.type || []).join(",") &&
+          selectedDate?.toDateString() === new Date().toDateString() &&
+          openingTime === (splitOldTime ? splitOldTime[0] : "") &&
+          closingTime === (splitOldTime ? splitOldTime[1] : "") &&
+          description === store?.description &&
+          address === store?.address &&
+          googleMapLink === store?.google_map_link &&
+          facebookLink === store?.facebook_link &&
+          defaultSeats === store?.default_seats &&
+          customSeats ===
+            (availability?.[0]?.availableSeats ?? store?.default_seats)
+        }
       >
         {t("Update")}
       </button>
