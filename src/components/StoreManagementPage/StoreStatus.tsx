@@ -181,9 +181,10 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             <div className="flex items-center gap-2">
               {availability ? (
                 <input
-                  type="text"
+                  type="number"
+                  min={0}
                   className="input input-sm bg-bg/70 text-text w-fit"
-                  value={customSeats || ""}
+                  defaultValue={customSeats || ""}
                   onChange={(e) => setCustomSeats(+e.target.value)}
                 />
               ) : (
@@ -199,9 +200,10 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             <div className="flex items-center gap-2">
               {availability ? (
                 <input
-                  type="text"
+                  type="number"
                   className="input input-sm bg-bg/70 text-text w-fit"
                   defaultValue={defaultSeats || 0}
+                  min={0}
                   onChange={(e) => setDefaultSeats(+e.target.value)}
                 />
               ) : (
