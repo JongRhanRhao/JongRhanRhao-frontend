@@ -177,6 +177,7 @@ export const resources = {
       "Please confirm that you are over 20 years old.":
         "กรุณายืนยันว่าคุณมีอายุมากกว่า 20 ปี",
       "Booking...": "กำลังจอง...",
+      "Booking History": "ประวัติการจอง",
       "Booking successfully!": "จองโต๊ะสำเร็จ!",
       "Error booking, please try again.": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
       Send: "ส่ง",
