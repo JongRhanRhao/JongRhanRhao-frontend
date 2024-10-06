@@ -1,0 +1,15 @@
+name: jongrhanrhao
+services:
+  frontend:
+    container_name: jongrhanrhao-frontend
+    build: .
+    ports:
+      - ${NGINX_PORT}:5173
+    networks:
+      - jongrhanrhao-net
+    environment:
+      - NGINX_PROXY=${NGINX_PROXY}
+      - NGINX_PORT=${NGINX_PORT}
+networks:
+  jongrhanrhao-net:
+    external: true
