@@ -21,9 +21,9 @@ const FeedbackPage: React.FC<FeedbackProps> = () => {
   const { t } = useTranslation();
 
   const feedbackSchema = z.object({
-    name: z.string().nonempty({ message: "* Name is required" }),
-    email: z.string().email(),
-    message: z.string().nonempty({ message: "* Message is required" }),
+    name: z.string().nonempty({ message: t("* Name is required") }),
+    email: z.string().email({ message: t("* Invalid email address") }),
+    message: z.string().nonempty({ message: t("* Message is required") }),
   });
 
   const {
