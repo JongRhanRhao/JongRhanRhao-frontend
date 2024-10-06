@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import ShopCard from "@/components/LandingPage/ShopCard";
-import { STORE_AVAILABILITY_STATUS } from "@/lib/variables";
 import { useFetchStores } from "@/hooks/useFetchStores";
 
 interface ShopImageSliderProps {
@@ -43,18 +42,12 @@ const ShopImageSlider: React.FC<ShopImageSliderProps> = () => {
                   image={store.image_url || ""}
                   title={store.shop_name || "No Title"}
                   storeStatus={store.status || "unknown"}
-                  reservationStatus={
-                    store.curr_seats < store.max_seats
-                      ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
-                      : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
-                  }
                   type={store.type || "unknown"}
                   open_timebooking={store.open_timebooking || "unknown"}
                   rating={store.rating || 0}
-                  maxSeats={store.max_seats || 0}
-                  currSeats={store.curr_seats || 0}
                   description={store.description || "No description available"}
                   ImageSliderClass="hidden"
+                  reservationStatus={""}
                 />
               </Link>
             )
