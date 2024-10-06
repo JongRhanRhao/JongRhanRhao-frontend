@@ -133,6 +133,8 @@ export const resources = {
       "* Email is required": "* กรุณากรอกอีเมล",
       "* Password is required": "* กรุณากรอกรหัสผ่าน",
       "* Username is required": "* กรุณากรอกชื่อผู้ใช้",
+      "* Name is required": "* กรุณากรอกชื่อ",
+      "* Message is required": "* กรุณากรอกข้อความ",
       "* Invalid phone number": "* เบอร์โทรศัพท์ไม่ถูกต้อง",
       "* Password must be at least 6 characters long":
         "* รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
