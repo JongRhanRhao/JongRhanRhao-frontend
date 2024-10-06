@@ -8,6 +8,7 @@ import {
   faArrowLeft,
   faArrowRight,
   faCalendarDay,
+  faHistory,
   faShop,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
@@ -196,39 +197,118 @@ const Reservations = () => {
       <div className="mb-4 text-2xl font-bold text-text">
         {t("reservation")}
       </div>
-      <div className="relative flex items-center p-1 rounded bg-secondary w-fit">
-        <button
-          onClick={() =>
-            setSelectedDate(
-              new Date((selectedDate?.getTime() || Date.now()) - 86400000)
-            )
-          }
-        >
-          <FontAwesomeIcon icon={faArrowLeft} className="mr-2 text-primary" />
-        </button>
-        <div className="border-r">
-          <FontAwesomeIcon
-            icon={faCalendarDay}
-            className="mr-2 ml-7 text-primary"
+      <div className="flex items-center gap-4">
+        <div className="relative flex items-center p-1 rounded bg-secondary w-fit">
+          <button
+            onClick={() =>
+              setSelectedDate(
+                new Date((selectedDate?.getTime() || Date.now()) - 86400000)
+              )
+            }
+          >
+            <FontAwesomeIcon icon={faArrowLeft} className="mr-2 text-primary" />
+          </button>
+          <div className="border-r">
+            <FontAwesomeIcon
+              icon={faCalendarDay}
+              className="mr-2 ml-7 text-primary"
+            />
+          </div>
+          <DatePicker
+            className="w-full p-2 bg-secondary text-text"
+            dateFormat={"d MMMM yyyy"}
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            placeholderText="Select a date"
+            locale={i18n.language === "th" ? th : undefined}
           />
+          <button
+            onClick={() =>
+              setSelectedDate(
+                new Date((selectedDate?.getTime() || Date.now()) + 86400000)
+              )
+            }
+          >
+            <FontAwesomeIcon
+              icon={faArrowRight}
+              className="mr-2 text-primary"
+            />
+          </button>
         </div>
-        <DatePicker
-          className="w-full p-2 bg-secondary text-text"
-          dateFormat={"d MMMM yyyy"}
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          placeholderText="Select a date"
-          locale={i18n.language === "th" ? th : undefined}
-        />
-        <button
-          onClick={() =>
-            setSelectedDate(
-              new Date((selectedDate?.getTime() || Date.now()) + 86400000)
-            )
-          }
-        >
-          <FontAwesomeIcon icon={faArrowRight} className="mr-2 text-primary" />
-        </button>
+        <div className="relative group cursor-pointer">
+          <button
+            onClick={() =>
+              (
+                document.getElementById(
+                  "booking_history_modal"
+                ) as HTMLDialogElement
+              )?.showModal()
+            }
+          >
+            <FontAwesomeIcon icon={faHistory} className="mr-2 text-primary" />
+            <div
+              className="absolute z-10 px-2 py-1 mt-1 text-sm rounded opacity-0 top-full left-1/2 -translate-x-1/2 text-text bg-secondary group-hover:opacity-100 transition-opacity duration-300"
+              role="tooltip"
+            >
+              {t("Booking History")}
+            </div>
+          </button>
+          <dialog id="booking_history_modal" className="modal">
+            <div className="modal-box bg-secondary text-text">
+              <form method="dialog">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
+              <h3 className="font-bold text-lg text-primary mb-4">
+                {t("Booking History")}
+              </h3>
+              {Array.isArray(reservation) && reservation.length > 0 ? (
+                <table className="table w-full min-w-full table-fixed rounded-xl">
+                  <thead>
+                    <tr className="bg-secondary">
+                      <th className="px-2 py-1 font-bold text-left uppercase text-text">
+                        {t("id_reservation")}
+                      </th>
+                      <th className="px-2 py-1 font-bold text-left uppercase text-text">
+                        {t("shop_name")}
+                      </th>
+                      <th className="px-2 py-1 font-bold text-left uppercase text-text">
+                        {t("dateNtime")}
+                      </th>
+                      <th className="px-2 py-1 font-bold text-left uppercase text-text">
+                        {t("status")}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-secondary">
+                    {reservation.map((res) => (
+                      <tr key={res.reservation_id}>
+                        <td className="px-2 py-1 border-b border-neutral-500">
+                          {res.reservation_id}
+                        </td>
+                        <td className="px-2 py-1 border-b border-neutral-500">
+                          {t(res.shop_name)}
+                        </td>
+                        <td className="px-2 py-1 border-b border-neutral-500">
+                          {format(new Date(res.reservation_date), "PPP", {
+                            locale: i18n.language === "th" ? th : undefined,
+                          })}
+                          , {res.reservation_time}
+                        </td>
+                        <td className="px-2 py-1 border-b border-neutral-500">
+                          {t(res.reservation_status)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="text-center">{t("noReservFound")}</div>
+              )}
+            </div>
+          </dialog>
+        </div>
       </div>
       <div className="flex mt-2 gap-2">
         <p className="p-1 font-semibold rounded text-text">
