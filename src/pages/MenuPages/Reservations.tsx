@@ -287,6 +287,7 @@ const Reservations = () => {
           </thead>
           <tbody className="bg-secondary text-text">
             {Array.isArray(filteredReservations) &&
+            filteredReservations.length > 0 ? (
               filteredReservations.map((reservation) => {
                 let statusColorClass = "";
                 switch (reservation.reservation_status) {
@@ -351,7 +352,14 @@ const Reservations = () => {
                     </td>
                   </tr>
                 );
-              })}
+              })
+            ) : (
+              <tr>
+                <td colSpan={5} className="py-4 text-center">
+                  {t("noReservFound")}
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
