@@ -244,22 +244,22 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
       <table className="table w-full overflow-x-scroll">
         <thead>
           <tr className="bg-secondary">
-            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
+            <th className="w-1/6 px-6 py-4 font-bold text-left uppercase text-text">
               {t("id_reservation")}
             </th>
-            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
+            <th className="w-1/6 px-6 py-4 font-bold text-left uppercase text-text">
               {t("customerName")}
             </th>
-            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
+            <th className="w-1/6 px-6 py-4 font-bold text-left uppercase text-text">
               {t("numberOfPeople")}
             </th>
-            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
+            <th className="w-1/6 px-6 py-4 font-bold text-left uppercase text-text">
               {t("dateNtime")}
             </th>
-            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
+            <th className="w-1/6 px-6 py-4 font-bold text-left uppercase text-text">
               {t("phone")}
             </th>
-            <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
+            <th className="w-1/12 px-6 py-4 font-bold text-left uppercase text-text">
               {t("action")}
             </th>
           </tr>
@@ -327,7 +327,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                     </form>
                   </dialog>
                 </td>
-                <td className="hidden px-6 py-4 border-b border-neutral-500 sm:table-cell">
+                <td className="px-6 py-4 border-b border-neutral-500">
                   {format(new Date(reservation.reservation_date), "PPP", {
                     locale: i18n.language === "th" ? th : undefined,
                   })}
