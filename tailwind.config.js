@@ -25,5 +25,13 @@ export default {
       sans: ["Prompt", "sans-serif"],
     },
   },
+  daisyui: {
+    theme: {
+      mytheme: {
+        primary: "#89fc00",
+        secondary: "#121212",
+      },
+    },
+  },
   plugins: [daisyui],
 };
