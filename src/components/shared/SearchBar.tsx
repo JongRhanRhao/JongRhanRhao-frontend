@@ -107,7 +107,7 @@ const SearchBar = () => {
           <input
             id="search-bar"
             ref={searchInputRef}
-            className="p-1 pl-10 input input-sm rounded-xl text-md text-text placeholder-text bg-secondary"
+            className="p-1 pl-10 border-2 input input-sm rounded-xl text-md text-text placeholder-text bg-bg border-secondary"
             type="text"
             placeholder={t("Search")}
             value={searchValue}
