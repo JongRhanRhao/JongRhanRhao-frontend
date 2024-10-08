@@ -9,6 +9,7 @@ import DatePicker from "react-datepicker";
 import { socket } from "@/socket";
 import { Store } from "@/hooks/useFetchStores";
 import {
+  CUSTOM_BUTTON_CLASS,
   SERVER_URL,
   STORE_MGMT_STATUS,
   STORE_TYPES_FOR_SELECTOR,
@@ -59,6 +60,73 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
       )
     : 0;
   const { t } = useTranslation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [diffChanges, setDiffChanges] = useState<{
+    [key: string]: {
+      old: string | number | boolean | string[] | undefined;
+      new: string | number | boolean | string[] | undefined;
+    };
+  }>({});
+
+  const getDiffChanges = () => {
+    const changes: { [key: string]: { old: unknown; new: unknown } } = {};
+
+    if (status !== store?.status) {
+      changes.status = { old: store?.status, new: status };
+    }
+    if (JSON.stringify(selectedStoreTypes) !== JSON.stringify(store?.type)) {
+      changes.type = { old: store?.type, new: selectedStoreTypes };
+    }
+    if (description !== store?.description) {
+      changes.description = { old: store?.description, new: description };
+    }
+    if (newOpeningTime !== store?.open_timebooking) {
+      changes.openTimeBooking = {
+        old: store?.open_timebooking,
+        new: newOpeningTime,
+      };
+    }
+    if (address !== store?.address) {
+      changes.address = { old: store?.address, new: address };
+    }
+    if (googleMapLink !== store?.google_map_link) {
+      changes.googleMapLink = {
+        old: store?.google_map_link,
+        new: googleMapLink,
+      };
+    }
+    if (facebookLink !== store?.facebook_link) {
+      changes.facebookLink = { old: store?.facebook_link, new: facebookLink };
+    }
+    if (defaultSeats !== store?.default_seats) {
+      changes.defaultSeats = { old: store?.default_seats, new: defaultSeats };
+    }
+    if (customSeats !== availability?.[0]?.availableSeats) {
+      changes.availableSeats = {
+        old: availability?.[0]?.availableSeats,
+        new: customSeats,
+      };
+    }
+
+    return changes;
+  };
+
+  const openModal = () => {
+    const changes = getDiffChanges();
+    setDiffChanges(
+      changes as {
+        [key: string]: {
+          old: string | number | boolean | string[] | undefined;
+          new: string | number | boolean | string[] | undefined;
+        };
+      }
+    );
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const availableSeats = availability?.[0]?.availableSeats;
@@ -123,7 +191,8 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     );
   };
 
-  const updateStoreStatus = () => {
+  const handleConfirmUpdate = async () => {
+    closeModal();
     toast.promise(handleStatusChange(), {
       loading: t("Updating store..."),
       success: t("Store updated successfully!"),
@@ -322,24 +391,47 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
       </div>
       <button
         className="mt-4 uppercase btn btn-sm bg-primary text-secondary sm:w-fit"
-        onClick={updateStoreStatus}
-        disabled={
-          status === store?.status &&
-          selectedStoreTypes.join(",") === (store?.type || []).join(",") &&
-          selectedDate?.toDateString() === new Date().toDateString() &&
-          openingTime === (splitOldTime ? splitOldTime[0] : "") &&
-          closingTime === (splitOldTime ? splitOldTime[1] : "") &&
-          description === store?.description &&
-          address === store?.address &&
-          googleMapLink === store?.google_map_link &&
-          facebookLink === store?.facebook_link &&
-          defaultSeats === store?.default_seats &&
-          customSeats ===
-            (availability?.[0]?.availableSeats ?? store?.default_seats)
-        }
+        onClick={openModal}
+        disabled={Object.keys(getDiffChanges()).length === 0}
       >
         {t("Update")}
       </button>
+      <dialog
+        id="confirm_modal"
+        className={`modal ${isModalOpen ? "modal-open" : ""}`}
+      >
+        <form method="dialog" className="modal-box bg-secondary">
+          <h3 className="text-lg font-bold text-primary">
+            {t("Confirm Update")}
+          </h3>
+          <p className="py-4">{t("The following changes will be made:")}</p>
+          <div className="overflow-y-auto max-h-60">
+            {Object.entries(diffChanges).map(([key, value]) => (
+              <div key={key} className="mb-2">
+                <p className="font-semibold">{t(key)}:</p>
+                <p className="text-red-500 line-through">
+                  {JSON.stringify(value.old)}
+                </p>
+                <p className="text-green-500">{JSON.stringify(value.new)}</p>
+              </div>
+            ))}
+          </div>
+          <div className="modal-action">
+            <button className="btn" onClick={closeModal}>
+              {t("Cancel")}
+            </button>
+            <button
+              className={CUSTOM_BUTTON_CLASS}
+              onClick={handleConfirmUpdate}
+            >
+              {t("Confirm")}
+            </button>
+          </div>
+        </form>
+        <form method="dialog" className="modal-backdrop">
+          <button onClick={closeModal}>close</button>
+        </form>
+      </dialog>
     </div>
   );
 };
