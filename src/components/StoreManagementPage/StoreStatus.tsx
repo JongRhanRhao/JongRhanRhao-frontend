@@ -392,7 +392,6 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
       <button
         className="mt-4 uppercase btn btn-sm bg-primary text-secondary sm:w-fit"
         onClick={openModal}
-        disabled={Object.keys(getDiffChanges()).length === 0}
       >
         {t("Update")}
       </button>
