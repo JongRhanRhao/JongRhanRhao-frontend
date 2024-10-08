@@ -31,11 +31,9 @@ import { useFetchAvailability } from "@/hooks/useFetchAvailability";
 import { useFetchReservationsByShopIdAndDate } from "@/hooks/useFetchReservationsByShopIdAndDate";
 
 const BookingButton = ({
-  disabled,
   storeId,
   storeName,
 }: {
-  disabled: boolean;
   storeId: string;
   storeName: string;
 }) => {
@@ -157,7 +155,6 @@ const BookingButton = ({
         <LoginButton />
       ) : (
         <button
-          disabled={disabled}
           className={`w-48 px-4 py-2 font-bold rounded-xl ${CUSTOM_BUTTON_CLASS}`}
           onClick={() =>
             (
