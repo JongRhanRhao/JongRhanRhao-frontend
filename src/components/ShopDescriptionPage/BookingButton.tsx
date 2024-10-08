@@ -6,6 +6,16 @@ import "react-international-phone/style.css";
 import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendar,
+  faClock,
+  faNoteSticky,
+  faPhone,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { th } from "date-fns/locale";
+import i18n from "@/helper/i18n";
 
 import { socket } from "@/socket";
 import "@/styles/custom-phone-input.css";
@@ -49,6 +59,9 @@ const BookingButton = ({
   );
   const { t } = useTranslation();
 
+  // New state for confirmation modal
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
+
   useEffect(() => {
     socket.on("reservation_update", () => {
       refetchReservations();
@@ -56,8 +69,7 @@ const BookingButton = ({
     return () => {
       socket.off("reservation_update");
     };
-  }),
-    [refetchReservations];
+  }, [refetchReservations]);
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -73,13 +85,19 @@ const BookingButton = ({
       toast.error(t("Please confirm that you are over 20 years old."));
       return;
     }
-    BookingStatus();
+    (document.getElementById("BookingButton") as HTMLDialogElement)?.close();
+    setShowConfirmModal(true);
   };
-  const formattedDate = selectedDate ? format(selectedDate, "d MMM yyyy") : "";
+
+  const formattedDate = selectedDate
+    ? format(selectedDate, "d MMM yyyy", {
+        locale: i18n.language === "th" ? th : undefined,
+      })
+    : "";
   const bookingData = {
     customerId: user?.userId,
     shopId: storeId,
-    reservationDate: formattedDate,
+    reservationDate: format(selectedDate || new Date(), "d MMM yyyy"),
     reservationTime: new Date().toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
@@ -110,6 +128,7 @@ const BookingButton = ({
       success: t("Booking successfully!"),
       error: t("Something went wrong. Please try again."),
     });
+    setShowConfirmModal(false);
   };
 
   const totalBookedSeatsbyDate = Array.isArray(reservations)
@@ -230,6 +249,59 @@ const BookingButton = ({
             </form>
           </div>
         </div>
+      </dialog>
+
+      <dialog
+        id="confirm_modal"
+        className={`modal ${showConfirmModal ? "modal-open" : ""}`}
+      >
+        <form
+          method="dialog"
+          className="border-2 shadow-lg modal-box bg-bg border-secondary/70"
+        >
+          {" "}
+          <h3 className="mb-4 text-xl font-bold text-primary">
+            {t("Confirm Booking")}
+          </h3>
+          <div className="p-4 mb-2 rounded-xl">
+            <p className="mb-2">
+              <strong>{t("Customer")}:</strong> {user?.userName}
+            </p>
+            <p className="mb-2">
+              <FontAwesomeIcon icon={faCalendar} className="mr-2" />
+              <strong>{t("date")}:</strong> {formattedDate}
+            </p>
+            <p className="mb-2">
+              <FontAwesomeIcon icon={faClock} className="mr-2" />
+              <strong>{t("Booking Time")}:</strong>{" "}
+              {bookingData.reservationTime} {i18n.language === "th" ? "น." : ""}
+            </p>
+            <p className="mb-2">
+              <FontAwesomeIcon icon={faUser} className="mr-2" />
+              <strong>{t("numberOfPeople")}:</strong> {numberOfPeople}{" "}
+              {i18n.language === "th" ? "คน" : ""}
+            </p>
+            <p className="mb-2">
+              <FontAwesomeIcon icon={faPhone} className="mr-2" />
+              <strong>{t("phone")}:</strong> {phoneNumber}
+            </p>
+            <p className="mb-2">
+              <FontAwesomeIcon icon={faNoteSticky} className="mr-2" />
+              <strong>{t("note")}:</strong> {note === "" ? t("N/A") : note}
+            </p>
+          </div>
+          <div className="modal-action">
+            <button
+              onClick={() => setShowConfirmModal(false)}
+              className="btn bg-secondary text-text"
+            >
+              {t("Cancel")}
+            </button>
+            <button onClick={BookingStatus} className={CUSTOM_BUTTON_CLASS}>
+              {t("Confirm Booking")}
+            </button>
+          </div>
+        </form>
       </dialog>
     </>
   );
