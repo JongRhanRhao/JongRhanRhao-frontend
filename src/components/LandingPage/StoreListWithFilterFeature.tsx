@@ -191,7 +191,7 @@ const StoreListWithFilterFeature = () => {
         <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
           {t("DiscoverAndBooking")}
         </h2>
-        <div className="hidden mr-4 md:block lg:block xl:block">
+        <div className="hidden mr-4 sm:block md:block lg:block xl:block">
           <SearchBar />
         </div>
       </div>
