@@ -157,8 +157,10 @@ export const resources = {
       staff: "พนักงาน",
       // การจอง
       Customer: "ลูกค้า",
+      "Booking Information": "รายละเอียดการจอง",
       numberOfPeople: "จำนวนคน",
       date: "วันที่",
+      "Booking date": "จองวันที่",
       time: "เวลา",
       "Booking Time": "เวลาที่กดจอง",
       phone: "เบอร์โทรศัพท์",
