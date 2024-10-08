@@ -21,6 +21,8 @@ export const GLOBAL_URL_ROUTES = {
 export const STORE_AVAILABILITY_STATUS = {
   AVAILABLE: "Can walk-in",
   UNAVAILABLE: "Unavailable",
+  BUSY: "Busy",
+  CLOSE: "Closed",
 };
 
 export const RESERVATION_STATUS = {
