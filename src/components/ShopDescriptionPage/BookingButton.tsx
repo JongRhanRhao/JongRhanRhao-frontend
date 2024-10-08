@@ -220,6 +220,7 @@ const BookingButton = ({
               onChange={(e) => setNote(e.target.value)}
               className="w-full p-2 mt-1 resize-none rounded-xl placeholder:text-text/50 textarea bg-secondary"
               placeholder={t("notePlaceholder")}
+              maxLength={100}
             ></textarea>
           </div>
           <div className="flex items-center">
@@ -250,7 +251,7 @@ const BookingButton = ({
           </div>
         </div>
       </dialog>
-
+      {/* Confirm modal */}
       <dialog
         id="confirm_modal"
         className={`modal ${showConfirmModal ? "modal-open" : ""}`}
@@ -261,15 +262,18 @@ const BookingButton = ({
         >
           {" "}
           <h3 className="mb-4 text-xl font-bold text-primary">
-            {t("Confirm Booking")}
+            {t("Confirm Booking")} <span>{t(storeName)}</span>
           </h3>
-          <div className="p-4 mb-2 rounded-xl">
-            <p className="mb-2">
-              <strong>{t("Customer")}:</strong> {user?.userName}
+          <div className="p-2 mb-2 bg-secondary rounded-xl">
+            <strong>{t("Customer")}:</strong> {user?.userName}
+          </div>
+          <div className="p-4 mb-2 bg-secondary rounded-xl">
+            <p className="mb-2 font-bold underline text-text">
+              {t("Booking Information")}
             </p>
             <p className="mb-2">
               <FontAwesomeIcon icon={faCalendar} className="mr-2" />
-              <strong>{t("date")}:</strong> {formattedDate}
+              <strong>{t("Booking date")}:</strong> {formattedDate}
             </p>
             <p className="mb-2">
               <FontAwesomeIcon icon={faClock} className="mr-2" />
