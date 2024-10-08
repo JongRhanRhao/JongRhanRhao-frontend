@@ -15,6 +15,7 @@ import { FilterButton } from "@/components/shared/FilterButton";
 import { ShopCardLink } from "@/components/LandingPage/ShopCardLink";
 import { socket } from "@/socket";
 import SearchBar from "@/components/shared/SearchBar";
+import { useFetchPopularStore } from "@/hooks/useFetchPopularStore";
 
 const StoreListWithFilterFeature = () => {
   const LAST_SELECTED_TYPE_KEY = "lastSelectedFilterType";
@@ -33,6 +34,8 @@ const StoreListWithFilterFeature = () => {
     error,
     refetch: refetchStoreData,
   } = useFetchStores();
+  const { data: popularStores, refetch: refetchPopularStores } =
+    useFetchPopularStore();
   const { user, isAuthenticated } = useUser();
   const {
     data: favoriteStores,
@@ -60,8 +63,9 @@ const StoreListWithFilterFeature = () => {
       setIsFakeLoading(true);
       refetchFavroiteStore();
       refetchStoreData();
+      refetchPopularStores();
     },
-    [refetchFavroiteStore, refetchStoreData]
+    [refetchFavroiteStore, refetchStoreData, refetchPopularStores]
   );
   const currentYear = new Date().getFullYear();
   const userAge = currentYear - (user?.birthYear ?? 0);
@@ -89,7 +93,15 @@ const StoreListWithFilterFeature = () => {
       case STORE_TYPES_FOR_FILTER_BTN.ALL:
         return stores;
       case STORE_TYPES_FOR_FILTER_BTN.HOT:
-        return stores.filter((store) => store.is_popular);
+        if (Array.isArray(popularStores)) {
+          return popularStores.map((popularStore) => {
+            const fullStoreInfo = stores.find(
+              (store) => store.store_id === popularStore.store_id
+            );
+            return { ...popularStore, ...fullStoreInfo };
+          });
+        }
+        return [];
       case STORE_TYPES_FOR_FILTER_BTN.FAVORITE:
         if (Array.isArray(favoriteStores)) {
           const favoriteStoreIds = favoriteStores.map((fav) => fav.store_id);
@@ -120,6 +132,7 @@ const StoreListWithFilterFeature = () => {
     userAge,
     currentYear,
     parseStoreAgeRange,
+    popularStores,
   ]);
 
   useEffect(() => {
