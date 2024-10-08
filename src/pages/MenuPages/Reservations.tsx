@@ -235,7 +235,7 @@ const Reservations = () => {
             />
           </button>
         </div>
-        <div className="relative group cursor-pointer">
+        <div className="relative cursor-pointer group">
           <button
             onClick={() =>
               (
@@ -256,11 +256,11 @@ const Reservations = () => {
           <dialog id="booking_history_modal" className="modal">
             <div className="modal-box bg-secondary text-text">
               <form method="dialog">
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                   ✕
                 </button>
               </form>
-              <h3 className="font-bold text-lg text-primary mb-4">
+              <h3 className="mb-4 text-lg font-bold text-primary">
                 {t("Booking History")}
               </h3>
               {Array.isArray(reservation) && reservation.length > 0 ? (
