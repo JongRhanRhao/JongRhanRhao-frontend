@@ -23,7 +23,6 @@ const ShopCard: React.FC<ShopCardProps> = ({
   id: storeId,
   image,
   title,
-  // storeStatus,
   reservationStatus,
   storeStatus,
   open_timebooking,
@@ -35,7 +34,6 @@ const ShopCard: React.FC<ShopCardProps> = ({
   const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
     isAvailable ? "bg-primary" : "bg-rose-500"
   }`;
-  // const seatCountClass = `mt-2 ${isAvailable ? "text-text" : "text-red-500"}`;
   const { t } = useTranslation();
 
   const { data: reviews } = useFetchReviews(storeId as string);
@@ -107,12 +105,6 @@ const ShopCard: React.FC<ShopCardProps> = ({
           ) : (
             <span>All</span>
           )}
-          {/* <div className="opacity-75">
-            <span>{storeStatus}</span>
-          </div>
-          <p className={`mb-1 ${seatCountClass} shadow-lg animate-pulse`}>
-            {currSeats} / {maxSeats}
-          </p> */}
         </div>
       </div>
     </div>
