@@ -247,7 +247,7 @@ const Reservations = () => {
           >
             <FontAwesomeIcon icon={faHistory} className="mr-2 text-primary" />
             <div
-              className="absolute z-10 px-2 py-1 mt-1 text-sm rounded opacity-0 top-full left-1/2 -translate-x-1/2 text-text bg-secondary group-hover:opacity-100 transition-opacity duration-300"
+              className="absolute z-10 px-2 py-1 mt-1 text-sm transition-opacity duration-300 -translate-x-1/2 rounded opacity-0 top-full left-1/2 text-text bg-secondary group-hover:opacity-100"
               role="tooltip"
             >
               {t("Booking History")}
@@ -294,7 +294,8 @@ const Reservations = () => {
                           {format(new Date(res.reservation_date), "PPP", {
                             locale: i18n.language === "th" ? th : undefined,
                           })}
-                          , {res.reservation_time}
+                          , {res.reservation_time}{" "}
+                          {i18n.language === "th" ? "น." : ""}
                         </td>
                         <td className="px-2 py-1 border-b border-neutral-500">
                           {t(res.reservation_status)}
@@ -310,7 +311,7 @@ const Reservations = () => {
           </dialog>
         </div>
       </div>
-      <div className="flex mt-2 gap-2">
+      <div className="flex gap-2 mt-2">
         <p className="p-1 font-semibold rounded text-text">
           {t("Total Reservations")}:{" "}
           {TotalReservationByDate(selectedDate || new Date())}
@@ -399,7 +400,8 @@ const Reservations = () => {
                       {format(new Date(reservation.reservation_date), "PPP", {
                         locale: i18n.language === "th" ? th : undefined,
                       })}
-                      , {reservation.reservation_time}
+                      , {reservation.reservation_time}{" "}
+                      {i18n.language === "th" ? "น." : ""}
                     </td>
                     <td className="px-6 py-4 border-b border-neutral-500">
                       <span
