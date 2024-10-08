@@ -19,7 +19,9 @@ export const ShopCardLink = React.memo(({ store }: { store: Store }) => {
         reservationStatus={
           store.status === "Available"
             ? t(STORE_AVAILABILITY_STATUS.AVAILABLE)
-            : t(STORE_AVAILABILITY_STATUS.UNAVAILABLE)
+            : store.status === "Busy"
+            ? t(STORE_AVAILABILITY_STATUS.BUSY)
+            : t(STORE_AVAILABILITY_STATUS.CLOSE)
         }
         rating={store.rating}
         type={store.type}
