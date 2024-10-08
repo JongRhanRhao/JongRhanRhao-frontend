@@ -31,8 +31,9 @@ const ShopCard: React.FC<ShopCardProps> = ({
   type,
 }) => {
   const isAvailable = storeStatus === "Available";
+  const isBusy = storeStatus === "Busy";
   const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
-    isAvailable ? "bg-primary" : "bg-rose-500"
+    isAvailable ? "bg-primary" : isBusy ? "bg-yellow-500" : "bg-rose-500"
   }`;
   const { t } = useTranslation();
 
@@ -77,7 +78,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
         <div
           className={`${ImageSliderClass} absolute px-2 py-1 rounded-r bottom-1`}
         >
-          <div className="px-1 text-sm badge w-fit rounded-xl space-x-2 bg-secondary/80 text-text">
+          <div className="px-1 space-x-2 text-sm badge w-fit rounded-xl bg-secondary/80 text-text">
             <FontAwesomeIcon
               icon={faStar}
               className="text-yellow-400 shadow-lg"
