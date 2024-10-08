@@ -6,16 +6,15 @@ import {
   // faTicket,
   faUser,
   faX,
-  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 
 import { useSidebarStore } from "@/hooks/useSidebarStore";
 import { useUser } from "@/hooks/useUserStore";
 import LoginButton from "@/components/shared/LoginButton";
 import { CUSTIOM_BUTTON_OUTLINE_CLASS } from "@/lib/variables";
+import LogoutButton from "@/components/shared/LogoutButton";
 // import { SERVER_URL } from "@/lib/variables";
 
 interface RightSidebarProps {
@@ -24,17 +23,9 @@ interface RightSidebarProps {
 
 const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
   const { rightSidebarExpanded, toggleRightSidebar } = useSidebarStore();
-  const { user, isAuthenticated, logout, initializeUser } = useUser();
+  const { user, isAuthenticated, initializeUser } = useUser();
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      toast.error(t("Something went wrong. Please try again."));
-    }
-  };
 
   useEffect(() => {
     async function initialize() {
@@ -110,20 +101,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
               >
                 {t("Profile Settings")}
               </button>
-
-              {/* <button className="w-full btn btn-outline text-text">
-                <FontAwesomeIcon icon={faTicket} className="mr-2" />
-                Have a coupon code?
-                <FontAwesomeIcon icon={faAngleRight} className="ml-2" />
-              </button> */}
-
-              <button
-                onClick={handleLogout}
-                className="w-full mt-auto btn btn-outline btn-error"
-              >
-                <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
-                {t("Logout")}
-              </button>
+              <LogoutButton className="w-full" />
               <button
                 onClick={() => {
                   navigate("/feedback");
