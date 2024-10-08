@@ -151,6 +151,7 @@ export const resources = {
       Logout: "ออกจากระบบ",
       "Have feedback?": "มีข้อเสนอแนะ?",
       "No Rating": "ยังไม่มีคะแนน",
+      "Logged out successfully!": "ออกจากระบบสำเร็จ!",
       // ตำแหน่ง
       owner: "เจ้าของร้าน",
       user: "ผู้ใช้",
