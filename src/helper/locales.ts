@@ -297,6 +297,8 @@ export const resources = {
       "LATE NIGHT TALKING MUSIC BAR": "LATE NIGHT TALKING MUSIC BAR",
       TAWANDANG: "ตะวันแดง มหาชน",
       // TODO: ใส่ชื่อร้านที่เหลือ
+      // จังหวัด
+      Chiangmai: "เชียงใหม่",
       // ข้อผิดพลาด
       "You need to log in to view this page.":
         "คุณต้องเข้าสู่ระบบเพื่อดูหน้านี้",
