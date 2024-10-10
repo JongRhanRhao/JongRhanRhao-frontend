@@ -352,16 +352,16 @@ const Reservations = () => {
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 {t("id_reservation")}
               </th>
-              <th className="hidden w-1/4 px-6 py-4 font-bold text-left uppercase text-text md:table-cell">
+              <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 {t("shop_name")}
               </th>
-              <th className="hidden w-1/4 px-6 py-4 font-bold text-left uppercase text-text sm:table-cell">
+              <th className="hidden w-1/4 px-6 py-4 font-bold text-left uppercase text-text md:table-cell">
                 {t("dateNtime")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
                 {t("status")}
               </th>
-              <th className="w-1/4 font-bold text-left uppercase text-text">
+              <th className="hidden w-1/4 font-bold text-left uppercase text-text md:table-cell">
                 {t("action")}
               </th>
             </tr>
@@ -393,10 +393,10 @@ const Reservations = () => {
                     <td className="px-6 py-4 border-b border-neutral-500">
                       {reservation.reservation_id}
                     </td>
-                    <td className="hidden px-6 py-4 truncate border-b border-neutral-500 md:table-cell">
+                    <td className="px-6 py-4 truncate border-b border-neutral-500">
                       {t(reservation.shop_name)}
                     </td>
-                    <td className="hidden px-6 py-4 border-b border-neutral-500 sm:table-cell">
+                    <td className="hidden px-6 py-4 border-b border-neutral-500 md:table-cell">
                       {format(new Date(reservation.reservation_date), "PPP", {
                         locale: i18n.language === "th" ? th : undefined,
                       })}
@@ -412,7 +412,7 @@ const Reservations = () => {
                         {t(reservation.reservation_status)}
                       </span>
                     </td>
-                    <td className="border-b border-neutral-500">
+                    <td className="hidden border-b border-neutral-500 md:table-cell">
                       {/* <button
                         onClick={() => {
                           updateCancelReserv(reservation.reservation_id);
