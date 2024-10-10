@@ -177,7 +177,10 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
             )
           }
         >
-          <FontAwesomeIcon icon={faArrowLeft} className="mr-2 text-primary" />
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            className="ml-2 mr-2 text-primary"
+          />
         </button>
         <div className="border-r">
           <FontAwesomeIcon
