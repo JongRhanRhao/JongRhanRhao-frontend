@@ -177,7 +177,7 @@ export const resources = {
       "Cancel within 24 hours": "ยกเลิกภายใน 24 ชั่วโมง",
       notePlaceholder: "กรุณากรอกเวลามาถึง & ข้อความเพิ่มเติมถึงร้าน",
       // รายละเอียดร้าน
-      status: "สถานะของร้าน",
+      status: "สถานะ",
       address: "พิกัด",
       closeAndOpenTime: "เวลาเปิด-ปิด",
       cancel_condition: "เงื่อนไขการยกเลิกจอง",
