@@ -447,7 +447,12 @@ const Reservations = () => {
               })
             ) : (
               <tr>
-                <td colSpan={5} className="py-4 text-center">
+                <td
+                  className={`px-6 py-4 text-center ${
+                    window.innerWidth < 640 ? "sm:col-span-3" : "col-span-5"
+                  }`}
+                  colSpan={window.innerWidth < 640 ? 3 : 5}
+                >
                   {t("noReservFound")}
                 </td>
               </tr>
