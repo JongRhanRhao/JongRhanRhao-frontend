@@ -225,6 +225,9 @@ export const resources = {
       Cancelled: "ยกเลิก",
       "Total Reservations": "จำนวนการจอง",
       "Fully Booked": "เต็ม",
+      "Closed for booking": "ปิดการรับจอง",
+      Back: "ย้อนกลับ",
+      "Edit Booking": "แก้ไขการจอง",
       // ประเภทร้าน
       Hot: "มาแรง",
       Favorite: "ร้านโปรด",
@@ -258,7 +261,6 @@ export const resources = {
       "Store Management": "การจัดการร้าน",
       "Staff Management": "การจัดการพนักงาน",
       Seats: "ที่นั่ง",
-      "Closed for booking": "ปิดรับจอง",
       "Default Available Seats": "จำนวนที่นั่งที่รับจองปกติ",
       "Map link": "ลิงค์แผนที่",
       "Booked Seats: ": "จำนวนที่นั่งที่จองไปแล้ว: ",
