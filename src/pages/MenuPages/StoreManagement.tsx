@@ -47,7 +47,11 @@ const StoreManagement = () => {
       case STORE_MGMT_MENU.STORE:
         return <StoreStatus store={selectedStore} />;
       case STORE_MGMT_MENU.STAFF:
-        return <StaffManagement store={selectedStore} />;
+        if (role === "owner") {
+          return <StaffManagement store={selectedStore} />;
+        } else {
+          return <p className="text-error p-4">{t("youDontHavePermission")}</p>;
+        }
       default:
         return null;
     }
