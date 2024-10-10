@@ -50,14 +50,15 @@ const BookingButton = ({
     );
   const [isOverAge, setIsOverAge] = useState<boolean>(false);
   const [note, setNote] = useState<string>("");
-  const { data: availability } = useFetchAvailability(
-    storeId,
-    format(selectedDate || new Date(), "yyyy-MM-dd"),
-    format(selectedDate || new Date(), "yyyy-MM-dd")
-  );
+  const { data: availability, refetch: refetchAvailability } =
+    useFetchAvailability(
+      storeId,
+      format(selectedDate || new Date(), "yyyy-MM-dd"),
+      format(selectedDate || new Date(), "yyyy-MM-dd")
+    );
+  const isReservable = availability?.[0].isReservable;
   const { t } = useTranslation();
 
-  // New state for confirmation modal
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -68,6 +69,18 @@ const BookingButton = ({
       socket.off("reservation_update");
     };
   }, [refetchReservations]);
+
+  useEffect(() => {
+    socket.on("store_update", (data) => {
+      if (data) {
+        refetchAvailability();
+      }
+    });
+
+    return () => {
+      socket.off("store_update");
+    };
+  }, [refetchAvailability]);
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -149,6 +162,13 @@ const BookingButton = ({
       : 0;
   }, [availability, totalBookedSeatsbyDate]);
 
+  const handleEditBookingButton = () => {
+    setShowConfirmModal(false);
+    (
+      document.getElementById("BookingButton") as HTMLDialogElement
+    )?.showModal();
+  };
+
   return (
     <>
       {!isAuthenticated ? (
@@ -161,8 +181,9 @@ const BookingButton = ({
               document.getElementById("BookingButton") as HTMLDialogElement
             )?.showModal()
           }
+          disabled={!isReservable}
         >
-          {t("BOOK NOW")}
+          {isReservable ? t("BOOK NOW") : t("Closed for booking")}
         </button>
       )}
       <dialog
@@ -262,7 +283,7 @@ const BookingButton = ({
             {t("Confirm Booking")} <span>{t(storeName)}</span>
           </h3>
           <div className="p-2 mb-2 bg-secondary rounded-xl">
-            <strong>{t("Customer")}:</strong> {user?.userName}
+            <strong>{t("customerName")}:</strong> {user?.userName}
           </div>
           <div className="p-4 mb-2 bg-secondary rounded-xl">
             <p className="mb-2 font-bold underline text-text">
@@ -293,10 +314,10 @@ const BookingButton = ({
           </div>
           <div className="modal-action">
             <button
-              onClick={() => setShowConfirmModal(false)}
+              onClick={() => handleEditBookingButton()}
               className="btn bg-secondary text-text"
             >
-              {t("Cancel")}
+              {t("Edit Booking")}
             </button>
             <button onClick={BookingStatus} className={CUSTOM_BUTTON_CLASS}>
               {t("Confirm Booking")}
