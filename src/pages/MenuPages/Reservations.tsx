@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
-import axios from "axios";
-import toast from "react-hot-toast";
+// import axios from "axios";
+// import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
@@ -10,7 +10,7 @@ import {
   faCalendarDay,
   faHistory,
   faShop,
-  faX,
+  // faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { th } from "date-fns/locale";
 import DatePicker from "react-datepicker";
@@ -20,7 +20,7 @@ import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useUser } from "@/hooks/useUserStore";
 import { useFetchReservations } from "@/hooks/useFetchReservations";
 import LinkBack from "@/components/shared/LinkBack";
-import { ERROR_TEXT, RESERVATION_STATUS, SERVER_URL } from "@/lib/variables";
+import { ERROR_TEXT, RESERVATION_STATUS } from "@/lib/variables";
 import { FilterButton } from "@/components/shared/FilterButton";
 import LoginButton from "@/components/shared/LoginButton";
 
@@ -42,10 +42,10 @@ const Reservations = () => {
 
   const isPending = (reservStatus: string) =>
     reservStatus === RESERVATION_STATUS.PENDING ? "animate-pulse" : "";
-  const isCancelled = (reservStatus: string) =>
-    reservStatus === RESERVATION_STATUS.CANCELLED ? true : false;
-  const isConfirmed = (reservStatus: string) =>
-    reservStatus === RESERVATION_STATUS.CONFIRMED ? true : false;
+  // const isCancelled = (reservStatus: string) =>
+  //   reservStatus === RESERVATION_STATUS.CANCELLED ? true : false;
+  // const isConfirmed = (reservStatus: string) =>
+  //   reservStatus === RESERVATION_STATUS.CONFIRMED ? true : false;
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -124,28 +124,28 @@ const Reservations = () => {
     );
   }
 
-  const handleCancelReserv = async (reservationId: string) => {
-    try {
-      await axios.put(
-        `${SERVER_URL}/stores/api/reservations/status/${reservationId}`,
-        {
-          reservationId: reservationId,
-          reservationStatus: RESERVATION_STATUS.CANCELLED,
-        }
-      );
-      socket.emit("reservation_update", { reservationId });
-    } catch (err) {
-      toast.error(t("Something went wrong. Please try again."));
-    }
-  };
+  // const handleCancelReserv = async (reservationId: string) => {
+  //   try {
+  //     await axios.put(
+  //       `${SERVER_URL}/stores/api/reservations/status/${reservationId}`,
+  //       {
+  //         reservationId: reservationId,
+  //         reservationStatus: RESERVATION_STATUS.CANCELLED,
+  //       }
+  //     );
+  //     socket.emit("reservation_update", { reservationId });
+  //   } catch (err) {
+  //     toast.error(t("Something went wrong. Please try again."));
+  //   }
+  // };
 
-  const updateCancelReserv = (reservationId: string) => {
-    toast.promise(handleCancelReserv(reservationId), {
-      loading: t("Cancelling..."),
-      success: t("Cancelled successfully!"),
-      error: t("Something went wrong. Please try again."),
-    });
-  };
+  // const updateCancelReserv = (reservationId: string) => {
+  //   toast.promise(handleCancelReserv(reservationId), {
+  //     loading: t("Cancelling..."),
+  //     success: t("Cancelled successfully!"),
+  //     error: t("Something went wrong. Please try again."),
+  //   });
+  // };
 
   const FilterBtnClass = (reservationStatus: string) => {
     switch (reservationStatus) {
@@ -247,7 +247,7 @@ const Reservations = () => {
           >
             <FontAwesomeIcon icon={faHistory} className="mr-2 text-primary" />
             <div
-              className="absolute z-10 px-2 py-1 mt-1 text-sm transition-opacity duration-300 -translate-x-1/2 rounded opacity-0 top-full left-1/2 text-text bg-secondary group-hover:opacity-100"
+              className="absolute z-10 px-2 py-1 mt-1 text-sm rounded opacity-0 transition-opacity duration-300 -translate-x-1/2 top-full left-1/2 text-text bg-secondary group-hover:opacity-100"
               role="tooltip"
             >
               {t("Booking History")}
@@ -311,7 +311,7 @@ const Reservations = () => {
           </dialog>
         </div>
       </div>
-      <div className="flex gap-2 mt-2">
+      <div className="flex mt-2 gap-2">
         <p className="p-1 font-semibold rounded text-text">
           {t("Total Reservations")}:{" "}
           {TotalReservationByDate(selectedDate || new Date())}
@@ -413,7 +413,7 @@ const Reservations = () => {
                       </span>
                     </td>
                     <td className="border-b border-neutral-500">
-                      <button
+                      {/* <button
                         onClick={() => {
                           updateCancelReserv(reservation.reservation_id);
                         }}
@@ -424,7 +424,7 @@ const Reservations = () => {
                         }
                       >
                         <FontAwesomeIcon icon={faX} />
-                      </button>
+                      </button> */}
                       <a
                         href={`/shop/${reservation.shop_id}`}
                         className="underline text-text/75"
