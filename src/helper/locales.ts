@@ -24,7 +24,7 @@ export const resources = {
       notePlaceholder:
         "Please type your estimated arrival time & additional notes.",
       // Shop description
-      status: "Status",
+      status: "Store status",
       address: "Address",
       closeAndOpenTime: "Open hours",
       cancel_condition: "Cancellation policy",
@@ -176,7 +176,7 @@ export const resources = {
       "Cancel within 24 hours": "ยกเลิกภายใน 24 ชั่วโมง",
       notePlaceholder: "กรุณากรอกเวลามาถึง & ข้อความเพิ่มเติมถึงร้าน",
       // รายละเอียดร้าน
-      status: "สถานะ",
+      status: "สถานะของร้าน",
       address: "พิกัด",
       closeAndOpenTime: "เวลาเปิด-ปิด",
       cancel_condition: "เงื่อนไขการยกเลิกจอง",
@@ -228,6 +228,9 @@ export const resources = {
       "Closed for booking": "ปิดการรับจอง",
       Back: "ย้อนกลับ",
       "Edit Booking": "แก้ไขการจอง",
+      isReservable: "ปิดรับการจอง",
+      true: "เปิด",
+      false: "ปิด",
       // ประเภทร้าน
       Hot: "มาแรง",
       Favorite: "ร้านโปรด",
@@ -267,7 +270,7 @@ export const resources = {
       "Customer Notes": "หมายเหตุจากลูกค้า",
       "FB link": "ลิงค์เฟสบุ๊ค",
       "Updating store...": "กำลังอัพเดทร้าน...",
-      "Store updated successfully!": "อัพเดทร้านสำเร็จ!",
+      "Store status updated successfully!": "อัพเดทสถานะร้านสำเร็จ!",
       Role: "ตำแหน่ง",
       "Deleting...": "กำลังลบ...",
       "Deleted successfully": "ลบสำเร็จ",
@@ -279,6 +282,16 @@ export const resources = {
       Cancel: "ยกเลิก",
       Confirm: "ยืนยัน",
       "The following changes will be made:": "การเปลี่ยนแปลงที่จะทำ:",
+      Field: "หัวข้อ",
+      "Old Value": "ค่าเดิม",
+      Changes: "ค่าใหม่",
+      "No changes": "ไม่มีการเปลี่ยนแปลง",
+      openTimeBooking: "เวลาเปิด-ปิด",
+      googleMapLink: "ลิงค์แผนที่",
+      facebookLink: "ลิงค์เฟสบุ๊ค",
+      type: "ประเภทร้าน",
+      availableSeats: "จำนวนที่นั่งที่จองได้",
+      defaultSeats: "จำนวนที่นั่งที่รับจองปกติ",
       // การจอง
       "Reservations for": "การจองสำหรับ",
       "Cancelling...": "กำลังยกเลิก...",
