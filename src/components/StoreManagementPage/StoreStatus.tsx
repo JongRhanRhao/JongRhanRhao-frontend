@@ -431,7 +431,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
       >
         <form
           method="dialog"
-          className="modal-box bg-bg border-secondary/80 border-2"
+          className="border-2 modal-box bg-bg border-secondary/80"
         >
           <h3 className="text-lg font-bold text-primary">
             {t("Confirm Update")}
@@ -439,7 +439,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
           <p className="py-4">{t("The following changes will be made:")}</p>
           {Object.keys(diffChanges).length > 0 ? (
             <div className="overflow-y-auto max-h-60">
-              <table className="overflow-x-auto table w-full mb-2">
+              <table className="table w-full mb-2 overflow-x-auto">
                 <thead>
                   <tr className="bg-secondary text-text">
                     <th className="px-4 py-2">{t("Field")}</th>
@@ -451,7 +451,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
                   {Object.entries(diffChanges).map(([key, value]) => (
                     <tr className="bg-secondary" key={key}>
                       <td className="px-4 py-2 font-semibold">{t(key)}</td>
-                      <td className="px-4 py-2 text-rose-500 line-through">
+                      <td className="px-4 py-2 line-through text-rose-500">
                         {t(String(value.old))}
                       </td>
                       <td className="px-4 py-2 text-green-500">
@@ -463,7 +463,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               </table>
             </div>
           ) : (
-            <table className="overflow-x-auto table w-full mb-2">
+            <table className="table w-full mb-2 overflow-x-auto">
               <thead>
                 <tr className="bg-secondary text-text">
                   <th className="px-4 py-2">{t("Field")}</th>
@@ -472,7 +472,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
                 </tr>
               </thead>
               <tbody>
-                <td colSpan={4} className="bg-secondary text-center text-text">
+                <td colSpan={4} className="text-center bg-secondary text-text">
                   {t("No changes")}
                 </td>
               </tbody>
