@@ -50,6 +50,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   const [isReservable, setIsReservable] = useState(
     availability?.[0]?.isReservable
   );
+  const [ageRange, setAgeRange] = useState(store?.age_range);
   const { data: reservations } = useFetchReservationsByShopIdAndDate(
     storeId || "",
     format(selectedDate || new Date(), "yyyy-MM-dd")
@@ -117,6 +118,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         new: !isReservable,
       };
     }
+    if (ageRange !== store?.age_range) {
+      changes.ageRange = { old: store?.age_range, new: ageRange };
+    }
     return changes;
   };
 
@@ -178,6 +182,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         googleMapLink: googleMapLink || store.google_map_link,
         facebookLink: facebookLink || store.facebook_link,
         defaultSeats: defaultSeats || store.default_seats,
+        ageRange: ageRange || store.age_range,
       });
       handleAvailabilityChange();
       socket.emit("store_update", { storeId });
@@ -398,6 +403,20 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               onChange={(e) => setFacebookLink(e.target.value)}
             />
             <div className="text-sm text-right text-gray-500"></div>
+          </div>
+        </div>
+        <div className="text-base bg-secondary w-fit rounded-xl collapse collapse-arrow">
+          <input type="checkbox" />
+          <span className="font-bold collapse-title">{t("ageRange")}</span>
+          <div className="collapse-content">
+            <input
+              type="text"
+              value={ageRange || ""}
+              onChange={(e) => setAgeRange(e.target.value)}
+              className="input bg-secondary"
+              placeholder="20-99"
+              pattern="\d{2}-\d{2}"
+            />
           </div>
         </div>
         <div className="text-base bg-secondary w-fit rounded-xl collapse collapse-arrow">
