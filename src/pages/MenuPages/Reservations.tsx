@@ -206,7 +206,10 @@ const Reservations = () => {
               )
             }
           >
-            <FontAwesomeIcon icon={faArrowLeft} className="mr-2 text-primary" />
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              className="ml-2 mr-2 text-primary"
+            />
           </button>
           <div className="border-r">
             <FontAwesomeIcon
@@ -282,26 +285,32 @@ const Reservations = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-secondary">
-                    {reservation.map((res) => (
-                      <tr key={res.reservation_id}>
-                        <td className="px-2 py-1 border-b border-neutral-500">
-                          {res.reservation_id}
-                        </td>
-                        <td className="px-2 py-1 border-b border-neutral-500">
-                          {t(res.shop_name)}
-                        </td>
-                        <td className="px-2 py-1 border-b border-neutral-500">
-                          {format(new Date(res.reservation_date), "PPP", {
-                            locale: i18n.language === "th" ? th : undefined,
-                          })}
-                          , {res.reservation_time}{" "}
-                          {i18n.language === "th" ? "น." : ""}
-                        </td>
-                        <td className="px-2 py-1 border-b border-neutral-500">
-                          {t(res.reservation_status)}
-                        </td>
-                      </tr>
-                    ))}
+                    {reservation
+                      .sort(
+                        (a, b) =>
+                          new Date(b.reservation_date).getTime() -
+                          new Date(a.reservation_date).getTime()
+                      )
+                      .map((res) => (
+                        <tr key={res.reservation_id}>
+                          <td className="px-2 py-1 border-b border-neutral-500">
+                            {res.reservation_id}
+                          </td>
+                          <td className="px-2 py-1 border-b border-neutral-500">
+                            {t(res.shop_name)}
+                          </td>
+                          <td className="px-2 py-1 border-b border-neutral-500">
+                            {format(new Date(res.reservation_date), "PPP", {
+                              locale: i18n.language === "th" ? th : undefined,
+                            })}
+                            , {res.reservation_time}{" "}
+                            {i18n.language === "th" ? "น." : ""}
+                          </td>
+                          <td className="px-2 py-1 border-b border-neutral-500">
+                            {t(res.reservation_status)}
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               ) : (
