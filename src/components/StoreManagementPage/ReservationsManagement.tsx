@@ -179,7 +179,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
         >
           <FontAwesomeIcon
             icon={faArrowLeft}
-            className="ml-2 mr-2 text-primary"
+            className="ml-2 mr-2 cursor-pointer text-primary"
           />
         </button>
         <div className="border-r">
@@ -203,7 +203,10 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
             )
           }
         >
-          <FontAwesomeIcon icon={faArrowRight} className="mr-2 text-primary" />
+          <FontAwesomeIcon
+            icon={faArrowRight}
+            className="mr-2 cursor-pointer text-primary"
+          />
         </button>
       </div>
       <div className="my-4">
