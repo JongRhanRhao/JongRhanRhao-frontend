@@ -290,7 +290,7 @@ const ReservationsManagement = ({ store }: { store: Store | null }) => {
                       }}
                     >
                       <FontAwesomeIcon icon={faNoteSticky} />{" "}
-                      <p className="hidden sm:block md:hidden xl:block">
+                      <p className="hidden sm:hidden md:hidden xl:block">
                         {t("Customer Notes")}
                       </p>
                     </button>
