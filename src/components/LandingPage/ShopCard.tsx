@@ -59,9 +59,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
               "https://static.vecteezy.com/system/resources/previews/009/007/134/original/failed-to-load-page-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
             }
             alt={title}
-            className={`${
-              isClosed ? "grayscale" : ""
-            } w-full object-cover duration-150 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32 ${className}`}
+            className={`w-full object-cover duration-150 ease-out aspect-auto lg:h-60 md:h-80 sm:h-32 ${className}`}
           />
         ) : (
           <div className="w-full skeleton h-60"></div>
@@ -84,35 +82,24 @@ const ShopCard: React.FC<ShopCardProps> = ({
           <div className="px-1 text-sm space-x-2 badge w-fit rounded-xl bg-secondary/80 text-text">
             <FontAwesomeIcon
               icon={faStar}
-              className={`${
-                isClosed ? "text-gray-400" : "text-yellow-400"
-              } shadow-lg`}
+              className={`text-yellow-400 shadow-lg`}
             />
-            <div className={`${isClosed ? "text-gray-400" : "text-text"}`}>
+            <div className={`text-text`}>
               {safeRating === 0 ? t("No Rating") : safeRating.toFixed(1)}
             </div>
           </div>
           <div
             className={`badge space-x-2 bg-secondary/80 w-fit rounded-xl px-1`}
           >
-            <FontAwesomeIcon
-              icon={faClock}
-              className={`text-xs ${isClosed ? "text-gray-400" : "text-text"}`}
-            />
-            <div
-              className={`${isClosed ? "text-gray-400" : "text-text"} text-xs`}
-            >
-              {open_timebooking}
-            </div>
+            <FontAwesomeIcon icon={faClock} className={`text-xs text-text`} />
+            <div className={`text-text text-xs`}>{open_timebooking}</div>
           </div>
           <br />
           {type && Array.isArray(type) ? (
             type.map((type: string, index: number) => (
               <div
                 key={index}
-                className={`badge badge-ghost bg-secondary text-xs ${
-                  isClosed ? "text-gray-400" : "text-text"
-                } mr-0.5`}
+                className={`badge badge-ghost bg-secondary text-xs text-text mr-0.5`}
               >
                 {t(type)}
               </div>
