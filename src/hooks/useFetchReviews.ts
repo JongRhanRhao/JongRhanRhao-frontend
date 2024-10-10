@@ -10,6 +10,7 @@ export interface Review {
   rating: number;
   reviewText: string;
   createdAt: string;
+  updatedAt: string;
   avatarUrl: string;
 }
 
