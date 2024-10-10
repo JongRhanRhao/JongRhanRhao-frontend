@@ -191,6 +191,19 @@ const Reservations = () => {
     return totalReservations;
   };
 
+  const statusColorClass = (reservationStatus: string) => {
+    switch (reservationStatus) {
+      case RESERVATION_STATUS.PENDING:
+        return "bg-yellow-500/30 text-yellow-500 border-yellow-500";
+      case RESERVATION_STATUS.CONFIRMED:
+        return "bg-primary/30 text-primary border-primary";
+      case RESERVATION_STATUS.CANCELLED:
+        return "bg-red-500/30 text-red-500 border-red-500";
+      default:
+        return "bg-yellow-500/30 text-yellow-500 border-yellow-500";
+    }
+  };
+
   return (
     <div>
       <LinkBack />
@@ -306,7 +319,11 @@ const Reservations = () => {
                             , {res.reservation_time}{" "}
                             {i18n.language === "th" ? "น." : ""}
                           </td>
-                          <td className="px-2 py-1 border-b border-neutral-500">
+                          <td
+                            className={`px-2 py-1 border-b border-neutral-500 ${statusColorClass(
+                              res.reservation_status
+                            )}`}
+                          >
                             {t(res.reservation_status)}
                           </td>
                         </tr>
@@ -379,24 +396,6 @@ const Reservations = () => {
             {Array.isArray(filteredReservations) &&
             filteredReservations.length > 0 ? (
               filteredReservations.map((reservation) => {
-                let statusColorClass = "";
-                switch (reservation.reservation_status) {
-                  case RESERVATION_STATUS.PENDING:
-                    statusColorClass =
-                      "bg-yellow-500/30 text-yellow-500 border-yellow-500";
-                    break;
-                  case RESERVATION_STATUS.CONFIRMED:
-                    statusColorClass =
-                      "bg-primary/30 text-primary border-primary";
-                    break;
-                  case RESERVATION_STATUS.CANCELLED:
-                    statusColorClass =
-                      "bg-red-500/30 text-red-500 border-red-500";
-                    break;
-                  default:
-                    statusColorClass =
-                      "bg-yellow-500/30 text-yellow-500 border-yellow-500";
-                }
                 return (
                   <tr key={reservation.reservation_id}>
                     <td className="px-6 py-4 border-b border-neutral-500">
@@ -416,7 +415,9 @@ const Reservations = () => {
                       <span
                         className={`${isPending(
                           reservation.reservation_status
-                        )} px-2 py-1 text-sm rounded-full ${statusColorClass}`}
+                        )} px-2 py-1 text-sm rounded-full ${statusColorClass(
+                          reservation.reservation_status
+                        )}`}
                       >
                         {t(reservation.reservation_status)}
                       </span>
