@@ -81,6 +81,7 @@ export const resources = {
       "Store Management": "Store Management",
       "Staff Management": "Staff Management",
       "Map link": "Map link",
+      youDontHavePermission: "You don't have permission to access this page.",
       "FB link": "Facebook link",
       // Profile Setting
       "Edit Profile": "Edit Profile",
@@ -264,6 +265,7 @@ export const resources = {
       "No availability data": "ไม่มีข้อมูล",
       "Store Management": "การจัดการร้าน",
       "Staff Management": "การจัดการพนักงาน",
+      youDontHavePermission: "คุณไม่มีสิทธิ์เข้าถึงหน้านี้",
       Seats: "ที่นั่ง",
       "Default Available Seats": "จำนวนที่นั่งที่รับจองปกติ",
       "Map link": "ลิงค์แผนที่",
