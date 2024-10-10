@@ -46,6 +46,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   const [customSeats, setCustomSeats] = useState<number | undefined>(
     availability?.[0]?.availableSeats ?? store?.default_seats
   );
+  const [isReservable, setIsReservable] = useState(
+    availability?.[0]?.isReservable
+  );
   const { data: reservations } = useFetchReservationsByShopIdAndDate(
     storeId || "",
     format(selectedDate || new Date(), "yyyy-MM-dd")
@@ -107,7 +110,9 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         new: customSeats,
       };
     }
-
+    if (isReservable !== availability?.[0]?.isReservable) {
+      changes.isReservable = { old: true, new: isReservable };
+    }
     return changes;
   };
 
@@ -173,10 +178,11 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         {
           date: format(selectedDate || new Date(), "yyyy-MM-dd"),
           availableSeats: customSeats,
-          isReservable: true,
+          isReservable,
         },
         { withCredentials: true }
       );
+      socket.emit("store_update", { storeId });
     } catch (error) {
       console.error("Error updating availability:", error);
       throw error;
@@ -250,6 +256,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             <div className="flex items-center gap-2">
               {availability ? (
                 <input
+                  disabled={!isReservable}
                   type="number"
                   min={0}
                   className="input input-sm bg-bg/70 text-text w-fit"
@@ -269,6 +276,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             <div className="flex items-center gap-2">
               {availability ? (
                 <input
+                  disabled={!isReservable}
                   type="number"
                   className="input input-sm bg-bg/70 text-text w-fit"
                   defaultValue={defaultSeats || 0}
@@ -279,6 +287,15 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
                 <p>{t("No availability data")}</p>
               )}
               <p>{t("Seats")}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={!isReservable}
+                onChange={() => setIsReservable(!isReservable)}
+                className="checkbox checkbox-error"
+              />
+              <p className="text-sm text-error">{t("Closed for booking")}</p>
             </div>
           </div>
         </div>
@@ -416,7 +433,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
             ))}
           </div>
           <div className="modal-action">
-            <button className="btn" onClick={closeModal}>
+            <button className="btn text-text bg-secondary" onClick={closeModal}>
               {t("Cancel")}
             </button>
             <button
