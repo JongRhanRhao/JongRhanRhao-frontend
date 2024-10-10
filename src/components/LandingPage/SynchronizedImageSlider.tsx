@@ -23,7 +23,7 @@ const SynchronizedImageSlider: React.FC = () => {
   }
 
   return (
-    <div className="relative sm:hidden lg:block">
+    <div className="relative hidden lg:block">
       <ImageSliderBackground
         height="275px"
         currentImageIndex={currentImageIndex}
