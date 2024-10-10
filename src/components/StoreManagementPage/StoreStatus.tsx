@@ -112,7 +112,10 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
       };
     }
     if (isReservable !== availability?.[0]?.isReservable) {
-      changes.isReservable = { old: true, new: isReservable };
+      changes.isReservable = {
+        old: !availability?.[0]?.isReservable,
+        new: !isReservable,
+      };
     }
     return changes;
   };
