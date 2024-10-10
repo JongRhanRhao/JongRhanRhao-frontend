@@ -36,6 +36,7 @@ const CommentSection = () => {
     userName: user?.userName || "",
     avatarUrl: user?.profilePicture || "",
     createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
 
   const handleReview = async () => {
