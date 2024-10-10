@@ -76,7 +76,7 @@ const LoginModal = () => {
         closeModal();
       }
     } catch (error) {
-      setErrorMessage("Invalid credentials.");
+      setErrorMessage(t("Invalid credentials."));
     }
   };
 
