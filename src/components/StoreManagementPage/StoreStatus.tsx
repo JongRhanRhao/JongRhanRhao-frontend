@@ -214,7 +214,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     closeModal();
     toast.promise(handleStatusChange(), {
       loading: t("Updating store..."),
-      success: t("Store updated successfully!"),
+      success: t("Store status updated successfully!"),
       error: t("Something went wrong. Please try again."),
     });
   };
@@ -429,22 +429,55 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
         id="confirm_modal"
         className={`modal ${isModalOpen ? "modal-open" : ""}`}
       >
-        <form method="dialog" className="modal-box bg-secondary">
+        <form
+          method="dialog"
+          className="modal-box bg-bg border-secondary/80 border-2"
+        >
           <h3 className="text-lg font-bold text-primary">
             {t("Confirm Update")}
           </h3>
           <p className="py-4">{t("The following changes will be made:")}</p>
-          <div className="overflow-y-auto max-h-60">
-            {Object.entries(diffChanges).map(([key, value]) => (
-              <div key={key} className="mb-2">
-                <p className="font-semibold">{t(key)}:</p>
-                <p className="text-red-500 line-through">
-                  {JSON.stringify(value.old)}
-                </p>
-                <p className="text-green-500">{JSON.stringify(value.new)}</p>
-              </div>
-            ))}
-          </div>
+          {Object.keys(diffChanges).length > 0 ? (
+            <div className="overflow-y-auto max-h-60">
+              <table className="overflow-x-auto table w-full mb-2">
+                <thead>
+                  <tr className="bg-secondary text-text">
+                    <th className="px-4 py-2">{t("Field")}</th>
+                    <th className="px-4 py-2">{t("Old Value")}</th>
+                    <th className="px-4 py-2">{t("Changes")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(diffChanges).map(([key, value]) => (
+                    <tr className="bg-secondary" key={key}>
+                      <td className="px-4 py-2 font-semibold">{t(key)}</td>
+                      <td className="px-4 py-2 text-rose-500 line-through">
+                        {t(String(value.old))}
+                      </td>
+                      <td className="px-4 py-2 text-green-500">
+                        {t(String(value.new))}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <table className="overflow-x-auto table w-full mb-2">
+              <thead>
+                <tr className="bg-secondary text-text">
+                  <th className="px-4 py-2">{t("Field")}</th>
+                  <th className="px-4 py-2">{t("Old Value")}</th>
+                  <th className="px-4 py-2">{t("Changes")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td colSpan={4} className="bg-secondary text-center text-text">
+                  {t("No changes")}
+                </td>
+              </tbody>
+            </table>
+          )}
           <div className="modal-action">
             <button className="btn text-text bg-secondary" onClick={closeModal}>
               {t("Cancel")}
