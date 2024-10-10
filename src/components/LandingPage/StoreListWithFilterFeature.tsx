@@ -148,7 +148,7 @@ const StoreListWithFilterFeature = () => {
   if (isFetchingStores || isFetchingFavorites || isFakeLoading) {
     return (
       <div className="mt-10">
-        <select className="z-50 ml-4 select bg-bg text-text border-text">
+        <select className="z-50 ml-4 select bg-bg text-text border-primary">
           <option value="cnx">{t("Chiangmai")}</option>
         </select>
         <div className="flex items-center justify-between">
@@ -203,7 +203,7 @@ const StoreListWithFilterFeature = () => {
 
   return (
     <div className="mt-10">
-      <select className="z-50 ml-4 select bg-bg text-text border-text">
+      <select className="z-50 ml-4 select bg-bg text-text border-primary">
         <option value="cnx">{t("Chiangmai")}</option>
       </select>
       <div className="flex items-center justify-between">
