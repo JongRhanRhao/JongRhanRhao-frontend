@@ -199,9 +199,12 @@ const StoreListWithFilterFeature = () => {
   }
 
   return (
-    <div>
+    <div className="mt-10">
+      <select className="z-50 ml-4 border select bg-secondary text-text border-primary">
+        <option value="cnx">Chiangmai</option>
+      </select>
       <div className="flex items-center justify-between">
-        <h2 className="mt-5 mb-3 text-3xl font-bold text-text">
+        <h2 className="items-center mt-5 mb-3 ml-4 text-3xl font-bold text-text">
           {t("DiscoverAndBooking")}
         </h2>
         <div className="hidden mr-4 sm:block md:block lg:block xl:block">
