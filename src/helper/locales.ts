@@ -141,6 +141,7 @@ export const resources = {
       "* Password must be at least 6 characters long":
         "* รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
       "* Passwords do not match": "* รหัสผ่านไม่ตรงกัน",
+      "Invalid credentials.": "อีเมลหรือรหัสผ่านผิดพลาด กรุณาลองใหม่อีกครั้ง",
       "Login to your account": "เข้าสู่ระบบ",
       "Please log in before adding a favorite store.":
         "กรุณาเข้าสู่ระบบก่อนเพิ่มร้านโปรด",
