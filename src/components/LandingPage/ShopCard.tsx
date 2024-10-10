@@ -79,7 +79,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
         <div
           className={`${ImageSliderClass} absolute px-2 py-1 rounded-r bottom-1`}
         >
-          <div className="px-1 text-sm space-x-2 badge w-fit rounded-xl bg-secondary/80 text-text">
+          <div className="px-1 text-sm space-x-2 badge w-fit rounded-xl bg-secondary text-text">
             <FontAwesomeIcon
               icon={faStar}
               className={`text-yellow-400 shadow-lg`}
@@ -88,9 +88,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
               {safeRating === 0 ? t("No Rating") : safeRating.toFixed(1)}
             </div>
           </div>
-          <div
-            className={`badge space-x-2 bg-secondary/80 w-fit rounded-xl px-1`}
-          >
+          <div className={`badge space-x-2 bg-secondary w-fit rounded-xl px-1`}>
             <FontAwesomeIcon icon={faClock} className={`text-xs text-text`} />
             <div className={`text-text text-xs`}>{open_timebooking}</div>
           </div>
