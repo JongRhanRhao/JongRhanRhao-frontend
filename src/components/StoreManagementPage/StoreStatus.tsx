@@ -27,11 +27,12 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     store?.type || []
   );
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const { data: availability } = useFetchAvailability(
-    storeId || "",
-    selectedDate ? format(selectedDate, "yyyy-MM-dd") : "",
-    selectedDate ? format(selectedDate, "yyyy-MM-dd") : ""
-  );
+  const { data: availability, refetch: refetchAvailability } =
+    useFetchAvailability(
+      storeId || "",
+      selectedDate ? format(selectedDate, "yyyy-MM-dd") : "",
+      selectedDate ? format(selectedDate, "yyyy-MM-dd") : ""
+    );
   const [openingTime, setOpeningTime] = useState(
     splitOldTime ? splitOldTime[0] || "" : ""
   );
@@ -132,6 +133,18 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (storeId) {
+      refetchAvailability();
+    }
+  }, [storeId, selectedDate, refetchAvailability]);
+
+  useEffect(() => {
+    if (availability?.[0]?.isReservable !== undefined) {
+      setIsReservable(availability?.[0]?.isReservable);
+    }
+  }, [availability]);
 
   useEffect(() => {
     const availableSeats = availability?.[0]?.availableSeats;
