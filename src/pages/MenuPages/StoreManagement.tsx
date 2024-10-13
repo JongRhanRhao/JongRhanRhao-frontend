@@ -32,14 +32,10 @@ const StoreManagement = () => {
   }, []);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      return;
-    }
     if (role !== "owner" && role !== "staff") {
       navigate("/");
     }
   }, [role, navigate, isAuthenticated]);
-
   const renderActiveSection = () => {
     switch (selectedType) {
       case STORE_MGMT_MENU.RESERVATIONS:
