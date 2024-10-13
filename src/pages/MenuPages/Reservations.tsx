@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
-// import axios from "axios";
-// import toast from "react-hot-toast";
+import axios from "axios";
+import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
   faArrowRight,
   faCalendarDay,
   faHistory,
-  faShop,
-  // faX,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { th } from "date-fns/locale";
 import DatePicker from "react-datepicker";
@@ -20,7 +19,7 @@ import BackHomeButton from "@/components/shared/BackHomeButton";
 import { useUser } from "@/hooks/useUserStore";
 import { useFetchReservations } from "@/hooks/useFetchReservations";
 import LinkBack from "@/components/shared/LinkBack";
-import { ERROR_TEXT, RESERVATION_STATUS } from "@/lib/variables";
+import { ERROR_TEXT, RESERVATION_STATUS, SERVER_URL } from "@/lib/variables";
 import { FilterButton } from "@/components/shared/FilterButton";
 import LoginButton from "@/components/shared/LoginButton";
 
@@ -42,10 +41,10 @@ const Reservations = () => {
 
   const isPending = (reservStatus: string) =>
     reservStatus === RESERVATION_STATUS.PENDING ? "animate-pulse" : "";
-  // const isCancelled = (reservStatus: string) =>
-  //   reservStatus === RESERVATION_STATUS.CANCELLED ? true : false;
-  // const isConfirmed = (reservStatus: string) =>
-  //   reservStatus === RESERVATION_STATUS.CONFIRMED ? true : false;
+  const isCancelled = (reservStatus: string) =>
+    reservStatus === RESERVATION_STATUS.CANCELLED ? true : false;
+  const isConfirmed = (reservStatus: string) =>
+    reservStatus === RESERVATION_STATUS.CONFIRMED ? true : false;
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -124,28 +123,28 @@ const Reservations = () => {
     );
   }
 
-  // const handleCancelReserv = async (reservationId: string) => {
-  //   try {
-  //     await axios.put(
-  //       `${SERVER_URL}/stores/api/reservations/status/${reservationId}`,
-  //       {
-  //         reservationId: reservationId,
-  //         reservationStatus: RESERVATION_STATUS.CANCELLED,
-  //       }
-  //     );
-  //     socket.emit("reservation_update", { reservationId });
-  //   } catch (err) {
-  //     toast.error(t("Something went wrong. Please try again."));
-  //   }
-  // };
+  const handleCancelReserv = async (reservationId: string) => {
+    try {
+      await axios.put(
+        `${SERVER_URL}/stores/api/reservations/status/${reservationId}`,
+        {
+          reservationId: reservationId,
+          reservationStatus: RESERVATION_STATUS.CANCELLED,
+        }
+      );
+      socket.emit("reservation_update", { reservationId });
+    } catch (err) {
+      toast.error(t("Something went wrong. Please try again."));
+    }
+  };
 
-  // const updateCancelReserv = (reservationId: string) => {
-  //   toast.promise(handleCancelReserv(reservationId), {
-  //     loading: t("Cancelling..."),
-  //     success: t("Cancelled successfully!"),
-  //     error: t("Something went wrong. Please try again."),
-  //   });
-  // };
+  const updateCancelReserv = (reservationId: string) => {
+    toast.promise(handleCancelReserv(reservationId), {
+      loading: t("Cancelling..."),
+      success: t("Cancelled successfully!"),
+      error: t("Something went wrong. Please try again."),
+    });
+  };
 
   const FilterBtnClass = (reservationStatus: string) => {
     switch (reservationStatus) {
@@ -385,9 +384,9 @@ const Reservations = () => {
                 {t("dateNtime")}
               </th>
               <th className="w-1/4 px-6 py-4 font-bold text-left uppercase text-text">
-                {t("status")}
+                {t("Reservation status")}
               </th>
-              <th className="hidden w-1/4 font-bold text-left uppercase text-text md:table-cell">
+              <th className="w-1/4 font-bold text-left uppercase text-text md:table-cell">
                 {t("action")}
               </th>
             </tr>
@@ -401,8 +400,10 @@ const Reservations = () => {
                     <td className="px-6 py-4 border-b border-neutral-500">
                       {reservation.reservation_id}
                     </td>
-                    <td className="px-6 py-4 truncate border-b border-neutral-500">
-                      {t(reservation.shop_name)}
+                    <td className="px-6 py-4 link truncate border-b border-neutral-500">
+                      <a href={`/shop/${reservation.shop_id}`}>
+                        {t(reservation.shop_name)}
+                      </a>
                     </td>
                     <td className="hidden px-6 py-4 border-b border-neutral-500 md:table-cell">
                       {format(new Date(reservation.reservation_date), "PPP", {
@@ -422,10 +423,13 @@ const Reservations = () => {
                         {t(reservation.reservation_status)}
                       </span>
                     </td>
-                    <td className="hidden border-b border-neutral-500 md:table-cell">
-                      {/* <button
+                    <td className="border-b border-neutral-500 md:table-cell">
+                      <button
                         onClick={() => {
-                          updateCancelReserv(reservation.reservation_id);
+                          const confirmDialog = document.getElementById(
+                            `confirm_cancel_${reservation.reservation_id}`
+                          ) as HTMLDialogElement;
+                          confirmDialog?.showModal();
                         }}
                         className="mr-2 btn btn-outline btn-xs text-rose-500 hover:bg-rose-500/70 hover:border-rose-500"
                         disabled={
@@ -433,14 +437,57 @@ const Reservations = () => {
                           isConfirmed(reservation.reservation_status)
                         }
                       >
-                        <FontAwesomeIcon icon={faX} />
-                      </button> */}
-                      <a
-                        href={`/shop/${reservation.shop_id}`}
-                        className="underline text-text/75"
+                        {window.innerWidth < 640 ? (
+                          <FontAwesomeIcon icon={faX} />
+                        ) : (
+                          t("Cancel Booking")
+                        )}
+                      </button>
+                      <dialog
+                        id={`confirm_cancel_${reservation.reservation_id}`}
+                        className="modal"
                       >
-                        <FontAwesomeIcon icon={faShop} />
-                      </a>
+                        <div className="modal-box bg-bg border-secondary/80 border-2 text-text">
+                          <form method="dialog">
+                            <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                              ✕
+                            </button>
+                          </form>
+                          <h3 className="mb-4 text-lg font-bold text-primary">
+                            {t("Confirm Cancellation")}
+                          </h3>
+                          <p>
+                            {t(
+                              "Are you sure you want to cancel this reservation?"
+                            )}
+                          </p>
+                          <div className="modal-action">
+                            <button
+                              className="btn btn-outline btn-xs text-rose-500 hover:bg-rose-500/70 hover:border-rose-500"
+                              onClick={() => {
+                                updateCancelReserv(reservation.reservation_id);
+                                const confirmDialog = document.getElementById(
+                                  `confirm_cancel_${reservation.reservation_id}`
+                                ) as HTMLDialogElement;
+                                confirmDialog?.close();
+                              }}
+                            >
+                              {t("Yes, Cancel")}
+                            </button>
+                            <button
+                              className="btn btn-outline btn-xs text-primary hover:bg-primary/70 hover:border-primary"
+                              onClick={() => {
+                                const confirmDialog = document.getElementById(
+                                  `confirm_cancel_${reservation.reservation_id}`
+                                ) as HTMLDialogElement;
+                                confirmDialog?.close();
+                              }}
+                            >
+                              {t("No, Keep")}
+                            </button>
+                          </div>
+                        </div>
+                      </dialog>
                     </td>
                   </tr>
                 );
