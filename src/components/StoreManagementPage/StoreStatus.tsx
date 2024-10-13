@@ -22,7 +22,6 @@ import { useFetchReservationsByShopIdAndDate } from "@/hooks/useFetchReservation
 const StoreStatus = ({ store }: { store: Store | null }) => {
   const splitOldTime = store?.open_timebooking.split(" - ");
   const storeId = store?.store_id;
-  const [status, setStatus] = useState(store?.status);
   const [selectedStoreTypes, setSelectedStoreTypes] = useState<string[]>(
     store?.type || []
   );
@@ -33,6 +32,11 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
       selectedDate ? format(selectedDate, "yyyy-MM-dd") : "",
       selectedDate ? format(selectedDate, "yyyy-MM-dd") : ""
     );
+  const { data: reservations } = useFetchReservationsByShopIdAndDate(
+    storeId || "",
+    format(selectedDate || new Date(), "yyyy-MM-dd")
+  );
+  const [status, setStatus] = useState(store?.status);
   const [openingTime, setOpeningTime] = useState(
     splitOldTime ? splitOldTime[0] || "" : ""
   );
@@ -51,10 +55,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
     availability?.[0]?.isReservable
   );
   const [ageRange, setAgeRange] = useState(store?.age_range);
-  const { data: reservations } = useFetchReservationsByShopIdAndDate(
-    storeId || "",
-    format(selectedDate || new Date(), "yyyy-MM-dd")
-  );
+
   const totalBookedSeatsbyDate = Array.isArray(reservations)
     ? reservations.reduce(
         (acc, curr) =>
@@ -429,6 +430,7 @@ const StoreStatus = ({ store }: { store: Store | null }) => {
               <div key={option.value} className="flex items-center space-x-2">
                 <input
                   type="checkbox"
+                  className="checkbox checkbox-sm"
                   id={`store-type-${option.value}`}
                   checked={selectedStoreTypes.includes(option.value)}
                   onChange={() => handleTypeCheckboxChange(option.value)}
