@@ -68,6 +68,9 @@ const LoginModal = () => {
         {
           ...data,
           role: "user",
+        },
+        {
+          withCredentials: true,
         }
       );
       if (response.data.user) {
