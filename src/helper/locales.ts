@@ -24,7 +24,7 @@ export const resources = {
       notePlaceholder:
         "Please type your estimated arrival time & additional notes.",
       // Shop description
-      status: "Store status",
+      status: "Current status",
       address: "Address",
       closeAndOpenTime: "Open hours",
       cancel_condition: "Cancellation policy",
@@ -108,9 +108,9 @@ export const resources = {
       back: "ย้อนกลับ",
       "Can walk-in": "วอคอินได้",
       Unavailable: "ไม่รับวอคอิน",
-      Available: "ว่าง",
-      Busy: "คนเยอะ",
-      Closed: "ปิด",
+      Available: "วอคอินได้",
+      Busy: "โอกาสเต็มสูง",
+      Closed: "ปิดให้บริการ",
       Update: "อัพเดทข้อมูล",
       Search: "ค้นหาร้าน",
       AddToFavorite: "เพิ่มร้านโปรด",
@@ -179,7 +179,7 @@ export const resources = {
       "Cancel within 24 hours": "ยกเลิกภายใน 24 ชั่วโมง",
       notePlaceholder: "กรุณากรอกเวลามาถึง & ข้อความเพิ่มเติมถึงร้าน",
       // รายละเอียดร้าน
-      status: "สถานะ",
+      status: "สถานะตอนนี้",
       address: "พิกัด",
       closeAndOpenTime: "เวลาเปิด-ปิด",
       cancel_condition: "เงื่อนไขการยกเลิกจอง",
@@ -219,6 +219,7 @@ export const resources = {
       id_reservation: "ไอดีการจอง",
       customerName: "ชื่อลูกค้า",
       shop_name: "ชื่อร้าน",
+      "Reservation status": "สถานะการจอง",
       dateNtime: "วันที่ & เวลา",
       profile: "ข้อมูลส่วนตัว",
       action: "การดำเนินการ",
@@ -301,6 +302,12 @@ export const resources = {
       "Reservations for": "การจองสำหรับ",
       "Cancelling...": "กำลังยกเลิก...",
       "Cancelled successfully!": "ยกเลิกสำเร็จ!",
+      "Yes, Cancel": "ใช่, ยกเลิก",
+      "No, Keep": "ไม่, เก็บไว้",
+      "Are you sure you want to cancel this reservation?":
+        "คุณแน่ใจที่จะยกเลิกการจองนี้?",
+      "Confirm Cancellation": "ยืนยันการยกเลิก",
+      "Cancel Booking": "ยกเลิกการจอง",
       // จัดการโปรไฟล์
       "Upload new photo": "อัพโหลดรูป",
       "Edit Profile": "แก้ไขโปรไฟล์",
