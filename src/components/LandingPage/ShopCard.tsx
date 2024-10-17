@@ -54,6 +54,7 @@ const ShopCard: React.FC<ShopCardProps> = ({
       <div className="relative">
         {image ? (
           <img
+            loading="lazy"
             src={
               image ||
               "https://static.vecteezy.com/system/resources/previews/009/007/134/original/failed-to-load-page-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
