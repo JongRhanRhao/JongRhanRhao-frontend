@@ -1,9 +1,10 @@
-import { useUserStore } from "@/hooks/useUserStore";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import toast from "react-hot-toast";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
+
+import { useUserStore } from "@/hooks/useUserStore";
 
 const LogoutButton = ({ className }: { className?: string }) => {
   const { logout } = useUserStore();
