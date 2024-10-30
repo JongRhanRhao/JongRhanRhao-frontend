@@ -400,7 +400,7 @@ const Reservations = () => {
                     <td className="px-6 py-4 border-b border-neutral-500">
                       {reservation.reservation_id}
                     </td>
-                    <td className="px-6 py-4 link truncate border-b border-neutral-500">
+                    <td className="px-6 py-4 truncate border-b link border-neutral-500">
                       <a href={`/shop/${reservation.shop_id}`}>
                         {t(reservation.shop_name)}
                       </a>
@@ -447,7 +447,7 @@ const Reservations = () => {
                         id={`confirm_cancel_${reservation.reservation_id}`}
                         className="modal"
                       >
-                        <div className="modal-box bg-bg border-secondary/80 border-2 text-text">
+                        <div className="border-2 modal-box bg-bg border-secondary/80 text-text">
                           <form method="dialog">
                             <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
                               ✕
