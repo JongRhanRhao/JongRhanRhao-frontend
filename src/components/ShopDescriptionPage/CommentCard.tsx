@@ -9,14 +9,12 @@ const CommentCard = ({
   date,
   comment,
   rating,
-}: // reviewCount,
-{
+}: {
   name: string;
   avatar: string;
   date: string;
   comment: string;
   rating: number;
-  // reviewCount: number;
 }) => {
   const { t } = useTranslation();
   return (
@@ -29,9 +27,6 @@ const CommentCard = ({
         </div>
         <div>
           <div className="font-medium text text-text">{name}</div>
-          {/* <div className="text-sm text-text/50">
-            {t("Review")}: {reviewCount}
-          </div> */}
         </div>
       </div>
       <p className="mb-6 leading-relaxed whitespace-pre-wrap text-text">
