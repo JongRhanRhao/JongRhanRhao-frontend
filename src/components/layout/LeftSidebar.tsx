@@ -9,6 +9,7 @@ import {
   faAngleLeft,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
+
 import { GLOBAL_URL_ROUTES } from "@/lib/variables";
 import { useUser } from "@/hooks/useUserStore";
 import { useSidebarStore } from "@/hooks/useSidebarStore";
