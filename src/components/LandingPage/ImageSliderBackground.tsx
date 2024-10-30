@@ -1,5 +1,6 @@
-import { Store } from "@/hooks/useFetchStores";
 import React from "react";
+
+import { Store } from "@/hooks/useFetchStores";
 
 interface ImageSliderBackgroundProps {
   height: string;
