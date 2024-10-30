@@ -1,5 +1,6 @@
 import DatePicker from "react-datepicker";
 import { th } from "date-fns/locale";
+
 import i18n from "@/helper/i18n";
 
 interface BookingCalendarProps {
