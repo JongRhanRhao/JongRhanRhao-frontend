@@ -12,7 +12,6 @@ type FeedbackProps = {
   message?: string;
   onClick?: () => void;
 };
-//TODO: implement feedback data submission
 const FeedbackPage: React.FC<FeedbackProps> = () => {
   const titleClass = "mt-4 text-text font-semibold text-sm";
   const inputClass =
