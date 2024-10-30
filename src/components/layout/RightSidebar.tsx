@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
-// import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  // faAngleRight,
-  // faTicket,
   faUser,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +12,6 @@ import { useUser } from "@/hooks/useUserStore";
 import LoginButton from "@/components/shared/LoginButton";
 import { CUSTIOM_BUTTON_OUTLINE_CLASS } from "@/lib/variables";
 import LogoutButton from "@/components/shared/LogoutButton";
-// import { SERVER_URL } from "@/lib/variables";
 
 interface RightSidebarProps {
   className?: string;
@@ -74,13 +70,6 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ className }) => {
                 <div className="mb-5 text-sm uppercase opacity-50">
                   {t(user?.role || "user")}
                 </div>
-                {/* <div className="text-base opacity-75 text-text">
-                  Reservation Status
-                </div>
-                <div className="font-semibold">
-                  Status:{" "}
-                  <span className="text-success">Successfully reserved</span>
-                </div> */}
               </div>
 
               <button
