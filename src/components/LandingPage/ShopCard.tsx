@@ -32,7 +32,6 @@ const ShopCard: React.FC<ShopCardProps> = ({
 }) => {
   const isAvailable = storeStatus === "Available";
   const isBusy = storeStatus === "Busy";
-  // const isClosed = storeStatus === "Closed";
   const reservationClass = `absolute top-3 text-secondary text-xs font-bold px-2 py-1 rounded-r-lg ${
     isAvailable ? "bg-primary" : isBusy ? "bg-yellow-500" : "bg-rose-500"
   }`;
