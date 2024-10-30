@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer utilities {
   .bg-pattern {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 200 200"><circle cx="100" cy="100" r="50" fill="rgba(255, 255, 255, 0.1)"/><circle cx="50" cy="50" r="50" fill="rgba(255, 255, 255, 0.1)"/><circle cx="150" cy="150" r="50" fill="rgba(255, 255, 255, 0.1)"/></svg>');
