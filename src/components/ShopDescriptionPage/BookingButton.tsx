@@ -15,8 +15,8 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { th } from "date-fns/locale";
-import i18n from "@/helper/i18n";
 
+import i18n from "@/helper/i18n";
 import { socket } from "@/socket";
 import "@/styles/custom-phone-input.css";
 import {
