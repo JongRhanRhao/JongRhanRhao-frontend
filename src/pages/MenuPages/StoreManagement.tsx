@@ -46,7 +46,7 @@ const StoreManagement = () => {
         if (role === "owner") {
           return <StaffManagement store={selectedStore} />;
         } else {
-          return <p className="text-error p-4">{t("youDontHavePermission")}</p>;
+          return <p className="p-4 text-error">{t("youDontHavePermission")}</p>;
         }
       default:
         return null;
