@@ -3,4 +3,6 @@ import { SERVER_URL } from "@/lib/variables";
 
 export const socket: Socket = io(SERVER_URL, {
   withCredentials: true,
+  transports: ["websocket"],
+  path: "/socket.io",
 });
